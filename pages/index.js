@@ -1,7 +1,6 @@
-import IndexComponent from '../components'
-
+import Layout from '../components/layout'
 export default props => (
-  <div>
-    <IndexComponent {...props} />>
-  </div>
+    <Layout subheadertext='Dashboard'>
+      test
+    </Layout>
 )
