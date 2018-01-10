@@ -9,7 +9,7 @@ const List = styled.li`
   color: ${props => props.active ? '#bf2d46;' : '#525672;'};
   background-color : ${props => props.active ? '#282a3a' : ''};
   font-size: 1.7em;
-  padding:0.4em 0.3em;
+  padding:0.6em 0.3em;
 `;
 const ListText = styled.p`
   color: #fefefe;
