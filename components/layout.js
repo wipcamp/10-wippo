@@ -1,6 +1,5 @@
-/* eslint-disable */
-import styled , { injectGlobal } from 'styled-components'
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import React from 'react'
+import styled from 'styled-components'
 import List from '../components/list'
 const TopNav = styled.div`
   width:100%;
@@ -35,31 +34,31 @@ const AvatarImg = styled.img`
   margin:15px;
 `
 const Layout = (props) => (
-    <div className="container-fluid px-0">
-      <div className="row no-gutters">
-        <div className="col-1 h-100vh sidenav-bg">
-          <Logo />
-          <UnorderedList>
-            <List active icon="car" text="Dashboard" />
-            <List icon="coffee" text="eiei2" />
-            <List icon="bullhorn" text="eiei3" />
-            <List icon="dollar-sign" text="eiei4" />
-          </UnorderedList>
-        </div>
-        <div className="col">
-          <TopNav>
-            <div className="ml-auto">
-              <AvatarImg src='/static/img/avata-mockup.jpg' />
-            </div>
-          </TopNav>
-          <SubHeader>
-            <SubHeaderText>{props.subheadertext}</SubHeaderText>
-          </SubHeader>
-          <ContentContainer>
-            {props.children}
-          </ContentContainer>
-        </div>
+  <div className='container-fluid px-0'>
+    <div className='row no-gutters'>
+      <div className='col-1 h-100vh sidenav-bg'>
+        <Logo />
+        <UnorderedList>
+          <List active icon='car' text='Dashboard' />
+          <List icon='coffee' text='eiei2' />
+          <List icon='bullhorn' text='eiei3' />
+          <List icon='dollar-sign' text='eiei4' />
+        </UnorderedList>
+      </div>
+      <div className='col'>
+        <TopNav>
+          <div className='ml-auto'>
+            <AvatarImg src='/static/img/avata-mockup2.jpg' />
+          </div>
+        </TopNav>
+        <SubHeader>
+          <SubHeaderText>{props.subheadertext}</SubHeaderText>
+        </SubHeader>
+        <ContentContainer>
+          {props.children}
+        </ContentContainer>
       </div>
     </div>
-);
-export default Layout;
+  </div>
+)
+export default Layout
