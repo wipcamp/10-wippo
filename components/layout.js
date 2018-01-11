@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import List from '../components/list'
+import Droupdown from './droupdown';
 const TopNav = styled.div`
   width:100%;
   height:80px;
@@ -33,6 +34,7 @@ const AvatarImg = styled.img`
   border : 1px solid #333;
   margin:15px;
 `
+
 const Layout = (props) => (
   <div className='container-fluid px-0'>
     <div className='row no-gutters'>
@@ -47,9 +49,10 @@ const Layout = (props) => (
       </div>
       <div className='col'>
         <TopNav>
-          <div className='ml-auto'>
-            <AvatarImg src='/static/img/avata-mockup2.jpg' />
-          </div>
+          {/* <Droupdown name={'WIPPER'}/> */}
+            <div className='ml-auto'>
+              <AvatarImg src='/static/img/avata-mockup2.jpg' />
+            </div>
         </TopNav>
         <SubHeader>
           <SubHeaderText>{props.subheadertext}</SubHeaderText>
