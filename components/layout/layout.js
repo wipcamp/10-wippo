@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import TopNav from './topnav'
 import Menu from './menu'
+import Dropdown from './dropdown'
 const Logo = styled.div`
   height:80px;
   background-color:#282a3c;
@@ -22,6 +23,10 @@ const LeftNav = styled.div`
   height:100vh;
   background-color: #2c2e3e;
 `
+const DropdownContainer = styled.div`
+  padding-left:955px;
+`
+
 const Layout = (props) => (
   <div className='container-fluid px-0'>
     <div className='row no-gutters'>
@@ -31,6 +36,9 @@ const Layout = (props) => (
       </LeftNav>
       <div className='col'>
         <TopNav />
+        <DropdownContainer>
+          <Dropdown name='wipper'isOpen={false}/>
+        </DropdownContainer>
         <SubHeader>
           <SubHeaderText>{props.subheadertext}</SubHeaderText>
         </SubHeader>
