@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ProfileList from './profilelist'
 
 const Content = styled.div`
-  display:
+  display:block
   position: absolute;
   width: 200px;
   z-index: 1;
