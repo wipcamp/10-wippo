@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import List from '../components/list'
-import Droupdown from './droupdown';
+import Droupdown from './droupdown'
 
 const TopNav = styled.div`
   width:100%;
@@ -51,9 +51,9 @@ const Layout = (props) => (
       <div className='col'>
         <TopNav>
           <Droupdown className='ml-auto' name={'WIPPER'} isOpen={true}/>
-            <div className='ml-auto' >
-              <AvatarImg src='/static/img/avata-mockup.jpg' />
-            </div>
+          <div className='ml-auto' >
+            <AvatarImg src='/static/img/avata-mockup.jpg' />
+          </div>
         </TopNav>
         <SubHeader>
           <SubHeaderText>{props.subheadertext}</SubHeaderText>
@@ -65,5 +65,4 @@ const Layout = (props) => (
     </div>
   </div>
 )
- 
 export default Layout
