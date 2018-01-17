@@ -19,9 +19,9 @@ const AvatarImg = styled.img`
 
 const avata = '/static/img/avata-mockup2.jpg'
 
-const TopNav = () => (
+const TopNav = props => (
   <TopNavBox>
-    <div className='ml-auto'>
+    <div className='ml-auto' onClick={props.clickHandeler}>
       <AvatarImg src={avata} />
     </div>
   </TopNavBox>
