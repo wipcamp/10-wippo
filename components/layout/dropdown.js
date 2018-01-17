@@ -45,10 +45,10 @@ const Header = props => (
 )
 
 const Dropdown = props => {
-  if(props.isOpen  == true ){
-    return(
+  if (props.isOpen === true) {
+    return (
       <div>
-        <Arrow/>
+        <Arrow />
         <Content>
           <Header name='eggcat' mail='dev10@wip.camp' img={props.img} />
           <ProfileList icon='user'>
@@ -60,9 +60,9 @@ const Dropdown = props => {
         </Content>
       </div>
     )
-  }else{
-    return(
-      <div/>
+  } else {
+    return (
+      <div />
     )
   }
 }
