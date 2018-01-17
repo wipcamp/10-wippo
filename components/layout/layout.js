@@ -37,7 +37,7 @@ const Layout = (props) => (
       <div className='col'>
         <TopNav />
         <DropdownContainer>
-          <Dropdown name='wipper'isOpen={false}/>
+          <Dropdown name='wipper' isOpen />
         </DropdownContainer>
         <SubHeader>
           <SubHeaderText>{props.subheadertext}</SubHeaderText>
