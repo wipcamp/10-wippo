@@ -29,9 +29,7 @@ const DropdownContainer = styled.div`
 `
 const Mainbox = styled.div`
   background-color: #f8f9fa;
-  min-height: 100%;
 `
-
 class Layout extends React.Component {
   constructor (props) {
     super(props)
@@ -55,18 +53,16 @@ class Layout extends React.Component {
             <Logo />
             <Menu />
           </LeftNav>
-          <div className='col'>
+          <Mainbox className='col'>
             <TopNav clickHandeler={this.toggleDropdown} />
             <DropdownContainer>
               <Dropdown name='wipper' isOpen={this.state.dropdown} />
             </DropdownContainer>
-            <Mainbox>
-              <SubHeader>
-                <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
-              </SubHeader>
-              <ContentContainer>{this.props.children}</ContentContainer>
-            </Mainbox>
-          </div>
+            <SubHeader>
+              <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
+            </SubHeader>
+            <ContentContainer>{this.props.children}</ContentContainer>
+          </Mainbox>
         </div>
       </div>
     )
