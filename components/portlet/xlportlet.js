@@ -8,12 +8,12 @@ background-color:#fff;
 margin-bottom:2.2rem;
 padding:8px
 `
-const Mportlet = props => (
-  <div className='col-sm-6'>
+const XLportlet = props => (
+  <div className='col-sm-12'>
     <Box>
       {props.children}
     </Box>
   </div>
 )
 
-export default Mportlet
+export default XLportlet

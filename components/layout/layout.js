@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import TopNav from './topnav'
 import Menu from './menu'
 import Dropdown from './dropdown'
-import dropdown from './dropdown';
 const Logo = styled.div`
   height:80px;
   background-color:#282a3c;

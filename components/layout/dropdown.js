@@ -25,14 +25,15 @@ const Email = styled.div`
   color: #ecf0f1;
 `
 const Arrow = styled.div`
-  margin-left:168px;
+  margin-left:165px;
   width: 0; 
   height: 0; 
-  border-left: 16px solid transparent;
-  border-right: 16px solid transparent;
-  border-bottom: 16px solid #9b59b6;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-bottom: 19px solid #9b59b6;
   position: relative  ;
   z-index:1;
+  border-radius: 3px;
   `
 const Header = props => (
   <div>
