@@ -4,15 +4,17 @@ import Layout from '../components/layout/layout'
 import XLportlet from '../components/portlet/xlportlet'
 import Mportlet from '../components/portlet/mportlet'
 import PortletHeader from '../components/portlet/portletHead'
+import ProgressBar from '../components/progressbar'
+// import ProgressBar from "bootstrap-progress-bar";
 
 const Badge = styled.span`
   margin-right:4px;
 `
 
-const numberOut = styled.div`
-padding-top:40px;
-padding-left:60px;
-size:77px;
+const Number = styled.div`
+padding-top:22px;
+padding-left:200px;
+font-size:77px;
 `
 
 const Approve = () =>
@@ -22,20 +24,21 @@ const Approve = () =>
         <div className='row'>
           <XLportlet>
             progressbar
+            <ProgressBar width='80' />
           </XLportlet>
         </div>
         <div className='row'>
           <Mportlet>
             บฝ
-            <numberOut>
+            <Number>
               {160}
-            </numberOut>
+            </Number>
           </Mportlet>
           <Mportlet>
             ฝู้ปกครอง
-            <numberOut>
+            <Number>
               {160}
-            </numberOut>
+            </Number>
           </Mportlet>
         </div>
         <div className='row'>
