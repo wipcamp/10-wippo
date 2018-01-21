@@ -5,10 +5,7 @@ import XLportlet from '../components/portlet/xlportlet'
 import Mportlet from '../components/portlet/mportlet'
 import PortletHeader from '../components/portlet/portletHead'
 import ProgressBar from '../components/progressbar'
-
-const Badge = styled.span`
-  margin-right:4px;
-`
+import ApproveTable from '../components/approve/approveTable'
 
 const Number = styled.div`
 padding-top:22px;
@@ -45,32 +42,7 @@ const Approve = () =>
             <PortletHeader>
               Camper
             </PortletHeader>
-            <table className='table table-hover'>
-              <thead className='thead-ligth'>
-                <tr>
-                  <th>#</th>
-                  <th>
-                    firstname
-                  </th>
-                  <th>
-                    lastname
-                  </th>
-                  <th>
-                    status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>
-                    1011
-                  </th>
-                  <th>DekDok</th>
-                  <th>Kamdor</th>
-                  <th><Badge className='badge badge-success'>บพ.</Badge><Badge className='badge badge-danger'>ผู้ปกครอง.</Badge></th>
-                </tr>
-              </tbody>
-            </table>
+            <ApproveTable />
           </XLportlet>
         </div>
       </Layout>

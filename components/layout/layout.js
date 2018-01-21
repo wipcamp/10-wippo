@@ -8,7 +8,7 @@ const Logo = styled.div`
   background-color:#282a3c;
 `
 const SubHeader = styled.div`
-  padding:50px 50px 10px 0px;
+  padding:0px 50px 10px 0px;
 `
 const SubHeaderText = styled.h3`
   font-weight:500;
