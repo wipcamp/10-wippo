@@ -5,7 +5,6 @@ import XLportlet from '../components/portlet/xlportlet'
 import Mportlet from '../components/portlet/mportlet'
 import PortletHeader from '../components/portlet/portletHead'
 import ProgressBar from '../components/progressbar'
-// import ProgressBar from "bootstrap-progress-bar";
 
 const Badge = styled.span`
   margin-right:4px;

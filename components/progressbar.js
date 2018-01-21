@@ -7,7 +7,7 @@ export default props => {
   return (
     <div>
       <Progress>
-        <div className='progressbar progress-bar progress-bar-warning active' >
+        <div className='progress-bar progress-bar-warning progress-bar-striped progress-bar-animated' >
           &nbsp;
         </div>
       </Progress>

@@ -22,7 +22,7 @@ export default class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet"/>
           <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
           <link rel="stylesheet" href="/static/css/style.css"/>
-          <script src="/static/js/bootstrap.min.js"></script>
+          {/* <script src="/static/js/bootstrap.min.js"></script> */}
           <script src="/static/js/fontawesome-all.js"></script>
           <script src="/static/js/fa-solid.js"></script>
           

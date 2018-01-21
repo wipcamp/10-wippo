@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import ProfileList from './profilelist'
 
 const Content = styled.div`
-  display:block
+  display:block;
+  margin-top:19px;
   position: absolute;
   width: 200px;
-  z-index: 1;
+  z-index: 100;
   background-color: #ffffff;
   box-shadow: 0px 0px 15px 0px rgba(69, 65, 78, 0.2);
 `
@@ -25,15 +26,15 @@ const Email = styled.div`
   color: #ecf0f1;
 `
 const Arrow = styled.div`
-  margin-left:165px;
+  margin-left:162px;
   width: 0; 
   height: 0; 
-  border-left: 18px solid transparent;
-  border-right: 18px solid transparent;
-  border-bottom: 19px solid #9b59b6;
-  position: relative  ;
-  z-index:1;
-  border-radius: 3px;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #9b59b6;
+  position: absolute  ;
+  z-index:101;
+  border-radius: 6px;
   `
 const Header = props => (
   <div>
@@ -46,10 +47,10 @@ const Header = props => (
 )
 
 const Dropdown = props => {
-  if(props.isOpen  == true ){
-    return(
+  if (props.isOpen === true) {
+    return (
       <div>
-        <Arrow/>
+        <Arrow />
         <Content>
           <Header name='eggcat' mail='dev10@wip.camp' img={props.img} />
           <ProfileList icon='user'>
@@ -61,9 +62,9 @@ const Dropdown = props => {
         </Content>
       </div>
     )
-  }else{
-    return(
-      <div/>
+  } else {
+    return (
+      <div />
     )
   }
 }
