@@ -44,7 +44,7 @@ class ApproveTable extends React.Component {
           {props.original.document.map(data => (
             <Badge isApprove={data.isApprove}>
               {data.name}
-              {console.log(data.isApprove)}
+              {/* {console.log(data.isApprove)} */}
             </Badge>
           ))}
         </div>
@@ -53,7 +53,7 @@ class ApproveTable extends React.Component {
     return (
       <div>
         <ReactTable className='table' data={this.state.res} columns={tableColumns} />
-        {console.log(this.state.res)}
+        {/* {console.log(this.state.res)} */}
       </div>
     )
   }
