@@ -2,16 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 import ReactTable from 'react-table'
 import axios from 'axios'
-const myApi = axios.create({
-  baseURL: 'http://localhost:8000/api/v1',
-  timeout: 10000,
-  crossDomain: true,
-  xDomain: true,
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
-})
+// const myApi = axios.create({
+//   baseURL: 'http://localhost:8000/api/v1',
+//   timeout: 10000,
+//   crossDomain: true,
+//   xDomain: true,
+//   headers: {
+//     'Accept': 'application/json',
+//     'Content-Type': 'application/json'
+//   }
+// })
 
 const Badge = styled.span.attrs({
   className: ({isApprove}) => isApprove === 1 ? `badge badge-danger` : `badge badge-warning`
@@ -27,8 +27,10 @@ class ApproveTable extends React.Component {
     }
   }
 
-  componentWillMount () {
-    myApi.get('/approve').then(res => this.setState({data: res.data}))
+  componentWillMount = async () => {
+    // myApi.get('/approve').then(res => this.setState({data: res.data}))
+    let result = await axios.get('http://127.0.0.1:8000/api/v1/approve')
+    this.setState({res: result.data.array})
   }
 
   render () {
