@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Dropdown from './dropdown'
 
 const TopNavBox = styled.div`
   width:100%;
@@ -15,8 +14,6 @@ const AvatarImg = styled.img`
   margin:15px;
 
 `
-
-
 const avata = '/static/img/avata-mockup2.jpg'
 
 const TopNav = props => (
