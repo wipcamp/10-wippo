@@ -26,8 +26,9 @@ const LeftNav = styled.div`
   background-color: #2c2e3e;
 `
 const DropdownContainer = styled.div`
-  padding-left:1062px;
-  position:absolute
+  // padding-left:1062px;
+  right: 220px;  
+  position:absolute;
 `
 const Mainbox = styled.div`
   background-color:#f8f9fa;

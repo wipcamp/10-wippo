@@ -40,6 +40,7 @@ class ApproveTable extends React.Component {
       {Header: 'lasname', accessor: 'surname'},
       {Header: 'Document',
         accessor: 'document',
+        style: {textAlign: 'center'},
         Cell: props => <div>
           {props.original.document.map(data => (
             <Badge isApprove={data.isApprove}>
