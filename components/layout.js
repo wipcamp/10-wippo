@@ -51,9 +51,9 @@ const Layout = (props) => (
       <div className='col'>
         <TopNav>
           <Droupdown className='ml-auto' name={'WIPPER'} isOpen={true}/>
-            <div className='ml-auto' >
-              <AvatarImg src='/static/img/avata-mockup.jpg' />
-            </div>
+          <div className='ml-auto' >
+            <AvatarImg src='/static/img/avata-mockup.jpg' />
+          </div>
         </TopNav>
         <SubHeader>
           <SubHeaderText>{props.subheadertext}</SubHeaderText>
@@ -65,5 +65,4 @@ const Layout = (props) => (
     </div>
   </div>
 )
- 
 export default Layout
