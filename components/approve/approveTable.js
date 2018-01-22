@@ -1,6 +1,52 @@
 import React from 'react'
 import styled from 'styled-components'
+import ReactTable from 'react-table'
 import axios from 'axios'
+
+const oldRender = props => (
+  <div>
+    <table className='table table-hover'>
+      <thead className='thead-ligth'>
+        <tr>
+          <th>#</th>
+          <th>
+            firstname
+          </th>
+          <th>
+            lastname
+          </th>
+          <th>
+            status
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {this.state.res.map(data => (
+          <tr>
+            <th>{data.id}</th>
+            <th>{data.name}</th>
+            <th>{data.surname}</th>
+            <th>{data.document.map(doc => {
+              if (doc.isApprove === 1) {
+                return (
+                  <Badge className='badge badge-pill badge-success'>
+                    {doc.name}
+                  </Badge>
+                )
+              } else if (doc.isApprove === 2) {
+                return (
+                  <Badge className='badge badge-pill badge-warning'>
+                    {doc.name}
+                  </Badge>
+                )
+              }
+            })}</th>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)
 
 const myApi = axios.create({
   baseURL: 'http://localhost:8000',
@@ -13,9 +59,12 @@ const myApi = axios.create({
   }
 })
 
-const Badge = styled.span`
-margin-right:4px;
+const Badge = styled.span.attrs({
+  className: ({isApprove}) => isApprove === 1 ? `badge badge-danger` : `badge badge-warning`
+})`
+  margin-right:4px;
 `
+
 class ApproveTable extends React.Component {
   constructor (props) {
     super(props)
@@ -32,49 +81,29 @@ class ApproveTable extends React.Component {
   }
 
   render () {
+    const TableStyle = styled.div`
+    font-size:16px;
+    font-style: normal;
+    font-weight: normal;
+    `
+    const tableColumns = [
+      {Header: '#', accessor: 'id', width: 45, style: {textAlign: 'center'}},
+      {Header: 'FirstName', accessor: 'name'},
+      {Header: 'lasname', accessor: 'surname'},
+      {Header: 'Document',
+        accessor: 'document',
+        Cell: props => <div>
+          {props.original.document.map(data => (
+            <Badge isApprove={data.isApprove}>
+              {data.name}
+              {console.log(data.isApprove)}
+            </Badge>
+          ))}
+        </div>
+      }
+    ]
     return (
-      <div>
-        <table className='table table-hover'>
-          <thead className='thead-ligth'>
-            <tr>
-              <th>#</th>
-              <th>
-                firstname
-              </th>
-              <th>
-                lastname
-              </th>
-              <th>
-                status
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.res.map(data => (
-              <tr>
-                <th>{data.id}</th>
-                <th>{data.name}</th>
-                <th>{data.surname}</th>
-                <th>{data.document.map(doc => {
-                  if (doc.isApprove === 1) {
-                    return (
-                      <Badge className='badge badge-success'>
-                        {doc.name}
-                      </Badge>
-                    )
-                  } else if (doc.isApprove === 2) {
-                    return (
-                      <Badge className='badge badge-danger'>
-                        {doc.name}
-                      </Badge>
-                    )
-                  }
-                })}</th>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <ReactTable className='table' data={this.state.res} columns={tableColumns} />
     )
   }
 }

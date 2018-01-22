@@ -13,6 +13,14 @@ padding-left:200px;
 font-size:77px;
 `
 
+const Badge = styled.span`
+margin-right:4px;
+`
+
+const BadgeRef = styled.span`
+font-size:16px;
+`
+
 const Approve = () =>
   (
     <div>
@@ -40,7 +48,12 @@ const Approve = () =>
         <div className='row'>
           <XLportlet>
             <PortletHeader>
-              Camper
+              Camper 
+              <BadgeRef>
+                <Badge className='badge badge-pill badge-success'>Sucess</Badge>
+                <Badge className='badge badge-pill badge-warning'>Pending</Badge>
+                <Badge className='badge badge-pill badge-danger'>Reject</Badge>
+              </BadgeRef>
             </PortletHeader>
             <ApproveTable />
           </XLportlet>
