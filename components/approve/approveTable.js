@@ -2,54 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import ReactTable from 'react-table'
 import axios from 'axios'
-
-const oldRender = props => (
-  <div>
-    <table className='table table-hover'>
-      <thead className='thead-ligth'>
-        <tr>
-          <th>#</th>
-          <th>
-            firstname
-          </th>
-          <th>
-            lastname
-          </th>
-          <th>
-            status
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {this.state.res.map(data => (
-          <tr>
-            <th>{data.id}</th>
-            <th>{data.name}</th>
-            <th>{data.surname}</th>
-            <th>{data.document.map(doc => {
-              if (doc.isApprove === 1) {
-                return (
-                  <Badge className='badge badge-pill badge-success'>
-                    {doc.name}
-                  </Badge>
-                )
-              } else if (doc.isApprove === 2) {
-                return (
-                  <Badge className='badge badge-pill badge-warning'>
-                    {doc.name}
-                  </Badge>
-                )
-              }
-            })}</th>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-)
-
 const myApi = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'http://localhost:8000/api/v1',
   timeout: 10000,
   crossDomain: true,
   xDomain: true,
@@ -69,23 +23,15 @@ class ApproveTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      res: [
-        {'id': 1, 'name': 'farang', 'surname': 'emmel', 'document': [{'name': 'บฝ.', 'isApprove': 1}, {'name': 'ใบผู้ปกครอง', 'isApprove': 2}]},
-        {'id': 2, 'name': 'bas', 'surname': 'tualek', 'document': [{'name': 'บฝ.', 'isApprove': 2}]}
-      ]
+      res: []
     }
   }
 
   componentWillMount () {
-    myApi.get('/approve').then(res => this.setState({res: res.data})).catch(reson => console.log(reson))
+    myApi.get('/approve').then(res => this.setState({data: res.data}))
   }
 
   render () {
-    const TableStyle = styled.div`
-    font-size:16px;
-    font-style: normal;
-    font-weight: normal;
-    `
     const tableColumns = [
       {Header: '#', accessor: 'id', width: 45, style: {textAlign: 'center'}},
       {Header: 'FirstName', accessor: 'name'},
@@ -103,7 +49,10 @@ class ApproveTable extends React.Component {
       }
     ]
     return (
-      <ReactTable className='table' data={this.state.res} columns={tableColumns} />
+      <div>
+        <ReactTable className='table' data={this.state.res} columns={tableColumns} />
+        {console.log(this.state.res)}
+      </div>
     )
   }
 }
