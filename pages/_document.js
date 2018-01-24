@@ -20,6 +20,7 @@ export default class MyDocument extends Document {
           {this.props.styleTags}
           <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet"/>
           <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet"/>
+          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
           <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
           <link rel="stylesheet" href="/static/css/style.css"/>
           <script src="/static/js/bootstrap.min.js"></script>

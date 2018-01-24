@@ -9,11 +9,12 @@ const Content = styled.div`
   z-index: 1;
   background-color: #ffffff;
   box-shadow: 0px 0px 15px 0px rgba(69, 65, 78, 0.2);
+  border-radius:4px;
 `
 
 const Title = styled.div`
   background-color: #9b59b6;
-  padding: 4px;
+  padding: 8px;
 `
 
 const AccountName = styled.div`
