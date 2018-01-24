@@ -6,6 +6,7 @@ const TopNavBox = styled.div`
   height:80px;
   box-shadow:0px 1px 15px 1px rgba(69, 65, 78, 0.1);
   display:flex;
+  background-color:#fff;
 `
 const AvatarImg = styled.img`
   border-radius:50%;
@@ -14,6 +15,7 @@ const AvatarImg = styled.img`
   margin:15px;
 
 `
+
 const avata = '/static/img/avata-mockup2.jpg'
 
 const TopNav = props => (

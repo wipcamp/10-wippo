@@ -9,6 +9,10 @@ const List = styled.li`
   background-color : ${props => props.active ? '#282a3a' : ''};
   font-size: 1.7em;
   padding:0.6em 0.3em;
+  &:hover {
+    color:white;
+    background-color:#282a3a;
+  }
 `
 const ListText = styled.p`
   color: #fefefe;

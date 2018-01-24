@@ -22,7 +22,7 @@ const Title = styled.div`
 const AccountName = styled.div`
   width: 100%;
   padding-left: 2px;
-  font-size: 33px;
+  font-size: 33px; 
 `
 const Email = styled.div`
   color: #ecf0f1;
