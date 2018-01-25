@@ -20,14 +20,19 @@ const ContentContainer = styled.div`
   padding: 30px 50px;
 `
 const LeftNav = styled.div`
-  height: 100vh;
+  position:fixed;
+  height:100%;
   background-color: #2c2e3e;
+  z-index:1;
+  width:130px;
 `
 const DropdownContainer = styled.div`
-  right: 24px;  
+  right: 224px;
   position: absolute;
 `
 const Mainbox = styled.div`
+  height:100%;
+  margin-left:130px;
   background-color: #f8f9fa;
 `
 class Layout extends React.Component {
@@ -47,48 +52,23 @@ class Layout extends React.Component {
 
   render () {
     return (
-      <div className='container-fluid px-0'>
-        <div className='row no-gutters'>
-          <LeftNav className='col-1'>
-            <Logo />
-            <Menu />
-          </LeftNav>
-          <Mainbox className='col'>
-            <TopNav clickHandeler={this.toggleDropdown} />
-            <DropdownContainer>
-              <Dropdown name='wipper' isOpen={this.state.dropdown} />
-            </DropdownContainer>
-            <SubHeader>
-              <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
-            </SubHeader>
-            <ContentContainer>{this.props.children}</ContentContainer>
-          </Mainbox>
-        </div>
+      <div>
+        <LeftNav>
+          <Logo />
+          <Menu />
+        </LeftNav>
+        <Mainbox >
+          <TopNav clickHandeler={this.toggleDropdown} />
+          <DropdownContainer>
+            <Dropdown name='wipper' isOpen={this.state.dropdown} />
+          </DropdownContainer>
+          <SubHeader>
+            <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
+          </SubHeader>
+          <ContentContainer>{this.props.children}</ContentContainer>
+        </Mainbox>
       </div>
     )
   }
 }
-
-// const Layout = (props) => (
-  // <div className='container-fluid px-0'>
-  //   <div className='row no-gutters'>
-  //     <LeftNav className='col-1'>
-  //       <Logo />
-  //       <Menu />
-  //     </LeftNav>
-  //     <div className='col'>
-  //       <TopNav />
-  //       <DropdownContainer>
-  //         <Dropdown name='wipper'isOpen={droupdown}/>
-  //       </DropdownContainer>
-  //       <SubHeader>
-  //         <SubHeaderText>{props.subheadertext}</SubHeaderText>
-  //       </SubHeader>
-  //       <ContentContainer>
-  //         {props.children}
-  //       </ContentContainer>
-  //     </div>
-  //   </div>
-  // </div>
-// )
 export default Layout

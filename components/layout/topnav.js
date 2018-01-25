@@ -2,10 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 const TopNavBox = styled.div`
+  text-align:right;
   width:100%;
   height:80px;
   box-shadow:0px 1px 15px 1px rgba(69, 65, 78, 0.1);
   display:flex;
+  justify-content:flex-end;
   background-color:#fff;
 `
 const AvatarImg = styled.img`
@@ -20,7 +22,7 @@ const avata = '/static/img/avata-mockup2.jpg'
 
 const TopNav = props => (
   <TopNavBox>
-    <div className='ml-auto' onClick={props.clickHandeler}>
+    <div onClick={props.clickHandeler}>
       <AvatarImg src={avata} />
     </div>
   </TopNavBox>

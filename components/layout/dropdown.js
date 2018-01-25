@@ -4,7 +4,7 @@ import ProfileList from './profilelist'
 
 const Content = styled.div`
   display:block;
-  margin-top:19px;
+  margin-top:18px;
   position: absolute;
   width: 200px;
   z-index: 100;
@@ -34,7 +34,7 @@ const Arrow = styled.div`
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-bottom: 20px solid #9b59b6;
-  position: absolute  ;
+  position: absolute;
   z-index:101;
   border-radius: 6px;
   `
