@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
 
 const TopNavBox = styled.div`
   text-align:right;
@@ -27,4 +28,24 @@ const TopNav = props => (
     </div>
   </TopNavBox>
 )
-export default TopNav
+const state = { visible: true }
+const sideBar = () => (
+  <div>
+    <Sidebar as={Menu} animation='push' direction='top' visible={state.visible} inverted>
+      <Menu.Item name='home'>
+        <Icon name='home' />
+        Home
+      </Menu.Item>
+      <Menu.Item name='gamepad'>
+        <Icon name='gamepad' />
+        Games
+      </Menu.Item>
+      <Menu.Item name='camera'>
+        <Icon name='camera' />
+        Channels
+      </Menu.Item>
+    </Sidebar>
+  </div>
+)
+
+export default sideBar

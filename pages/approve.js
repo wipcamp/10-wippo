@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../components/layout/layout'
 import TranscriptCard from '../components/approve/TranscriptCard'
+import Parentconfirmation from '../components/approve/Parentconfirmation'
 import DatatableCard from '../components/approve/DatatableCard'
 import {Grid} from 'semantic-ui-react'
 
@@ -14,7 +15,7 @@ const Approve = () =>
               <TranscriptCard />
             </Grid.Column>
             <Grid.Column width={8}>
-              <TranscriptCard />
+              <Parentconfirmation />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>

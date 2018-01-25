@@ -18,7 +18,7 @@ const Percentage = styled.div`
   `
 
 const state = {
-  metric: 60
+  metric: 25
 }
 
 const CardChart = styled.div`
@@ -37,7 +37,7 @@ const data =
     }
   ]
 
-const TranscriptCard = props => (
+const Parentconfirmation = props => (
   <div>
     <CardContainer>
       <Card>
@@ -49,7 +49,7 @@ const TranscriptCard = props => (
           <Percentage>
             <text>{state.metric} %</text>
           </Percentage>
-          <CardChart class="text-center">
+          <CardChart class='text-center'>
             <VictoryPie
               padAngle={0}
               // used to hide labels
@@ -68,4 +68,4 @@ const TranscriptCard = props => (
   </div>
 )
 
-export default TranscriptCard
+export default Parentconfirmation
