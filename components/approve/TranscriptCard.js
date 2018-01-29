@@ -43,7 +43,7 @@ const TranscriptCard = props => (
       <Card>
         <Card.Content>
           <Card.Header>
-              Line Matthew
+          จำนวนผู้ส่งใบ ปพ.1
             <Divider />
           </Card.Header>
           <Percentage>

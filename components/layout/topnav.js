@@ -1,15 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
+import { Sidebar, Menu, Icon } from 'semantic-ui-react'
+import Dropdown from './dropdown'
 
-const TopNavBox = styled.div`
-  text-align:right;
-  width:100%;
-  height:80px;
-  box-shadow:0px 1px 15px 1px rgba(69, 65, 78, 0.1);
-  display:flex;
-  justify-content:flex-end;
-  background-color:#fff;
+const DropdownContainer = styled.div`
+  right: 224px;
+  position: absolute;
 `
 const AvatarImg = styled.img`
   border-radius:50%;
@@ -21,29 +17,33 @@ const AvatarImg = styled.img`
 
 const avata = '/static/img/avata-mockup2.jpg'
 
-const TopNav = props => (
-  <TopNavBox>
-    <div onClick={props.clickHandeler}>
-      <AvatarImg src={avata} />
-    </div>
-  </TopNavBox>
-)
 const state = { visible: true }
 const sideBar = () => (
   <div>
     <Sidebar as={Menu} animation='push' direction='top' visible={state.visible} inverted>
       <Menu.Item name='home'>
-        <Icon name='home' />
-        Home
+        <Icon name='dashboard' />
+        Dashboard
       </Menu.Item>
       <Menu.Item name='gamepad'>
-        <Icon name='gamepad' />
-        Games
+        <Icon name='file word outline' />
+        Approve Document
       </Menu.Item>
       <Menu.Item name='camera'>
-        <Icon name='camera' />
-        Channels
+        <Icon name='comments' />
+        Check Answer
       </Menu.Item>
+      <Menu.Item name='home'>
+        <Icon name='users' />
+        Itim Management
+      </Menu.Item>
+      <Menu.Item name='home'>
+        <Icon name='user circle outline' />
+        Staff  Management
+      </Menu.Item>
+      {/* <DropdownContainer>
+        <Dropdown name='wipper' isOpen={state.dropdown} />
+      </DropdownContainer> */}
     </Sidebar>
   </div>
 )

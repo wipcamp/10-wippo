@@ -43,7 +43,7 @@ const Parentconfirmation = props => (
       <Card>
         <Card.Content>
           <Card.Header>
-              Line Matthew
+             จำนวนผู้ส่งใบอนุญาติผู้ปกครอง
             <Divider />
           </Card.Header>
           <Percentage>
