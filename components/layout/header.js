@@ -1,7 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled , { injectGlobal } from 'styled-components'
 import { Container, Grid } from 'semantic-ui-react'
-
+import Menu from './menu.js'
 const HeaderBox = styled.div`
   height:90px;
   display:flex;
@@ -32,23 +32,44 @@ const AvatarImg = styled.img.attrs({
   border : 1px solid #333;
   margin:15px;
 `
-
+const MenuWrapper = styled.div`
+  background:#3d3b56;
+`
+injectGlobal`
+  .nav-bg{
+    background:#5eb9e2;
+  }
+`
 const Header = () => (
   <div>
-    <Container>
+    <Container fluid>
+
+      <Container>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column>
+              <HeaderBox>
+                <Logo />
+                <UserBox>
+                  <GreetingMember>Hello, <MemberName>Farang</MemberName></GreetingMember>
+                  <AvatarImg />
+                </UserBox>
+              </HeaderBox>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container> {/* End Container */}
       <Grid>
-        <Grid.Row>
-          <Grid.Column>
-            <HeaderBox>
-              <Logo />
-              <UserBox>
-                <GreetingMember>Hello, <MemberName>Farang</MemberName></GreetingMember>
-                <AvatarImg />
-              </UserBox>
-            </HeaderBox>
-          </Grid.Column>
+        <Grid.Row className='nav-bg'>
+          <Container>
+            <Grid.Column>
+              <Menu />
+            </Grid.Column>
+          </Container>
+          
         </Grid.Row>
       </Grid>
+
     </Container>
   </div>
 )
