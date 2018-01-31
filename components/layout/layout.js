@@ -1,27 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-import TopNav from './topnav'
-import Dropdown from './dropdown'
-const Logo = styled.div`
-  height: 80px;
-  background-color: #282a3c;
-`
+import Header from './header'
+import { Container, Grid } from 'semantic-ui-react'
 const SubHeader = styled.div`
-  padding: 50px 50px 0 50px;
+  padding: 50px 25px 0 0px;
 `
 const SubHeaderText = styled.h3`
   font-weight: 500;
-  font-size: 1.2em;
+  font-size: 1.6em;
   color: #3f4047;
   font-family: 'Roboto', sans-serif;
 `
 const ContentContainer = styled.div`
   padding: 30px 50px;
-`
-
-const DropdownContainer = styled.div`
-  right: 224px;
-  position: absolute;
 `
 
 class Layout extends React.Component {
@@ -42,14 +33,19 @@ class Layout extends React.Component {
   render () {
     return (
       <div>
-        <TopNav clickHandeler={this.toggleDropdown} />
-        <DropdownContainer>
-          <Dropdown name='wipper' isOpen={this.state.dropdown} />
-        </DropdownContainer>
-        <SubHeader>
-          <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
-        </SubHeader>
-        <ContentContainer>{this.props.children}</ContentContainer>
+        <Header />
+        <Container>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column>
+                <SubHeader>
+                  <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
+                </SubHeader>
+              </Grid.Column>
+            </Grid.Row>
+            <ContentContainer>{this.props.children}</ContentContainer>
+          </Grid>
+        </Container>
       </div>
     )
   }
