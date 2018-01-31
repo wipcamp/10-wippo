@@ -1,13 +1,34 @@
 import React from 'react'
 import Layout from '../components/layout/layout'
-import { Button, Grid } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
+import Portlet from '../components/util/portlet'
+import Axios from 'axios'
+class Index extends React.Component {
+  state = {
+    registerAmount: '',
+    campData: []
+  }
+  componentWillMount = async () => {
+    let data = await Axios.get('http://localhost:8000/api/v1/dashboard/')
+    this.setState({
+      registerAmount: data.data.data.registerTodayAmount,
+      campData: data.data.data.campDetail
+    })
 
-export default props => (
-  <Layout subheadertext='Dashboard'>
-    <Grid.Row>
-      <Grid.Column>
-        <Button>Click Here</Button>
-      </Grid.Column>
-    </Grid.Row>
-  </Layout>
-)
+  }
+  render () {
+    return (
+      <Layout subheadertext='Dashboard'>
+        <Grid.Row>
+          <Grid.Column width={5}>
+            <Portlet title='Daily User' herotext={this.state.registerAmount} image='/static/img/team.svg' />
+          </Grid.Column>
+          <Grid.Column width={5}>
+            <Portlet title='Countdown ปิดรับสมัคร' herotext='100 วัน' image='/static/img/stopwatch.svg' />
+          </Grid.Column>
+        </Grid.Row>
+      </Layout>
+    )
+  }
+}
+export default Index
