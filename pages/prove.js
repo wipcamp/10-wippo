@@ -11,6 +11,9 @@ class Prove extends React.Component {
       { menuItem: 'ใบอนุญาติ', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> }
     ]
 
+    const data = {name: 'พชร',
+      surname: 'กำดอ', relation: 'ลุ่งตู่'}
+
     return (
       <div>
         <Layout>

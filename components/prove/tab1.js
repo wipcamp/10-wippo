@@ -1,6 +1,7 @@
 import React from 'react'
 import ItimCard from '../general/itimcard'
-import { Grid, Form } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
+import axios from '../../utils/axios'
 import styled from 'styled-components'
 
 const ItimImage = '/static/img/itim-profileImg.jpg'
@@ -21,10 +22,10 @@ const Sdata = styled.span`
 const Tab1 = props => (
   <div>
     <TabStyle>
-      <Grid celled>
+      <Grid>
         <Grid.Row>
           <Grid.Column width={4}>
-            <ItimCard src={ItimImage} name={'Phachara kamdor'} school={'kmutt'} join={'30 JAN 2018'} />          
+            <ItimCard src={ItimImage} name={'Phachara kamdor'} school={'kmutt'} join={'30 JAN 2018'} />
           </Grid.Column>
           <Grid.Column width={12}>
             <Grid padded>

@@ -50,7 +50,7 @@ class ApproveTable extends React.Component {
     return (
       <tableColumns>
         <div>
-          <ReactTable defaultPageSize={10}  className='table' data={this.state.res} columns={tableColumns} />
+          <ReactTable defaultPageSize={10} className='table' data={this.state.res} columns={tableColumns} />
           {/* {console.log(this.state.res)} */}
         </div>
       </tableColumns>
