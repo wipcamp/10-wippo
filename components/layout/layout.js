@@ -43,7 +43,7 @@ class Layout extends React.Component {
                 </SubHeader>
               </Grid.Column>
             </Grid.Row>
-            <ContentContainer>{this.props.children}</ContentContainer>
+            {this.props.children}
           </Grid>
         </Container>
       </div>
