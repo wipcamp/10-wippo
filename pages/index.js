@@ -3,6 +3,11 @@ import Layout from '../components/layout/layout'
 import { Grid } from 'semantic-ui-react'
 import Portlet from '../components/util/portlet'
 import Axios from 'axios'
+import Moment from 'moment'
+
+const differ = (start, end) => {
+  return Moment(end).diff(start, 'days')
+}
 class Index extends React.Component {
   state = {
     registerAmount: '',
@@ -14,7 +19,6 @@ class Index extends React.Component {
       registerAmount: data.data.data.registerTodayAmount,
       campData: data.data.data.campDetail
     })
-
   }
   render () {
     return (
@@ -24,7 +28,7 @@ class Index extends React.Component {
             <Portlet title='Daily User' herotext={this.state.registerAmount} image='/static/img/team.svg' />
           </Grid.Column>
           <Grid.Column width={5}>
-            <Portlet title='Countdown ปิดรับสมัคร' herotext='100 วัน' image='/static/img/stopwatch.svg' />
+            <Portlet title='Countdown ปิดรับสมัคร' herotext={`${differ(this.state.campData.opened_at, this.state.campData.closed_at)} วัน`} image='/static/img/stopwatch.svg' />
           </Grid.Column>
         </Grid.Row>
       </Layout>
