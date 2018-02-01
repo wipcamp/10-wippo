@@ -11,6 +11,7 @@ const differ = (start, end) => {
 }
 class Index extends React.Component {
   state = {
+    page: '',
     registerAmount: '',
     campData: []
   }
