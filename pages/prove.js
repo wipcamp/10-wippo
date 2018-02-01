@@ -1,18 +1,21 @@
 import React from 'react'
 import Layout from '../components/layout/layout'
 import Tab1 from '../components/prove/tab1'
+import Tab2 from '../components/prove/tab2'
+import axios from '../utils/axios'
 import { Tab } from 'semantic-ui-react'
 
 class Prove extends React.Component {
+  async componentWillMount () {
+    const {data} = await axios.get('/profiles/'.props.userId)
+    console.log(data)
+  }
   render () {
     const panes = [
       { menuItem: 'ข้อมูลน้อง', render: () => <Tab.Pane attached={false}><Tab1 /></Tab.Pane> },
-      { menuItem: 'ปพ.1', render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
+      { menuItem: 'ปพ.1', render: () => <Tab.Pane attached={false}><Tab2 /></Tab.Pane> },
       { menuItem: 'ใบอนุญาติ', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> }
     ]
-
-    const data = {name: 'พชร',
-      surname: 'กำดอ', relation: 'ลุ่งตู่'}
 
     return (
       <div>

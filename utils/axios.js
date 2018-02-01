@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const createInstance = () => {
   return axios.create({
-    baseURL: 'localhost:8000/api/v1',
+    baseURL: 'http://localhost:8000/api/v1',
     headers: {
       // 'x-access-token': ''
       // 'Accept': 'application/json',
