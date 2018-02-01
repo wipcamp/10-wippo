@@ -18,13 +18,11 @@ const StyledMenuItem = styled(Menu.Item)`
     width:0 !important;
   }
 
-  ${props => props.active === 'dashboard' && `
-    background:rgb(58, 165, 212) !important;
-  `}
+  
 `
 const MenuNames = ['Dashboard', 'Document', 'Itim Management']
 
-const ListMenu = MenuNames.map((MenuName) => <StyledMenuItem active={this.state.page} >{MenuName}</StyledMenuItem>)
+const ListMenu = MenuNames.map((MenuName) => <StyledMenuItem>{MenuName}</StyledMenuItem>)
 
 class MyMenu extends React.Component {
   render () {
