@@ -43,7 +43,6 @@ injectGlobal`
 const Header = () => (
   <div>
     <Container fluid>
-
       <Container>
         <Grid>
           <Grid.Row>
@@ -59,17 +58,15 @@ const Header = () => (
           </Grid.Row>
         </Grid>
       </Container> {/* End Container */}
-      <Grid>
-        <Grid.Row className='nav-bg'>
+      <Grid className='nav-bg'>
+        <Grid.Row>
           <Container>
             <Grid.Column>
               <Menu />
             </Grid.Column>
           </Container>
-          
         </Grid.Row>
       </Grid>
-
     </Container>
   </div>
 )
