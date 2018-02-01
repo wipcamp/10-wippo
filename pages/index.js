@@ -6,7 +6,8 @@ import Axios from 'axios'
 import Moment from 'moment'
 
 const differ = (start, end) => {
-  return Moment(end).diff(start, 'days')
+  const date = new Date()
+  return Moment(end).diff(date, 'days')
 }
 class Index extends React.Component {
   state = {
@@ -25,10 +26,10 @@ class Index extends React.Component {
       <Layout subheadertext='Dashboard'>
         <Grid.Row>
           <Grid.Column width={5}>
-            <Portlet title='Daily User' herotext={this.state.registerAmount} image='/static/img/team.svg' />
+            <Portlet title='น้องใหม่ประจำวัน' herotext={this.state.registerAmount} image='/static/img/team.svg' />
           </Grid.Column>
           <Grid.Column width={5}>
-            <Portlet title='Countdown ปิดรับสมัคร' herotext={`${differ(this.state.campData.opened_at, this.state.campData.closed_at)} วัน`} image='/static/img/stopwatch.svg' />
+            <Portlet title='ปิดรับสมัครใน' herotext={`${differ(this.state.campData.opened_at, this.state.campData.closed_at)} วัน`} image='/static/img/stopwatch.svg' />
           </Grid.Column>
         </Grid.Row>
       </Layout>
