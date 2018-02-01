@@ -3835,7 +3835,7 @@ modify-values@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/modify-values/-/modify-values-1.0.0.tgz#e2b6cdeb9ce19f99317a53722f3dbf5df5eaaab2"
 
-moment@^2.11.2, moment@^2.19.3:
+moment@^2.11.2, moment@^2.20.1:
   version "2.20.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
 
@@ -4629,10 +4629,6 @@ react-hot-loader@3.1.1:
 react-jss@^1.0.4:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-jss/-/react-jss-1.1.1.tgz#9d5bc5ab96242017ea56f1c1df7a46c601ec564c"
-
-react-moment@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.7.0.tgz#9ccb5c87be683d08c253b48469167443f09c3d89"
 
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
