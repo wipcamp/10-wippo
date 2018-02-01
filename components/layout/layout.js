@@ -11,9 +11,6 @@ const SubHeaderText = styled.h3`
   color: #3f4047;
   font-family: 'Roboto', sans-serif;
 `
-const ContentContainer = styled.div`
-  padding: 30px 50px;
-`
 
 class Layout extends React.Component {
   constructor (props) {
