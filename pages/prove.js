@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../components/layout/layout'
 import Tab1 from '../components/prove/tab1'
 import Tab2 from '../components/prove/tab2'
+import Tab3 from '../components/prove/tab3'
 import axios from '../utils/axios'
 import { Tab } from 'semantic-ui-react'
 
@@ -14,7 +15,7 @@ class Prove extends React.Component {
     const panes = [
       { menuItem: 'ข้อมูลน้อง', render: () => <Tab.Pane attached={false}><Tab1 /></Tab.Pane> },
       { menuItem: 'ปพ.1', render: () => <Tab.Pane attached={false}><Tab2 /></Tab.Pane> },
-      { menuItem: 'ใบอนุญาติ', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> }
+      { menuItem: 'ใบอนุญาติ', render: () => <Tab.Pane attached={false}><Tab3 /></Tab.Pane> }
     ]
 
     return (
