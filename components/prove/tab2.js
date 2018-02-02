@@ -1,6 +1,6 @@
 import React from 'react'
 import ItimCard from '../general/itimcard'
-import {Grid, Image, Button, Segment} from 'semantic-ui-react'
+import {Grid, Image, Button} from 'semantic-ui-react'
 import styled from 'styled-components'
 const ItimImage = '/static/img/itim-profileImg.jpg'
 const transcript = '/static/img/transcript.jpg'
