@@ -9,6 +9,13 @@ margin:2%;
 `
 
 class Tab3 extends React.Component {
+  constructor (props) {
+    super()
+    this.state = {
+      docStatus: 'pending'// approved,pending,rejected
+    }
+  }
+
   render () {
     return (
       <div>
@@ -20,11 +27,12 @@ class Tab3 extends React.Component {
             <Grid.Column width={12} textAlign={'center'}>
               <EnhancedImage src={parentPermission} size={'large'} centered />
               <Button.Group>
-                <Button>Reject</Button>
+                {this.state.docStatus === 'reject' ? <Button color='red' >Reject </Button> : <Button onClick={console.log('Im clicked')} >Reject </Button>}
                 <Button.Or />
-                <Button color='yellow'>Pending</Button>
+                {console.log(this.state.docStatus)}
+                {this.state.docStatus === 'pending' ? <Button color='yellow' >Pending</Button> : <Button>Pending</Button>}
                 <Button.Or />
-                <Button >Approved</Button>
+                {this.state.docStatus === 'approve' ? <Button color='green' >Approved </Button> : <Button >Approved </Button>}
               </Button.Group>
             </Grid.Column>
           </Grid.Row>

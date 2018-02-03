@@ -27,7 +27,6 @@ export default class MyDocument extends Document {
           {/* <script src="/static/js/bootstrap.min.js"></script> */}
           <script src="/static/js/fontawesome-all.js"></script>
           <script src="/static/js/fa-solid.js"></script>
-          
         </Head>
         <body>
           <Main />

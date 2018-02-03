@@ -17,6 +17,9 @@ padding:2px;
 `
 
 class Tab1 extends React.Component {
+  constructor (props) {
+    super()
+  }
   render () {
     return (
       <div>
