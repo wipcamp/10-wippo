@@ -27,12 +27,12 @@ class Tab3 extends React.Component {
             <Grid.Column width={12} textAlign={'center'}>
               <EnhancedImage src={parentPermission} size={'large'} centered />
               <Button.Group>
-                {this.state.docStatus === 'reject' ? <Button color='red' >Reject </Button> : <Button onClick={console.log('Im clicked')} >Reject </Button>}
+                {this.state.docStatus === 'reject' ? <Button color='red' >Reject </Button> : <Button onClick={() => this.setState({docStatus: 'reject'})} >Reject </Button>}
                 <Button.Or />
                 {console.log(this.state.docStatus)}
-                {this.state.docStatus === 'pending' ? <Button color='yellow' >Pending</Button> : <Button>Pending</Button>}
+                {this.state.docStatus === 'pending' ? <Button color='yellow' >Pending</Button> : <Button onClick={() => this.setState({docStatus: 'pending'})}>Pending</Button>}
                 <Button.Or />
-                {this.state.docStatus === 'approve' ? <Button color='green' >Approved </Button> : <Button >Approved </Button>}
+                {this.state.docStatus === 'approve' ? <Button color='green' >Approved </Button> : <Button onClick={() => this.setState({docStatus: 'approve'})}>Approved </Button>}
               </Button.Group>
             </Grid.Column>
           </Grid.Row>
