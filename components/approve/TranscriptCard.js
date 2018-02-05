@@ -32,8 +32,8 @@ class TranscriptCard extends React.Component {
   }
 
   async componentWillMount () {
-    let {data: { data }} = await axios.get('/approve/Transcript')
-    console.log(data)
+    let {data: { data }} = await axios.get('/approve/count/transcript')
+    this.setState({transcript: data})
   }
 
   render () {

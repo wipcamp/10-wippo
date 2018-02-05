@@ -18,30 +18,28 @@ class ApproveTable extends React.Component {
   }
 
   componentWillMount = async () => {
-    // myApi.get('/approve').then(res => this.setState({data: res.data}))
     let result = await axios.get('http://127.0.0.1:8000/api/v1/approve')
-    this.setState({res: result.data.array})
+    this.setState({res: result.data})
   }
 
   render () {
     const tableColumns = [
-      {Header: '#', accessor: 'id', width: 45, style: {textAlign: 'center'}},
+      {Header: '#', accessor: 'user_id', width: 45, style: {textAlign: 'center'}},
       {Header: 'FirstName',
-        accessor: 'name',
+        accessor: 'first_name',
         filterMethod: (filter, row) => {
           row[filter.id].startsWith(filter.value) &&
           row[filter.id].endsWith(filter.value)
         }
       },
-      {Header: 'lasname', accessor: 'surname'},
+      {Header: 'lasname', accessor: 'last_name'},
       {Header: 'Document',
-        accessor: 'document',
+        accessor: 'documents',
         style: {textAlign: 'center'},
         Cell: props => <div>
-          {props.original.document.map(data => (
-            <Badge isApprove={data.isApprove}>
-              {data.name}
-              {/* {console.log(data.isApprove)} */}
+          {props.value.map(data => (
+            <Badge isApprove={data.is_approve !== null ? 'null' : data.is_approve}>
+              {data.is_approve}
             </Badge>
           ))}
         </div>
