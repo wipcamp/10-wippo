@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import ReactTable from 'react-table'
 import axios from 'axios'
+import { Label } from 'semantic-ui-react'
 
-const Badge = styled.span.attrs({
-  className: ({isApprove}) => isApprove === 1 ? `badge badge-danger` : `badge badge-warning`
-})`
-  margin-right:4px;
+const Badge = styled(Label)`
+  text-overflow: ellipsis;
+  width: 12em; 
 `
 
 class ApproveTable extends React.Component {
@@ -37,9 +37,10 @@ class ApproveTable extends React.Component {
         accessor: 'documents',
         style: {textAlign: 'center'},
         Cell: props => <div>
+          {console.log(props)}
           {props.value.map(data => (
-            <Badge isApprove={data.is_approve !== null ? 'null' : data.is_approve}>
-              {data.is_approve}
+            <Badge color={data.is_approve !== null ? 'red' : 'green'}>
+              {data.document_type.display_name}
             </Badge>
           ))}
         </div>
