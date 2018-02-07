@@ -7,10 +7,16 @@ import axios from '../utils/axios'
 import { Tab } from 'semantic-ui-react'
 
 class Prove extends React.Component {
-  async componentWillMount () {
-    const {data} = await axios.get('/profiles/'.props.userId)
+  
+  async componentWillMount() {
+    const {data} = await axios.get('/profiles/' + this.props.url.query.user_id)
     console.log(data)
   }
+
+  // static async getInitialProps ({ query }) {
+  //   return query
+  // }
+
   render () {
     const panes = [
       { menuItem: 'ข้อมูลน้อง', render: () => <Tab.Pane attached={false}><Tab1 /></Tab.Pane> },
