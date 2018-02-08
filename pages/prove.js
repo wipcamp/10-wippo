@@ -7,10 +7,18 @@ import axios from '../utils/axios'
 import { Tab } from 'semantic-ui-react'
 
 class Prove extends React.Component {
-  
-  async componentWillMount() {
+  constructor (props) {
+    super()
+    this.state = {
+      profile: [],
+      parentPermission: '',
+      transcript: ''
+    }
+  }
+
+  async componentWillMount () {
     const {data} = await axios.get('/profiles/' + this.props.url.query.user_id)
-    console.log(data)
+    this.setState({profile: data})
   }
 
   // static async getInitialProps ({ query }) {
@@ -19,9 +27,9 @@ class Prove extends React.Component {
 
   render () {
     const panes = [
-      { menuItem: 'ข้อมูลน้อง', render: () => <Tab.Pane attached={false}><Tab1 /></Tab.Pane> },
-      { menuItem: 'ปพ.1', render: () => <Tab.Pane attached={false}><Tab2 /></Tab.Pane> },
-      { menuItem: 'ใบอนุญาติ', render: () => <Tab.Pane attached={false}><Tab3 /></Tab.Pane> }
+      { menuItem: 'ข้อมูลน้อง', render: () => <Tab.Pane attached={false}><Tab1 info={this.state.profile} /></Tab.Pane> },
+      { menuItem: 'ปพ.1', render: () => <Tab.Pane attached={false}><Tab2 info={this.state.profile} status={this.state.transcript} /></Tab.Pane> },
+      { menuItem: 'ใบอนุญาติ', render: () => <Tab.Pane attached={false}><Tab3 info={this.state.profile} status={this.state.parentPermission} /></Tab.Pane> }
     ]
 
     return (
