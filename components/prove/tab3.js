@@ -1,12 +1,10 @@
 import React from 'react'
 import ItimCard from '../general/itimcard'
-import {Grid, Image} from 'semantic-ui-react'
-import styled from 'styled-components'
+import {Grid} from 'semantic-ui-react'
+import ImageZoom from 'react-medium-image-zoom'
 const ItimImage = '/static/img/itim-profileImg.jpg'
-const transcript = '/static/img/parentConfirmation.jpg'
-const EnhancedImage = styled(Image)`
-margin:2%;
-`
+const transcript = '/static/img/ParentPermission.jpg'
+
 const Tab3 = (props) => (
   (
     <div>
@@ -17,8 +15,13 @@ const Tab3 = (props) => (
             <ItimCard src={ItimImage} name={'Phachara kamdor'} school={'kmutt'} join={'30 JAN 2018'} />
           </Grid.Column>
           <Grid.Column width={12} textAlign={'center'}>
-            <EnhancedImage src={transcript} size={'large'} centered />
-            {console.log(props)}
+            <ImageZoom image={{
+              src: transcript,
+              style: { width: '30em', display: 'block', marginLeft: '17em', marginButtom: '8em' }
+            }} zoomImage={{
+              src: transcript
+            }}
+            />
             {props.button}
           </Grid.Column>
         </Grid.Row>

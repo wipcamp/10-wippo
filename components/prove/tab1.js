@@ -15,6 +15,10 @@ const InfoSeg = styled(Segment)`
 margin:6px;
 `
 
+const SecHeader = styled.span`
+font-size:25px;
+`
+
 const Tab1 = ({ info }) => {
   return (
     <div>
@@ -30,7 +34,7 @@ const Tab1 = ({ info }) => {
                   <Grid padded={'horizontally'}>
                     <Grid.Row>
                       <Icon name={'user'} />
-                      <span>ข้อมูลส่วนตัว</span>
+                      <SecHeader>ข้อมูลส่วนตัว</SecHeader>
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column width={8}>
@@ -57,7 +61,7 @@ const Tab1 = ({ info }) => {
                     {console.log(info)}
                     <Grid.Row>
                       <Icon name={'pencil'} />
-                      <span>ข้อมูลการศึกษา</span>
+                      <SecHeader>ข้อมูลการศึกษา</SecHeader>
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column width={6}>
@@ -79,7 +83,7 @@ const Tab1 = ({ info }) => {
                   <Grid>
                     <Grid.Row>
                       <Icon name={'free code camp'} />
-                      <span>ข้อมูลค่าย</span>
+                      <SecHeader>ข้อมูลค่าย</SecHeader>
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column centered>

@@ -4634,6 +4634,10 @@ react-jss@^1.0.4:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-jss/-/react-jss-1.1.1.tgz#9d5bc5ab96242017ea56f1c1df7a46c601ec564c"
 
+react-medium-image-zoom@^3.0.10:
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/react-medium-image-zoom/-/react-medium-image-zoom-3.0.10.tgz#7e011844b02605aef0500b36f10dcc2808731583"
+
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
   resolved "https://registry.yarnpkg.com/react-proxy/-/react-proxy-3.0.0-alpha.1.tgz#4400426bcfa80caa6724c7755695315209fa4b07"
