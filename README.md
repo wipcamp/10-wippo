@@ -13,7 +13,7 @@ yarn
 * React
 * Redux
 * NextJS
-* Bootstrap 4
+* Semantic UI React
 * use laravel API from [wip-api](https://github.com/wipcamp/wip-api)
 * :heart:
 
