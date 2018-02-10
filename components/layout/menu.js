@@ -22,7 +22,7 @@ const StyledMenuItem = styled(Menu.Item)`
 `
 const MenuNames = ['Dashboard', 'Document', 'Itim Management']
 
-const ListMenu = MenuNames.map((MenuName) => <StyledMenuItem>{MenuName}</StyledMenuItem>)
+const ListMenu = MenuNames.map((MenuName, i) => <StyledMenuItem key={i}>{MenuName}</StyledMenuItem>)
 
 class MyMenu extends React.Component {
   render () {
