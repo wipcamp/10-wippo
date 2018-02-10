@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactTable from 'react-table'
-import styled from 'styled-components'
+import styled, { injectGlobal } from 'styled-components'
 import Axios from 'axios'
 import Link from 'next/link'
 import { Input } from 'semantic-ui-react'
@@ -11,6 +11,11 @@ const StyledReactTable = styled(ReactTable)`
 const SearchInput = styled(Input)`
   width:100%;
   margin-bottom:1.2em;
+`
+injectGlobal`
+  .ReactTable .rt-thead .rt-resizable-header-content{
+    font-weight:bold;
+  }
 `
 class DatatableCard extends React.Component {
   constructor (props) {
