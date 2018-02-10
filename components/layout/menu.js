@@ -11,8 +11,12 @@ const StyledMenuItem = styled(Menu.Item)`
   padding:.92857143em 1.64285714em !important;
   font-size:1.1em !important;
   color:#fff !important;
-  &:active{
+  border-radius: 4px !important;
+  &:hover{
     background:rgb(58, 165, 212) !important;
+  }
+  &:active{
+    background:rgb(42, 150, 197) !important;
   }
   &:before{
     width:0 !important;
