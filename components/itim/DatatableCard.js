@@ -3,7 +3,15 @@ import ReactTable from 'react-table'
 import styled from 'styled-components'
 import Axios from 'axios'
 import Link from 'next/link'
+import { Input } from 'semantic-ui-react'
 
+const StyledReactTable = styled(ReactTable)`
+  text-align:center;
+`
+const SearchInput = styled(Input)`
+  width:100%;
+  margin-bottom:1.2em;
+`
 class DatatableCard extends React.Component {
   constructor (props) {
     super(props)
@@ -32,9 +40,8 @@ class DatatableCard extends React.Component {
     let msg = input.toUpperCase()
     if (msg.length === 0) this.setState({ searchCamper: this.state.camper })
     else {
-      this.setState({searchCamper: this.state.camper})
-      let res = await this.state.searchCamper.filter(input => input.first_name.indexOf(msg) > -1 || input.last_name.indexOf(msg) > -1 || input.nickname.indexOf(msg) > -1)
-      this.setState({...this.state, searchCamper: res})
+      let res = await this.state.searchCamper.filter(input => input.first_name.toUpperCase().indexOf(msg) > -1 || input.last_name.toUpperCase().indexOf(msg) > -1 || input.nickname.toUpperCase().indexOf(msg) > -1)
+      await this.setState({...this.state, searchCamper: res})
     }
   }
   render () {
@@ -56,14 +63,18 @@ class DatatableCard extends React.Component {
         accessor: 'telno'
       },
       {
+        Header: 'Document',
+        accessor: 'doc'
+      },
+      {
         Header: 'Action',
         accessor: 'action'
       }
     ]
     return (
       <div>
-        <input onChange={this.searchCamper} type='text' />
-        <ReactTable filterable data={this.state.searchCamper} columns={columns} />
+        <SearchInput onChange={this.searchCamper} type='text' icon='search' placeholder='Search...' />
+        <StyledReactTable data={this.state.searchCamper} columns={columns} />
       </div>
     )
   }
