@@ -13,7 +13,7 @@ yarn
 * React
 * Redux
 * NextJS
-* Bootstrap4
+* Bootstrap 4
 * use laravel API from [wip-api](https://github.com/wipcamp/wip-api)
 * :heart:
 
