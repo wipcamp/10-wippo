@@ -1,7 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled ,{ injectGlobal } from 'styled-components'
 import Header from './header'
 import { Container, Grid } from 'semantic-ui-react'
+import Footer from './footer'
 const SubHeader = styled.div`
   padding: 50px 25px 0 0px;
 `
@@ -11,7 +12,11 @@ const SubHeaderText = styled.h3`
   color: #3f4047;
   font-family: 'Roboto', sans-serif;
 `
-
+injectGlobal`
+  .fullpage{
+    min-height:86vh;
+  }
+`
 class Layout extends React.Component {
   constructor (props) {
     super(props)
@@ -31,18 +36,21 @@ class Layout extends React.Component {
     return (
       <div>
         <Header />
-        <Container>
-          <Grid>
-            <Grid.Row>
-              <Grid.Column>
-                <SubHeader>
-                  <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
-                </SubHeader>
-              </Grid.Column>
-            </Grid.Row>
-            {this.props.children}
-          </Grid>
+        <Container fluid className='fullpage'>
+          <Container>
+            <Grid>
+              <Grid.Row>
+                <Grid.Column>
+                  <SubHeader>
+                    <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
+                  </SubHeader>
+                </Grid.Column>
+              </Grid.Row>
+              {this.props.children}
+            </Grid>
+          </Container>
         </Container>
+        <Footer />
       </div>
     )
   }
