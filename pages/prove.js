@@ -4,6 +4,7 @@ import Tab1 from '../components/prove/tab1'
 import Tab2 from '../components/prove/tab2'
 import Tab3 from '../components/prove/tab3'
 import axios from '../utils/axios'
+import Querystring from 'query-string'
 import { Tab, Button } from 'semantic-ui-react'
 
 class Prove extends React.Component {
@@ -22,16 +23,22 @@ class Prove extends React.Component {
       parentPermission: '',
       transcript: ''
     }
+    this.handlePutData = this.handlePutData.bind(this)
   }
 
   async componentWillMount () {
     const {data} = await axios.get('/profiles/' + this.props.url.query.user_id)
     await this.setState({profile: data})
+    console.log(data)
   }
 
-  // static async getInitialProps ({ query }) {
-  //   return query
-  // }
+  async handlePutData (...e) {
+    // const data = Querystring.stringify({
+    //   'is_approve': e.status
+    // })
+    // await axios.put('/approve/19', data)
+    console.log(e)
+  }
 
   render () {
     const panes = [
@@ -52,7 +59,7 @@ class Prove extends React.Component {
 
     const ButtonTranscript = () => (
       <Button.Group>
-        {this.state.transcript === 'reject' ? <Button color='red' >Reject </Button> : <Button onClick={() => this.setState({transcript: 'reject'})} >Reject </Button>}
+        {this.state.transcript === 'reject' ? <Button color='red' >Reject </Button> : <Button onClick={() => this.handlePutData(12, 0)} >Reject </Button>}
         <Button.Or />
         {this.state.transcript === '' ? <Button color='yellow' >Pending</Button> : <Button onClick={() => this.setState({transcript: ''})}>Pending</Button>}
         <Button.Or />

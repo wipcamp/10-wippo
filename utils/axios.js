@@ -6,7 +6,7 @@ const createInstance = () => {
     headers: {
       // 'x-access-token': ''
       // 'Accept': 'application/json',
-      // 'Content-Type': 'application/json'
+      'Content-type': 'application/x-www-form-urlencoded'
     }
   })
 }
