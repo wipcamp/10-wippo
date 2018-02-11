@@ -1,5 +1,5 @@
 import React from 'react'
-import styled , { injectGlobal } from 'styled-components'
+import styled, { injectGlobal } from 'styled-components'
 import { Container, Grid } from 'semantic-ui-react'
 import Menu from './menu.js'
 const HeaderBox = styled.div`
@@ -31,9 +31,6 @@ const AvatarImg = styled.img.attrs({
   max-width:50px;
   border : 1px solid #333;
   margin:15px;
-`
-const MenuWrapper = styled.div`
-  background:#3d3b56;
 `
 injectGlobal`
   .nav-bg{
