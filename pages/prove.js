@@ -27,9 +27,9 @@ class Prove extends React.Component {
   }
 
   async componentWillMount () {
-    const {data} = await axios.get('/profiles/' + this.props.url.query.user_id)
-    await this.setState({profile: data})
-    console.log(data)
+    const {data} = await axios.get('/registrants/' + this.props.url.query.user_id)
+    await this.setState({profile: data[0]})
+    console.log(this.state.profile)
   }
 
   async handlePutData (...e) {
