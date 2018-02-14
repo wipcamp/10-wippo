@@ -16,18 +16,17 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-          <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+          <meta httpEquiv="X-UA-Compatible" content="ie=edge"/>
           <title>WIPPO</title>
           <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet"/>
           <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet"/>
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous" />
           <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
           <link rel="stylesheet" href="/static/css/style.css"/>
           <link rel="stylesheet" href="/static/css/react-table.css" />
-          <script src="https://unpkg.com/react-table@latest/react-table.js" />
-          {this.props.styleTags}
-          <script src="/static/js/fontawesome-all.js"></script>
+          <link rel="stylesheet" href="/static/js/fontawesome-all.min.js" />
           <script src="/static/js/fa-solid.js"></script>
+          
           {this.props.styleTags}
         </Head>
         <body>
