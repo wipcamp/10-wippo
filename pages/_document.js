@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
           <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
           <title>WIPPO</title>
@@ -24,12 +24,11 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
           <link rel="stylesheet" href="/static/css/style.css"/>
           <link rel="stylesheet" href="/static/css/react-table.css" />
-          {this.props.styleTags}
           <script src="https://unpkg.com/react-table@latest/react-table.js" />
-          {/* <script src="/static/js/bootstrap.min.js"></script> */}
+          {this.props.styleTags}
           <script src="/static/js/fontawesome-all.js"></script>
           <script src="/static/js/fa-solid.js"></script>
-          
+          {this.props.styleTags}
         </Head>
         <body>
           <Main />
