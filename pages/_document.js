@@ -24,10 +24,9 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
           <link rel="stylesheet" href="/static/css/style.css"/>
           <link rel="stylesheet" href="/static/css/react-table.css" />
+          <link rel="stylesheet" href="/static/js/fontawesome-all.min.js" />
           {this.props.styleTags}
           <script src="https://unpkg.com/react-table@latest/react-table.js" />
-          {/* <script src="/static/js/bootstrap.min.js"></script> */}
-          <script src="/static/js/fontawesome-all.js"></script>
           <script src="/static/js/fa-solid.js"></script>
           
         </Head>
