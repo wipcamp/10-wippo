@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import FacebookLogin from 'react-facebook-login'
 import { appId, fields, scope } from './facebook.json'
 
+import {auth} from '../util/auth'
+
 const Wrapper = styled.div`
   min-height:70vh;
   justify-content:center;
@@ -48,7 +50,7 @@ const Index = () => (
           fields={fields}
           scope={scope}
           // onClick={() => setLoad(true)}
-          callback={(res) => console.log(res)}
+          callback={(res) => auth(res)}
           icon={`fa fa-facebook mt-2 mr-3`}
           textButton={`Login with Facebook`}
           cssClass='btn btn-primary animated fadeInUp blink'
