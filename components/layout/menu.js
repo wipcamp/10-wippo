@@ -1,17 +1,43 @@
 import React from 'react'
 import styled from 'styled-components'
-import List from './menulist'
-const UnorderedList = styled.ul`
-  list-style:none;
-  padding:40px 0 30px 0;
+import { Menu } from 'semantic-ui-react'
+
+const StyledMenu = styled(Menu)`
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
 `
-const Menu = () => (
-  <UnorderedList>
-    <List active icon='chart-line' text='Dashboard' />
-    <List icon='check-square' text='Approve Document' />
-    <List icon='file-word' text='Check Answer' />
-    <List icon='user' text='Itim Management' />
-    <List icon='user-secret' text='Staff Management' />
-  </UnorderedList>
-)
-export default Menu
+const StyledMenuItem = styled(Menu.Item)`
+  padding:.92857143em 1.64285714em !important;
+  font-size:1.1em !important;
+  color:#fff !important;
+  border-radius: 4px !important;
+  &:hover{
+    background:rgb(58, 165, 212) !important;
+  }
+  &:active{
+    background:rgb(42, 150, 197) !important;
+  }
+  &:before{
+    width:0 !important;
+  }
+
+  
+`
+const MenuNames = ['Dashboard', 'Document', 'Itim Management']
+
+const ListMenu = MenuNames.map((MenuName, i) => <StyledMenuItem key={i}>{MenuName}</StyledMenuItem>)
+
+class MyMenu extends React.Component {
+  render () {
+    return (
+      <StyledMenu>
+        {
+          ListMenu
+        }
+      </StyledMenu>
+    )
+  }
+}
+
+export default MyMenu
