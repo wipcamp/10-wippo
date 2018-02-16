@@ -68,6 +68,7 @@ export const Wrapper = styled.div`
   display:flex;
   flex-direction: column;
   padding: 0 2em;
+  color: #fff;
 
   h1, h3, h6 {
     margin: 0;
@@ -77,12 +78,16 @@ export const Wrapper = styled.div`
   }
   h6 {
     margin-top: .5em;
-    color: #bdbcbc;
+  }
+
+  @media (min-width: 768px) {
+    color: #676c7b;
+    h6 {
+      color: #bdbcbc;
+    }
   }
 `
 export const BackgroundWrapper = styled.div`
-  background-image:url('/static/img/loginbg.png');
-  background-size: cover;
   width:100%;
   height:100vh;
   max-height:100vh;
@@ -101,7 +106,10 @@ export const Faded = styled.div`
   padding: 0;
 `
 export const Background = styled.div`
-  background-color: #fff;
+  background: linear-gradient(135deg, #00c5dc 30%, #716aca 100%);
+  @media (min-width: 768px) {
+    background: #fff;
+  }
 `
 
 export class IndexTemplate extends React.Component {
