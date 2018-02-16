@@ -1,13 +1,13 @@
 import React from 'react'
 import Layout from '../components/layout/layout'
-import Tab1 from '../components/prove/tab1'
-import Tab2 from '../components/prove/tab2'
-import Tab3 from '../components/prove/tab3'
+import Tab1 from '../components/verify/tab1'
+import Tab2 from '../components/verify/tab2'
+import Tab3 from '../components/verify/tab3'
 import axios from '../utils/axios'
 import Querystring from 'query-string'
 import { Tab, Button } from 'semantic-ui-react'
 
-class Prove extends React.Component {
+class Verify extends React.Component {
   constructor (props) {
     super()
     this.state = {
@@ -77,4 +77,4 @@ class Prove extends React.Component {
   }
 }
 
-export default Prove
+export default Verify

@@ -1,9 +1,9 @@
 import axios from 'axios'
-import {API} from '../../env.json'
+import env from './env'
 
 const createInstance = (headers) => {
   return axios.create({
-    baseURL: API,
+    baseURL: env.API_URL,
     headers
   })
 }
