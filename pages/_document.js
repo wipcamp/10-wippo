@@ -1,5 +1,9 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+import htmlescape from 'htmlescape'
+
+const { API_URL } = process.env
+const env = { API_URL }
 
 
 export default class MyDocument extends Document {
@@ -33,6 +37,10 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+
+          <script
+            dangerouslySetInnerHTML={{ __html: '__ENV__ = ' + htmlescape(env) }}
+          />
         </body>
       </html>
     )
