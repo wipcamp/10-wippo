@@ -17,6 +17,7 @@ injectGlobal`
     font-weight:bold;
   }
 `
+
 class DatatableCard extends React.Component {
   constructor (props) {
     super(props)
@@ -26,7 +27,8 @@ class DatatableCard extends React.Component {
     }
   }
   componentWillMount = async () => {
-    let {data} = await Axios.get('http://localhost:8000/api/v1/profiles')
+    let {data} = await Axios.get('http://localhost:8000/api/v1/registrants')
+    console.log(data)
     data = data.map(profile => {
       return {
         ...profile,
@@ -65,7 +67,7 @@ class DatatableCard extends React.Component {
       },
       {
         Header: 'Tel',
-        accessor: 'telno'
+        accessor: 'profile_registrant.telno_personal'
       },
       {
         Header: 'Document',
