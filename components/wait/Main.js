@@ -1,6 +1,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import {Router} from '../../routes'
+import Router from 'next/router'
 import styled from 'styled-components'
 import {compose, withState} from 'recompose'
 import api from '../util/axios'
@@ -49,11 +49,13 @@ const requestStaff = async (stdId, setStdId, setShow) => {
     })
   }
   setStdId('')
+  setShow(false)
+  Router.push('/')
 }
 
 const onEnter = (key, stdId, setStdId, setShow) => {
   if (key.which === 13 || key.keyCode === 13) {
-    requestStaff(stdId)
+    requestStaff(stdId, setStdId, setShow)
     setShow(true)
     setStdId('')
   }
