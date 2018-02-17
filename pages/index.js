@@ -1,9 +1,16 @@
 import React from 'react'
-import Layout from '../components/layout/layout'
-import { Button } from 'semantic-ui-react'
+import injectGlobal from '../components/layout/injectGlobal'
+import IndexPage from '../components/index/Main'
 
-export default props => (
-  <Layout subheadertext='Dashboard'>
-    <Button>Click Here</Button>
-  </Layout>
-)
+class Login extends React.Component {
+  componentWillMount () {
+    injectGlobal
+  }
+  render () {
+    return (
+      <IndexPage />
+    )
+  }
+}
+
+export default Login

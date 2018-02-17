@@ -1,34 +1,22 @@
 import React from 'react'
-import styled from 'styled-components'
-import TopNav from './topnav'
-import Menu from './menu'
-import Dropdown from './dropdown'
-const Logo = styled.div`
-  height: 80px;
-  background-color: #282a3c;
-`
+import styled, { injectGlobal } from 'styled-components'
+import Header from './header'
+import { Container, Grid } from 'semantic-ui-react'
+import Footer from './footer'
+
 const SubHeader = styled.div`
-  padding: 50px 50px 0 50px;
+  padding: 50px 25px 0 0px;
 `
 const SubHeaderText = styled.h3`
   font-weight: 500;
-  font-size: 1.2em;
+  font-size: 1.6em;
   color: #3f4047;
   font-family: 'Roboto', sans-serif;
 `
-const ContentContainer = styled.div`
-  padding: 30px 50px;
-`
-const LeftNav = styled.div`
-  height: 100vh;
-  background-color: #2c2e3e;
-`
-const DropdownContainer = styled.div`
-  right: 24px;  
-  position: absolute;
-`
-const Mainbox = styled.div`
-  background-color: #f8f9fa;
+injectGlobal`
+  .fullpage{
+    min-height:86vh;
+  }
 `
 class Layout extends React.Component {
   constructor (props) {
@@ -47,48 +35,96 @@ class Layout extends React.Component {
 
   render () {
     return (
-      <div className='container-fluid px-0'>
-        <div className='row no-gutters'>
-          <LeftNav className='col-1'>
-            <Logo />
-            <Menu />
-          </LeftNav>
-          <Mainbox className='col'>
-            <TopNav clickHandeler={this.toggleDropdown} />
-            <DropdownContainer>
-              <Dropdown name='wipper' isOpen={this.state.dropdown} />
-            </DropdownContainer>
-            <SubHeader>
-              <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
-            </SubHeader>
-            <ContentContainer>{this.props.children}</ContentContainer>
-          </Mainbox>
-        </div>
+      <div>
+        <Header />
+        <Container fluid className='fullpage'>
+          <Container>
+            <Grid>
+              <Grid.Row>
+                <Grid.Column>
+                  <SubHeader>
+                    <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
+                  </SubHeader>
+                </Grid.Column>
+              </Grid.Row>
+              {this.props.children}
+            </Grid>
+          </Container>
+        </Container>
+        <Footer />
       </div>
     )
   }
 }
-
-// const Layout = (props) => (
-// <div className='container-fluid px-0'>
-//   <div className='row no-gutters'>
-//     <LeftNav className='col-1'>
-//       <Logo />
-//       <Menu />
-//     </LeftNav>
-//     <div className='col'>
-//       <TopNav />
-//       <DropdownContainer>
-//         <Dropdown name='wipper'isOpen={droupdown}/>
-//       </DropdownContainer>
-//       <SubHeader>
-//         <SubHeaderText>{props.subheadertext}</SubHeaderText>
-//       </SubHeader>
-//       <ContentContainer>
-//         {props.children}
-//       </ContentContainer>
-//     </div>
-//   </div>
-// </div>
-// )
 export default Layout
+
+export const ContainerWarpper = styled.div`
+  min-height: 100vh;
+`
+export const Wrapper = styled.div`
+  min-height:100vh;
+  justify-content:center;
+  align-items:flex-start;
+  display:flex;
+  flex-direction: column;
+  padding: 0 2em;
+  color: #fff;
+
+  h1, h3, h6 {
+    margin: 0;
+  }
+  h3, h6 {
+    font-style: italic;
+  }
+  h6 {
+    margin-top: .5em;
+  }
+
+  @media (min-width: 768px) {
+    color: #676c7b;
+    h6 {
+      color: #bdbcbc;
+    }
+  }
+`
+export const BackgroundWrapper = styled.div`
+  width:100%;
+  height:100vh;
+  max-height:100vh;
+`
+export const DevBackground = styled.div`
+  background-image: url('/static/img/wipcamp.jpg');
+  background-size: cover;
+  background-position: bottom center;
+  padding: 0;
+`
+export const Faded = styled.div`
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  opacity: .25;
+  padding: 0;
+`
+export const Background = styled.div`
+  background: linear-gradient(135deg, #00c5dc 30%, #716aca 100%);
+  @media (min-width: 768px) {
+    background: #fff;
+  }
+`
+
+export class IndexTemplate extends React.Component {
+  render () {
+    return (
+      <BackgroundWrapper className={`container-fluid`}>
+        <div className='row'>
+          <DevBackground className='col-12 col-md-6'>
+            <Faded />
+          </DevBackground>
+          <Background className='col-12 col-md-6'>
+            {this.props.children}
+          </Background>
+        </div>
+      </BackgroundWrapper>
+    )
+  }
+}
