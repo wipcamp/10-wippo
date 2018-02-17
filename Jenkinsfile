@@ -9,6 +9,12 @@ pipeline {
         sh 'sudo docker container run --rm -v $(pwd):/app node:8 sh -c "cd /app && yarn install"'
       }
     }
+    stage('build-application') {
+      steps {
+        sh 'rm -rf .next'
+        sh 'sudo docker container run --rm -v $(pwd):/app node:8 sh -c "cd /app && yarn build"'
+      }
+    }
     stage('build-image') {
       steps {
         sh 'sudo docker build . -t 10-wippo'
