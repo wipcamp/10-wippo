@@ -4,51 +4,63 @@ pipeline {
     GIT_BRANCH = "${BRANCH_NAME}"
   }
   stages {
-    stage('initial') {
+    stage('install-dependencies') {
       steps {
-        sh 'yarn install'
+        sh 'sudo docker container run --rm -v $(pwd):/app node:8 sh -c "cd /app && yarn install"'
       }
     }
-    stage('test') {
+    stage('build-application') {
       steps {
-        sh 'echo no test now test trigger'
+        sh 'rm -rf .next'
+        sh 'sudo docker container run --rm -v $(pwd):/app node:8 sh -c "cd /app && yarn build"'
       }
     }
-    stage('build') {
+    stage('build-image') {
+      steps {
+        sh 'sudo docker build . -t 10-wippo'
+        sh 'sudo docker tag 10-wippo registry.wip.camp/10-wippo:$GIT_BRANCH'
+        sh 'sudo docker tag 10-wippo registry.wip.camp/10-wippo'
+      }
+    }
+    stage('push-image') {
+      steps {
+        sh 'sudo docker push registry.wip.camp/10-wippo:$GIT_BRANCH'
+        sh 'sudo docker push registry.wip.camp/10-wippo'
+      }
+    }
+    stage('versioning') {
       when {
         expression {
-          branch = sh(returnStdout: true, script: 'echo $GIT_BRANCH').trim()
-          return branch == 'develop' || branch == 'master'
+          return GIT_BRANCH == 'master'
         }
       }
       steps {
-        sh 'sudo docker build . -t wip-wippo'
-        sh 'sudo docker tag wip-wippo registry.wip.camp/wip-wippo:$GIT_BRANCH-$BUILD_NUMBER'
-        sh 'sudo docker tag wip-wippo registry.wip.camp/wip-wippo'
-      }
-    }
-    stage('push') {
-      when {
-        expression {
-          branch = sh(returnStdout: true, script: 'echo $GIT_BRANCH').trim()
-          return branch == 'develop' || branch == 'master'
-        }
-      }
-      steps {
-        sh 'sudo docker push registry.wip.camp/wip-wippo:$GIT_BRANCH-$BUILD_NUMBER'
-        sh 'sudo docker push registry.wip.camp/wip-wippo'
+        sh 'sudo docker tag 10-wippo registry.wip.camp/10-wippo:$GIT_BRANCH-$BUILD_NUMBER'
+        sh 'sudo docker push registry.wip.camp/10-wippo:$GIT_BRANCH-$BUILD_NUMBER'        
+        sh 'sudo docker image rm registry.wip.camp/10-wippo:$GIT_BRANCH-$BUILD_NUMBER'        
       }
     }
     stage('clean') {
       when {
         expression {
           branch = sh(returnStdout: true, script: 'echo $GIT_BRANCH').trim()
-          return branch == 'develop' || branch == 'master'
+          return branch == 'develop'
         }
       }
       steps {
-        sh 'sudo docker image rm registry.wip.camp/wip-wippo:$GIT_BRANCH-$BUILD_NUMBER'
-        sh 'sudo docker image rm registry.wip.camp/wip-wippo'
+        sh 'sudo docker image rm registry.wip.camp/10-wippo:$GIT_BRANCH'
+        sh 'sudo docker image rm registry.wip.camp/10-wippo'
+        sh 'sudo docker image rm 10-wippo'
+      }
+    }
+    stage('deploy-development') {
+      when {
+        expression {
+          return GIT_BRANCH == 'develop'
+        }
+      }
+      steps {
+        sh 'sudo kubectl rolling-update wip-wippo -n development --image registry.wip.camp/10-wippo:$GIT_BRANCH'
       }
     }
   }
