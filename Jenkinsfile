@@ -11,6 +11,7 @@ pipeline {
     }
     stage('build-application') {
       steps {
+        sh 'rm -rf .next'
         sh 'sudo docker container run --rm -v $(pwd):/app node:8 sh -c "cd /app && yarn build"'
       }
     }
