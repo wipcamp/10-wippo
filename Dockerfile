@@ -7,6 +7,7 @@ COPY node_modules /app/node_modules
 COPY .next /app/.next
 COPY static /app/static
 COPY package.json /app/package.json
+COPY *.js /app/
 
 HEALTHCHECK --interval=5s --timeout=60s CMD curl --fail http://localhost:3000/ || exit 1
 
