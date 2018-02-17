@@ -54,7 +54,7 @@ pipeline {
         }
       }
       steps {
-        sh 'sudo kubectl rolling-update wip-wippo -n development --image registry.wip.camp/10-wippo:$GIT_BRANCH'
+        sh 'sudo kubectl rolling-update wip-wippo -n development --image registry.wip.camp/10-wippo:$GIT_BRANCH --image-pull-policy Always'
       }
     }
   }
