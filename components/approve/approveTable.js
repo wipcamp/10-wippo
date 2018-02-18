@@ -2,10 +2,9 @@ import React from 'react'
 import Router from 'next/router'
 import styled from 'styled-components'
 import ReactTable from 'react-table'
-import axios from 'axios'
+import axios from '../util/axios'
+import getCookie from '../util/cookie'
 import { Label, Button, Icon } from 'semantic-ui-react'
-
-import * as R from 'ramda'
 
 const Badge = styled(Label)`
   overflow: hidden;
@@ -22,7 +21,10 @@ class ApproveTable extends React.Component {
   }
 
   componentWillMount = async () => {
-    let {data} = await axios.get('http://127.0.0.1:8000/api/v1/approve')
+    let {token} = await getCookie({req: false})
+    let {data} = await axios.get('/approve', {
+      Authorization: `Bearer ${token}`
+    })
     let result = data.map((profile) => ({
       ...profile,
       documents: profile.documents.filter((doc) => doc.type_id !== 1)
@@ -42,7 +44,7 @@ class ApproveTable extends React.Component {
           row[filter.id].endsWith(filter.value)
         }
       },
-      {Header: 'lasname', accessor: 'last_name'},
+      {Header: 'LastName', accessor: 'last_name'},
       {Header: 'Document',
         accessor: 'documents',
         style: {textAlign: 'center'},
