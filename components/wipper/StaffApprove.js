@@ -1,7 +1,8 @@
 import React from 'react'
-import Axios from 'axios'
+import axios from '../util/axios'
 import styled from 'styled-components'
 import { Button } from 'semantic-ui-react'
+import getCookie from '../util/cookie'
 const Idtitle = styled.h3`
   background-color:#333;
   color:#fff;
@@ -48,30 +49,47 @@ export default class StaffApprove extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      camper: {
-        profile_registrant: {}
-      }
+      staff: {},
+      stdId: 0
     }
   }
-  componentWillMount = async () => {
-    let {data} = await Axios.get(`http://localhost:8000/api/v1/staffs/${this.props.id}`)
+  componentDidMount = async () => {
+    let staffData = await this.fetchStaff()
+    let {data} = await this.fetchUser(staffData.data.user_id)
     this.setState({
-      camper: data[0]
+      staff: data
     })
+    console.log(data)
   }
+  fetchStaff = async () => {
+    let {token} = await getCookie({req: false})
+    let {data} = await axios.get(`/staffs/${this.props.id}`, {
+      Authorization: `Bearer ${token}`
+    })
+    this.setState({
+      stdId: data.data.student_id
+    })
+    return data
+  }
+  fetchUser = async (userId) => {
+    let {token} = await getCookie({req: false})
+    let {data} = await axios.get(`/users/${userId}`, {
+      Authorization: `Bearer ${token}`
+    })
+    return data
+  }
+  
   render () {
     return (
       <div>
         <Box>
           <Idtitle>WIPID #</Idtitle>
-          <ProfileImage className='' src='https://scontent.fbkk2-3.fna.fbcdn.net/v/t1.0-9/19665475_1397373506976550_3785411902592413247_n.jpg?oh=4ab6299c08fa8d1c17bc6507f10627ec&oe=5B0463F3' />
+          <ProfileImage src={`https://graph.facebook.com/${this.state.staff.provider_acc}/picture?width=99999`} />
           <div style={{width: '100%'}}>
-            <a href='#'><FacebookButton><i className='fab fa-facebook' /></FacebookButton></a>
-            {/* <a href={`https://facebook.com/${this.state.staff.user.provider_acc}`} target='_blank'><FacebookButton><i className='fab fa-facebook' /></FacebookButton></a> */}
+            <a href={`https://facebook.com/${this.state.staff.provider_acc}`} target='_blank'><FacebookButton><i className='fab fa-facebook' /></FacebookButton></a>
           </div>
-          {/* <ProfileImage src={`https://graph.facebook.com/${this.state.staff.user.provider_acc}/picture?width=99999`} /> */}
-          <Title>Student ID : <Text>test</Text></Title>
-          <Title>Facebook Name : <Text>test</Text></Title>
+          <Title>Student ID : <Text>{this.state.stdId}</Text></Title>
+          <Title>Facebook Name : <Text>{this.state.staff.account_name}</Text></Title>
           <Button.Group style={{display:'flex'}}>
             <Button negative>Cancel</Button>
             <Button.Or />
