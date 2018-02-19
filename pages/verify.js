@@ -9,8 +9,10 @@ import { Tab, Button } from 'semantic-ui-react'
 
 const filterDocument = (doc, typeId) => {
   let documents = []
-  doc.filter(data => {
-    documents[data.type_id - 1] = data.path
+  doc.filter(({path, type_id: typeId, id}) => {
+    documents[typeId - 1] = {
+      id, path
+    }
   })
   return documents
 }
