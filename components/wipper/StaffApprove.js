@@ -1,7 +1,7 @@
 import React from 'react'
 import Axios from 'axios'
 import styled from 'styled-components'
-
+import { Button } from 'semantic-ui-react'
 const Idtitle = styled.h3`
   background-color:#333;
   color:#fff;
@@ -30,14 +30,19 @@ const Text = styled.span`
 `
 const FacebookButton = styled.button`
   margin:0 auto;
-  width:50%;
-  margin-left: 25%;
+  width:42.2%;
+  margin-left: 28.9%;
   margin-top: 1%;
   background: #55b0d8;
   color: #fff;
   border: 0;
-  padding: 0.45em;
-  border-radius: 20px;
+  font-size: 1.6em;
+  padding: 0.2em 0;
+  outline:0 !important;
+  transition:0.7s;
+  &:hover{
+    background:#53a4c7;
+  }
 `
 export default class StaffApprove extends React.Component {
   constructor (props) {
@@ -59,13 +64,19 @@ export default class StaffApprove extends React.Component {
       <div>
         <Box>
           <Idtitle>WIPID #</Idtitle>
-          <ProfileImage className='img-responsive' src='https://scontent.fbkk2-3.fna.fbcdn.net/v/t1.0-9/19665475_1397373506976550_3785411902592413247_n.jpg?oh=4ab6299c08fa8d1c17bc6507f10627ec&oe=5B0463F3' />
+          <ProfileImage className='' src='https://scontent.fbkk2-3.fna.fbcdn.net/v/t1.0-9/19665475_1397373506976550_3785411902592413247_n.jpg?oh=4ab6299c08fa8d1c17bc6507f10627ec&oe=5B0463F3' />
           <div style={{width: '100%'}}>
-            <FacebookButton><i className='fab fa-facebook' /></FacebookButton>
+            <a href='#'><FacebookButton><i className='fab fa-facebook' /></FacebookButton></a>
+            {/* <a href={`https://facebook.com/${this.state.staff.user.provider_acc}`} target='_blank'><FacebookButton><i className='fab fa-facebook' /></FacebookButton></a> */}
           </div>
           {/* <ProfileImage src={`https://graph.facebook.com/${this.state.staff.user.provider_acc}/picture?width=99999`} /> */}
-          <Title>Student ID : </Title>
-          <Title>Facebook Name : </Title>
+          <Title>Student ID : <Text>test</Text></Title>
+          <Title>Facebook Name : <Text>test</Text></Title>
+          <Button.Group style={{display:'flex'}}>
+            <Button negative>Cancel</Button>
+            <Button.Or />
+            <Button positive>Accept</Button>
+          </Button.Group>
         </Box>
         {/* <p>Name : {this.state.camper.first_name} {this.state.camper.last_name}</p>
         <p>Nickname : {this.state.camper.nickname}</p>
