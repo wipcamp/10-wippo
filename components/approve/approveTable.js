@@ -60,7 +60,7 @@ class ApproveTable extends React.Component {
         style: {textAlign: 'center'},
         Cell: props => <div>
           <Button onClick={() => Router.push({
-            pathname: '/prove',
+            pathname: '/verify',
             query: { user_id: props.original.user_id }
           })} Icon color='blue' >
             {console.log(props)}
