@@ -16,7 +16,7 @@ const filterDocument = (doc, typeId) => {
 }
 
 class Verify extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super()
     this.state = {
       profile: {
@@ -28,7 +28,8 @@ class Verify extends React.Component {
           edu_name: ''
         }
       },
-      documents: []
+      documents: [],
+      image: ''
     }
     this.handlePutData = this.handlePutData.bind(this)
   }
@@ -38,6 +39,7 @@ class Verify extends React.Component {
     let { data } = await axios.get(`/registrants/${this.props.url.query.user_id}`, {
       Authorization: `Bearer ${token}`
     })
+    this.fetchData()
     await this.setState({ profile: data[0] })
     console.log(this.state.profile)
     await this.setState({ documents: filterDocument(this.state.profile.documents) })
@@ -52,18 +54,28 @@ class Verify extends React.Component {
     console.log(e)
   }
 
+  async fetchData () {
+    let { token } = await getCookie({ req: false })
+    let { data: {data} } = await axios.get(`/users/${this.props.url.query.user_id}`, {
+      Authorization: `Bearer ${token}`
+    })
+    this.setState({
+      image: `https://graph.facebook.com/v2.12/${data.provider_acc}/picture?height=1000&width=1000`
+    })
+  }
+
   render () {
     const panes = [
       { menuItem: 'ข้อมูลน้อง',
-        render: () => <Tab.Pane attached={false}>
+        render: () => <Tab.Pane attached={false}>  
           <Tab1
-            image={this.state.documents[0]}
+            image={this.state.image}
             info={this.state.profile} />
         </Tab.Pane> },
       { menuItem: 'ปพ.1',
         render: props => <Tab.Pane attached={false}>
           <Tab2
-            image={this.state.documents[0]}
+            image={this.state.image}
             path={this.state.documents[2]}
             info={this.state.profile}
             status={this.state.transcript}
@@ -72,7 +84,7 @@ class Verify extends React.Component {
       { menuItem: 'ใบอนุญาติ',
         render: props => <Tab.Pane attached={false}>
           <Tab3
-            image={this.state.documents[0]}
+            image={this.state.image}
             path={this.state.documents[1]}
             info={this.state.profile}
             status={this.state.parentPermission}
