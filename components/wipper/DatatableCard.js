@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactTable from 'react-table'
 import Styled, { injectGlobal } from 'styled-components'
-import Axios from 'axios'
+import axios from '../util/axios'
+import getCookie from '../util/cookie'
 import Link from 'next/link'
 import { Input } from 'semantic-ui-react'
 
@@ -26,9 +27,11 @@ class DatatableCard extends React.Component {
       searchStaff: []
     }
   }
-  componentWillMount = async () => {
-    let {data} = await Axios.get('http://localhost:8000/api/v1/staffs')
-    // let {data} = await Axios.get('https://api.freezer.wip.camp/api/v1/staffs')
+  componentDidMount = async () => {
+    let {token} = await getCookie({req: false})
+    let {data} = await axios.get('/staffs', {
+      Authorization: `Bearer ${token}`
+    })
     console.log(data)
     data.data = await data.data.map(staff => {
       return {
