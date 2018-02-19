@@ -44,6 +44,13 @@ class Verify extends React.Component {
     console.log(this.state.profile)
     await this.setState({ documents: filterDocument(this.state.profile.documents) })
     console.log(filterDocument(this.state.profile.documents))
+
+  setComment = (comment) => {
+    this.setState({
+      comment
+    })
+  }
+
   getFileType () {
     let fileType = []
     this.state.documents.map((data, i) => {
