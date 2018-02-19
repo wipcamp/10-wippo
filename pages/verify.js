@@ -44,14 +44,28 @@ class Verify extends React.Component {
     console.log(this.state.profile)
     await this.setState({ documents: filterDocument(this.state.profile.documents) })
     console.log(filterDocument(this.state.profile.documents))
+  async handleParentPermission (value, status) {
+    let {token} = await getCookie({req: false})
+    let headers = {
+      Authorization: `Bearer ${token}`
+    }
+    await axios.put(`/documents/${this.state.documents[1].id}`, {
+      isApprove: value,
+      comment: this.state.comment
+    }, headers)
+    this.setState({ parentPermission: status })
   }
 
-  async handlePutData (...e) {
-    // const data = Querystring.stringify({
-    //   'is_approve': e.status
-    // })
-    // await axios.put('/approve/19', data)
-    console.log(e)
+  async handleTransript (value, status) {
+    let {token} = await getCookie({req: false})
+    let headers = {
+      Authorization: `Bearer ${token}`
+    }
+    await axios.put(`/documents/${this.state.documents[2].id}`, {
+      isApprove: value,
+      comment: this.state.comment
+    }, headers)
+    this.setState({ transcript: status })
   }
 
   async fetchData () {
