@@ -113,11 +113,11 @@ class Verify extends React.Component {
     )
 
     return (
-      <div>
-        <Layout>
-          <Tab {...this.props} menu={{ pointing: true }} panes={panes} />
-        </Layout>
-      </div>
+      <Layout subheadertext={`Approve System.`}>
+        <Grid.Row>
+          <Tab className='col-12' menu={{ pointing: true }} panes={panes} />
+        </Grid.Row>
+      </Layout>
     )
   }
 }
