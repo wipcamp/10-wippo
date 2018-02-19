@@ -78,12 +78,19 @@ export default class StaffApprove extends React.Component {
     })
     return data
   }
-  
+  assignRole = async (userId) => {
+    let {token} = await getCookie({req: false})
+    console.log(token)
+    let {result} = await axios.post(`/staffs/${userId}/roles`, {
+      Authorization: `Bearer ${token}`
+    })
+    console.log(result)
+  }
   render () {
     return (
       <div>
         <Box>
-          <Idtitle>WIPID #</Idtitle>
+          <Idtitle>WIPID #{this.state.staff.id}</Idtitle>
           <ProfileImage src={`https://graph.facebook.com/${this.state.staff.provider_acc}/picture?width=99999`} />
           <div style={{width: '100%'}}>
             <a href={`https://facebook.com/${this.state.staff.provider_acc}`} target='_blank'><FacebookButton><i className='fab fa-facebook' /></FacebookButton></a>
@@ -93,7 +100,7 @@ export default class StaffApprove extends React.Component {
           <Button.Group style={{display:'flex'}}>
             <Button negative>Cancel</Button>
             <Button.Or />
-            <Button positive>Verify</Button>
+            <Button positive onClick={() => this.assignRole(this.state.staff.id)}>Verify</Button>
           </Button.Group>
         </Box>
         {/* <p>Name : {this.state.camper.first_name} {this.state.camper.last_name}</p>
