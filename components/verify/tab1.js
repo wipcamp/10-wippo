@@ -3,8 +3,6 @@ import ItimCard from '../general/itimcard'
 import { Grid, Form, Input, TextArea, Segment, Icon } from 'semantic-ui-react'
 import styled from 'styled-components'
 
-const ItimImage = '/static/img/itim-profileImg.jpg'
-
 const TabStyle = styled.div`
 height:100%;
 .ui.padded.grid{
