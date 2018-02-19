@@ -75,7 +75,7 @@ export default class StaffApprove extends React.Component {
           <Button.Group style={{display:'flex'}}>
             <Button negative>Cancel</Button>
             <Button.Or />
-            <Button positive>Accept</Button>
+            <Button positive>Verify</Button>
           </Button.Group>
         </Box>
         {/* <p>Name : {this.state.camper.first_name} {this.state.camper.last_name}</p>
