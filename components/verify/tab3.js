@@ -4,7 +4,7 @@ import { Grid } from 'semantic-ui-react'
 import { ImageCustom, PDF } from './tab2'
 import env from '../util/env'
 
-const Tab3 = ({info, image, path, button, fileType}) => (
+const Tab3 = ({info, image, path, button, fileType, setComment, comment}) => (
   (
     <Grid.Row>
       <div className='container'>
@@ -13,13 +13,18 @@ const Tab3 = ({info, image, path, button, fileType}) => (
             <ItimCard src={image} name={`น้อง ${info.nickname}`} school={info.edu_name} join={info.created_at} />
           </div>
           <div className='col-12 col-md-10 d-flex flex-column justify-content-center align-items-center'>
+            <h1>ใบอนุญาติผู้ปกครอง</h1>
             {
               fileType === 'pdf'
                 ? <PDF src={`${env.URL}${path}`} href={`${env.URL}${path}`} />
                 : <ImageCustom src={`${env.URL}${path}`} size='large' href={`${env.URL}${path}`} />
             }
             <h3>เหตุผล (หากไม่ผ่าน)</h3>
-            <textarea placeholder='ใส่เหตุผลที่นี่' className='form-control' />
+            <textarea
+              onChange={(e) => setComment(e.target.value)}
+              value={comment}
+              placeholder='ใส่เหตุผลที่นี่'
+              className='form-control' />
             <div className='mt-3'>
               {button}
             </div>
