@@ -75,8 +75,11 @@ class Verify extends React.Component {
       { menuItem: 'ปพ.1',
         render: props => <Tab.Pane attached={false}>
           <Tab2
+            comment={this.state.comment}
+            setComment={this.setComment}
+            fileType={this.state.fileType[2]}
             image={this.state.image}
-            path={this.state.documents[2]}
+            path={this.state.documents[2].path}
             info={this.state.profile}
             status={this.state.transcript}
             button={<ButtonTranscript />} />
@@ -84,8 +87,11 @@ class Verify extends React.Component {
       { menuItem: 'ใบอนุญาติ',
         render: props => <Tab.Pane attached={false}>
           <Tab3
+            comment={this.state.comment}
+            setComment={this.setComment}
+            fileType={this.state.fileType[1]}
             image={this.state.image}
-            path={this.state.documents[1]}
+            path={this.state.documents[1].path}
             info={this.state.profile}
             status={this.state.parentPermission}
             button={<ButtonParentPermission />} />
