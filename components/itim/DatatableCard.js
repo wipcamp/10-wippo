@@ -4,7 +4,7 @@ import styled, { injectGlobal } from 'styled-components'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import Link from 'next/link'
-import { Input } from 'semantic-ui-react'
+import { Input, Icon, Button } from 'semantic-ui-react'
 
 const StyledReactTable = styled(ReactTable)`
   text-align:center;
@@ -16,6 +16,9 @@ const SearchInput = styled(Input)`
 injectGlobal`
   .ReactTable .rt-thead .rt-resizable-header-content{
     font-weight:bold;
+  }
+  .ReactTable .rt-tbody .rt-td{
+    align-self:center;
   }
 `
 
@@ -37,7 +40,7 @@ class DatatableCard extends React.Component {
       return {
         ...profile,
         fullname: `${profile.first_name} ${profile.last_name}`,
-        action: <Link href={{ pathname: '/itim', query: { id: profile.user_id } }}><a>ส่อง</a></Link>
+        action: <Link href={{ pathname: '/itim', query: { id: profile.user_id } }}><a><Button icon='search' color='blue' /></a></Link>
       }
     })
     this.setState({

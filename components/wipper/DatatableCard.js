@@ -4,7 +4,7 @@ import Styled, { injectGlobal } from 'styled-components'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import Link from 'next/link'
-import { Input } from 'semantic-ui-react'
+import { Input, Icon, Button } from 'semantic-ui-react'
 
 const StyledReactTable = Styled(ReactTable)`
   text-align:center;
@@ -16,6 +16,9 @@ const SearchInput = Styled(Input)`
 injectGlobal`
   .ReactTable .rt-thead .rt-resizable-header-content{
     font-weight:bold;
+  }
+  .ReactTable .rt-tbody .rt-td{
+    align-self:center;
   }
 `
 
@@ -36,7 +39,7 @@ class DatatableCard extends React.Component {
     data.data = await data.data.map(staff => {
       return {
         ...staff,
-        action: <Link href={{ pathname: '/wipper', query: { id: staff.user_id } }}><a>ส่อง</a></Link>
+        action: <Link href={{ pathname: '/wipper', query: { id: staff.user_id } }}><a><Button icon='search' color='blue' /></a></Link>
       }
     })
     this.setState({
