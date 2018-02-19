@@ -8,11 +8,13 @@ const env = { API_URL, URL }
 
 
 export default class MyDocument extends Document {
-  static getInitialProps ({ renderPage }) {
+  static async getInitialProps (ctx) {
+    const { renderPage } = ctx
+    const props = await Document.getInitialProps(ctx)
     const sheet = new ServerStyleSheet()
     const page = renderPage(App => props => sheet.collectStyles(<App {...props} />))
     const styleTags = sheet.getStyleElement()
-    return { ...page, styleTags }
+    return { ...page, styleTags, ...props }
   }
 
   componentWillMount() {
@@ -33,7 +35,7 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="/static/css/style.css"/>
           <link rel="stylesheet" href="/static/css/react-table.css" />
           <link rel="stylesheet" href="/static/css/sweetalert.css" />
-          <link rel="stylesheet" href="/static/js/fontawesome-all.min.js" />
+          <script src="/static/js/fontawesome-all.min.js"></script>
           <script src="/static/js/fa-solid.js"></script>
           
           {this.props.styleTags}
