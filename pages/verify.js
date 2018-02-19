@@ -5,7 +5,7 @@ import Tab2 from '../components/verify/tab2'
 import Tab3 from '../components/verify/tab3'
 import axios from '../components/util/axios'
 import getCookie from '../components/util/cookie'
-import { Tab, Button } from 'semantic-ui-react'
+import { Grid, Tab, Button } from 'semantic-ui-react'
 
 const filterDocument = (doc, typeId) => {
   let documents = []
