@@ -1,13 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled , { injectGlobal } from 'styled-components'
 import { Menu } from 'semantic-ui-react'
+import Link from 'next/link'
 
 const StyledMenu = styled(Menu)`
   background:transparent !important;
   border:0 !important;
   box-shadow:none !important;
 `
-const StyledMenuItem = styled(Menu.Item)`
+const StyledLink = styled.a`
   padding:.92857143em 1.64285714em !important;
   font-size:1.1em !important;
   color:#fff !important;
@@ -21,19 +22,37 @@ const StyledMenuItem = styled(Menu.Item)`
   &:before{
     width:0 !important;
   }
-
-  
 `
-const MenuNames = ['Dashboard', 'Document', 'Itim Management']
-
-const ListMenu = MenuNames.map((MenuName, i) => <StyledMenuItem key={i}>{MenuName}</StyledMenuItem>)
+injectGlobal`
+  .ui.menu .item{
+    padding:0;
+  }
+`
+// const MenuNames = ['Dashboard', 'Document', 'Itim Management']
+const MenuNames = [
+  {
+    menuName: 'Dashboard',
+    link: '/dashboard'
+  },
+  {
+    menuName: 'Document',
+    link: '/approve'
+  },
+  {
+    menuName: 'Itim Management',
+    link: '/itim'
+  }
+]
 
 class MyMenu extends React.Component {
   render () {
     return (
       <StyledMenu>
         {
-          ListMenu
+          MenuNames.map((menu, i) => <Menu.Item key={i}>
+            <Link href={`${menu.link}`}><StyledLink>{menu.menuName}</StyledLink></Link>
+          </Menu.Item>
+          )
         }
       </StyledMenu>
     )
