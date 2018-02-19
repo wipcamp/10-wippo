@@ -12,7 +12,7 @@ const Tab2 = ({info, image, path, button}) => (
             <ItimCard src={image} name={info.name} school={info.edu_name} join={info.created_at} />
           </Grid.Column>
           <Grid.Column width={12} textAlign={'center'}>
-            <Image src={`${env.API_URL}${path}`} size='large' href={`${env.API_URL}${path}`} />
+            <Image src={`${env.URL}${path}`} size='large' href={`${env.URL}${path}`} />
             {button}
           </Grid.Column>
         </Grid.Row>
