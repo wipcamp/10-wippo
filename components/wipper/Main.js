@@ -1,13 +1,17 @@
 import React from 'react'
-
+import DatatableCard from './DatatableCard'
+import StaffApprove from './StaffApprove'
 class Main extends React.Component {
-  state = {
-
-  }
   render () {
     return (
       <div>
-        test
+        {
+          this.props.url.query.id ? (
+            <StaffApprove id={this.props.url.query.id} />
+          ) : (
+            <DatatableCard />
+          )
+        }
       </div>
     )
   }
