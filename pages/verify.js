@@ -44,6 +44,16 @@ class Verify extends React.Component {
     console.log(this.state.profile)
     await this.setState({ documents: filterDocument(this.state.profile.documents) })
     console.log(filterDocument(this.state.profile.documents))
+  getFileType () {
+    let fileType = []
+    this.state.documents.map((data, i) => {
+      fileType[i] = data.substring(data.length - 3, data.length)
+    })
+    this.setState({
+      fileType: fileType
+    })
+  }
+
   async handleParentPermission (value, status) {
     let {token} = await getCookie({req: false})
     let headers = {
