@@ -1,11 +1,10 @@
 import React from 'react'
+import Waiting from '../components/wait/Main'
 
 export default class Wait extends React.Component {
-  render() {
+  render () {
     return (
-      <div>
-        Waiting for Approve.
-      </div>
+      <Waiting />
     )
   }
 }
