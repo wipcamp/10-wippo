@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactTable from 'react-table'
-import styled, { injectGlobal } from 'styled-components'
+import Styled, { injectGlobal } from 'styled-components'
 import Axios from 'axios'
 import Link from 'next/link'
 import { Input } from 'semantic-ui-react'
 
-const StyledReactTable = styled(ReactTable)`
+const StyledReactTable = Styled(ReactTable)`
   text-align:center;
 `
-const SearchInput = styled(Input)`
+const SearchInput = Styled(Input)`
   width:100%;
   margin-bottom:1.2em;
 `
@@ -27,8 +27,8 @@ class DatatableCard extends React.Component {
     }
   }
   componentWillMount = async () => {
-    // let {data} = await Axios.get('http://localhost:8000/api/v1/staffs')
-    let {data} = await Axios.get('https://api.freezer.wip.camp/api/v1/staffs')
+    let {data} = await Axios.get('http://localhost:8000/api/v1/staffs')
+    // let {data} = await Axios.get('https://api.freezer.wip.camp/api/v1/staffs')
     console.log(data)
     data.data = await data.data.map(staff => {
       return {
