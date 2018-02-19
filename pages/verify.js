@@ -44,7 +44,8 @@ class Verify extends React.Component {
     console.log(this.state.profile)
     await this.setState({ documents: filterDocument(this.state.profile.documents) })
     console.log(filterDocument(this.state.profile.documents))
-    })
+    this.getFileType()
+  }
 
   setComment = (comment) => {
     this.setState({
@@ -99,7 +100,7 @@ class Verify extends React.Component {
   render () {
     const panes = [
       { menuItem: 'ข้อมูลน้อง',
-        render: () => <Tab.Pane attached={false}>  
+        render: () => <Tab.Pane attached={false}>
           <Tab1
             image={this.state.image}
             info={this.state.profile} />
