@@ -36,15 +36,16 @@ class ApproveTable extends React.Component {
 
   render () {
     const tableColumns = [
-      {Header: '#', accessor: 'user_id', width: 45, style: {textAlign: 'center'}},
+      {Header: '#', accessor: 'user_id', width: 100, style: {textAlign: 'center'}},
       {Header: 'FirstName',
         accessor: 'first_name',
+        width: 150,
         filterMethod: (filter, row) => {
           row[filter.id].startsWith(filter.value) &&
           row[filter.id].endsWith(filter.value)
         }
       },
-      {Header: 'LastName', accessor: 'last_name'},
+      {Header: 'LastName', width: 150, accessor: 'last_name'},
       {Header: 'Document',
         accessor: 'documents',
         style: {textAlign: 'center'},
@@ -57,6 +58,7 @@ class ApproveTable extends React.Component {
         </div>
       },
       {Header: '',
+        width: 150,
         style: {textAlign: 'center'},
         Cell: props => <div>
           <Button onClick={() => Router.push({
