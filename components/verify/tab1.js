@@ -19,14 +19,14 @@ const SecHeader = styled.span`
 font-size:25px;
 `
 
-const Tab1 = ({ info }) => {
+const Tab1 = ({ info, image, path }) => {
   return (
     <div>
       <TabStyle>
         <Grid>
           <Grid.Row>
             <Grid.Column width={4}>
-              <ItimCard src={ItimImage} name={info.nickname} school={''} join={'undefined'} />
+              <ItimCard src={image} name={info.nickname} school={''} join={info.created_at} />
             </Grid.Column>
             <Grid.Column width={12}>
               <Grid.Row>
@@ -86,7 +86,7 @@ const Tab1 = ({ info }) => {
                       <SecHeader>ข้อมูลค่าย</SecHeader>
                     </Grid.Row>
                     <Grid.Row>
-                      <Grid.Column centered>
+                      <Grid.Column centered='true'>
                         <Form>
                           <Form.Group>
                             <Form.Field width={5} control={TextArea} label='ค่ายที่เคยเข้าร่วม' value={info.profile_registrant.past_camp} />
