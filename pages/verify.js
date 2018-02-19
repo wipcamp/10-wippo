@@ -18,22 +18,20 @@ const filterDocument = (doc, typeId) => {
 }
 
 class Verify extends React.Component {
-  constructor (props) {
-    super()
-    this.state = {
-      profile: {
-        profile_registrant: {
-          activities: '',
-          addr_dist: '',
-          addr_prov: '',
-          user_id: '',
-          edu_name: ''
-        }
-      },
-      documents: [],
-      image: ''
-    }
-    this.handlePutData = this.handlePutData.bind(this)
+  state = {
+    profile: {
+      profile_registrant: {
+        activities: '',
+        addr_dist: '',
+        addr_prov: '',
+        user_id: '',
+        edu_name: ''
+      }
+    },
+    documents: [],
+    image: '',
+    fileType: [],
+    comment: ''
   }
 
   async componentDidMount () {
