@@ -18,9 +18,10 @@ class Index extends React.Component {
   }
   componentDidMount = async () => {
     let {token} = await getCookie({req: false})
-    let data = await axios.get('/dashboard', {
-      authorization: `Bearer ${token}`
-    })
+    let headers = {
+      Authorization: `Bearer ${token}`
+    }
+    let data = await axios.get('/dashboard', headers)
     this.setState({
       registerAmount: data.data.data.registerTodayAmount,
       campData: data.data.data.campDetail

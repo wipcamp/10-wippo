@@ -1,107 +1,69 @@
 import React from 'react'
 import ItimCard from '../general/itimcard'
-import { Grid, Form, Input, TextArea, Segment, Icon } from 'semantic-ui-react'
+import { Grid, Icon } from 'semantic-ui-react'
 import styled from 'styled-components'
 
-const TabStyle = styled.div`
-height:100%;
-.ui.padded.grid{
-  height:100%;
-}
+const SecHeader = styled.div`
+  font-family: 'Kanit', sans-serif !important;
+  font-size:25px;
 `
-const InfoSeg = styled(Segment)`
-margin:6px;
-`
-
-const SecHeader = styled.span`
-font-size:25px;
+const Topic = styled.div`
+  font-family: 'Kanit', sans-serif !important;
+  font-size:18px;
+  margin-top: 1em;
 `
 
 const Tab1 = ({ info, image, path }) => {
   return (
-    <div>
-      <TabStyle>
-        <Grid>
-          <Grid.Row>
-            <Grid.Column width={4}>
-              <ItimCard src={image} name={info.nickname} school={''} join={info.created_at} />
-            </Grid.Column>
-            <Grid.Column width={12}>
-              <Grid.Row>
-                <InfoSeg padded>
-                  <Grid padded={'horizontally'}>
-                    <Grid.Row>
-                      <Icon name={'user'} />
-                      <SecHeader>ข้อมูลส่วนตัว</SecHeader>
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Column width={8}>
-                        <span>ชื่อ :</span><Form.Field readOnly control={Input} value={info.first_name} />
-                      </Grid.Column>
-                      <Grid.Column width={8}>
-                        <span>นามสกุล :</span><Form.Field readOnly control={Input} value={info.last_name} />
-                      </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Column width={8}>
-                        <span>โรค :</span><Form.Field readOnly control={Input} value={info.congenital_diseases} />
-                      </Grid.Column>
-                      <Grid.Column width={8}>
-                        <span>ยารักษา :</span><Form.Field readOnly control={Input} value={info.congenital_drugs} />
-                      </Grid.Column>
-                    </Grid.Row>
-                  </Grid>
-                </InfoSeg>
-              </Grid.Row>
-              <Grid.Row>
-                <InfoSeg padded>
-                  <Grid>
-                    {console.log(info)}
-                    <Grid.Row>
-                      <Icon name={'pencil'} />
-                      <SecHeader>ข้อมูลการศึกษา</SecHeader>
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Column width={6}>
-                        <span>โรงเรียน :</span><Form.Field readOnly control={Input} value={info.profile_registrant.edu_name} />
-                      </Grid.Column>
-                      <Grid.Column width={5}>
-                        <span>ลำดับชั้น :</span><Form.Field readOnly control={Input} value={info.profile_registrant.edu_lv} />
-                      </Grid.Column>
-                      <Grid.Column width={5}>
-                        <span>เกรด :</span><Form.Field readOnly control={Input} value={info.profile_registrant.edu_gpax} />
-                      </Grid.Column>
-                    </Grid.Row>
-
-                  </Grid>
-                </InfoSeg>
-              </Grid.Row>
-              <Grid.Row>
-                <InfoSeg padded>
-                  <Grid>
-                    <Grid.Row>
-                      <Icon name={'free code camp'} />
-                      <SecHeader>ข้อมูลค่าย</SecHeader>
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Column centered='true'>
-                        <Form>
-                          <Form.Group>
-                            <Form.Field width={5} control={TextArea} label='ค่ายที่เคยเข้าร่วม' value={info.profile_registrant.past_camp} />
-                            <Form.Field width={5} control={TextArea} label='ทักษะคอมฯ' value={info.profile_registrant.skill_computer} />
-                            <Form.Field width={6} control={TextArea} label='อยากบอกพี่ว่า' value={info.profile_registrant.tell_wipper} />
-                          </Form.Group>
-                        </Form>
-                      </Grid.Column>
-                    </Grid.Row>
-                  </Grid>
-                </InfoSeg>
-              </Grid.Row>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </TabStyle>
-    </div>
+    <Grid.Row>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-6 col-md-2'>
+            <ItimCard src={image} name={`น้อง ${info.nickname}`} school={''} join={info.created_at} />
+          </div>
+          <div className='col-12 col-md-10'>
+            <SecHeader className='mt-3'>
+              <Icon size='big' name={'user'} />
+              ข้อมูลส่วนตัว
+            </SecHeader>
+            <div className='row'>
+              <Topic className='col'>ชื่อ : <input readOnly className='form-control' type='text' value={info.first_name || ''} /></Topic>
+              <Topic className='col'>นามสกุล :<input readOnly className='form-control' type='text' value={info.last_name || ''} /></Topic>
+            </div>
+            <div className='row'>
+              <Topic className='col'>โรค :<input readOnly className='form-control' type='text' value={info.congenital_diseases || ''} /></Topic>
+              <Topic className='col'>ยาที่แพ้ :<input readOnly className='form-control' type='text' value={info.congenital_drugs || ''} /></Topic>
+            </div>
+            <div className='row'>
+              <div className='col-12'>
+                <SecHeader className='mt-3'>
+                  <Icon size='big' name={'pencil'} />
+                ข้อมูลการศึกษา
+                </SecHeader>
+                <div className='row'>
+                  <Topic className='col'>โรงเรียน :<input readOnly className='form-control' type='text' value={info.profile_registrant.edu_name || ''} /></Topic>
+                  <Topic className='col'>ลำดับชั้น :<input readOnly className='form-control' type='text' value={info.profile_registrant.edu_lv || ''} /></Topic>
+                  <Topic className='col'>เกรด :<input readOnly className='form-control' type='text' value={info.profile_registrant.edu_gpax || ''} /></Topic>
+                </div>
+              </div>
+            </div>
+            <div className='row mb-5'>
+              <div className='col-12'>
+                <SecHeader className='mt-3'>
+                  <Icon className='mr-3' size='big' name={'free code camp'} />
+                  ข้อมูลค่าย
+                </SecHeader>
+                <div className='row'>
+                  <Topic className='col'>ค่ายที่เคยเข้าร่วม :<textarea readOnly rows='5' className='form-control' type='text' value={info.profile_registrant.past_camp || ''} /></Topic>
+                  <Topic className='col'>ทักษะคอมฯ :<textarea readOnly rows='5' className='form-control' type='text' value={info.profile_registrant.skill_computer || ''} /></Topic>
+                  <Topic className='col'>อยากบอกพี่ว่า :<textarea readOnly rows='5' className='form-control' type='text' value={info.profile_registrant.tell_wipper || ''} /></Topic>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Grid.Row>
   )
 }
 
