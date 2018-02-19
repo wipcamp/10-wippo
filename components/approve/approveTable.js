@@ -29,9 +29,9 @@ class ApproveTable extends React.Component {
       ...profile,
       documents: profile.documents.filter((doc) => doc.type_id !== 1)
     }))
-    result = result.filter(profile => profile.documents.length)
-    this.setState({res: result})
     console.log(result)
+    // result = result.filter(profile => profile.documents.length)
+    this.setState({res: result})
   }
 
   render () {
