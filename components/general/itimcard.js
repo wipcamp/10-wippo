@@ -1,21 +1,21 @@
 import React from 'react'
 import {Card, Image} from 'semantic-ui-react'
 
-const ItimCard = props => (
+const ItimCard = ({src, name, join, school}) => (
   <div>
     <Card>
-      <Image src={props.src} />
+      <Image size='small' fluid src={src} />
       <Card.Content>
         <Card.Header>
-          {props.name}
+          {name}
         </Card.Header>
         <Card.Meta>
           <span className='date'>
-            {props.join}
+            {new Date(join).toLocaleDateString()}
           </span>
         </Card.Meta>
         <Card.Description>
-          {props.school}
+          {school}
         </Card.Description>
       </Card.Content>
     </Card>
