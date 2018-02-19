@@ -2,7 +2,8 @@ import React from 'react'
 import { Card, Divider } from 'semantic-ui-react'
 import styled from 'styled-components'
 import {VictoryPie} from 'victory'
-import axios from '../../utils/axios'
+import axios from '../util/axios'
+import getCookie from '../util/cookie'
 
 const CardContainer = styled.div`
   width:100%;
@@ -32,7 +33,10 @@ class TranscriptCard extends React.Component {
   }
 
   async componentWillMount () {
-    let {data: { data }} = await axios.get('/approve/count/transcript')
+    let {token} = await getCookie({req: false})
+    let {data: { data }} = await axios.get('/approve/count/transcript', {
+      Authorization: `Bearer ${token}`
+    })
     this.setState({transcript: data})
   }
 
