@@ -94,21 +94,18 @@ class Verify extends React.Component {
 
     const ButtonParentPermission = () => (
       <Button.Group>
-        {this.state.parentPermission === 'reject' ? <Button color='red' >Reject </Button> : <Button onClick={() => this.setState({ parentPermission: 'reject' })} >Reject </Button>}
+        {this.state.parentPermission === 'reject' ? <Button color='red' >Reject </Button> : <Button onClick={() =>
+          this.handleParentPermission(0, 'reject')} >Reject </Button>}
         <Button.Or />
-        {this.state.parentPermission === '' ? <Button color='yellow' >Pending</Button> : <Button onClick={() => this.setState({ parentPermission: '' })}>Pending</Button>}
-        <Button.Or />
-        {this.state.parentPermission === 'approve' ? <Button color='green' >Approved </Button> : <Button onClick={() => this.setState({ parentPermission: 'approve' })}>Approved </Button>}
+        {this.state.parentPermission === 'approve' ? <Button color='green' >Approved </Button> : <Button onClick={() => this.handleParentPermission(1, 'approve')}>Approved </Button>}
       </Button.Group>
     )
 
     const ButtonTranscript = () => (
       <Button.Group>
-        {this.state.transcript === 'reject' ? <Button color='red' >Reject </Button> : <Button onClick={() => this.handlePutData(12, 0)} >Reject </Button>}
+        {this.state.transcript === 'reject' ? <Button color='red' >Reject </Button> : <Button onClick={() => this.handleTransript(0, 'reject')} >Reject </Button>}
         <Button.Or />
-        {this.state.transcript === '' ? <Button color='yellow' >Pending</Button> : <Button onClick={() => this.setState({ transcript: '' })}>Pending</Button>}
-        <Button.Or />
-        {this.state.transcript === 'approve' ? <Button color='green' >Approved </Button> : <Button onClick={() => this.setState({ transcript: 'approve' })}>Approved </Button>}
+        {this.state.transcript === 'approve' ? <Button color='green' >Approved </Button> : <Button onClick={() => this.handleTransript(1, 'approve')}>Approved </Button>}
       </Button.Group>
     )
 
