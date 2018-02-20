@@ -11,6 +11,7 @@ const Box = styled.div`
   overflow:hidden;
 `
 const HeroText = styled.h1`
+  font-family: 'Kanit', sans-serif;
   font-size:3.5em;
   margin:0;
   display:block;
