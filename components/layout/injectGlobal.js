@@ -6,6 +6,7 @@ export default injectGlobal`
     font-size: 12px;
   }
   .btn-primary {
+    font-family: 'Kanit', sans-serif;
     color: #fff;
     background-color: #5867dd;
     border-color: #5867dd;
