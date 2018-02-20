@@ -64,7 +64,6 @@ class ApproveTable extends React.Component {
             pathname: '/verify',
             query: { user_id: props.original.user_id }
           })} Icon color='blue' >
-            {console.log(props)}
             <Icon name='search' />
             approve
           </Button>

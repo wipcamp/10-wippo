@@ -45,7 +45,6 @@ export default class ItimProfile extends React.Component {
     this.setState({
       camper: data[0]
     })
-    console.log(data[0]) 
   }
   render () {
     return (
