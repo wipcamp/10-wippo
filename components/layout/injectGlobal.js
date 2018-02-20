@@ -15,4 +15,9 @@ export default injectGlobal`
     background-color: #384ad7;
     border-color: #2e40d4;
   }
+  a.item {
+    min-width: 85px;
+    padding: 1em;
+    justify-content: center;
+  }
 `
