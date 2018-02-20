@@ -104,7 +104,7 @@ class ApproveTable extends React.Component {
     ]
     return (
       <div>
-        <SearchInput onChange={this.searchCamper} type='text' icon='search' placeholder='Search...' />  
+        <SearchInput onChange={this.searchCamper} type='text' icon='search' placeholder='Search...' />
         <tableColumns>
           <div>
             <ReactTable defaultPageSize={10} className='table' data={this.state.search} columns={tableColumns} />
