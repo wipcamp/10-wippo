@@ -17,7 +17,7 @@ const filterDocument = (doc, typeId) => {
   return documents
 }
 
-const Breadcrumb = () => <ol>
+const Breadcrumb = () => <ol className='breadcrumb'>
   <li className='breadcrumb-item'><a href='/approve'>Approve System</a></li>
   <li className='breadcrumb-item active' aria-current='page'>Verify</li>
 </ol>
@@ -105,12 +105,14 @@ class Verify extends React.Component {
       { menuItem: 'ข้อมูลน้อง',
         render: () => <Tab.Pane attached={false}>
           <Tab1
+            fullName={`${this.state.profile.first_name} ${this.state.profile.last_name}`}
             image={this.state.image}
             info={this.state.profile} />
         </Tab.Pane> },
       { menuItem: 'ปพ.1',
         render: props => <Tab.Pane attached={false}>
           <Tab2
+            fullName={`${this.state.profile.first_name} ${this.state.profile.last_name}`}
             comment={this.state.comment}
             setComment={this.setComment}
             fileType={this.state.fileType[2]}
@@ -123,6 +125,7 @@ class Verify extends React.Component {
       { menuItem: 'ใบอนุญาติ',
         render: props => <Tab.Pane attached={false}>
           <Tab3
+            fullName={`${this.state.profile.first_name} ${this.state.profile.last_name}`}
             comment={this.state.comment}
             setComment={this.setComment}
             fileType={this.state.fileType[1]}
