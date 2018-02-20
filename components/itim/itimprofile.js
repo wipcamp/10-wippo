@@ -1,7 +1,5 @@
 import React from 'react'
 import Axios from 'axios'
-import { Grid, Button } from 'semantic-ui-react'
-import Link from 'next/link'
 import styled from 'styled-components'
 
 const Idtitle = styled.h3`
