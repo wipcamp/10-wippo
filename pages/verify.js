@@ -41,10 +41,8 @@ class Verify extends React.Component {
     })
     this.fetchData()
     await this.setState({ profile: data[0] })
-    console.log(this.state.profile)
     await this.setState({ documents: filterDocument(this.state.profile.documents) })
-    console.log(filterDocument(this.state.profile.documents))
-    this.getFileType()
+    await this.getFileType()
   }
 
   setComment = (comment) => {
@@ -53,12 +51,12 @@ class Verify extends React.Component {
     })
   }
 
-  getFileType () {
+  async getFileType () {
     let fileType = []
-    this.state.documents.map((data, i) => {
-      fileType[i] = data.substring(data.length - 3, data.length)
+    await this.state.documents.map(({path}, i) => {
+      fileType[i] = path.substr(path.length - 3, path.length)
     })
-    this.setState({
+    await this.setState({
       fileType: fileType
     })
   }
