@@ -1,7 +1,5 @@
 import React from 'react'
-import { Card, Divider } from 'semantic-ui-react'
 import styled from 'styled-components'
-import {VictoryPie} from 'victory'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
 
