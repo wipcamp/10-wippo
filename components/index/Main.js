@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Icon } from 'semantic-ui-react'
 import FacebookLogin from 'react-facebook-login'
 import {Wrapper, IndexTemplate} from '../layout/layout'
 import { appId, fields, scope } from './facebook.json'
@@ -21,9 +22,9 @@ const Login = () => (
         scope={scope}
         // onClick={() => setLoad(true)}
         callback={(res) => responser(res)}
-        icon={`fa fa-facebook my-2 ml-2 mr-3`}
+        icon={<Icon name='facebook f' />}
         textButton={`Login with Facebook`}
-        cssClass='btn btn-primary animated fadeInUp blink'
+        cssClass='btn btn-primary btn-lg animated fadeInUp blink'
         tag={`button`}
       />
     </Box>

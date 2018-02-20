@@ -8,7 +8,7 @@ import {Grid} from 'semantic-ui-react'
 const Approve = () =>
   (
     <div>
-      <Layout subheadertext={'approve'}>
+      <Layout subheadertext={'Approve System'}>
         <Grid >
           <Grid.Row>
             <Grid.Column width={8}>
