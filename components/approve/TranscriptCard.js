@@ -12,70 +12,43 @@ const CardContainer = styled.div`
   }
 `
 
-const Percentage = styled.div`
-  position:absolute;
-  padding-top: 9%;
-  padding-left:60%;
+const Text = styled.div`
   font-size:4em;
-  `
-
-const CardChart = styled.div`
-padding-left:4em;
- width:45%;
+  padding: .5em 1em;
 `
 
 class TranscriptCard extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      transcript: 0
+      user: 0,
+      doc: 0
     }
   }
 
   async componentWillMount () {
     let {token} = await getCookie({req: false})
-    let {data: { data }} = await axios.get('/approve/count/transcript', {
+    let user = await axios.get('/dashboard/register/all', {
       Authorization: `Bearer ${token}`
     })
-    this.setState({transcript: data})
+    let {data} = await axios.get('/approve/count/transcript', {
+      Authorization: `Bearer ${token}`
+    })
+    this.setState({doc: data[0].sum, user: user.data[0].sum})
   }
 
   render () {
-    const data =
-  [
-    {
-      'key': '',
-      'y': this.state.transcript
-    },
-    {
-      'key': '',
-      'y': (100 - this.state.transcript)
-    }
-  ]
     return (
       <div>
         <CardContainer>
           <Card>
             <Card.Content>
               <Card.Header>
-              จำนวนผู้ส่งใบ ปพ.1
-                <Divider />
+                <h1>จำนวนน้องที่ยังไม่ส่งใบ ปพ.1</h1>
+                <Text className='text-center'>
+                  {this.state.user - this.state.doc} คน
+                </Text>
               </Card.Header>
-              <Percentage>
-                <text>{this.state.transcript} %</text>
-              </Percentage>
-              <CardChart >
-                <VictoryPie
-                  padAngle={0}
-                  // used to hide labels
-                  innerRadius={70}
-                  width={200} height={200}
-                  colorScale={[
-                    '#19B3A6',
-                    '#EEEEEE'
-                  ]}
-                  data={data} />
-              </CardChart>
             </Card.Content>
           </Card>
         </CardContainer>
