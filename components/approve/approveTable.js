@@ -33,7 +33,19 @@ class ApproveTable extends React.Component {
     this.setState({res: result})
   }
 
+  checkDocStatus = (status) => {
+    switch (status) {
+      case 0:
+        return 'red'
+      case 1:
+        return 'green'
+      default:
+        return 'yellow'
+    }
+  }
+
   render () {
+    let doc = []
     const tableColumns = [
       {Header: '#', accessor: 'user_id', width: 100, style: {textAlign: 'center'}},
       {Header: 'FirstName',
@@ -48,13 +60,19 @@ class ApproveTable extends React.Component {
       {Header: 'Document',
         accessor: 'documents',
         style: {textAlign: 'center'},
-        Cell: props => <div>
-          {props.value.map(data => (
-            <Badge color={data.is_approve !== null ? 'yellow' : 'green'}>
-              {data.document_type.display_name}
-            </Badge>
-          ))}
-        </div>
+        Cell: props => {
+          props.value.map(data => {
+            doc[data.type_id - 1] = data
+          })
+          return (
+            <div>
+              {doc.map((data, i) => data ? <Badge key={i} color={this.checkDocStatus(data.is_approve)}>
+                {data.document_type.display_name}
+              </Badge> : <span />)
+              }
+            </div>
+          )
+        }
       },
       {Header: '',
         width: 150,
