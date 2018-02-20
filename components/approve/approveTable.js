@@ -95,7 +95,7 @@ class ApproveTable extends React.Component {
           <Button onClick={() => Router.push({
             pathname: '/verify',
             query: { user_id: props.original.user_id }
-          })} Icon color='blue' >
+          })} icon color='blue' >
             <Icon name='search' />
             approve
           </Button>
