@@ -17,9 +17,9 @@ const filterDocument = (doc, typeId) => {
   return documents
 }
 
-const Breadcrumb = () => <ol class="breadcrumb">
-  <li class="breadcrumb-item"><a href="/approve">Approve System</a></li>
-  <li class="breadcrumb-item active" aria-current="page">Verify</li>
+const Breadcrumb = () => <ol>
+  <li className='breadcrumb-item'><a href='/approve'>Approve System</a></li>
+  <li className='breadcrumb-item active' aria-current='page'>Verify</li>
 </ol>
 
 class Verify extends React.Component {
