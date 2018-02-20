@@ -21,4 +21,7 @@ export default injectGlobal`
     padding: 1em;
     justify-content: center;
   }
+  div.item a {
+    cursor: pointer;
+  }
 `
