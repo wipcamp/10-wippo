@@ -3,6 +3,8 @@ import axios from '../util/axios'
 import styled from 'styled-components'
 import { Button } from 'semantic-ui-react'
 import getCookie from '../util/cookie'
+import SweetAlert from 'sweetalert-react'
+
 const Idtitle = styled.h3`
   background-color:#333;
   color:#fff;
@@ -50,7 +52,9 @@ export default class StaffApprove extends React.Component {
     super(props)
     this.state = {
       staff: {},
-      stdId: 0
+      stdId: 0,
+      showSuccess: false,
+      showFalse: false
     }
   }
   componentDidMount = async () => {
@@ -81,10 +85,15 @@ export default class StaffApprove extends React.Component {
   assignRole = async (userId) => {
     let {token} = await getCookie({req: false})
     console.log(token)
-    let {result} = await axios.post(`/staffs/${userId}/roles`, {
+    let result = await axios.post(`/staffs/${userId}/roles`, null, {
       Authorization: `Bearer ${token}`
     })
-    console.log(result)
+    if (result.data.role_id) {
+      this.setState({showSuccess: true})
+    } else {
+      this.setState({showFalse: true})
+    }
+
   }
   render () {
     return (
@@ -103,6 +112,16 @@ export default class StaffApprove extends React.Component {
             <Button positive onClick={() => this.assignRole(this.state.staff.id)}>Verify</Button>
           </Button.Group>
         </Box>
+        <SweetAlert
+          show={this.state.showSuccess}
+          title='Success Approve'
+          onConfirm={() => this.setState({ showSuccess: false })}
+        />
+        <SweetAlert
+          show={this.state.showFalse}
+          title='Failed Approve'
+          onConfirm={() => this.setState({ showFalse: false })}
+        />
         {/* <p>Name : {this.state.camper.first_name} {this.state.camper.last_name}</p>
         <p>Nickname : {this.state.camper.nickname}</p>
         <p>Gender : {this.state.camper.gender === 1 ? (<span>male</span>) : (<span>female</span>)}</p> */}
