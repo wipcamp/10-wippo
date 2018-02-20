@@ -1,38 +1,52 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+import htmlescape from 'htmlescape'
+import injectGlobal from '../components/layout/injectGlobal'
+
+const { API_URL, URL } = process.env
+const env = { API_URL, URL }
+
 
 export default class MyDocument extends Document {
-  static getInitialProps ({ renderPage }) {
+  static async getInitialProps (ctx) {
+    const { renderPage } = ctx
+    const props = await Document.getInitialProps(ctx)
     const sheet = new ServerStyleSheet()
     const page = renderPage(App => props => sheet.collectStyles(<App {...props} />))
     const styleTags = sheet.getStyleElement()
-    return { ...page, styleTags }
+    return { ...page, styleTags, ...props }
+  }
+
+  componentWillMount() {
+    injectGlobal
   }
 
   render () {
     return (
       <html>
         <Head>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-          <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-          <title>WIPPO</title>
-          {this.props.styleTags}
-          <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet"/>
-          <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet"/>
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+          <meta httpEquiv="X-UA-Compatible" content="ie=edge"/>
+          <title>WIPPO | WIP Camp #10</title>
+          <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous" />
           <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
           <link rel="stylesheet" href="/static/css/style.css"/>
           <link rel="stylesheet" href="/static/css/react-table.css" />
-          <script src="https://unpkg.com/react-table@latest/react-table.js" />
-          {/* <script src="/static/js/bootstrap.min.js"></script> */}
-          <script src="/static/js/fontawesome-all.js"></script>
+          <link rel="stylesheet" href="/static/css/sweetalert.css" />
+          <script src="/static/js/fontawesome-all.min.js"></script>
           <script src="/static/js/fa-solid.js"></script>
           
+          {this.props.styleTags}
         </Head>
         <body>
           <Main />
           <NextScript />
+
+          <script
+            dangerouslySetInnerHTML={{ __html: '__ENV__ = ' + htmlescape(env) }}
+          />
         </body>
       </html>
     )

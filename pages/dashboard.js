@@ -2,7 +2,8 @@ import React from 'react'
 import Layout from '../components/layout/layout'
 import { Grid } from 'semantic-ui-react'
 import Portlet from '../components/util/portlet'
-import Axios from 'axios'
+import axios from '../components/util/axios'
+import getCookie from '../components/util/cookie'
 import Moment from 'moment'
 
 const differ = (start, end) => {
@@ -15,8 +16,12 @@ class Index extends React.Component {
     registerAmount: '',
     campData: []
   }
-  componentWillMount = async () => {
-    let data = await Axios.get('http://localhost:8000/api/v1/dashboard/')
+  componentDidMount = async () => {
+    let {token} = await getCookie({req: false})
+    let headers = {
+      Authorization: `Bearer ${token}`
+    }
+    let data = await axios.get('/dashboard', headers)
     this.setState({
       registerAmount: data.data.data.registerTodayAmount,
       campData: data.data.data.campDetail

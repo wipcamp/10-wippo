@@ -1,12 +1,15 @@
 import React from 'react'
+import Router from 'next/router'
 import styled from 'styled-components'
 import ReactTable from 'react-table'
-import axios from 'axios'
+import axios from '../util/axios'
+import getCookie from '../util/cookie'
+import { Label, Button, Icon } from 'semantic-ui-react'
 
-const Badge = styled.span.attrs({
-  className: ({isApprove}) => isApprove === 1 ? `badge badge-danger` : `badge badge-warning`
-})`
-  margin-right:4px;
+const Badge = styled(Label)`
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  width: 12em;
 `
 
 class ApproveTable extends React.Component {
@@ -18,40 +21,61 @@ class ApproveTable extends React.Component {
   }
 
   componentWillMount = async () => {
-    // myApi.get('/approve').then(res => this.setState({data: res.data}))
-    let result = await axios.get('http://127.0.0.1:8000/api/v1/approve')
-    this.setState({res: result.data.array})
+    let {token} = await getCookie({req: false})
+    let {data} = await axios.get('/approve', {
+      Authorization: `Bearer ${token}`
+    })
+    let result = data.map((profile) => ({
+      ...profile,
+      documents: profile.documents.filter((doc) => doc.type_id !== 1)
+    }))
+    console.log(result)
+    // result = result.filter(profile => profile.documents.length)
+    this.setState({res: result})
   }
 
   render () {
     const tableColumns = [
-      {Header: '#', accessor: 'id', width: 45, style: {textAlign: 'center'}},
+      {Header: '#', accessor: 'user_id', width: 100, style: {textAlign: 'center'}},
       {Header: 'FirstName',
-        accessor: 'name',
+        accessor: 'first_name',
+        width: 150,
         filterMethod: (filter, row) => {
           row[filter.id].startsWith(filter.value) &&
           row[filter.id].endsWith(filter.value)
         }
       },
-      {Header: 'lasname', accessor: 'surname'},
+      {Header: 'LastName', width: 150, accessor: 'last_name'},
       {Header: 'Document',
-        accessor: 'document',
+        accessor: 'documents',
         style: {textAlign: 'center'},
         Cell: props => <div>
-          {props.original.document.map(data => (
-            <Badge isApprove={data.isApprove}>
-              {data.name}
-              {/* {console.log(data.isApprove)} */}
+          {props.value.map(data => (
+            <Badge color={data.is_approve !== null ? 'yellow' : 'green'}>
+              {data.document_type.display_name}
             </Badge>
           ))}
+        </div>
+      },
+      {Header: '',
+        width: 150,
+        style: {textAlign: 'center'},
+        Cell: props => <div>
+          <Button onClick={() => Router.push({
+            pathname: '/verify',
+            query: { user_id: props.original.user_id }
+          })} Icon color='blue' >
+            {console.log(props)}
+            <Icon name='search' />
+            approve
+          </Button>
         </div>
       }
     ]
     return (
       <tableColumns>
         <div>
-          <ReactTable defaultPageSize={10}  className='table' data={this.state.res} columns={tableColumns} />
-          {/* {console.log(this.state.res)} */}
+          <ReactTable defaultPageSize={10} className='table' data={this.state.res} columns={tableColumns} />
         </div>
       </tableColumns>
     )
