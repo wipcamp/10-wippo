@@ -34,7 +34,7 @@ class Index extends React.Component {
       campData: data.data.data.campDetail,
       registerSuccess: registerSuccess.data.length,
       userInSystem: userInSystem.data[0].sum,
-      userDocUnSuccess: userDocSuccess.data,
+      userDocSuccess: userDocSuccess.data[0].sum,
       userProfileSuccess: userProfileSuccess.data[0].sum
     })
   }
