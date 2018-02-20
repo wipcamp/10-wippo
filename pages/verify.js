@@ -72,7 +72,7 @@ class Verify extends React.Component {
       isApprove: value,
       comment: this.state.comment
     }, headers)
-    this.setState({ parentPermission: status })
+    this.setState({ parentPermission: status, comment: '' })
   }
 
   async handleTransript (value, status) {
@@ -84,7 +84,7 @@ class Verify extends React.Component {
       isApprove: value,
       comment: this.state.comment
     }, headers)
-    this.setState({ transcript: status })
+    this.setState({ transcript: status, comment: '' })
   }
 
   async fetchData () {
