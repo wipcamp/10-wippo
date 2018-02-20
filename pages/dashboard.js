@@ -1,6 +1,5 @@
 import React from 'react'
 import Layout from '../components/layout/layout'
-import { Grid } from 'semantic-ui-react'
 import Portlet from '../components/util/portlet'
 import axios from '../components/util/axios'
 import getCookie from '../components/util/cookie'
