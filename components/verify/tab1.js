@@ -13,13 +13,18 @@ const Topic = styled.div`
   margin-top: 1em;
 `
 
-const Tab1 = ({ info, image, path }) => {
+const Tab1 = ({ fullName, info, image, path }) => {
   return (
     <Grid.Row>
       <div className='container'>
         <div className='row'>
           <div className='col-6 col-md-2'>
-            <ItimCard src={image} name={`น้อง ${info.nickname}`} school={''} join={info.created_at} />
+            <ItimCard
+              fullName={fullName}
+              src={image}
+              name={`น้อง ${info.nickname}`}
+              school={''}
+              join={info.created_at} />
           </div>
           <div className='col-12 col-md-10'>
             <SecHeader className='mt-3'>

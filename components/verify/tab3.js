@@ -4,13 +4,19 @@ import { Grid } from 'semantic-ui-react'
 import { ImageCustom, PDF } from './tab2'
 import env from '../util/env'
 
-const Tab3 = ({info, image, path, button, fileType, setComment, comment}) => (
+const Tab3 = ({fullName, info, image, path, button, fileType, setComment, comment}) => (
   (
     <Grid.Row>
       <div className='container'>
         <div className='row'>
           <div className='col-6 col-md-2'>
-            <ItimCard src={image} name={`น้อง ${info.nickname}`} school={info.edu_name} join={info.created_at} />
+            <ItimCard
+              fullName={fullName}
+              src={image}
+              name={`น้อง ${info.nickname}`}
+              school={info.edu_name}
+              join={info.created_at}
+            />
           </div>
           <div className='col-12 col-md-10 d-flex flex-column justify-content-center align-items-center'>
             <h1>ใบอนุญาติผู้ปกครอง</h1>
