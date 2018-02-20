@@ -17,6 +17,11 @@ const filterDocument = (doc, typeId) => {
   return documents
 }
 
+const Breadcrumb = () => <ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/approve">Approve System</a></li>
+  <li class="breadcrumb-item active" aria-current="page">Verify</li>
+</ol>
+
 class Verify extends React.Component {
   state = {
     profile: {
@@ -147,7 +152,7 @@ class Verify extends React.Component {
     )
 
     return (
-      <Layout subheadertext={`Approve System`}>
+      <Layout subheadertext={<Breadcrumb />}>
         <Grid.Row>
           <Tab className='col-12' menu={{ pointing: true }} panes={panes} />
         </Grid.Row>
