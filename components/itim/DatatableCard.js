@@ -4,7 +4,7 @@ import styled, { injectGlobal } from 'styled-components'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import Link from 'next/link'
-import { Input, Icon, Button } from 'semantic-ui-react'
+import { Input, Label, Button } from 'semantic-ui-react'
 
 const StyledReactTable = styled(ReactTable)`
   text-align:center;
@@ -35,18 +35,32 @@ class DatatableCard extends React.Component {
     let {data} = await axios.get('/registrants', {
       Authorization: `Bearer ${token}`
     })
-    console.log(data)
+    console.log('raw data : ', data)
     data = data.map(profile => {
+      // profile.documents = this.filterDocument(profile.documents)
+      // console.log(profile.documents[2].format_id)
       return {
         ...profile,
         fullname: `${profile.first_name} ${profile.last_name}`,
-        action: <Link href={{ pathname: '/itim', query: { id: profile.user_id } }}><a><Button icon='search' color='blue' /></a></Link>
+        doc: <Label color={profile.documents.format_id}>ปภ.</Label>,
+        action: <Link href={{ pathname: '/itim', query: { user_id: profile.user_id } }}><a><Button icon='search' color='blue' /></a></Link>
       }
     })
+    console.log(data)
     this.setState({
       camper: data,
       searchCamper: data
     })
+  }
+  checkDocument = (doc, typeId) => {
+    
+  }
+  filterDocument = (doc, typeId) => {
+    let documents = []
+    doc.filter(data => {
+      documents[data.type_id - 1] = data
+    })
+    return documents
   }
   searchCamper = async (e) => {
     this.setState({ ...this.state, searchCamper: this.state.camper })

@@ -1,7 +1,7 @@
 import {injectGlobal} from 'styled-components'
 
 export default injectGlobal`
-  body {
+  body, input, textarea {
     font-family: 'Kanit', sans-serif;
     font-size: 12px;
   }
@@ -20,5 +20,15 @@ export default injectGlobal`
     min-width: 85px;
     padding: 1em;
     justify-content: center;
+  }
+  div.item a {
+    cursor: pointer;
+  }
+  ol.breadcrumb {
+    padding: 0;
+    background-color: #fff;
+    a, li {  
+      font-size: 18px;
+    }
   }
 `

@@ -1,93 +1,156 @@
 import React from 'react'
-import Axios from 'axios'
-import { Grid, Button } from 'semantic-ui-react'
-import Link from 'next/link'
-import styled from 'styled-components'
+import Tab1 from '../verify/tab1'
+import Tab2 from '../verify/tab2'
+import Tab3 from '../verify/tab3'
+import axios from '../util/axios'
+import getCookie from '../util/cookie'
+import { Grid, Tab, Button } from 'semantic-ui-react'
 
-const Idtitle = styled.h3`
-  background-color:#333;
-  color:#fff;
-  padding:0.8em 0em 0.8em 2.5em;
-  border-radius:5px;
-  width:100%;
-  align-self:flex-start;
-`
-const Box = styled.div`
-  background-color:#fff;
-  width:100%;
-`
-const BoxInner = styled.div`
-`
-const ProfileImage = styled.img`
-  max-width:150px !important;
-  border-radius:50%;
-`
-const Text = styled.span`
-  font-weight:normal;
-`
-export default class ItimProfile extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      camper: {
-        profile_registrant: {}
-      }
+const filterDocument = (doc, typeId) => {
+  let documents = []
+  doc.filter(({path, type_id: typeId, id}) => {
+    documents[typeId - 1] = {
+      id, path
     }
-  }
-  componentWillMount = async () => {
-    let {data} = await Axios.get(`http://localhost:8000/api/v1/registrants/${this.props.id}`)
-    data = data.map(profile => {
-      return {
-        ...profile,
-        fullname: `${profile.first_name} ${profile.last_name}`
+  })
+  return documents
+}
+
+class Verify extends React.Component {
+  state = {
+    profile: {
+      profile_registrant: {
+        activities: '',
+        addr_dist: '',
+        addr_prov: '',
+        user_id: '',
+        edu_name: ''
       }
+    },
+    documents: [],
+    image: '',
+    fileType: [],
+    comment: ''
+  }
+
+  async componentDidMount () {
+    let { token } = await getCookie({ req: false })
+    let { data } = await axios.get(`/registrants/${this.props.url.query.user_id}`, {
+      Authorization: `Bearer ${token}`
+    })
+    this.fetchData()
+    await this.setState({ profile: data[0] })
+    await this.setState({ documents: filterDocument(this.state.profile.documents) })
+    await this.getFileType()
+  }
+
+  setComment = (comment) => {
+    this.setState({
+      comment
+    })
+  }
+
+  async getFileType () {
+    let fileType = []
+    await this.state.documents.map(({path}, i) => {
+      fileType[i] = path.substr(path.length - 3, path.length)
+    })
+    await this.setState({
+      fileType: fileType
+    })
+  }
+
+  async handleParentPermission (value, status) {
+    let {token} = await getCookie({req: false})
+    let headers = {
+      Authorization: `Bearer ${token}`
+    }
+    await axios.put(`/documents/${this.state.documents[1].id}`, {
+      isApprove: value,
+      comment: this.state.comment
+    }, headers)
+    this.setState({ parentPermission: status, comment: '' })
+  }
+
+  async handleTransript (value, status) {
+    let {token} = await getCookie({req: false})
+    let headers = {
+      Authorization: `Bearer ${token}`
+    }
+    await axios.put(`/documents/${this.state.documents[2].id}`, {
+      isApprove: value,
+      comment: this.state.comment
+    }, headers)
+    this.setState({ transcript: status, comment: '' })
+  }
+
+  async fetchData () {
+    let { token } = await getCookie({ req: false })
+    let { data: {data} } = await axios.get(`/users/${this.props.url.query.user_id}`, {
+      Authorization: `Bearer ${token}`
     })
     this.setState({
-      camper: data[0]
+      image: `https://graph.facebook.com/v2.12/${data.provider_acc}/picture?height=1000&width=1000`
     })
-    console.log(data[0]) 
   }
+
   render () {
+    const panes = [
+      { menuItem: 'ข้อมูลน้อง',
+        render: () => <Tab.Pane attached={false}>
+          <Tab1
+            image={this.state.image}
+            info={this.state.profile} />
+        </Tab.Pane> },
+      { menuItem: 'ปพ.1',
+        render: props => <Tab.Pane attached={false}>
+          <Tab2
+            comment={this.state.comment}
+            setComment={this.setComment}
+            fileType={this.state.fileType[2]}
+            image={this.state.image}
+            path={this.state.documents[2].path}
+            info={this.state.profile}
+            status={this.state.transcript}
+            button={<ButtonTranscript />} />
+        </Tab.Pane> },
+      { menuItem: 'ใบอนุญาติ',
+        render: props => <Tab.Pane attached={false}>
+          <Tab3
+            comment={this.state.comment}
+            setComment={this.setComment}
+            fileType={this.state.fileType[1]}
+            image={this.state.image}
+            path={this.state.documents[1].path}
+            info={this.state.profile}
+            status={this.state.parentPermission}
+            button={<ButtonParentPermission />} />
+        </Tab.Pane> }
+    ]
+
+    const ButtonParentPermission = () => (
+      <Button.Group>
+        {this.state.parentPermission === 'reject' ? <Button color='red' >Reject </Button> : <Button onClick={() =>
+          this.handleParentPermission(0, 'reject')} >Reject </Button>}
+        <Button.Or />
+        {this.state.parentPermission === 'approve' ? <Button color='green' >Approved </Button> : <Button onClick={() => this.handleParentPermission(1, 'approve')}>Approved </Button>}
+      </Button.Group>
+    )
+
+    const ButtonTranscript = () => (
+      <Button.Group>
+        {this.state.transcript === 'reject' ? <Button color='red' >Reject </Button> : <Button onClick={() => this.handleTransript(0, 'reject')} >Reject </Button>}
+        <Button.Or />
+        {this.state.transcript === 'approve' ? <Button color='green' >Approved </Button> : <Button onClick={() => this.handleTransript(1, 'approve')}>Approved </Button>}
+      </Button.Group>
+    )
+
     return (
-      <div>
-        <Box>
-          <Idtitle>WIPID #{this.state.camper.user_id}</Idtitle>
-          <BoxInner>
-            <ProfileImage src='https://scontent.fbkk12-2.fna.fbcdn.net/v/t31.0-8/27983341_10155366148776094_7042545821156866325_o.jpg?oh=475e290821f6df193e8f87f9d1100299&oe=5B076C8B' />
-            <h1>น้อง{this.state.camper.nickname} ({this.state.camper.gender_id === 1 ? <span>ชาย</span> : <span>หญิง</span>})</h1>
-            <h3>ชื่อ - นามสกุล : <Text>{this.state.camper.first_name} {this.state.camper.last_name}</Text></h3>
-            <h3>Name - Surname : <Text>{this.state.camper.first_name_en} {this.state.camper.last_name_en}</Text></h3>
-            <hr />
-            <h2>ประวัติการศึกษา</h2>
-            <h3>โรงเรียน : <Text>{this.state.camper.profile_registrant.edu_name}</Text></h3>
-            <h3>สายการเรียน : <Text>{this.state.camper.profile_registrant.edu_major}</Text></h3>
-            <h3>ลำดับชั้น : <Text>{this.state.camper.profile_registrant.edu_lv}</Text></h3>
-            <h3>เกรดเฉลี่ย : <Text>{this.state.camper.profile_registrant.edu_gpax}</Text></h3>
-            <hr />
-            <h2>ข้อมูลทั่วไป</h2>
-            <h3>วัน / เดือน / ปี เกิด : <Text>{this.state.camper.birth_at}</Text></h3>
-            <h3>กรุ๊ปเลือด : <Text>{this.state.camper.blood_group}</Text></h3>
-            <h3>ศาสนา : <Text>{this.state.camper.religion_id}</Text></h3>
-            <h3>เลขบัตรประจำตัวประชาชน : <Text>{this.state.camper.citizen_id}</Text></h3>
-            <hr />
-            <h2>ข้อมูลการติดต่อ</h2>
-            <h3>เบอร์โทรศัพท์ : <Text>{this.state.camper.profile_registrant.telno_personal}</Text></h3>
-            <h3>โรคประจำตัว : <Text>{this.state.camper.congenital_diseases}</Text></h3>
-            <h3>ยาประจำตัว : <Text>{this.state.camper.congenital_drugs}</Text></h3>
-            <hr />
-            <h2>ข้อมูลเพิ่มเติม</h2>
-            <h3>ทักษาคอม : <Text>{this.state.camper.profile_registrant.skill_computer}</Text></h3>
-            <h3>ค่ายที่เคยเข้า : <Text>{this.state.camper.profile_registrant.past_camp}</Text></h3>
-            <h3>กิจกรรม : <Text>{this.state.camper.profile_registrant.activities}</Text></h3>
-            <h3>รู้จักค่ายนี้จาก : <Text>{this.state.camper.profile_registrant.known_via}</Text></h3>
-            
-          </BoxInner>
-        </Box>
-        {/* <p>Name : {this.state.camper.first_name} {this.state.camper.last_name}</p>
-        <p>Nickname : {this.state.camper.nickname}</p>
-        <p>Gender : {this.state.camper.gender === 1 ? (<span>male</span>) : (<span>female</span>)}</p> */}
-        {/* <Link href='/itim'><a><Button color='teal'>Back</Button></a></Link> */}
-      </div>
+      <Grid.Row>
+        <Tab className='col-12' menu={{ pointing: true }} panes={panes} />
+      </Grid.Row>
     )
   }
 }
+
+export default Verify
