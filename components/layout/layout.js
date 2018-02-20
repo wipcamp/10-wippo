@@ -11,7 +11,6 @@ const SubHeaderText = styled.h3`
   font-weight: 500;
   font-size: 1.6em;
   color: #3f4047;
-  font-family: 'Roboto', sans-serif;
 `
 injectGlobal`
   .fullpage{
