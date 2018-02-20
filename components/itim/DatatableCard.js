@@ -4,7 +4,7 @@ import styled, { injectGlobal } from 'styled-components'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import Link from 'next/link'
-import { Input, Icon, Button } from 'semantic-ui-react'
+import { Input, Button } from 'semantic-ui-react'
 
 const StyledReactTable = styled(ReactTable)`
   text-align:center;
@@ -35,7 +35,6 @@ class DatatableCard extends React.Component {
     let {data} = await axios.get('/registrants', {
       Authorization: `Bearer ${token}`
     })
-    console.log(data)
     data = data.map(profile => {
       return {
         ...profile,
