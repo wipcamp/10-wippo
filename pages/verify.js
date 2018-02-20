@@ -147,7 +147,7 @@ class Verify extends React.Component {
     )
 
     return (
-      <Layout subheadertext={`Approve System.`}>
+      <Layout subheadertext={`Approve System`}>
         <Grid.Row>
           <Tab className='col-12' menu={{ pointing: true }} panes={panes} />
         </Grid.Row>
