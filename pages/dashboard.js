@@ -29,15 +29,13 @@ class Index extends React.Component {
     let userInSystem = await axios.get('/dashboard/register/all', headers)
     let registerSuccess = await axios.get('/dashboard/register/success', headers)
     let userDocSuccess = await axios.get('/dashboard/document/success', headers)
-    console.log(userInSystem.data[0])
-    console.log(userProfileSuccess.data[0])
     this.setState({
       registerAmount: data.data.data.registerTodayAmount,
       campData: data.data.data.campDetail,
       registerSuccess: registerSuccess.data.length,
-      userInSystem: userInSystem.data,
+      userInSystem: userInSystem.data[0].sum,
       userDocUnSuccess: userDocSuccess.data,
-      userProfileSuccess: userProfileSuccess.data
+      userProfileSuccess: userProfileSuccess.data[0].sum
     })
   }
   render () {
