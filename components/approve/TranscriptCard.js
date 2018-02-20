@@ -68,7 +68,6 @@ class TranscriptCard extends React.Component {
                 <VictoryPie
                   padAngle={0}
                   // used to hide labels
-                  labelComponent={<span />}
                   innerRadius={70}
                   width={200} height={200}
                   colorScale={[
