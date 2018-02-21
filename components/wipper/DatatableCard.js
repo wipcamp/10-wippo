@@ -4,7 +4,7 @@ import Styled, { injectGlobal } from 'styled-components'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import Link from 'next/link'
-import { Input, Icon, Button } from 'semantic-ui-react'
+import { Input, Button } from 'semantic-ui-react'
 
 const StyledReactTable = Styled(ReactTable)`
   text-align:center;
@@ -35,10 +35,10 @@ class DatatableCard extends React.Component {
     let {data} = await axios.get('/staffs', {
       Authorization: `Bearer ${token}`
     })
-    console.log(data)
     data.data = await data.data.map(staff => {
       return {
         ...staff,
+        fb_name: staff.user.account_name,
         action: <Link href={{ pathname: '/wipper', query: { id: staff.user_id } }}><a><Button icon='search' color='blue' /></a></Link>
       }
     })
@@ -53,7 +53,7 @@ class DatatableCard extends React.Component {
     let msg = input.toUpperCase()
     if (msg.length === 0) this.setState({ searchStaff: this.state.staff })
     else {
-      let res = await this.state.searchStaff.filter(input => input.first_name.toUpperCase().indexOf(msg) > -1 || input.last_name.toUpperCase().indexOf(msg) > -1 || input.nickname.toUpperCase().indexOf(msg) > -1)
+      let res = await this.state.searchStaff.filter(input => input.user_id.toString().toUpperCase().indexOf(msg) > -1 || input.student_id.toUpperCase().indexOf(msg) > -1 || input.fb_name.toUpperCase().indexOf(msg) > -1)
       await this.setState({...this.state, searchStaff: res})
     }
   }
