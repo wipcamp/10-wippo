@@ -106,11 +106,9 @@ export default compose(
       if (id) {
         let {data} = await api.get(`/userroles/user_id/${id}`, headers)
         let roles = data.filter(data => data.role_id > 6)
-        if (roles) {
+        if (roles[0].role_id >= 6) {
           Router.pushRoute('/dashboard')
         }
-      } else {
-        Router.pushRoute('/')
       }
     }
   })
