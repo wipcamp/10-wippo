@@ -1,5 +1,5 @@
 import React from 'react'
-import styled , { injectGlobal } from 'styled-components'
+import styled, { injectGlobal } from 'styled-components'
 import { Menu } from 'semantic-ui-react'
 import Link from 'next/link'
 
