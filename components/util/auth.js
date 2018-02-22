@@ -4,9 +4,25 @@ import Router from 'next/router'
 import getCookie from './cookie'
 
 export const auth = async (res) => {
-  let {data} = await axios.post('/auth/login', { ...res }, null)
-  document.cookie = cookie.serialize('token', data.accessToken, { maxAge: 60 * 60 * 24 * 5 })
-  Router.pushRoute('/wait')
+  let {data: {accessToken}} = await axios.post('/auth/login', { ...res }, null)
+  document.cookie = cookie.serialize('token', accessToken, { maxAge: 60 * 60 * 24 * 5 })
+  let {data, data: {id}} = await axios.post(`/auth/me`, null, {
+    Authorization: `Bearer ${accessToken}`
+  })
+  console.log(data)
+  window.localStorage.setItem('user', JSON.stringify(data))
+  if (id) {
+    let {data} = await axios.get(`/userroles/user_id/${id}`, {
+      Authorization: `Bearer ${accessToken}`
+    })
+    console.log(data)
+    let roles = await data.filter(data => data.role_id > 6)
+    if (roles[0] && roles[0].role_id >= 6) {
+      Router.pushRoute('/dashboard')
+    } else {
+      Router.pushRoute('/wait')
+    }
+  }
 }
 
 export const logout = async () => {
