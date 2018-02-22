@@ -6,6 +6,12 @@ class Main extends React.Component {
     return (
       <div>
         {
+          this.props.url.query.id ? <ol className='breadcrumb'>
+            <li className='breadcrumb-item'><a href='/wipper'>WIPPER Management</a></li>
+            <li className='breadcrumb-item active' aria-current='page'>Verify</li>
+          </ol> : ''
+        }
+        {
           this.props.url.query.id ? (
             <StaffApprove id={this.props.url.query.id} />
           ) : (
