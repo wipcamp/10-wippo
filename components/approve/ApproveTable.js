@@ -49,6 +49,18 @@ class ApproveTable extends React.Component {
         return ''
     }
   }
+  checkTypeId = (id) => {
+    switch (id) {
+      case 1:
+        return 'โปรไฟล์'
+      case 2:
+        return 'ใบอณุญาติผปค.'
+      case 3:
+        return 'ปพ.1'
+      default:
+        return 'null'
+    }
+  }
   searchCamper = async (e) => {
     this.setState({ ...this.state, search: this.state.res })
     let input = e.target.value
@@ -81,8 +93,8 @@ class ApproveTable extends React.Component {
           })
           return (
             <div>
-              {doc.map((data, i) => data ? <Badge key={i} color={this.checkDocStatus(data.is_approve)}>
-                {data.document_type.display_name}
+              {doc.map((data, i) => data && data.type_id !== 1 ? <Badge key={i} color={this.checkDocStatus(data.is_approve)}>
+                {this.checkTypeId(data.type_id)}
               </Badge> : <span />)
               }
             </div>
@@ -104,7 +116,10 @@ class ApproveTable extends React.Component {
       }
     ]
     return (
-      <div>
+      <div className='text-center'>
+        <Badge color='green'>ตรวจแล้ว</Badge>
+        <Badge color='yellow'>ยังไม่ตรวจ</Badge>
+        <Badge color='red'>เอกสารไม่ผ่าน</Badge>
         <SearchInput onChange={this.searchCamper} type='text' icon='search' placeholder='Search...' />
         <div>
           <ReactTable defaultPageSize={10} className='table' data={this.state.search} columns={TableColumns} />

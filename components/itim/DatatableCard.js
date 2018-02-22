@@ -82,9 +82,9 @@ class DatatableCard extends React.Component {
       case 1:
         return 'โปรไฟล์'
       case 2:
-        return 'ปพ.1'
-      case 3:
         return 'ใบอณุญาติผปค.'
+      case 3:
+        return 'ปพ.1'
       default:
         return 'null'
     }
