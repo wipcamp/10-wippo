@@ -1,20 +1,8 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
-import styled from 'styled-components'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
-
-const CardContainer = styled.div`
-  width:100%;
-  .card {
-    width: 100% !important;
-  }
-`
-
-const Text = styled.div`
-  font-size:4em;
-  padding: .5em 1em;
-`
+import {CardContainer, Text} from './Parentconfirmation'
 
 class TranscriptCard extends React.Component {
   constructor (props) {
@@ -42,7 +30,7 @@ class TranscriptCard extends React.Component {
         <CardContainer>
           <Card>
             <Card.Content>
-              <Card.Header>
+              <Card.Header className='text-center'>
                 <h1>จำนวนน้องที่ยังไม่ส่งใบ ปพ.1</h1>
                 <Text className='text-center'>
                   {this.state.user - this.state.doc} คน
