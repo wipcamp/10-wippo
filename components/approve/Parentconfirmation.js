@@ -4,14 +4,19 @@ import styled from 'styled-components'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
 
-const CardContainer = styled.div`
+export const CardContainer = styled.div`
+  font-family: 'Kanit', sans-serif;
   width:100%;
   .card {
     width: 100% !important;
   }
+  h1 {
+    margin: 0 auto;
+    font-family: 'Kanit', sans-serif;
+  }
 `
-
-const Text = styled.div`
+export const Text = styled.div`
+  font-family: 'Kanit', sans-serif;
   font-size:4em;
   padding: .5em 1em;
 `
@@ -42,7 +47,7 @@ class Parentconfirmation extends React.Component {
         <CardContainer>
           <Card>
             <Card.Content>
-              <Card.Header>
+              <Card.Header className='text-center'>
                 <h1>จำนวนน้องที่ยังไม่ส่งใบ ยืนยันผู้ปกครอง</h1>
                 <Text className='text-center'>
                   {this.state.user - this.state.doc} คน
