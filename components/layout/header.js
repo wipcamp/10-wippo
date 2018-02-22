@@ -22,6 +22,8 @@ const Logo = styled.img.attrs({
 const GreetingMember = styled.span`
   color:#b1b5c1;
   font-weight:600;
+  text-align: center;
+  font-size: 15px;
 `
 const MemberName = styled.span`
   color:#3eb9f3;
@@ -34,12 +36,16 @@ const AvatarImg = styled.img.attrs({
   border : 1px solid #333;
   margin:15px;
 `
+const UserId = styled.span`
+  font-size: 20px;
+  color: #ff9090;
+`
 injectGlobal`
   .nav-bg{
     background:#5eb9e2;
   }
 `
-const Header = ({user: {provider_acc: providerAcc, account_name: accountName}}) => (
+const Header = ({user: {id, provider_acc: providerAcc, account_name: accountName}}) => (
   <div>
     <Container fluid>
       <Container>
@@ -49,7 +55,10 @@ const Header = ({user: {provider_acc: providerAcc, account_name: accountName}}) 
               <HeaderBox>
                 <Logo />
                 <UserBox>
-                  <GreetingMember>Hello, <MemberName>{accountName}</MemberName></GreetingMember>
+                  <GreetingMember>
+                    Hello, <MemberName>{accountName}</MemberName> <br />
+                    <UserId>WIP ID : {id}</UserId>
+                  </GreetingMember>
                   <AvatarImg img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
                 </UserBox>
               </HeaderBox>
