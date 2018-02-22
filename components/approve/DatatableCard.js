@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Divider } from 'semantic-ui-react'
 import styled from 'styled-components'
-import ApproveTable from './approveTable'
+import ApproveTable from './ApproveTable'
 
 const CardContainer = styled.div`
   width:100%;

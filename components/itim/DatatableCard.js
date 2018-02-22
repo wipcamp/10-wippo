@@ -35,10 +35,7 @@ class DatatableCard extends React.Component {
     let {data} = await axios.get('/registrants', {
       Authorization: `Bearer ${token}`
     })
-    console.log('raw data : ', data)
     data = data.map(profile => {
-      // profile.documents = this.filterDocument(profile.documents)
-      // console.log(profile.documents[2].format_id)
       return {
         ...profile,
         fullname: `${profile.first_name} ${profile.last_name}`,
@@ -46,14 +43,10 @@ class DatatableCard extends React.Component {
         action: <Link href={{ pathname: '/itim', query: { user_id: profile.user_id } }}><a><Button icon='search' color='blue' /></a></Link>
       }
     })
-    console.log(data)
     this.setState({
       camper: data,
       searchCamper: data
     })
-  }
-  checkDocument = (doc, typeId) => {
-    
   }
   filterDocument = (doc, typeId) => {
     let documents = []
