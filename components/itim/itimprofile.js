@@ -30,7 +30,8 @@ class Verify extends React.Component {
     documents: [],
     image: '',
     fileType: [],
-    comment: ''
+    comment: '',
+    question: 0
   }
 
   async componentDidMount () {
@@ -99,12 +100,14 @@ class Verify extends React.Component {
       { menuItem: 'ข้อมูลน้อง',
         render: () => <Tab.Pane attached={false}>
           <Tab1
+            question={this.state.question}
             image={this.state.image}
             info={this.state.profile} />
         </Tab.Pane> },
       { menuItem: 'ปพ.1',
         render: props => <Tab.Pane attached={false}>
           <Tab2
+            question={this.state.question}
             comment={this.state.comment}
             setComment={this.setComment}
             fileType={this.state.fileType[2]}
@@ -117,6 +120,7 @@ class Verify extends React.Component {
       { menuItem: 'ใบอนุญาติ',
         render: props => <Tab.Pane attached={false}>
           <Tab3
+            question={this.state.question}
             comment={this.state.comment}
             setComment={this.setComment}
             fileType={this.state.fileType[1]}

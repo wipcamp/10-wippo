@@ -1,24 +1,43 @@
 import React from 'react'
+import styled from 'styled-components'
 import {Card, Image} from 'semantic-ui-react'
 
-const ItimCard = ({fullName, src, name, join, school}) => (
+const Text = styled.h1`
+  font-family: 'Kanit', sans-serif;
+`
+const Stats = styled.h3`
+  font-family: 'Kanit', sans-serif;
+`
+
+const UserHeader = Text.extend`
+  margin: 0;
+`
+
+const FullName = Text.extend`
+  margin: 0;
+  font-size: 1.5em;
+  color: #d85000;
+`
+
+const ItimCard = ({id, fullName, src, name, question}) => (
   <div>
     <Card>
-      <Image centered fluid src={src} />
+      <Image size={`medium`} centered fluid src={src} />
       <Card.Content>
         <Card.Header>
           <div className='text-center'>
-            <h1>{fullName}</h1>
+            <UserHeader>{id}</UserHeader>
+            <UserHeader>{name}</UserHeader>
           </div>
         </Card.Header>
         <Card.Meta>
           <div className='text-center'>
-            <h1>{name}</h1>
+            <FullName>{fullName}</FullName>
           </div>
         </Card.Meta>
-        <Card.Description>
-          {school}
-        </Card.Description>
+      </Card.Content>
+      <Card.Content className='text-center'>
+        <Stats>ตอบคำถาม <span className='text-danger'>{question || 0}</span>/6 ข้อ</Stats>
       </Card.Content>
     </Card>
   </div>
