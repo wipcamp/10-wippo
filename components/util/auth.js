@@ -16,7 +16,6 @@ export const logout = async () => {
   for (const key of Object.keys(allCookie)) {
     document.cookie = await cookie.serialize(key, allCookie[key], { maxAge: 0 })
   }
-  Router.pushRoute('/logout')
   setTimeout(() => window.location.replace('https://wippo.wip.camp'), 2500)
 }
 
