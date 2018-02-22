@@ -109,7 +109,7 @@ const Header = ({show, setShow, user: {id, provider_acc: providerAcc, account_na
                   <Dropdown show={show}>
                     <Arrow />
                     {
-                      Button.map(({name, path}) => <List href={path}>{name}</List>)
+                      Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
                     }
                   </Dropdown>
                 </UserBox>
