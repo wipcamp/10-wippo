@@ -2,7 +2,7 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import Router from 'next/router'
 import styled from 'styled-components'
-import {compose, withState} from 'recompose'
+import {compose, withState, lifecycle} from 'recompose'
 import api from '../util/axios'
 import getCookie from '../util/cookie'
 import {IndexTemplate, Wrapper} from '../layout/layout'
@@ -94,5 +94,22 @@ const Waiting = ({show, setShow, stdId, setStdId}) => (
 
 export default compose(
   withState('stdId', 'setStdId', ''),
-  withState('show', 'setShow', false)
+  withState('show', 'setShow', false),
+  lifecycle({
+    async componentDidMount () {
+      let {token} = await getCookie({req: false})
+      let headers = {
+        Authorization: `Bearer ${token}`
+      }
+      let {data, data: { id }} = await api.post('/auth/me', null, headers)
+      window.localStorage.setItem('user', JSON.stringify(data))
+      if (id) {
+        let {data} = await api.get(`/userroles/user_id/${id}`, headers)
+        let roles = data.filter(data => data.role_id > 6)
+        if (roles[0] && roles[0].role_id >= 6) {
+          Router.pushRoute('/dashboard')
+        }
+      }
+    }
+  })
 )(Waiting)
