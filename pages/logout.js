@@ -5,6 +5,7 @@ import {logout} from '../components/util/auth'
 export default class Logout extends React.Component {
   componentDidMount () {
     logout()
+    window.localStorage.clear()
   }
   render () {
     return (
