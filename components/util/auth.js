@@ -6,7 +6,6 @@ import getCookie from './cookie'
 export const auth = async (res) => {
   let {data} = await axios.post('/auth/login', { ...res }, null)
   document.cookie = cookie.serialize('token', data.accessToken, { maxAge: 60 * 60 * 24 * 5 })
-  console.log(data)
   Router.pushRoute('/wait')
 }
 

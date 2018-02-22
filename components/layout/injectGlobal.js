@@ -1,8 +1,10 @@
 import {injectGlobal} from 'styled-components'
 
 export default injectGlobal`
-  body, input, textarea {
+  body, input, h1, h3 {
     font-family: 'Kanit', sans-serif;
+  }
+  body, input, textarea {
     font-size: 12px;
   }
   .btn-primary {

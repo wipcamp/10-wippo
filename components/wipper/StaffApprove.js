@@ -63,7 +63,6 @@ export default class StaffApprove extends React.Component {
     this.setState({
       staff: data
     })
-    console.log(data)
   }
   fetchStaff = async () => {
     let {token} = await getCookie({req: false})
@@ -84,7 +83,6 @@ export default class StaffApprove extends React.Component {
   }
   assignRole = async (userId) => {
     let {token} = await getCookie({req: false})
-    console.log(token)
     let result = await axios.post(`/staffs/${userId}/roles`, null, {
       Authorization: `Bearer ${token}`
     })
@@ -93,7 +91,6 @@ export default class StaffApprove extends React.Component {
     } else {
       this.setState({showFalse: true})
     }
-
   }
   render () {
     return (
@@ -106,7 +103,7 @@ export default class StaffApprove extends React.Component {
           </div>
           <Title>Student ID : <Text>{this.state.stdId}</Text></Title>
           <Title>Facebook Name : <Text>{this.state.staff.account_name}</Text></Title>
-          <Button.Group style={{display:'flex'}}>
+          <Button.Group style={{display: 'flex'}}>
             <Button negative>Cancel</Button>
             <Button.Or />
             <Button positive onClick={() => this.assignRole(this.state.staff.id)}>Verify</Button>

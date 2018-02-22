@@ -36,7 +36,8 @@ class Verify extends React.Component {
     documents: [],
     image: '',
     fileType: [],
-    comment: ''
+    comment: '',
+    question: 0
   }
 
   async componentDidMount () {
@@ -95,8 +96,12 @@ class Verify extends React.Component {
     let { data: {data} } = await axios.get(`/users/${this.props.url.query.user_id}`, {
       Authorization: `Bearer ${token}`
     })
+    let question = await axios.get(`/answers/${this.props.url.query.user_id}/count`, {
+      Authorization: `Bearer ${token}`
+    })
     this.setState({
-      image: `https://graph.facebook.com/v2.12/${data.provider_acc}/picture?height=1000&width=1000`
+      image: `https://graph.facebook.com/v2.12/${data.provider_acc}/picture?height=1000&width=1000`,
+      question: question.data.data
     })
   }
 
@@ -105,6 +110,7 @@ class Verify extends React.Component {
       { menuItem: 'ข้อมูลน้อง',
         render: () => <Tab.Pane attached={false}>
           <Tab1
+            question={this.state.question}
             fullName={`${this.state.profile.first_name} ${this.state.profile.last_name}`}
             image={this.state.image}
             info={this.state.profile} />
@@ -112,6 +118,7 @@ class Verify extends React.Component {
       { menuItem: 'ปพ.1',
         render: props => <Tab.Pane attached={false}>
           <Tab2
+            question={this.state.question}
             fullName={`${this.state.profile.first_name} ${this.state.profile.last_name}`}
             comment={this.state.comment}
             setComment={this.setComment}
@@ -125,6 +132,7 @@ class Verify extends React.Component {
       { menuItem: 'ใบอนุญาติ',
         render: props => <Tab.Pane attached={false}>
           <Tab3
+            question={this.state.question}
             fullName={`${this.state.profile.first_name} ${this.state.profile.last_name}`}
             comment={this.state.comment}
             setComment={this.setComment}

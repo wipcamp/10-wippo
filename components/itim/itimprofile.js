@@ -39,10 +39,11 @@ class Verify extends React.Component {
     let { data } = await axios.get(`/registrants/${this.props.url.query.user_id}`, {
       Authorization: `Bearer ${token}`
     })
-    this.fetchData()
+    await this.fetchData()
     await this.setState({ profile: data[0] })
     await this.setState({ documents: filterDocument(this.state.profile.documents) })
     await this.getFileType()
+    await this.fetchCountQuestion()
   }
 
   setComment = (comment) => {
