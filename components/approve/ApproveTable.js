@@ -6,7 +6,7 @@ import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import { Label, Button, Icon, Input } from 'semantic-ui-react'
 
-const Badge = styled(Label)`
+export const Badge = styled(Label)`
   overflow: hidden;
   text-overflow: ellipsis; 
   width: 12em;
@@ -43,8 +43,10 @@ class ApproveTable extends React.Component {
         return 'red'
       case 1:
         return 'green'
-      default:
+      case null:
         return 'yellow'
+      default:
+        return ''
     }
   }
   searchCamper = async (e) => {
@@ -58,8 +60,7 @@ class ApproveTable extends React.Component {
     }
   }
   render () {
-    let doc = []
-    const tableColumns = [
+    const TableColumns = [
       {Header: '#', accessor: 'user_id', width: 100, style: {textAlign: 'center'}},
       {Header: 'FirstName',
         accessor: 'first_name',
@@ -74,6 +75,7 @@ class ApproveTable extends React.Component {
         accessor: 'documents',
         style: {textAlign: 'center'},
         Cell: props => {
+          let doc = []
           props.value.map(data => {
             doc[data.type_id - 1] = data
           })
@@ -104,11 +106,9 @@ class ApproveTable extends React.Component {
     return (
       <div>
         <SearchInput onChange={this.searchCamper} type='text' icon='search' placeholder='Search...' />
-        <tableColumns>
-          <div>
-            <ReactTable defaultPageSize={10} className='table' data={this.state.search} columns={tableColumns} />
-          </div>
-        </tableColumns>
+        <div>
+          <ReactTable defaultPageSize={10} className='table' data={this.state.search} columns={TableColumns} />
+        </div>
       </div>
     )
   }
