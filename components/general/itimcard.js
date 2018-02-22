@@ -38,7 +38,6 @@ const ItimCard = ({id, fullName, src, name, question}) => (
       </Card.Content>
       <Card.Content className='text-center'>
         <Stats>ตอบคำถาม <span className='text-danger'>{question}</span>/6 ข้อ</Stats>
-        {(question)}
       </Card.Content>
     </Card>
   </div>
