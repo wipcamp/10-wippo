@@ -13,20 +13,21 @@ const Topic = styled.div`
   margin-top: 1em;
 `
 
-const Tab1 = ({ fullName, info, image, path }) => {
+const Tab1 = ({ question, fullName, info, image, path }) => {
   return (
     <Grid.Row>
       <div className='container'>
         <div className='row'>
-          <div className='col-6 col-md-2'>
+          <div className='col-6 col-md-3'>
             <ItimCard
+              question={question}
               fullName={fullName}
+              id={info.user_id}
               src={image}
               name={`น้อง ${info.nickname}`}
-              school={''}
-              join={info.created_at} />
+            />
           </div>
-          <div className='col-12 col-md-10'>
+          <div className='col-12 col-md-9'>
             <SecHeader className='mt-3'>
               <Icon size='big' name={'user'} />
               ข้อมูลส่วนตัว

@@ -13,21 +13,21 @@ export const PDF = styled.embed`
   min-width: 100%;
 `
 
-const Tab2 = ({fullName, info, image, path, button, fileType, setComment, comment}) => (
+const Tab2 = ({question, fullName, info, image, path, button, fileType, setComment, comment}) => (
   (
     <Grid.Row>
       <div className='container'>
         <div className='row'>
-          <div className='col-6 col-md-2'>
+          <div className='col-6 col-md-3'>
             <ItimCard
+              question={question}
               fullName={fullName}
+              id={info.user_id}
               src={image}
               name={`น้อง ${info.nickname}`}
-              school={info.edu_name}
-              join={info.created_at}
             />
           </div>
-          <div className='col-12 col-md-10 d-flex flex-column justify-content-center align-items-center'>
+          <div className='col-12 col-md-9 d-flex flex-column justify-content-center align-items-center'>
             <h1>ใบปพ.1</h1>
             {
               fileType === 'pdf'
