@@ -22,7 +22,7 @@ const FullName = Text.extend`
 const ItimCard = ({id, fullName, src, name, question}) => (
   <div>
     <Card>
-      <Image size={`medium`} centered fluid src={src} />
+      <Image size={`medium`} centered src={src} />
       <Card.Content>
         <Card.Header>
           <div className='text-center'>
@@ -37,7 +37,8 @@ const ItimCard = ({id, fullName, src, name, question}) => (
         </Card.Meta>
       </Card.Content>
       <Card.Content className='text-center'>
-        <Stats>ตอบคำถาม <span className='text-danger'>{question || 0}</span>/6 ข้อ</Stats>
+        <Stats>ตอบคำถาม <span className='text-danger'>{question}</span>/6 ข้อ</Stats>
+        {(question)}
       </Card.Content>
     </Card>
   </div>
