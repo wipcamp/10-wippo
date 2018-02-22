@@ -3,6 +3,13 @@ import {compose, withState, lifecycle} from 'recompose'
 import styled, { injectGlobal } from 'styled-components'
 import { Container, Grid } from 'semantic-ui-react'
 import Menu from './menu.js'
+
+injectGlobal`
+  .nav-bg{
+    background:#5eb9e2;
+  }
+`
+
 const HeaderBox = styled.div`
   height:90px;
   display:flex;
@@ -31,6 +38,7 @@ const MemberName = styled.span`
 const AvatarImg = styled.img.attrs({
   src: props => props.img
 })`
+  cursor: pointer;
   border-radius:50%;
   max-width:50px;
   border : 1px solid #333;
@@ -40,13 +48,51 @@ const UserId = styled.span`
   font-size: 20px;
   color: #ff9090;
 `
-injectGlobal`
-  .nav-bg{
-    background:#5eb9e2;
+const RelativeBlock = styled.div`
+  position: relative;
+`
+const Dropdown = styled.div`
+  text-align: center;
+  padding: .7em 1em .3em;
+  display: ${props => props.show ? 'block' : 'none'};
+  min-height: 35px;
+  width: 300px;
+  right: 1.5em;
+  bottom: -2.5em;
+  background-color: #fff;
+  position: absolute;
+  border-radius: 5px;
+  box-shadow: 1px 3px 13px 2px rgba(0, 0, 0, .1);
+  z-index: 9999;
+`
+const List = styled.a`
+  cursor: pointer;
+  width: 100%;
+  min-height: 20px;
+  font-size: 1.5em;
+  text-align: center;
+  transition: .3s;
+  color: #b1b5c1;
+  &:hover {
+    color: #000;
   }
 `
-const Header = ({user: {id, provider_acc: providerAcc, account_name: accountName}}) => (
-  <div>
+const Arrow = styled.div`
+  position: absolute;
+  top: -1em;
+  right: 2em;
+  width: 0; 
+  height: 0;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 15px solid #fff;
+`
+const Button = [
+  { name: 'Logout', path: '/logout' }
+]
+
+const Header = ({show, setShow, user: {id, provider_acc: providerAcc, account_name: accountName}}) => (
+  <RelativeBlock>
     <Container fluid>
       <Container>
         <Grid>
@@ -59,7 +105,13 @@ const Header = ({user: {id, provider_acc: providerAcc, account_name: accountName
                     Hello, <MemberName>{accountName}</MemberName> <br />
                     <UserId>WIP ID : {id}</UserId>
                   </GreetingMember>
-                  <AvatarImg img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
+                  <AvatarImg onClick={() => setShow(!show)} img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
+                  <Dropdown show={show}>
+                    <Arrow />
+                    {
+                      Button.map(({name, path}) => <List href={path}>{name}</List>)
+                    }
+                  </Dropdown>
                 </UserBox>
               </HeaderBox>
             </Grid.Column>
@@ -76,11 +128,11 @@ const Header = ({user: {id, provider_acc: providerAcc, account_name: accountName
         </Grid.Row>
       </Grid>
     </Container>
-  </div>
+  </RelativeBlock>
 )
 export default compose(
-  withState('user', 'setUser', {
-  }),
+  withState('user', 'setUser', {}),
+  withState('show', 'setShow', false),
   lifecycle({
     async componentDidMount () {
       let user = await JSON.parse(window.localStorage.getItem('user'))
