@@ -115,14 +115,14 @@ export class IndexTemplate extends React.Component {
   render () {
     return (
       <BackgroundWrapper className={`container-fluid`}>
-        <div className='row'>
+        <ContainerWarpper className='row'>
           <DevBackground className='col-12 col-md-6'>
             <Faded />
           </DevBackground>
           <Background className='col-12 col-md-6'>
             {this.props.children}
           </Background>
-        </div>
+        </ContainerWarpper>
       </BackgroundWrapper>
     )
   }
