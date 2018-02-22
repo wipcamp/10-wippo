@@ -6,7 +6,7 @@ class Wipper extends React.Component {
 
   render () {
     return (
-      <Layout subheadertext='WIPPER Management'>
+      <Layout subheadertext=''>
         <Grid.Row>
           <Grid.Column>
             <WipperMain {...this.props} />

@@ -48,10 +48,10 @@ class Index extends React.Component {
     return (
       <Layout subheadertext='Dashboard'>
         <div className='row'>
-          <div className='col-12 col-md-4'>
+          <div className='col-12 col-md-4 mb-4'>
             <Portlet title='น้องใหม่ประจำวัน' herotext={`${this.state.registerAmount} คน`} image='/static/img/team.svg' />
           </div>
-          <div className='col-12 col-md-4'>
+          <div className='col-12 col-md-4 mb-4'>
             <Portlet title='ปิดรับสมัครใน' herotext={`${differ(this.state.campData.opened_at, this.state.campData.closed_at)} วัน`} image='/static/img/stopwatch.svg' />
           </div>
         </div>
@@ -61,24 +61,24 @@ class Index extends React.Component {
           </div>
         </div>
         <div className='row'>
-          <div className='col-12 col-md-4'>
+          <div className='col-12 col-md-4 mb-4'>
             <Portlet title='จำนวนน้องในระบบ' herotext={`${this.state.userInSystem} คน`} image='/static/img/team.svg' />
           </div>
-          <div className='col-12 col-md-4'>
+          <div className='col-12 col-md-4 mb-4'>
             <Portlet title='น้องที่สมัครเสร็จทุกขั้นตอน' herotext={`${this.state.registerSuccess} คน`} image='/static/img/team.svg' />
           </div>
-          <div className='col-12 col-md-4'>
+          <div className='col-12 col-md-4 mb-4'>
             <Portlet title='จำนวนน้องที่อัพเอกสารไม่เสร็จ' herotext={`${this.state.userInSystem - this.state.userDocSuccess} คน`} image='/static/img/team.svg' />
           </div>
         </div>
         <div className='row'>
-          <div className='col-12 col-md-4'>
+          <div className='col-12 col-md-4 mb-4'>
             <Portlet title='จำนวนน้องที่กรอกข้อมูลครบ' herotext={`${this.state.userProfileSuccess} คน`} image='/static/img/team.svg' />
           </div>
-          <div className='col-12 col-md-4'>
+          <div className='col-12 col-md-4 mb-4'>
             <Portlet title='จำนวนน้องที่ยังไม่อัพ ปพ.1' herotext={`${this.state.userInSystem - this.state.userUploadTranscript} คน`} image='/static/img/team.svg' />
           </div>
-          <div className='col-12 col-md-4'>
+          <div className='col-12 col-md-4 mb-4'>
             <Portlet title='จำนวนน้องที่ยังไม่อัพ ใบอนุญาติผู้ปกครอง' herotext={`${this.state.userInSystem - this.state.userUploadParentAllow} คน`} image='/static/img/team.svg' />
           </div>
         </div>

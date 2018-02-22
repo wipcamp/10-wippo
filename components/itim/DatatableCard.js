@@ -39,7 +39,6 @@ class DatatableCard extends React.Component {
       return {
         ...profile,
         fullname: `${profile.first_name} ${profile.last_name}`,
-        doc: <Label color={profile.documents.format_id}>ปภ.</Label>,
         action: <Link href={{ pathname: '/itim', query: { user_id: profile.user_id } }}><a><Button icon='search' color='blue' /></a></Link>
       }
     })

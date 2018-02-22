@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Box = styled.div`
-  box-shadow : 0px 1px 15px 1px rgba(81, 77, 92, 0.08);
+  box-shadow : 0px 5px 15px 3px rgba(81, 77, 92, 0.09);
   width:100% !important;
   padding:1.8em 1.5em 1em 1.5em;
   letter-spacing:.028em;
