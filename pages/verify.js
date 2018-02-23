@@ -35,6 +35,7 @@ class Verify extends React.Component {
     },
     documents: [],
     image: '',
+    fblink: '',
     fileType: [],
     comment: '',
     question: 0
@@ -101,7 +102,8 @@ class Verify extends React.Component {
     })
     this.setState({
       image: `https://graph.facebook.com/v2.12/${data.provider_acc}/picture?height=1000&width=1000`,
-      question: question.data.data
+      question: question.data.data,
+      fblink: `https://facebook.com/${data.provider_acc}`
     })
   }
 
@@ -113,7 +115,9 @@ class Verify extends React.Component {
             question={this.state.question}
             fullName={`${this.state.profile.first_name} ${this.state.profile.last_name}`}
             image={this.state.image}
-            info={this.state.profile} />
+            info={this.state.profile}
+            facebook={this.state.fblink}
+          />
         </Tab.Pane> },
       { menuItem: 'ปพ.1',
         render: props => <Tab.Pane attached={false}>
