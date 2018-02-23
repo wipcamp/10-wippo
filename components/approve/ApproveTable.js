@@ -15,6 +15,51 @@ const SearchInput = styled(Input)`
   width:100%;
   margin-bottom:1.2em;
 `
+
+export const documentHeader = {
+  Header: 'Document',
+  accessor: 'documents',
+  style: {textAlign: 'center'},
+  Cell: props => {
+    let doc = []
+    props.value.map(data => {
+      doc[data.type_id - 1] = data
+    })
+    return (
+      <div>
+        {doc.map((data, i) => data && data.type_id !== 1 ? <Badge key={i} color={checkDocStatus(data.is_approve)}>
+          {checkTypeId(data.type_id)}
+        </Badge> : <span />)
+        }
+      </div>
+    )
+  }
+}
+
+export const checkDocStatus = (status) => {
+  switch (status) {
+    case 0:
+      return 'red'
+    case 1:
+      return 'green'
+    case null:
+      return 'yellow'
+    default:
+      return ''
+  }
+}
+export const checkTypeId = (id) => {
+  switch (id) {
+    case 1:
+      return 'โปรไฟล์'
+    case 2:
+      return 'ใบอณุญาติผปค.'
+    case 3:
+      return 'ปพ.1'
+    default:
+      return 'null'
+  }
+}
 class ApproveTable extends React.Component {
   constructor (props) {
     super(props)
@@ -35,31 +80,6 @@ class ApproveTable extends React.Component {
     }))
     result = result.filter(profile => profile.documents.length)
     this.setState({res: result, search: result})
-  }
-
-  checkDocStatus = (status) => {
-    switch (status) {
-      case 0:
-        return 'red'
-      case 1:
-        return 'green'
-      case null:
-        return 'yellow'
-      default:
-        return ''
-    }
-  }
-  checkTypeId = (id) => {
-    switch (id) {
-      case 1:
-        return 'โปรไฟล์'
-      case 2:
-        return 'ใบอณุญาติผปค.'
-      case 3:
-        return 'ปพ.1'
-      default:
-        return 'null'
-    }
   }
   searchCamper = async (e) => {
     this.setState({ ...this.state, search: this.state.res })
@@ -83,24 +103,7 @@ class ApproveTable extends React.Component {
         }
       },
       {Header: 'LastName', width: 150, accessor: 'last_name'},
-      {Header: 'Document',
-        accessor: 'documents',
-        style: {textAlign: 'center'},
-        Cell: props => {
-          let doc = []
-          props.value.map(data => {
-            doc[data.type_id - 1] = data
-          })
-          return (
-            <div>
-              {doc.map((data, i) => data && data.type_id !== 1 ? <Badge key={i} color={this.checkDocStatus(data.is_approve)}>
-                {this.checkTypeId(data.type_id)}
-              </Badge> : <span />)
-              }
-            </div>
-          )
-        }
-      },
+      documentHeader,
       {Header: '',
         width: 150,
         style: {textAlign: 'center'},

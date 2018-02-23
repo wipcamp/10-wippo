@@ -9,14 +9,12 @@ export const auth = async (res) => {
   let {data, data: {id}} = await axios.post(`/auth/me`, null, {
     Authorization: `Bearer ${accessToken}`
   })
-  console.log(data)
   window.localStorage.setItem('user', JSON.stringify(data))
   if (id) {
     let {data} = await axios.get(`/userroles/user_id/${id}`, {
       Authorization: `Bearer ${accessToken}`
     })
-    console.log(data)
-    let roles = await data.filter(data => data.role_id > 6)
+    let roles = await data.filter(data => data.role_id >= 6)
     if (roles[0] && roles[0].role_id >= 6) {
       Router.pushRoute('/dashboard')
     } else {
