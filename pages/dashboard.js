@@ -1,9 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
 import Layout from '../components/layout/layout'
 import Portlet from '../components/util/portlet'
 import axios from '../components/util/axios'
 import getCookie from '../components/util/cookie'
 import Moment from 'moment'
+
+const Header = styled.h3`
+  font-weight: 500;
+  font-size: 1.6em;
+  color: #3f4047;
+`
 
 const differ = (start, end) => {
   const date = new Date()
@@ -57,7 +64,7 @@ class Index extends React.Component {
         </div>
         <div className='row'>
           <div className='col-12'>
-            <h3>Itim Overview</h3>
+            <Header>Itim Overview</Header>
           </div>
         </div>
         <div className='row'>

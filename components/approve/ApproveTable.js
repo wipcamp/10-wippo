@@ -6,7 +6,7 @@ import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import { Label, Button, Icon, Input } from 'semantic-ui-react'
 
-const Badge = styled(Label)`
+export const Badge = styled(Label)`
   overflow: hidden;
   text-overflow: ellipsis; 
   width: 12em;
@@ -43,8 +43,22 @@ class ApproveTable extends React.Component {
         return 'red'
       case 1:
         return 'green'
-      default:
+      case null:
         return 'yellow'
+      default:
+        return ''
+    }
+  }
+  checkTypeId = (id) => {
+    switch (id) {
+      case 1:
+        return 'โปรไฟล์'
+      case 2:
+        return 'ใบอณุญาติผปค.'
+      case 3:
+        return 'ปพ.1'
+      default:
+        return 'null'
     }
   }
   searchCamper = async (e) => {
@@ -58,8 +72,7 @@ class ApproveTable extends React.Component {
     }
   }
   render () {
-    let doc = []
-    const tableColumns = [
+    const TableColumns = [
       {Header: '#', accessor: 'user_id', width: 100, style: {textAlign: 'center'}},
       {Header: 'FirstName',
         accessor: 'first_name',
@@ -74,13 +87,14 @@ class ApproveTable extends React.Component {
         accessor: 'documents',
         style: {textAlign: 'center'},
         Cell: props => {
+          let doc = []
           props.value.map(data => {
             doc[data.type_id - 1] = data
           })
           return (
             <div>
-              {doc.map((data, i) => data ? <Badge key={i} color={this.checkDocStatus(data.is_approve)}>
-                {data.document_type.display_name}
+              {doc.map((data, i) => data && data.type_id !== 1 ? <Badge key={i} color={this.checkDocStatus(data.is_approve)}>
+                {this.checkTypeId(data.type_id)}
               </Badge> : <span />)
               }
             </div>
@@ -102,13 +116,14 @@ class ApproveTable extends React.Component {
       }
     ]
     return (
-      <div>
+      <div className='text-center'>
+        <Badge color='green'>ตรวจแล้ว</Badge>
+        <Badge color='yellow'>ยังไม่ตรวจ</Badge>
+        <Badge color='red'>เอกสารไม่ผ่าน</Badge>
         <SearchInput onChange={this.searchCamper} type='text' icon='search' placeholder='Search...' />
-        <tableColumns>
-          <div>
-            <ReactTable defaultPageSize={10} className='table' data={this.state.search} columns={tableColumns} />
-          </div>
-        </tableColumns>
+        <div>
+          <ReactTable defaultPageSize={10} className='table' data={this.state.search} columns={TableColumns} />
+        </div>
       </div>
     )
   }

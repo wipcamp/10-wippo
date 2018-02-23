@@ -4,7 +4,8 @@ import styled, { injectGlobal } from 'styled-components'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import Link from 'next/link'
-import { Input, Label, Button } from 'semantic-ui-react'
+import { Input, Button } from 'semantic-ui-react'
+import {Badge} from '../approve/ApproveTable'
 
 const StyledReactTable = styled(ReactTable)`
   text-align:center;
@@ -54,6 +55,18 @@ class DatatableCard extends React.Component {
     })
     return documents
   }
+  checkDocStatus = (status) => {
+    switch (status) {
+      case 0:
+        return 'red'
+      case 1:
+        return 'green'
+      case null:
+        return 'yellow'
+      default:
+        return ''
+    }
+  }
   searchCamper = async (e) => {
     this.setState({ ...this.state, searchCamper: this.state.camper })
     let input = e.target.value
@@ -64,11 +77,24 @@ class DatatableCard extends React.Component {
       await this.setState({...this.state, searchCamper: res})
     }
   }
+  checkTypeId = (id) => {
+    switch (id) {
+      case 1:
+        return 'โปรไฟล์'
+      case 2:
+        return 'ใบอณุญาติผปค.'
+      case 3:
+        return 'ปพ.1'
+      default:
+        return 'null'
+    }
+  }
   render () {
     const columns = [
       {
         Header: '#',
-        accessor: 'user_id'
+        accessor: 'user_id',
+        width: 90
       },
       {
         Header: 'Name - Surname',
@@ -76,19 +102,37 @@ class DatatableCard extends React.Component {
       },
       {
         Header: 'Nickname',
-        accessor: 'nickname'
+        accessor: 'nickname',
+        width: 100
       },
       {
         Header: 'Tel',
-        accessor: 'profile_registrant.telno_personal'
+        accessor: 'profile_registrant.telno_personal',
+        width: 100
       },
       {
         Header: 'Document',
-        accessor: 'doc'
+        accessor: 'documents',
+        style: {textAlign: 'center'},
+        Cell: props => {
+          let doc = []
+          props.value.map(data => {
+            doc[data.type_id - 1] = data
+          })
+          return (
+            <div>
+              {doc.map((data, i) => data && data.type_id !== 1 ? <Badge key={i} color={this.checkDocStatus(data.is_approve)}>
+                {this.checkTypeId(data.type_id)}
+              </Badge> : <span />)
+              }
+            </div>
+          )
+        }
       },
       {
         Header: 'Action',
-        accessor: 'action'
+        accessor: 'action',
+        width: 50
       }
     ]
     return (

@@ -32,19 +32,20 @@ class DatatableCard extends React.Component {
   }
   componentDidMount = async () => {
     let {token} = await getCookie({req: false})
-    let {data} = await axios.get('/staffs', {
+    let {data} = await axios.get('/staffs/nonapprove', {
       Authorization: `Bearer ${token}`
     })
-    data.data = await data.data.map(staff => {
+    console.log(data)
+    data = await data.map(staff => {
       return {
         ...staff,
-        fb_name: staff.user.account_name,
+        fb_name: staff.account_name,
         action: <Link href={{ pathname: '/wipper', query: { id: staff.user_id } }}><a><Button icon='search' color='blue' /></a></Link>
       }
     })
     this.setState({
-      staff: data.data,
-      searchStaff: data.data
+      staff: data,
+      searchStaff: data
     })
   }
   searchStaff = async (e) => {
@@ -69,7 +70,7 @@ class DatatableCard extends React.Component {
       },
       {
         Header: 'Facebook Name',
-        accessor: 'user.account_name'
+        accessor: 'account_name'
       },
       {
         Header: 'Action',
