@@ -13,7 +13,7 @@ const Topic = styled.div`
   margin-top: 1em;
 `
 
-const Tab1 = ({ question, fullName, info, image, path }) => {
+const Tab1 = ({ question, fullName, info, image, path, facebook }) => {
   return (
     <Grid.Row>
       <div className='container'>
@@ -25,6 +25,7 @@ const Tab1 = ({ question, fullName, info, image, path }) => {
               id={info.user_id}
               src={image}
               name={`น้อง ${info.nickname}`}
+              facebook={facebook}
             />
           </div>
           <div className='col-12 col-md-9'>
