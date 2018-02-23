@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Card, Image} from 'semantic-ui-react'
+import {Card, Image, Button, Icon} from 'semantic-ui-react'
 
 const Text = styled.h1`
   font-family: 'Kanit', sans-serif;
@@ -28,6 +28,9 @@ const ItimCard = ({id, fullName, src, name, question}) => (
           <div className='text-center'>
             <UserHeader>{id}</UserHeader>
             <UserHeader>{name}</UserHeader>
+            <Button color='facebook' className='btn-block mt-2'>
+              <Icon name='facebook' /> Facebook
+            </Button>
           </div>
         </Card.Header>
         <Card.Meta>
