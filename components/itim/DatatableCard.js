@@ -5,7 +5,7 @@ import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import Link from 'next/link'
 import { Input, Button } from 'semantic-ui-react'
-import {Badge} from '../approve/ApproveTable'
+import {documentHeader} from '../approve/ApproveTable'
 
 const StyledReactTable = styled(ReactTable)`
   text-align:center;
@@ -110,25 +110,7 @@ class DatatableCard extends React.Component {
         accessor: 'profile_registrant.telno_personal',
         width: 100
       },
-      {
-        Header: 'Document',
-        accessor: 'documents',
-        style: {textAlign: 'center'},
-        Cell: props => {
-          let doc = []
-          props.value.map(data => {
-            doc[data.type_id - 1] = data
-          })
-          return (
-            <div>
-              {doc.map((data, i) => data && data.type_id !== 1 ? <Badge key={i} color={this.checkDocStatus(data.is_approve)}>
-                {this.checkTypeId(data.type_id)}
-              </Badge> : <span />)
-              }
-            </div>
-          )
-        }
-      },
+      documentHeader,
       {
         Header: 'Action',
         accessor: 'action',
