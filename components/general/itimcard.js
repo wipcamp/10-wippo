@@ -19,7 +19,7 @@ const FullName = Text.extend`
   color: #d85000;
 `
 
-const ItimCard = ({id, fullName, src, name, question}) => (
+const ItimCard = ({id, fullName, src, name, question, facebook}) => (
   <div>
     <Card>
       <Image size={`medium`} centered src={src} />
@@ -28,9 +28,9 @@ const ItimCard = ({id, fullName, src, name, question}) => (
           <div className='text-center'>
             <UserHeader>{id}</UserHeader>
             <UserHeader>{name}</UserHeader>
-            <Button color='facebook' className='btn-block mt-2'>
+            <a href={`${facebook}`} target='_blank'><Button color='facebook' className='btn-block mt-2'>
               <Icon name='facebook' /> Facebook
-            </Button>
+            </Button></a>
           </div>
         </Card.Header>
         <Card.Meta>
