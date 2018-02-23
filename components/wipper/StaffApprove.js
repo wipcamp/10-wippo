@@ -111,12 +111,14 @@ export default class StaffApprove extends React.Component {
         </Box>
         <SweetAlert
           show={this.state.showSuccess}
-          title='Success Approve'
+          title='Success Approve'  
+          type='success'
           onConfirm={() => this.setState({ showSuccess: false })}
         />
         <SweetAlert
           show={this.state.showFalse}
           title='Failed Approve'
+          type='error'
           onConfirm={() => this.setState({ showFalse: false })}
         />
         {/* <p>Name : {this.state.camper.first_name} {this.state.camper.last_name}</p>
