@@ -109,11 +109,11 @@ class ApproveTable extends React.Component {
         style: {textAlign: 'center'},
         Cell: props => <div>
           <Button onClick={() => Router.push({
-            pathname: '/verify',
+            pathname: '/itimanswer',
             query: { user_id: props.original.user_id }
           })} icon color='blue' >
             <Icon name='search' />
-            approve
+            See Answer
           </Button>
         </div>
       }
