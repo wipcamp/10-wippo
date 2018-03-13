@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import ReactTable from 'react-table'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
-import { Label, Button, Icon, Input } from 'semantic-ui-react'
+import { Label, Icon, Input } from 'semantic-ui-react'
+import Link from 'next/link'
 
 export const Badge = styled(Label)`
   overflow: hidden;
@@ -108,13 +109,16 @@ class ApproveTable extends React.Component {
         width: 150,
         style: {textAlign: 'center'},
         Cell: props => <div>
-          <Button onClick={() => Router.push({
+          <Link href={{ pathname: '/verify', query: { user_id: props.original.user_id } }}>
+            <a className='btn btn-primary' > approve</a>
+          </Link>
+          {/* <Button onClick={() => Router.push({
             pathname: '/verify',
             query: { user_id: props.original.user_id }
           })} icon color='blue' >
             <Icon name='search' />
             approve
-          </Button>
+          </Button> */}
         </div>
       }
     ]
@@ -125,7 +129,7 @@ class ApproveTable extends React.Component {
         <Badge color='red'>เอกสารไม่ผ่าน</Badge>
         <SearchInput onChange={this.searchCamper} type='text' icon='search' placeholder='Search...' />
         <div>
-          <ReactTable defaultPageSize={10} className='table' data={this.state.search} columns={TableColumns} />
+          <ReactTable defaultPageSize={10} page={this.state.page} className='table' data={this.state.search} columns={TableColumns} />
         </div>
       </div>
     )
