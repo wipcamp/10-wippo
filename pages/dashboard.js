@@ -64,7 +64,7 @@ class Index extends React.Component {
         </div>
         <div className='row'>
           <div className='col-12'>
-            <Header>Itim Overview</Header>
+            <Header className='my-2'>Itim Overview</Header>
           </div>
         </div>
         <div className='row'>
