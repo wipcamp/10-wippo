@@ -1,40 +1,15 @@
 import React from 'react'
-import Router from 'next/router'
 import styled from 'styled-components'
 import ReactTable from 'react-table'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
-import { Label, Button, Icon, Input } from 'semantic-ui-react'
+import { Input } from 'semantic-ui-react'
+import Link from 'next/link'
 
-export const Badge = styled(Label)`
-  overflow: hidden;
-  text-overflow: ellipsis; 
-  width: 12em;
-`
 const SearchInput = styled(Input)`
   width:100%;
   margin-bottom:1.2em;
 `
-
-export const documentHeader = {
-  Header: 'Document',
-  accessor: 'documents',
-  style: {textAlign: 'center'},
-  Cell: props => {
-    let doc = []
-    props.value.map(data => {
-      doc[data.type_id - 1] = data
-    })
-    return (
-      <div>
-        {doc.map((data, i) => data && data.type_id !== 1 ? <Badge key={i} color={checkDocStatus(data.is_approve)}>
-          {checkTypeId(data.type_id)}
-        </Badge> : <span />)
-        }
-      </div>
-    )
-  }
-}
 
 export const checkDocStatus = (status) => {
   switch (status) {
@@ -71,16 +46,13 @@ class ApproveTable extends React.Component {
 
   componentWillMount = async () => {
     let {token} = await getCookie({req: false})
-    let {data} = await axios.get('/approve', {
+    let {data} = await axios.get('/dashboard/register/success', {
       Authorization: `Bearer ${token}`
     })
-    let result = data.map((profile) => ({
-      ...profile,
-      documents: profile.documents.filter((doc) => doc.type_id !== 1)
-    }))
-    result = result.filter(profile => profile.documents.length)
-    this.setState({res: result, search: result})
+    console.log('data', data)
+    this.setState({res: data, search: data})
   }
+
   searchCamper = async (e) => {
     this.setState({ ...this.state, search: this.state.res })
     let input = e.target.value
@@ -91,6 +63,7 @@ class ApproveTable extends React.Component {
       await this.setState({...this.state, search: res})
     }
   }
+
   render () {
     const TableColumns = [
       {Header: '#', accessor: 'user_id', width: 100, style: {textAlign: 'center'}},
@@ -103,18 +76,13 @@ class ApproveTable extends React.Component {
         }
       },
       {Header: 'LastName', width: 150, accessor: 'last_name'},
-      documentHeader,
       {Header: '',
         width: 150,
         style: {textAlign: 'center'},
         Cell: props => <div>
-          <Button onClick={() => Router.push({
-            pathname: '/itimanswer',
-            query: { user_id: props.original.user_id }
-          })} icon color='blue' >
-            <Icon name='search' />
-            See Answer
-          </Button>
+          <Link href={{ pathname: '/itimanswer', query: { user_id: props.original.user_id } }}>
+            <a className='btn btn-primary' > See Answer</a>
+          </Link>
         </div>
       }
     ]
