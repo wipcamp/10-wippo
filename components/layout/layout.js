@@ -41,7 +41,7 @@ class Layout extends React.Component {
             <div className='row'>
               <div className='col-12'>
                 <SubHeader>
-                  <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
+                  <SubHeaderText className='mb-3'>{this.props.subheadertext}</SubHeaderText>
                 </SubHeader>
               </div>
             </div>
