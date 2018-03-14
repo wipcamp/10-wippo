@@ -91,39 +91,101 @@ const Button = [
   { name: 'Logout', path: '/logout' }
 ]
 
+const StyledNav = styled.nav`
+  @media (max-width: 991px){
+    background:#5eb9e2;
+  }
+`
+
 const Header = ({show, setShow, user: {id, provider_acc: providerAcc, account_name: accountName}}) => (
+  // <RelativeBlock>
+  //   <div className='container-fluid'>
+  //     <div className='container'>
+  //       <div className='row'>
+  //         <div className='col-12 d-none d-lg-block'>
+  //           <HeaderBox>
+  //             <Logo />
+  //             <UserBox>
+  //               <GreetingMember>
+  //                 Hello, <MemberName>{accountName}</MemberName> <br />
+  //                 <UserId>WIP ID : {id}</UserId>
+  //               </GreetingMember>
+  //               <AvatarImg onClick={() => setShow(!show)} img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
+  //               <Dropdown show={show}>
+  //                 <Arrow />
+  //                 {
+  //                   Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
+  //                 }
+  //               </Dropdown>
+  //             </UserBox>
+  //           </HeaderBox>
+  //         </div>
+  //         <div className='col-12'>
+  //           s
+  //         </div>
+  //       </div>
+  //     </div> {/* End Container */}
+  //     <div className='row nav-bg'>
+  //       <div className='container'>
+  //         <div className='col'>
+  //           <Menu />
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </div>
+  // </RelativeBlock><RelativeBlock>
+  //   <div className='container-fluid'>
+  //     <div className='container'>
+  //       <div className='row'>
+  //         <div className='col-12 d-none d-lg-block'>
+  //           <HeaderBox>
+  //             <Logo />
+  //             <UserBox>
+  //               <GreetingMember>
+  //                 Hello, <MemberName>{accountName}</MemberName> <br />
+  //                 <UserId>WIP ID : {id}</UserId>
+  //               </GreetingMember>
+  //               <AvatarImg onClick={() => setShow(!show)} img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
+  //               <Dropdown show={show}>
+  //                 <Arrow />
+  //                 {
+  //                   Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
+  //                 }
+  //               </Dropdown>
+  //             </UserBox>
+  //           </HeaderBox>
+  //         </div>
+  //         <div className='col-12'>
+  //           s
+  //         </div>
+  //       </div>
+  //     </div> {/* End Container */}
+  //     <div className='row nav-bg'>
+  //       <div className='container'>
+  //         <div className='col'>
+  //           <Menu />
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </div>
+  // </RelativeBlock>
   <RelativeBlock>
-    <div className='container-fluid'>
+    <StyledNav className='navbar navbar-expand-lg navbar-light'>
       <div className='container'>
-        <div className='row'>
-          <div className='col-12 hidden-xs hidden-sm'>
-            <HeaderBox>
-              <Logo />
-              <UserBox>
-                <GreetingMember>
-                  Hello, <MemberName>{accountName}</MemberName> <br />
-                  <UserId>WIP ID : {id}</UserId>
-                </GreetingMember>
-                <AvatarImg onClick={() => setShow(!show)} img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
-                <Dropdown show={show}>
-                  <Arrow />
-                  {
-                    Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
-                  }
-                </Dropdown>
-              </UserBox>
-            </HeaderBox>
-          </div>
-        </div>
-      </div> {/* End Container */}
-      <div className='row nav-bg'>
-        <div className='container'>
-          <div className='col'>
-            <Menu />
-          </div>
+        <Logo className='' />
+        <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+          <span className='navbar-toggler-icon' />
+        </button>
+
+        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+          <ul className='navbar-nav mr-auto'>
+            <li className='nav-item'>
+              {/* <Logo /> */}
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
+    </StyledNav>
   </RelativeBlock>
 )
 export default compose(
