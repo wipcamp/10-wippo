@@ -36,20 +36,18 @@ class Layout extends React.Component {
     return (
       <div>
         <Header />
-        <Container fluid className='fullpage'>
-          <Container>
-            <Grid>
-              <Grid.Row>
-                <Grid.Column>
-                  <SubHeader>
-                    <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
-                  </SubHeader>
-                </Grid.Column>
-              </Grid.Row>
-              {this.props.children}
-            </Grid>
-          </Container>
-        </Container>
+        <div className='container-fluid fullpage'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-12'>
+                <SubHeader>
+                  <SubHeaderText>{this.props.subheadertext}</SubHeaderText>
+                </SubHeader>
+              </div>
+            </div>
+            {this.props.children}
+          </div>
+        </div>
         <Footer />
       </div>
     )

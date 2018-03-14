@@ -93,41 +93,37 @@ const Button = [
 
 const Header = ({show, setShow, user: {id, provider_acc: providerAcc, account_name: accountName}}) => (
   <RelativeBlock>
-    <Container fluid>
-      <Container>
-        <Grid>
-          <Grid.Row>
-            <Grid.Column>
-              <HeaderBox>
-                <Logo />
-                <UserBox>
-                  <GreetingMember>
-                    Hello, <MemberName>{accountName}</MemberName> <br />
-                    <UserId>WIP ID : {id}</UserId>
-                  </GreetingMember>
-                  <AvatarImg onClick={() => setShow(!show)} img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
-                  <Dropdown show={show}>
-                    <Arrow />
-                    {
-                      Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
-                    }
-                  </Dropdown>
-                </UserBox>
-              </HeaderBox>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container> {/* End Container */}
-      <Grid className='nav-bg'>
-        <Grid.Row>
-          <Container>
-            <Grid.Column>
-              <Menu />
-            </Grid.Column>
-          </Container>
-        </Grid.Row>
-      </Grid>
-    </Container>
+    <div className='container-fluid'>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-12 hidden-xs hidden-sm'>
+            <HeaderBox>
+              <Logo />
+              <UserBox>
+                <GreetingMember>
+                  Hello, <MemberName>{accountName}</MemberName> <br />
+                  <UserId>WIP ID : {id}</UserId>
+                </GreetingMember>
+                <AvatarImg onClick={() => setShow(!show)} img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
+                <Dropdown show={show}>
+                  <Arrow />
+                  {
+                    Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
+                  }
+                </Dropdown>
+              </UserBox>
+            </HeaderBox>
+          </div>
+        </div>
+      </div> {/* End Container */}
+      <div className='row nav-bg'>
+        <div className='container'>
+          <div className='col'>
+            <Menu />
+          </div>
+        </div>
+      </div>
+    </div>
   </RelativeBlock>
 )
 export default compose(
