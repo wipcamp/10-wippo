@@ -29,12 +29,16 @@ export default class Itimanswer extends React.Component {
     let { data } = await axios.get(`/registrants/${this.props.url.query.user_id}`, {
       Authorization: `Bearer ${token}`
     })
+    let users = await axios.get(`/users/${this.props.url.query.user_id}`, {
+      Authorization: `Bearer ${token}`
+    })
     let question = await axios.get(`/answers/${this.props.url.query.user_id}/count`, {
       Authorization: `Bearer ${token}`
     })
     await this.setState({ profile: data[0] })
-    this.setState({
-      image: `https://graph.facebook.com/v2.12/${data.provider_acc}/picture?height=1000&width=1000`,
+    // await this.setState({ question: question })
+    await this.setState({
+      image: `https://graph.facebook.com/v2.12/${users.data.data.provider_acc}/picture?height=1000&width=1000`,
       question: question.data.data,
       fblink: `https://facebook.com/${data.provider_acc}`
     })
