@@ -3,14 +3,13 @@ import {compose, withState, lifecycle} from 'recompose'
 import styled, { injectGlobal } from 'styled-components'
 import { Container, Grid } from 'semantic-ui-react'
 import Menu from './menu.js'
-
+import Link from 'next/link'
 
 injectGlobal`
   .nav-bg{
     background:#5eb9e2;
   }
 `
-
 const HeaderBox = styled.div`
   height:90px;
   display:flex;
@@ -99,30 +98,44 @@ const StyledNav = styled.nav`
     background:#5eb9e2;
   }
 `
-// class Header2 extends React.Component {
-//   constructor (props) {
-//     super(props)
-//     this.toggle = this.toggle.bind(this)
-//     this.state = {
-//       isOpen: false,
-//       user: {},
-//       show: false
-//     }
-//   }
-//   async componentDidMount () {
-//     let user = await JSON.parse(window.localStorage.getItem('user'))
-//     this.setState({user: user})
-//   }
-
-// }
-class Header2 extends React.Component {
-
-  state = {
-    user: {},
-    show: false,
-    isOpen: false
+const MobileList = styled.p`
+  font-size:1.2em;
+  padding:0.5em 0;
+  color:#3fa6d2;
+  margin: 1em 0 !important;
+`
+const NavCollapseContainer = styled.div`
+  background-color:#f9f9f9;
+`
+const MenuNames = [
+  {
+    menuName: 'Dashboard',
+    link: '/dashboard'
+  },
+  {
+    menuName: 'Document',
+    link: '/approve'
+  },
+  {
+    menuName: 'Itim Management',
+    link: '/itim'
+  },
+  {
+    menuName: 'Logout',
+    link: '/logout'
   }
+]
 
+class Header extends React.Component {
+  constructor (props) {
+    super(props)
+    this.toggle = this.toggle.bind(this)
+    this.state = {
+      user: {},
+      show: false,
+      isOpen: false
+    }
+  }
   async componentDidMount () {
     let user = await JSON.parse(window.localStorage.getItem('user'))
     this.setUser(user)
@@ -146,10 +159,11 @@ class Header2 extends React.Component {
   render () {
     return (
       <RelativeBlock>
+        
         <StyledNav className='navbar navbar-expand-lg navbar-light'>
           <div className='container'>
-            <Logo className='' />
-            <button className='navbar-toggler d-none d-xs-block d-sm-block d-md-block d-lg-none d-xl-none' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+            <Logo/>
+            <button onClick={this.toggle} className='navbar-toggler d-lg-none' type='button' data-toggle='collapse'>
               <span className='navbar-toggler-icon' />
             </button>
             <div className='collapse navbar-collapse' id='navbarSupportedContent'>
@@ -177,6 +191,25 @@ class Header2 extends React.Component {
             </div>
           </div>
         </StyledNav>
+        {
+          this.state.isOpen ? (
+            <NavCollapseContainer className='container-fluid'>
+              <div className='container'>
+                <div className='row'>
+                  <div className='col'>
+                    {
+                      MenuNames.map((menu, i) => <MobileList key={i}>
+                        <Link href={`${menu.link}`}><a>{menu.menuName}</a></Link>
+                      </MobileList>
+                      )
+                    }
+                  </div>
+                </div> 
+              </div>
+            </NavCollapseContainer> 
+          ):(<div></div>)
+        }
+              
         <div className='container-fluid d-none d-lg-block d-xl-block'>
           <div className='row nav-bg'>
             <div className='container'>
@@ -192,126 +225,5 @@ class Header2 extends React.Component {
     )
   }
 }
-const Header = ({show, setShow, user: {id, provider_acc: providerAcc, account_name: accountName}}) => (
-  // <RelativeBlock>
-  //   <div className='container-fluid'>
-  //     <div className='container'>
-  //       <div className='row'>
-  //         <div className='col-12 d-none d-lg-block'>
-  //           <HeaderBox>
-  //             <Logo />
-  //             <UserBox>
-  //               <GreetingMember>
-  //                 Hello, <MemberName>{accountName}</MemberName> <br />
-  //                 <UserId>WIP ID : {id}</UserId>
-  //               </GreetingMember>
-  //               <AvatarImg onClick={() => setShow(!show)} img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
-  //               <Dropdown show={show}>
-  //                 <Arrow />
-  //                 {
-  //                   Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
-  //                 }
-  //               </Dropdown>
-  //             </UserBox>
-  //           </HeaderBox>
-  //         </div>
-  //         <div className='col-12'>
-  //           s
-  //         </div>
-  //       </div>
-  //     </div> {/* End Container */}
-  //     <div className='row nav-bg'>
-  //       <div className='container'>
-  //         <div className='col'>
-  //           <Menu />
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </div>
-  // </RelativeBlock><RelativeBlock>
-  //   <div className='container-fluid'>
-  //     <div className='container'>
-  //       <div className='row'>
-  //         <div className='col-12 d-none d-lg-block'>
-  //           <HeaderBox>
-  //             <Logo />
-  //             <UserBox>
-  //               <GreetingMember>
-  //                 Hello, <MemberName>{accountName}</MemberName> <br />
-  //                 <UserId>WIP ID : {id}</UserId>
-  //               </GreetingMember>
-  //               <AvatarImg onClick={() => setShow(!show)} img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
-  //               <Dropdown show={show}>
-  //                 <Arrow />
-  //                 {
-  //                   Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
-  //                 }
-  //               </Dropdown>
-  //             </UserBox>
-  //           </HeaderBox>
-  //         </div>
-  //         <div className='col-12'>
-  //           s
-  //         </div>
-  //       </div>
-  //     </div> {/* End Container */}
-  //     <div className='row nav-bg'>
-  //       <div className='container'>
-  //         <div className='col'>
-  //           <Menu />
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </div>
-  // </RelativeBlock>
-  <RelativeBlock>
-    <StyledNav className='navbar navbar-expand-lg navbar-light'>
-      <div className='container'>
-        <Logo className='' />
-        <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
-          <span className='navbar-toggler-icon' />
-        </button>
-        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul className='navbar-nav ml-auto'>
-            <li className='nav-item'>
-              <GreetingMember>
-                  Hello, <MemberName>{accountName}</MemberName> <br />
-                <UserId>WIP ID : {id}</UserId>
-              </GreetingMember>
-              <AvatarImg onClick={() => setShow(!show)} img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
-              <Dropdown show={show}>
-                <Arrow />
-                {
-                  Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
-                }
-              </Dropdown>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </StyledNav>
-    <div className='container-fluid'>
-      <div className='row nav-bg'>
-        <div className='container'>
-          <div className='row'>
-            <div className='col'>
-              <Menu className='' />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </RelativeBlock>
-)
-// export default compose(
-//   withState('user', 'setUser', {}),
-//   withState('show', 'setShow', false),
-//   lifecycle({
-//     async componentDidMount () {
-//       let user = await JSON.parse(window.localStorage.getItem('user'))
-//       this.props.setUser(user)
-//     }
-//   })
-// )(Header)
 
-export default Header2
+export default Header
