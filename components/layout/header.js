@@ -144,14 +144,12 @@ class Header2 extends React.Component {
     })
   }
   render () {
-    console.log(this.state.user)
-    console.log(this.state.user.id)
     return (
       <RelativeBlock>
         <StyledNav className='navbar navbar-expand-lg navbar-light'>
           <div className='container'>
             <Logo className='' />
-            <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+            <button className='navbar-toggler d-none d-xs-block d-sm-block d-md-block d-lg-none d-xl-none' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
               <span className='navbar-toggler-icon' />
             </button>
             <div className='collapse navbar-collapse' id='navbarSupportedContent'>
@@ -179,7 +177,7 @@ class Header2 extends React.Component {
             </div>
           </div>
         </StyledNav>
-        <div className='container-fluid'>
+        <div className='container-fluid d-none d-lg-block d-xl-block'>
           <div className='row nav-bg'>
             <div className='container'>
               <div className='row'>
