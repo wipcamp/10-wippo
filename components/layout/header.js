@@ -4,6 +4,7 @@ import styled, { injectGlobal } from 'styled-components'
 import { Container, Grid } from 'semantic-ui-react'
 import Menu from './menu.js'
 
+
 injectGlobal`
   .nav-bg{
     background:#5eb9e2;
@@ -31,6 +32,7 @@ const GreetingMember = styled.span`
   font-weight:600;
   text-align: center;
   font-size: 15px;
+  text-align:right;
 `
 const MemberName = styled.span`
   color:#3eb9f3;
@@ -43,6 +45,7 @@ const AvatarImg = styled.img.attrs({
   max-width:50px;
   border : 1px solid #333;
   margin:15px;
+  margin-left:0;
 `
 const UserId = styled.span`
   font-size: 20px;
@@ -57,7 +60,7 @@ const Dropdown = styled.div`
   display: ${props => props.show ? 'block' : 'none'};
   min-height: 35px;
   width: 300px;
-  right: 1.5em;
+  right: -16px;
   bottom: -2.5em;
   background-color: #fff;
   position: absolute;
@@ -96,7 +99,101 @@ const StyledNav = styled.nav`
     background:#5eb9e2;
   }
 `
+// class Header2 extends React.Component {
+//   constructor (props) {
+//     super(props)
+//     this.toggle = this.toggle.bind(this)
+//     this.state = {
+//       isOpen: false,
+//       user: {},
+//       show: false
+//     }
+//   }
+//   async componentDidMount () {
+//     let user = await JSON.parse(window.localStorage.getItem('user'))
+//     this.setState({user: user})
+//   }
 
+// }
+class Header2 extends React.Component {
+
+  state = {
+    user: {},
+    show: false,
+    isOpen: false
+  }
+
+  async componentDidMount () {
+    let user = await JSON.parse(window.localStorage.getItem('user'))
+    this.setUser(user)
+  }
+
+  setUser = (user) => {
+    this.setState({
+      user
+    })
+  }
+  setShow = (show) => {
+    this.setState({
+      show
+    })
+  }
+  toggle = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
+  }
+  render () {
+    console.log(this.state.user)
+    console.log(this.state.user.id)
+    return (
+      <RelativeBlock>
+        <StyledNav className='navbar navbar-expand-lg navbar-light'>
+          <div className='container'>
+            <Logo className='' />
+            <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+              <span className='navbar-toggler-icon' />
+            </button>
+            <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+              <ul className='navbar-nav ml-auto'>
+                <li className='nav-item'>
+                  <div className='row'>
+                    <div className='col-9 align-self-center'>
+                      <GreetingMember>
+                        Hello, <MemberName>{this.state.user.account_name}</MemberName> <br />
+                        <UserId>WIP ID : {this.state.user.id}</UserId>
+                      </GreetingMember>
+                    </div>
+                    <div className='col-3'>
+                      <AvatarImg onClick={() => this.setShow(!this.state.show)} img={`https://graph.facebook.com/v2.12/${this.state.user.provider_acc}/picture?height=1000&width=1000`} />
+                    </div>
+                  </div>
+                  <Dropdown show={this.state.show}>
+                    <Arrow />
+                    {
+                      Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
+                    }
+                  </Dropdown>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </StyledNav>
+        <div className='container-fluid'>
+          <div className='row nav-bg'>
+            <div className='container'>
+              <div className='row'>
+                <div className='col'>
+                  <Menu className='' />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </RelativeBlock>
+    )
+  }
+}
 const Header = ({show, setShow, user: {id, provider_acc: providerAcc, account_name: accountName}}) => (
   // <RelativeBlock>
   //   <div className='container-fluid'>
@@ -176,25 +273,47 @@ const Header = ({show, setShow, user: {id, provider_acc: providerAcc, account_na
         <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
           <span className='navbar-toggler-icon' />
         </button>
-
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul className='navbar-nav mr-auto'>
+          <ul className='navbar-nav ml-auto'>
             <li className='nav-item'>
-              {/* <Logo /> */}
+              <GreetingMember>
+                  Hello, <MemberName>{accountName}</MemberName> <br />
+                <UserId>WIP ID : {id}</UserId>
+              </GreetingMember>
+              <AvatarImg onClick={() => setShow(!show)} img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
+              <Dropdown show={show}>
+                <Arrow />
+                {
+                  Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
+                }
+              </Dropdown>
             </li>
           </ul>
         </div>
       </div>
     </StyledNav>
+    <div className='container-fluid'>
+      <div className='row nav-bg'>
+        <div className='container'>
+          <div className='row'>
+            <div className='col'>
+              <Menu className='' />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </RelativeBlock>
 )
-export default compose(
-  withState('user', 'setUser', {}),
-  withState('show', 'setShow', false),
-  lifecycle({
-    async componentDidMount () {
-      let user = await JSON.parse(window.localStorage.getItem('user'))
-      this.props.setUser(user)
-    }
-  })
-)(Header)
+// export default compose(
+//   withState('user', 'setUser', {}),
+//   withState('show', 'setShow', false),
+//   lifecycle({
+//     async componentDidMount () {
+//       let user = await JSON.parse(window.localStorage.getItem('user'))
+//       this.props.setUser(user)
+//     }
+//   })
+// )(Header)
+
+export default Header2
