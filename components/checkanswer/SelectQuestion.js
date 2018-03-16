@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default class Selectanswer extends React.Component {
+export default class SelectQuestion extends React.Component {
   render () {
     const Input = styled.select`
       font-style: italic;

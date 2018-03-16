@@ -3,8 +3,7 @@ import Layout from '../components/layout/layout'
 import {Tab} from 'semantic-ui-react'
 import axios from '../components/util/axios'
 import getCookie from '../components/util/cookie'
-import Tab1 from '../components/verify/tab1'
-
+import Answer from '../components/ItimAnswers/Answer'
 export default class Itimanswer extends React.Component {
   state = {
     profile: {
@@ -50,24 +49,15 @@ export default class Itimanswer extends React.Component {
       <li className='breadcrumb-item active' aria-current='page'>ItimAnswer</li>
     </ol>
 
-    const panes = [
-      {menuItem: 'ข้อมูลน้อง',
-        render: () => <Tab.Pane attached={false}>
-          <Tab1
-            question={this.state.question}
-            fullName={`${this.state.profile.first_name} ${this.state.profile.last_name}`}
-            image={this.state.image}
-            info={this.state.profile}
-            facebook={this.state.fblink}
-          />
-        </Tab.Pane>
-      }
-    ]
+    const info = {
+      user_id: 1000038,
+      nickname: 'Tae'
+    }
 
     return (
       <Layout subheadertext={<Breadcrumb />}>
         ItimAnswer
-        <Tab menu={{ pointing: true }} panes={panes} />
+        <Answer question={'fuck'} info={info} fullName={'Keerati'} />
       </Layout>
     )
   }
