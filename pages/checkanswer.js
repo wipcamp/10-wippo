@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../components/layout/layout'
-import Selectanswer from '../components/checkanswer/Selectanswer'
+import SelectQuestion from '../components/checkanswer/SelectQuestion'
 import Itimlobby from '../components/checkanswer/Itimlobby'
 
 const CheckAnswer = () => (
