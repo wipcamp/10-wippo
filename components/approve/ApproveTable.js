@@ -72,19 +72,25 @@ class ApproveTable extends React.Component {
     this.incresePage = this.incresePage.bind(this)
     this.decresePage = this.decresePage.bind(this)
     this.setPage = this.setPage.bind(this)
+    this.savePage = this.savePage.bind(this)
   }
 
-  incresePage () {
-    this.setState({ page: this.state.page + 1 })
+  async incresePage () {
+    await this.setState({ page: this.state.page + 1 })
+    this.savePage()
   }
 
-  decresePage () {
-    this.setState({ page: this.state.page - 1 })
-    console.log(this.state.page)
+  async decresePage () {
+    await this.setState({ page: this.state.page - 1 })
+    this.savePage()
   }
 
   setPage (e) {
     this.setState({page: e.target.value - 1})
+  }
+
+  savePage () {
+    window.localStorage.setItem('currentPage', this.state.page)
   }
 
   componentWillMount = async () => {
@@ -96,8 +102,10 @@ class ApproveTable extends React.Component {
       ...profile,
       documents: profile.documents.filter((doc) => doc.type_id !== 1)
     }))
+    let page = window.localStorage.getItem('currentPage')
     result = result.filter(profile => profile.documents.length)
     this.setState({res: result, search: result})
+    page == null ? this.setState({page: 0}) : this.setState({page: page})
   }
   searchCamper = async (e) => {
     this.setState({ ...this.state, search: this.state.res })
@@ -155,7 +163,7 @@ class ApproveTable extends React.Component {
         </div>
         <div className='input-group' >
           <Button className='btn btn-info form-control' onClick={this.decresePage}>Previous</Button>
-          <input className='form-control' style={{width: '30px'}} onChange={this.setPage} type='number' />
+          <input className='form-control' onChange={this.setPage} type='number' />
           <Button className='btn btn-info form-control' onClick={this.incresePage}>Next</Button>
         </div>
       </div>
