@@ -163,7 +163,7 @@ class ApproveTable extends React.Component {
         </div>
         <div className='input-group' >
           <Button className='btn btn-info form-control' onClick={this.decresePage}>Previous</Button>
-          <input className='form-control' style={{marginRight: '8px'}} onChange={this.setPage} type='number' />
+          <input className='form-control' value={this.state.page+1} style={{marginRight: '8px'}} onChange={this.setPage} type='number' />
           <Button className='btn btn-info form-control' onClick={this.incresePage}>Next</Button>
         </div>
       </div>
