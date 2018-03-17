@@ -14,7 +14,7 @@ const FooterContainer = styled.div`
 
 const Footer = () => (
   <div>
-    <FooterContainer>&lt;/&gt; with VScode</FooterContainer>
+    <FooterContainer>Made with ❤ by 10 Developer</FooterContainer>
   </div>
 )
 
