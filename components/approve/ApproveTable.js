@@ -123,6 +123,13 @@ class ApproveTable extends React.Component {
       margin-right: 8px;
       width: 30px;
     `
+    const Pageignation = () => (
+      <div className='input-group' >
+        <Button className='btn btn-info form-control' onClick={this.decresePage}>Previous</Button>
+        <input className='form-control' value={this.state.page+1} style={{marginRight: '8px'}} onChange={this.setPage} type='number' />
+        <Button className='btn btn-info form-control' onClick={this.incresePage}>Next</Button>
+      </div>
+    )
     const TableColumns = [
       {Header: '#', accessor: 'user_id', width: 100, style: {textAlign: 'center'}},
       {Header: 'FirstName',
@@ -159,12 +166,7 @@ class ApproveTable extends React.Component {
         <Badge color='red'>เอกสารไม่ผ่าน</Badge>
         <SearchInput onChange={this.searchCamper} type='text' icon='search' placeholder='Search...' />
         <div>
-          <ReactTable defaultPageSize={10} page={this.state.page} className='table' data={this.state.search} columns={TableColumns} />
-        </div>
-        <div className='input-group' >
-          <Button className='btn btn-info form-control' onClick={this.decresePage}>Previous</Button>
-          <input className='form-control' value={this.state.page+1} style={{marginRight: '8px'}} onChange={this.setPage} type='number' />
-          <Button className='btn btn-info form-control' onClick={this.incresePage}>Next</Button>
+          <ReactTable PaginationComponent={Pageignation} defaultPageSize={10} page={this.state.page} className='table' data={this.state.search} columns={TableColumns} />
         </div>
       </div>
     )
