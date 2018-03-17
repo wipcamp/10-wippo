@@ -119,9 +119,9 @@ class ApproveTable extends React.Component {
   }
   render () {
     const Button = styled.button`
-      margin-left: 8px;
+      padding-left:8px;
       margin-right: 8px;
-      width: 20px;
+      width: 30px;
     `
     const TableColumns = [
       {Header: '#', accessor: 'user_id', width: 100, style: {textAlign: 'center'}},
@@ -163,7 +163,7 @@ class ApproveTable extends React.Component {
         </div>
         <div className='input-group' >
           <Button className='btn btn-info form-control' onClick={this.decresePage}>Previous</Button>
-          <input className='form-control' onChange={this.setPage} type='number' />
+          <input className='form-control' style={{marginRight: '8px'}} onChange={this.setPage} type='number' />
           <Button className='btn btn-info form-control' onClick={this.incresePage}>Next</Button>
         </div>
       </div>
