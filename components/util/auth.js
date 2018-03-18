@@ -9,7 +9,14 @@ export const auth = async (res) => {
   let {data, data: {id}} = await axios.post(`/auth/me`, null, {
     Authorization: `Bearer ${accessToken}`
   })
+  let roles = await axios.get(`/userroleteams/user_id/${id}`, {
+    Authorization: `Bearer ${accessToken}`
+  })
   window.localStorage.setItem('user', JSON.stringify(data))
+  let team = ('role', roles.data.map(role => {
+    return {role: role.role_team_id}
+  }))
+  window.localStorage.setItem('team',JSON.stringify(team))
   if (id) {
     let {data} = await axios.get(`/userroles/user_id/${id}`, {
       Authorization: `Bearer ${accessToken}`
