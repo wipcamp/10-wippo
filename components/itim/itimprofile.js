@@ -153,9 +153,9 @@ class Verify extends React.Component {
     )
 
     return (
-      <Grid.Row>
+      <div className='row'>
         <Tab className='col-12' menu={{ pointing: true }} panes={panes} />
-      </Grid.Row>
+      </div>
     )
   }
 }
