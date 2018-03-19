@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../../components/layout/layout'
 import Phase1 from '../../components/dashboard/Phase1'
-import Phase2 from '../../components/dashboard/Phase2'
+// import Phase2 from '../../components/dashboard/Phase2'
 class Main extends React.Component {
   render () {
     return (
@@ -11,11 +11,11 @@ class Main extends React.Component {
             <Phase1 />
           </div>
         </div>
-        <div className='row'>
+        {/* <div className='row'>
           <div className='col'>
             <Phase2 />
           </div>
-        </div>
+        </div> */}
       </Layout>
     )
   }
