@@ -33,6 +33,10 @@ class CheckAnswerChart extends React.Component {
     })
   }
 
+  percentCalculate = () => {
+    
+  }
+
   render () {
     console.log(this.state.registerSuccess)
     return (
