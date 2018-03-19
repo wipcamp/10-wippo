@@ -45,12 +45,20 @@ class ApproveTable extends React.Component {
   }
 
   componentWillMount = async () => {
-    let {token} = await getCookie({req: false})
-    let {data} = await axios.get('/dashboard/register/success', {
-      Authorization: `Bearer ${token}`
+    const question = []
+    let { token } = await getCookie({ req: false })
+    const teams = JSON.parse(
+      window.localStorage.getItem('team')
+    )
+    teams.map(team => {
+      let data = axios.get(`/answers/${team.role}`, {
+        Authorization: `Bearer ${token}`
+      })
+      data.then(val => {
+        question.push(val.data.data)
+      })
     })
-    console.log('data', data)
-    this.setState({res: data, search: data})
+    this.setState({res: question, search: question})
   }
 
   searchCamper = async (e) => {
