@@ -13,12 +13,21 @@ const Header = styled.h3`
 
 const differ = (start, end) => {
   const date = new Date()
-  return Moment(end).diff(date, 'days')
+  const diff = Moment(end).diff(date, 'days', true)
+  const endTime = `${end}`.substr(11)
+  const diffDay = Math.floor(parseInt(Moment(end).diff(date, 'days', true)))
+  if (diff < 0) {
+    return 'ปิดรับสมัคร'
+  } else if (diff < 1 && diff > 0) {
+    return `ภายในวันนี้เวลา ${endTime}`
+  } else {
+    return `${diffDay} วัน`
+  }
 }
 
 class Phase1 extends React.Component {
   state = {
-    registerAmount: '',
+    registerAmount: 0,
     campData: [],
     registerSuccess: 0,
     userInSystem: 0,
@@ -64,7 +73,7 @@ class Phase1 extends React.Component {
             <Portlet title='น้องใหม่ประจำวัน' herotext={`${this.state.registerAmount} คน`} image='/static/img/team.svg' />
           </div>
           <div className='col-12 col-md-4 mb-4'>
-            <Portlet title='ปิดรับสมัครใน' herotext={`${differ(this.state.campData.opened_at, this.state.campData.closed_at)} วัน`} image='/static/img/stopwatch.svg' />
+            <Portlet title='ปิดรับสมัครใน' herotext={`${differ(this.state.campData.opened_at, this.state.campData.closed_at)}`} image='/static/img/stopwatch.svg' />
           </div>
         </div>
         <div className='row'>
