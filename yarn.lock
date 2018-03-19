@@ -4446,6 +4446,13 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-chartjs-2@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/react-chartjs-2/-/react-chartjs-2-2.7.0.tgz#14925143f7e5c59dc631d0d8279255b031c5561a"
+  dependencies:
+    lodash "^4.17.4"
+    prop-types "^15.5.8"
+
 react-chartjs@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-chartjs/-/react-chartjs-1.2.0.tgz#54d0f90f3e9026666d9fcae447cd090bab65689d"

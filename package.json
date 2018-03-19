@@ -31,6 +31,7 @@
     "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-chartjs": "^1.2.0",
+    "react-chartjs-2": "^2.7.0",
     "react-dom": "^16.2.0",
     "react-facebook-login": "^4.0.1",
     "react-image-magnify": "^2.5.2",

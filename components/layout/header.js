@@ -159,10 +159,9 @@ class Header extends React.Component {
   render () {
     return (
       <RelativeBlock>
-        
         <StyledNav className='navbar navbar-expand-lg navbar-light'>
           <div className='container'>
-            <Logo/>
+            <Logo />
             <button onClick={this.toggle} className='navbar-toggler d-lg-none' type='button' data-toggle='collapse'>
               <span className='navbar-toggler-icon' />
             </button>
@@ -207,9 +206,8 @@ class Header extends React.Component {
                 </div> 
               </div>
             </NavCollapseContainer> 
-          ):(<div></div>)
+          ) : (<div />)
         }
-              
         <div className='container-fluid d-none d-lg-block d-xl-block'>
           <div className='row nav-bg'>
             <div className='container'>
