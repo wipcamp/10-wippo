@@ -3,7 +3,7 @@ import env from './env'
 
 const createInstance = (headers) => {
   return axios.create({
-    baseURL: env.API_URL,
+    baseURL: 'http://localhost:8000/api/v1',
     headers
   })
 }
