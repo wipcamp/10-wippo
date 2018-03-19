@@ -45,7 +45,7 @@ class ApproveTable extends React.Component {
   }
 
   componentWillMount = async () => {
-    const question = []
+    const questions = []
     let { token } = await getCookie({ req: false })
     const teams = JSON.parse(
       window.localStorage.getItem('team')
@@ -55,10 +55,13 @@ class ApproveTable extends React.Component {
         Authorization: `Bearer ${token}`
       })
       data.then(val => {
-        question.push(val.data.data)
+        val.data.data.map(question => {
+          questions.push(question)
+        })
       })
     })
-    this.setState({res: question, search: question})
+    this.setState({res: questions, search: questions})
+    console.log(questions)
   }
 
   searchCamper = async (e) => {
@@ -88,7 +91,7 @@ class ApproveTable extends React.Component {
         width: 150,
         style: {textAlign: 'center'},
         Cell: props => <div>
-          <Link href={{ pathname: '/itimanswer', query: { user_id: props.original.user_id } }}>
+          <Link href={{ pathname: '/itimanswer', query: { answer_id: props.original.id } }}>
             <a className='btn btn-primary' > See Answer</a>
           </Link>
         </div>
