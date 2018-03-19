@@ -5,7 +5,7 @@ import getCookie from './cookie'
 
 export const auth = async (res) => {
   let {data: {accessToken}} = await axios.post('/auth/login', { ...res }, null)
-  document.cookie = cookie.serialize('token', accessToken, { maxAge: 1/24 })
+  document.cookie = cookie.serialize('token', accessToken, { maxAge: 60 * 60 })
   let {data, data: {id}} = await axios.post(`/auth/me`, null, {
     Authorization: `Bearer ${accessToken}`
   })
