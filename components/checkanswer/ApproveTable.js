@@ -11,30 +11,6 @@ const SearchInput = styled(Input)`
   margin-bottom:1.2em;
 `
 
-export const checkDocStatus = (status) => {
-  switch (status) {
-    case 0:
-      return 'red'
-    case 1:
-      return 'green'
-    case null:
-      return 'yellow'
-    default:
-      return ''
-  }
-}
-export const checkTypeId = (id) => {
-  switch (id) {
-    case 1:
-      return 'โปรไฟล์'
-    case 2:
-      return 'ใบอณุญาติผปค.'
-    case 3:
-      return 'ปพ.1'
-    default:
-      return 'null'
-  }
-}
 class ApproveTable extends React.Component {
   constructor (props) {
     super(props)
@@ -44,7 +20,7 @@ class ApproveTable extends React.Component {
     }
   }
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     const questions = []
     let { token } = await getCookie({ req: false })
     const teams = JSON.parse(
@@ -80,15 +56,15 @@ class ApproveTable extends React.Component {
       {Header: '#', accessor: 'user_id', width: 100, style: {textAlign: 'center'}},
       {Header: 'FirstName',
         accessor: 'first_name',
-        width: 150,
+        width: 200,
         filterMethod: (filter, row) => {
           row[filter.id].startsWith(filter.value) &&
           row[filter.id].endsWith(filter.value)
         }
       },
-      {Header: 'LastName', width: 150, accessor: 'last_name'},
+      {Header: 'LastName', width: 200, accessor: 'last_name'},
       {Header: '',
-        width: 150,
+        width: 100,
         style: {textAlign: 'center'},
         Cell: props => <div>
           <Link href={{ pathname: '/itimanswer', query: { answer_id: props.original.id } }}>
