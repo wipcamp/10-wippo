@@ -57,7 +57,6 @@ export default class Itimanswer extends React.Component {
 
     return (
       <Layout subheadertext={<Breadcrumb />}>
-        ItimAnswer
         <Answer question={'fuck'} info={info} fullName={'Keerati'} />
       </Layout>
     )

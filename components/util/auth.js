@@ -16,7 +16,8 @@ export const auth = async (res) => {
   let team = ('role', roles.data.map(role => {
     return {role: role.role_team_id}
   }))
-  window.localStorage.setItem('team',JSON.stringify(team))
+  window.localStorage.setItem('team', JSON.stringify(team))
+  console.log(roles)
   if (id) {
     let {data} = await axios.get(`/userroles/user_id/${id}`, {
       Authorization: `Bearer ${accessToken}`

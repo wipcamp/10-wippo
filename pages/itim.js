@@ -5,13 +5,14 @@ import DatatableCard from '../components/itim/DatatableCard'
 import ItimProfile from '../components/itim/itimprofile'
 class Itim extends React.Component {
   render () {
+    const answer = this.props.url.query.answer_id
     return (
       <Layout subheadertext='Itim Management'>
         <Grid.Row>
           {
             this.props.url.query.user_id ? (
               <Grid.Column>
-                <ItimProfile user_id={this.props.url.query.user_id} {...this.props} />
+                <ItimProfile user_id={16} {...this.props} />
               </Grid.Column>
             ) : (
               <Grid.Column>

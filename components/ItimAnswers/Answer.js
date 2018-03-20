@@ -12,6 +12,16 @@ const Topic = styled.div`
   font-size:18px;
   margin-top: 1em;
 `
+const Question = styled.div`
+  font-family: 'Kanit', sans-serif !important;
+  font-size:27px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+`
+const info = () => {
+
+}
 
 const Answer = ({ question, fullName, info }) => {
   return (
@@ -30,15 +40,21 @@ const Answer = ({ question, fullName, info }) => {
               <Icon size='big' name={'question'} />
               คำถาม
             </SecHeader>
-            <div className='row'>
-              <Topic className='col'>WIP ID :<input readOnly className='form-control bg-danger text-white' type='text' value={info.user_id || ''} /></Topic>
-              <Topic className='col'>เบอร์โทร :<input readOnly className='form-control bg-danger text-white' type='text' /></Topic>
+            <div className='row card'>
+              <div className='col-12 text-center'>
+                <Question>{`"กออะไรกอไก่"`}</Question>
+              </div>
             </div>
-            <div className='row'>
+            <div style={{marginTop: '2.5em'}} className='row'>
               <SecHeader className='mt-3'>
                 <Icon size='big' name={'info'} />
                 คำตอบ
               </SecHeader>
+            </div>
+            <div className='row card'>
+              <div className='col-12 text-center'>
+                <Question>{`"กอไก่ไง"`}</Question>
+              </div>
             </div>
           </div>
         </div>
