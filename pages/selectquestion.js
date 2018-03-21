@@ -1,5 +1,6 @@
 import React from 'react'
 import Layout from '../components/layout/layout'
+import SelectQuestion from '../components/checkanswer/SelectQuestion'
 
 export default class Selectquestion extends React.Component {
   render () {
@@ -9,7 +10,7 @@ export default class Selectquestion extends React.Component {
 
     return (
       <Layout subheadertext={<Breadcrumb />}>
-        Hi
+        <SelectQuestion />
       </Layout>
     )
   }
