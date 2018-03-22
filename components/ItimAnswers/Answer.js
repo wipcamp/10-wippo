@@ -3,7 +3,7 @@ import ItimCard from '../general/itimcard'
 import { Grid, Icon } from 'semantic-ui-react'
 import styled from 'styled-components'
 import getCookie from '../util/cookie'
-import axios from '../util/axios';
+import axios from '../util/axios'
 
 const SecHeader = styled.div`
   font-family: 'Kanit', sans-serif !important;
@@ -33,20 +33,26 @@ export default class ItimAnswer extends React.Component {
     this.state = {
       answer: {},
       itim: {},
-      question: {data: null}
+      question: { data: null }
     }
   }
   async componentDidMount () {
-    let {token} = await getCookie({req: false})
-    await axios.get(`/answers/answer/${this.props.questionId}`, {
-      Authorization: `Bearer ${token}`
-    }).then(answer => this.setState({answer: answer.data[0]}))
-    await axios.get(`/profiles/${this.state.answer.user_id}`, {
-      Authorization: `Bearer ${token}`
-    }).then(itim => this.setState({itim: itim.data}))
-    await axios.get(`/questions/${this.state.answer.question_id}`, {
-      Authorization: `Bearer ${token}`
-    }).then(question => this.setState({question: question.data[0]}))
+    let { token } = await getCookie({ req: false })
+    await axios
+      .get(`/answers/answer/${this.props.questionId}`, {
+        Authorization: `Bearer ${token}`
+      })
+      .then(answer => this.setState({ answer: answer.data[0] }))
+    await axios
+      .get(`/profiles/${this.state.answer.user_id}`, {
+        Authorization: `Bearer ${token}`
+      })
+      .then(itim => this.setState({ itim: itim.data }))
+    await axios
+      .get(`/questions/${this.state.answer.question_id}`, {
+        Authorization: `Bearer ${token}`
+      })
+      .then(question => this.setState({ question: question.data[0] }))
     console.log(this.state.itim)
   }
 
@@ -57,7 +63,9 @@ export default class ItimAnswer extends React.Component {
           <div className='row'>
             <div className='col-6 col-md-3'>
               <ItimCard
-                fullName={this.state.itim.first_name + ' ' + this.state.itim.last_name}
+                fullName={
+                  this.state.itim.first_name + ' ' + this.state.itim.last_name
+                }
                 id={this.state.itim.user_id}
                 name={this.state.itim.nickname}
               />
@@ -72,22 +80,33 @@ export default class ItimAnswer extends React.Component {
                   <Question>{this.state.question.data}</Question>
                 </div>
               </div>
-              <div style={{marginTop: '2.5em'}} className='row'>
-                <SecHeader className='mt-3'>
-                  <Icon size='big' name={'info'} />
-                  คำตอบ
-                </SecHeader>
+            </div>
+          </div>{/* END */}
+          <div calssName='row'>
+            <div style={{ marginTop: '2.5em' }} className='row'>
+              <SecHeader className='mt-3'>
+                <Icon size='big' name={'info'} />
+                คำตอบ
+              </SecHeader>
+            </div>
+            <div className='row card'>
+              <div className='col-12 text-center'>
+                {console.log(this.state.answer)}
+                <Answer>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: this.state.answer.data }}
+                  />
+                </Answer>
               </div>
-              <div className='row card'>
-                <div className='col-12 text-center'>
-                  {console.log(this.state.answer)}
-                  <Answer>
-                    <div dangerouslySetInnerHTML={
-                      {__html: this.state.answer.data}
-                    } />
-                  </Answer>
-                </div>
-              </div>
+            </div>
+            <div className='row'>
+              <textarea className='form-control' />
+            </div>
+            <div className='row'>
+              <div className='col-3'> col</div>
+              <div className='col-3'> col</div>
+              <div className='col-3'> col</div>
+              <div className='col-3'> col</div>
             </div>
           </div>
         </div>
