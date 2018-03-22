@@ -1,7 +1,6 @@
 import React from 'react'
 import ApproveTable from './ApproveTable'
-import axios from '../util/axios'
-import getCookie from '../util/cookie'
+
 
 export default class Itimlobby extends React.Component {
   render () {
