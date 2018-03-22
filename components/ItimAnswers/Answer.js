@@ -16,12 +16,12 @@ const Topic = styled.div`
 `
 const Question = styled.div`
   font-family: 'Kanit', sans-serif !important;
-  font-size:27px;
+  font-size:15px;
   margin-top: 1em;
   margin-bottom: 1em;
 `
 const Answer = styled.div`
-  font-size:16px;
+  font-size:20px;
   text-align:left;
   margin-top: 1em;
   margin-bottom: 1em;
@@ -67,7 +67,7 @@ export default class ItimAnswer extends React.Component {
                 <Icon size='big' name={'question'} />
                 คำถาม
               </SecHeader>
-              <div className='row card'>
+              <div className='row'>
                 <div className='col-12 text-center'>
                   <Question>{this.state.question.data}</Question>
                 </div>
@@ -80,7 +80,12 @@ export default class ItimAnswer extends React.Component {
               </div>
               <div className='row card'>
                 <div className='col-12 text-center'>
-                  <Answer><frame>{this.state.answer.data}</frame></Answer>
+                  {console.log(this.state.answer)}
+                  <Answer>
+                    <div dangerouslySetInnerHTML={
+                      {__html: this.state.answer.data}
+                    } />
+                  </Answer>
                 </div>
               </div>
             </div>

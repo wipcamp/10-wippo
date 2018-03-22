@@ -1,7 +1,5 @@
 import React from 'react'
 import Layout from '../components/layout/layout'
-import axios from '../components/util/axios'
-import getCookie from '../components/util/cookie'
 import ItimAnswer from '../components/ItimAnswers/Answer'
 class ExItimanswer extends React.Component {
   state = {
