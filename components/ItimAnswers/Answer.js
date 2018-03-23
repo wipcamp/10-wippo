@@ -26,6 +26,10 @@ const Answer = styled.div`
   margin-top: 1em;
   margin-bottom: 1em;
 `
+const Box = styled.div`
+  margin-top:30px;
+  width:100%;
+`
 
 export default class ItimAnswer extends React.Component {
   constructor () {
@@ -99,15 +103,49 @@ export default class ItimAnswer extends React.Component {
                 </Answer>
               </div>
             </div>
-            <div className='row'>
-              <textarea className='form-control' />
-            </div>
-            <div className='row'>
-              <div className='col-3'> col</div>
-              <div className='col-3'> col</div>
-              <div className='col-3'> col</div>
-              <div className='col-3'> col</div>
-            </div>
+            <Box>
+              <div className='row'>
+                <SecHeader className='mt-3'>
+                  <Icon size='big' name={'comment outline'} />
+                  Comment
+                </SecHeader>
+                <textarea className='form-control' />
+              </div>
+              <div
+                className='row'
+                style={{ marginTop: '20px', marginLeft: '40px' }}
+              >
+                <div
+                  className='col-md-2 col-12 mr-auto'
+                  style={{ width: '8px' }}
+                >
+                  <span>ด้านที่ 1 </span>
+                  <span>
+                    <input className='form-control' type='number' step='0.10' />
+                  </span>
+                </div>
+                <div className='col-md-2 mr-auto'>
+                  <span>ด้านที่ 2 </span>
+                  <span>
+                    <input className='form-control' type='number' step='0.10' />
+                  </span>
+                </div>
+                <div className='col-md-2 mr-auto'>
+                  <span>ด้านที่ 3 </span>
+                  <span>
+                    <input className='form-control' type='number' step='0.10' />
+                  </span>
+                </div>
+                <div
+                  style={{ paddingTop: '12px' }}
+                  className='col-md-1 col-6 mr-auto'
+                >
+                  <div>
+                    <input type='submit' className='btn btn-success' />
+                  </div>
+                </div>
+              </div>
+            </Box>
           </div>
         </div>
       </Grid.Row>
