@@ -1,5 +1,4 @@
 import React from 'react'
-import { Grid } from 'semantic-ui-react'
 import Layout from '../components/layout/layout'
 import DatatableCard from '../components/itim/DatatableCard'
 import ItimProfile from '../components/itim/itimprofile'
@@ -8,19 +7,19 @@ class Itim extends React.Component {
     const answer = this.props.url.query.answer_id
     return (
       <Layout subheadertext='Itim Management'>
-        <Grid.Row>
+        <div className='row'>
           {
             this.props.url.query.user_id ? (
-              <Grid.Column>
-                <ItimProfile user_id={16} {...this.props} />
-              </Grid.Column>
+              <div className='col'>
+                <ItimProfile user_id={this.props.url.query.user_id} {...this.props} />
+              </div>
             ) : (
-              <Grid.Column>
+              <div className='col'>
                 <DatatableCard {...this.props} />
-              </Grid.Column>
+              </div>
             )
           }
-        </Grid.Row>
+        </div>
       </Layout>
     )
   }
