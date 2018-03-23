@@ -23,21 +23,24 @@ class ApproveTable extends React.Component {
 
   componentDidMount = async () => {
     let wipId = JSON.parse(window.localStorage.getItem('user')).id
-    const questions = []
-    let { token } = await getCookie({ req: false })
+    let { token } = getCookie({ req: false })
     const teams = JSON.parse(window.localStorage.getItem('team'))
-    teams.map(team => {
-      let data = axios.get(`/answers/${team.role}/${wipId}`, {
+    let answers = teams.map(async team => {
+      let {data} = await axios.get(`/answers/${team.role}/${wipId}`, {
         Authorization: `Bearer ${token}`
       })
-      data.then(async val => {
-        val.data.map(async question => {
-          questions.push(question)
+      return data
+    })
+    await Promise.all(answers).then(arrs => {
+      arrs.map(arr => {
+        arr.map(async answer => {
+          console.log(answer)
+          await this.setState({res: [...this.state.res, answer]})
+          await this.setState({search: [...this.state.search, answer]})
         })
       })
     })
-    this.setState({res: questions, search: questions, loading: false})
-    console.log('search' + this.state.search)
+    console.log('res', this.state.res)
   }
 
   searchCamper = async e => {
@@ -57,20 +60,6 @@ class ApproveTable extends React.Component {
   }
 
   render () {
-    return (
-      <div className='text-center'>
-        <SearchInput
-          onChange={this.searchCamper}
-          type='text'
-          icon='search'
-          placeholder='Search...'
-        />
-        {this.__renderTable()}
-      </div>
-    )
-  }
-
-  __renderTable () {
     const TableColumns = [
       {
         Header: '#',
@@ -79,15 +68,15 @@ class ApproveTable extends React.Component {
         style: { textAlign: 'center' }
       },
       {
-        Header: 'FirstName',
-        accessor: 'first_name',
+        Header: 'Nick Name',
+        accessor: 'nickname',
         width: 200,
         filterMethod: (filter, row) => {
           row[filter.id].startsWith(filter.value) &&
             row[filter.id].endsWith(filter.value)
         }
       },
-      { Header: 'LastName', width: 200, accessor: 'last_name' },
+      { Header: 'Question Id', width: 200, accessor: 'question_id' },
       {
         Header: '',
         width: 100,
@@ -108,16 +97,21 @@ class ApproveTable extends React.Component {
     ]
 
     return (
-      <div>
-        {this.state.loading
-          ? <h1>loadin data</h1>
-          : <ReactTable
+      <div className='text-center'>
+        <SearchInput
+          onChange={this.searchCamper}
+          type='text'
+          icon='search'
+          placeholder='Search...'
+        />
+        <div>
+          <ReactTable
             defaultPageSize={10}
             className='table'
             data={this.state.search}
             columns={TableColumns}
           />
-        }
+        </div>
       </div>
     )
   }
