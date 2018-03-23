@@ -1,6 +1,7 @@
 import React from 'react'
 import CheckAnswerChart from './CheckAnswerChart'
 import styled from 'styled-components'
+import Clock from 'react-live-clock'
 
 const Card = styled.div`
  box-shadow : 0px 5px 15px 3px rgba(81,77,92,0.09);
@@ -22,6 +23,9 @@ const ProgressBox = styled.div`
   padding-top:10px;
   padding-bottom:10px;
 `
+const StyledClock = styled(Clock)`
+  font-size:3em;
+`
 class Main extends React.Component {
   state = {
     now: ''
@@ -37,8 +41,22 @@ class Main extends React.Component {
             <CheckAnswerChart />
           </div>
           <div className='col-4'>
-            
+            <Card className='text-center py-3'>
+              <h2>นี่คือเวลาตอนนี้</h2>
+              <StyledClock format={'HH:mm:ss'} ticking timezone={'Asia/Bangkok'} />
+            </Card>
+            <Card className='mt-3 py-3 text-center'>
+              <h2>คาดว่าจะเสร็จในอีก</h2>
+
+            </Card>
           </div>
+        </div>
+        <div className='row d-flex justify-content-center my-4'>
+          <Card className='col-10 py-3'>
+            <div className='progress'>
+              <div className='progress-bar progress-bar-striped progress-bar-animated bg-danger' role='progressbar' style={{width:'15%'}}>15%</div>
+            </div>
+          </Card>
         </div>
         <div className='row mt-3'>
           <Card className='col-3 mx-5 my-4'>
