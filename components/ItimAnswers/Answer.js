@@ -9,11 +9,7 @@ const SecHeader = styled.div`
   font-family: 'Kanit', sans-serif !important;
   font-size:25px;
 `
-const Topic = styled.div`
-  font-family: 'Kanit', sans-serif !important;
-  font-size:18px;
-  margin-top: 1em;
-`
+
 const Question = styled.div`
   font-family: 'Kanit', sans-serif !important;
   font-size:15px;
@@ -75,79 +71,86 @@ export default class ItimAnswer extends React.Component {
               />
             </div>
             <div className='col-12 col-md-9'>
-              <SecHeader className='mt-3'>
-                <Icon size='big' name={'question'} />
-                คำถาม
-              </SecHeader>
-              <div className='row'>
-                <div className='col-12 text-center'>
-                  <Question>{this.state.question.data}</Question>
-                </div>
-              </div>
-            </div>
-          </div>{/* END */}
-          <div calssName='row'>
-            <div style={{ marginTop: '2.5em' }} className='row'>
-              <SecHeader className='mt-3'>
-                <Icon size='big' name={'info'} />
-                คำตอบ
-              </SecHeader>
-            </div>
-            <div className='row card'>
-              <div className='col-12 text-center'>
-                {console.log(this.state.answer)}
-                <Answer>
-                  <div
-                    dangerouslySetInnerHTML={{ __html: this.state.answer.data }}
-                  />
-                </Answer>
-              </div>
-            </div>
-            <Box>
-              <div className='row'>
+              <div className='card' style={{marginBottom: '8px'}}>
                 <SecHeader className='mt-3'>
-                  <Icon size='big' name={'comment outline'} />
-                  Comment
+                  <Icon size='big' name={'question'} />
+                คำถาม
                 </SecHeader>
-                <textarea className='form-control' />
-              </div>
-              <div
-                className='row'
-                style={{ marginTop: '20px', marginLeft: '40px' }}
-              >
-                <div
-                  className='col-md-2 col-12 mr-auto'
-                  style={{ width: '8px' }}
-                >
-                  <span>ด้านที่ 1 </span>
-                  <span>
-                    <input className='form-control' type='number' step='0.10' />
-                  </span>
-                </div>
-                <div className='col-md-2 mr-auto'>
-                  <span>ด้านที่ 2 </span>
-                  <span>
-                    <input className='form-control' type='number' step='0.10' />
-                  </span>
-                </div>
-                <div className='col-md-2 mr-auto'>
-                  <span>ด้านที่ 3 </span>
-                  <span>
-                    <input className='form-control' type='number' step='0.10' />
-                  </span>
-                </div>
-                <div
-                  style={{ paddingTop: '12px' }}
-                  className='col-md-1 col-6 mr-auto'
-                >
-                  <div>
-                    <input type='submit' className='btn btn-success' />
+                <div className='row'>
+                  <div className='col-12 text-center'>
+                    <Question>{this.state.question.data}</Question>
                   </div>
                 </div>
               </div>
-            </Box>
+              <div className='card'>
+                <div calssName='row'>
+                  <div className='container'>
+
+                    <div style={{ marginTop: '2.5em' }} className='row'>
+                      <SecHeader className='mt-3'>
+                        <Icon size='big' name={'info'} />
+                        คำตอบ
+                      </SecHeader>
+                    </div>
+                    <div className='card'>
+                      <div className='col-12 text-center'>
+                        {console.log(this.state.answer)}
+                        <Answer>
+                          <div
+                            dangerouslySetInnerHTML={{ __html: this.state.answer.data }}
+                          />
+                        </Answer>
+                      </div>
+                    </div>
+                    <Box>
+                      <SecHeader className='mt-3 mb-2'>
+                        <Icon size='big' name={'comment outline'} />
+                          Comment
+                      </SecHeader>
+                      <div className='card'>
+                        <textarea className='form-control' />
+                      </div>
+                      <div
+                        className='row'
+                        style={{ marginTop: '20px', marginLeft: '40px' ,marginBottom: '30px' }}
+                      >
+                        <div
+                          className='col-md-2 col-12 mr-auto'
+                          style={{ width: '8px' }}
+                        >
+                          <span>ด้านที่ 1 </span>
+                          <span>
+                            <input className='form-control' type='number' step='0.10' />
+                          </span>
+                        </div>
+                        <div className='col-md-2 mr-auto'>
+                          <span>ด้านที่ 2 </span>
+                          <span>
+                            <input className='form-control' type='number' step='0.10' />
+                          </span>
+                        </div>
+                        <div className='col-md-2 mr-auto'>
+                          <span>ด้านที่ 3 </span>
+                          <span>
+                            <input className='form-control' type='number' step='0.10' />
+                          </span>
+                        </div>
+                        <div
+                          style={{ paddingTop: '12px' }}
+                          className='col-md-1 col-6 mr-auto'
+                        >
+                          <div>
+                            <a href='/checkanswer' className='btn btn-success'>Submit!</a>
+                          </div>
+                        </div>
+                      </div>
+                    </Box>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </div>{/* END */}
       </Grid.Row>
     )
   }

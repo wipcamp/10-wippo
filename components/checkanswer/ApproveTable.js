@@ -16,7 +16,8 @@ class ApproveTable extends React.Component {
     super(props)
     this.state = {
       res: [],
-      search: []
+      search: [],
+      loading: true
     }
   }
 
@@ -26,17 +27,17 @@ class ApproveTable extends React.Component {
     let { token } = await getCookie({ req: false })
     const teams = JSON.parse(window.localStorage.getItem('team'))
     teams.map(team => {
-      console.log(team.role, wipId)
       let data = axios.get(`/answers/${team.role}/${wipId}`, {
         Authorization: `Bearer ${token}`
       })
-      data.then(val => {
-        val.data.map(question => {
+      data.then(async val => {
+        val.data.map(async question => {
           questions.push(question)
         })
       })
     })
-    this.setState({res: questions, search: questions})
+    this.setState({res: questions, search: questions, loading: false})
+    console.log('search' + this.state.search)
   }
 
   searchCamper = async e => {
@@ -56,6 +57,20 @@ class ApproveTable extends React.Component {
   }
 
   render () {
+    return (
+      <div className='text-center'>
+        <SearchInput
+          onChange={this.searchCamper}
+          type='text'
+          icon='search'
+          placeholder='Search...'
+        />
+        {this.__renderTable()}
+      </div>
+    )
+  }
+
+  __renderTable () {
     const TableColumns = [
       {
         Header: '#',
@@ -91,22 +106,18 @@ class ApproveTable extends React.Component {
         )
       }
     ]
+
     return (
-      <div className='text-center'>
-        <SearchInput
-          onChange={this.searchCamper}
-          type='text'
-          icon='search'
-          placeholder='Search...'
-        />
-        <div>
-          <ReactTable
+      <div>
+        {this.state.loading
+          ? <h1>loadin data</h1>
+          : <ReactTable
             defaultPageSize={10}
             className='table'
             data={this.state.search}
             columns={TableColumns}
           />
-        </div>
+        }
       </div>
     )
   }
