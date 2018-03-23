@@ -69,6 +69,10 @@ const Badge = styled.span`
   margin:1%;
   font-size:20px;
 `
+const Header = styled.h1`
+  margin-top:1em;
+  font-size:3.5em;
+`
 
 const CardCustom = ({ data }) => (
   <Card className="col-12">
@@ -86,13 +90,15 @@ const CardCustom = ({ data }) => (
       </DivInCard>
       <div className="col-5">
         <Profile className="px-3">
-          <p>WIP ID : 100001 &nbsp; เบอร์โทร : 088-888-8888</p> 
-          <p>ชื่อ: อับบราฮัม&nbsp;&nbsp;&nbsp;นามสกุล: มีบุตรเจ็ดคน&nbsp;&nbsp;&nbsp;ชื่อเล่น : น้องเอ๋ย</p>
+          <p>WIP ID : 100001&nbsp;&nbsp;&nbsp;ชื่อเล่น : น้องเอ๋ย&nbsp;&nbsp;&nbsp;เบอร์โทร : 088-888-8888</p> 
+          <p>ชื่อ: อับบราฮัม&nbsp;&nbsp;&nbsp;นามสกุล: มีบุตรเจ็ดคน</p>
           <p>โรค : -&nbsp;&nbsp;&nbsp;อาหารที่แพ้ : -&nbsp;&nbsp;&nbsp;กรุ้ปเลือด : B</p>
           <p>จังหวัด : กรุงเทพ&nbsp;&nbsp;&nbsp;เขต : ทุ่งครุ</p>
           <p>เบอร์ผู้ปกครอง : 0999999999&nbsp;&nbsp;&nbsp;ความสัมพันธ์ : มารดา</p>
           <p>โรงเรียน: อนุบาลหมีน้อย&nbsp;&nbsp;&nbsp;ลำดับชั้น : ม.5 ขึ้น ม.6&nbsp;&nbsp;&nbsp;สายการเรียน : วิทย์-คณิต   </p>
-          <p>เกรดเฉลีย : 3.5 &nbsp;&nbsp;&nbsp;ค่ายที่เคยเข้าร่วม : อิอิ&nbsp;&nbsp;&nbsp;ทักษะคอม : ไม่มี  </p>
+          <p>เกรดเฉลีย : 3.5 &nbsp;&nbsp;&nbsp;</p>
+          <p>ค่ายที่เคยเข้าร่วม : อิอิ</p>
+          <p>ทักษะคอม : ไม่มี  </p>
         </Profile>
         <div className="text-center">
           <Button type="submit">submit</Button>
@@ -125,7 +131,8 @@ export default class Itimstat extends React.Component {
       <Page className="contianer-fluid">
         <div className="container">
           <div className="row">
-          <h1>Itim Stats</h1>
+            <div/>
+            <Header>Itim Stats</Header>
             {[1, 1, 1, 1].map(() => <CardCustom data={this.state.data} />)}
           </div>
         </div>
