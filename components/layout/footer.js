@@ -7,14 +7,14 @@ const FooterContainer = styled.div`
   text-align:center;
   font-weight:bold;
   color:#fff;
-  padding-top:5px;
-  padding-bottom:5px;
+  padding-top:8px;
+  padding-bottom:8px;
   margin-top:50px;
 `
 
 const Footer = () => (
   <div>
-    <FooterContainer>&lt;/&gt; with VScode</FooterContainer>
+    <FooterContainer>Made with ❤ by 10 Developer</FooterContainer>
   </div>
 )
 

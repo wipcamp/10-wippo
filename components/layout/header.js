@@ -3,13 +3,13 @@ import {compose, withState, lifecycle} from 'recompose'
 import styled, { injectGlobal } from 'styled-components'
 import { Container, Grid } from 'semantic-ui-react'
 import Menu from './menu.js'
+import Link from 'next/link'
 
 injectGlobal`
   .nav-bg{
     background:#5eb9e2;
   }
 `
-
 const HeaderBox = styled.div`
   height:90px;
   display:flex;
@@ -31,6 +31,7 @@ const GreetingMember = styled.span`
   font-weight:600;
   text-align: center;
   font-size: 15px;
+  text-align:right;
 `
 const MemberName = styled.span`
   color:#3eb9f3;
@@ -43,6 +44,7 @@ const AvatarImg = styled.img.attrs({
   max-width:50px;
   border : 1px solid #333;
   margin:15px;
+  margin-left:0;
 `
 const UserId = styled.span`
   font-size: 20px;
@@ -57,7 +59,7 @@ const Dropdown = styled.div`
   display: ${props => props.show ? 'block' : 'none'};
   min-height: 35px;
   width: 300px;
-  right: 1.5em;
+  right: -16px;
   bottom: -2.5em;
   background-color: #fff;
   position: absolute;
@@ -91,52 +93,135 @@ const Button = [
   { name: 'Logout', path: '/logout' }
 ]
 
-const Header = ({show, setShow, user: {id, provider_acc: providerAcc, account_name: accountName}}) => (
-  <RelativeBlock>
-    <Container fluid>
-      <Container>
-        <Grid>
-          <Grid.Row>
-            <Grid.Column>
-              <HeaderBox>
-                <Logo />
-                <UserBox>
-                  <GreetingMember>
-                    Hello, <MemberName>{accountName}</MemberName> <br />
-                    <UserId>WIP ID : {id}</UserId>
-                  </GreetingMember>
-                  <AvatarImg onClick={() => setShow(!show)} img={`https://graph.facebook.com/v2.12/${providerAcc}/picture?height=1000&width=1000`} />
-                  <Dropdown show={show}>
+const StyledNav = styled.nav`
+  @media (max-width: 991px){
+    background:#5eb9e2;
+  }
+`
+const MobileList = styled.p`
+  font-size:1.2em;
+  padding:0.5em 0;
+  color:#3fa6d2;
+  margin: 1em 0 !important;
+`
+const NavCollapseContainer = styled.div`
+  background-color:#f9f9f9;
+`
+const MenuNames = [
+  {
+    menuName: 'Dashboard',
+    link: '/dashboard'
+  },
+  {
+    menuName: 'Document',
+    link: '/approve'
+  },
+  {
+    menuName: 'Itim Management',
+    link: '/itim'
+  },
+  {
+    menuName: 'Logout',
+    link: '/logout'
+  }
+]
+
+class Header extends React.Component {
+  constructor (props) {
+    super(props)
+    this.toggle = this.toggle.bind(this)
+    this.state = {
+      user: {},
+      show: false,
+      isOpen: false
+    }
+  }
+  async componentDidMount () {
+    let user = await JSON.parse(window.localStorage.getItem('user'))
+    this.setUser(user)
+  }
+
+  setUser = (user) => {
+    this.setState({
+      user
+    })
+  }
+  setShow = (show) => {
+    this.setState({
+      show
+    })
+  }
+  toggle = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
+  }
+  render () {
+    return (
+      <RelativeBlock>
+        <StyledNav className='navbar navbar-expand-lg navbar-light'>
+          <div className='container'>
+            <Logo />
+            <button onClick={this.toggle} className='navbar-toggler d-lg-none' type='button' data-toggle='collapse'>
+              <span className='navbar-toggler-icon' />
+            </button>
+            <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+              <ul className='navbar-nav ml-auto'>
+                <li className='nav-item'>
+                  <div className='row'>
+                    <div className='col-9 align-self-center'>
+                      <GreetingMember>
+                        Hello, <MemberName>{this.state.user.account_name}</MemberName> <br />
+                        <UserId>WIP ID : {this.state.user.id}</UserId>
+                      </GreetingMember>
+                    </div>
+                    <div className='col-3'>
+                      <AvatarImg onClick={() => this.setShow(!this.state.show)} img={`https://graph.facebook.com/v2.12/${this.state.user.provider_acc}/picture?height=1000&width=1000`} />
+                    </div>
+                  </div>
+                  <Dropdown show={this.state.show}>
                     <Arrow />
                     {
                       Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
                     }
                   </Dropdown>
-                </UserBox>
-              </HeaderBox>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container> {/* End Container */}
-      <Grid className='nav-bg'>
-        <Grid.Row>
-          <Container>
-            <Grid.Column>
-              <Menu />
-            </Grid.Column>
-          </Container>
-        </Grid.Row>
-      </Grid>
-    </Container>
-  </RelativeBlock>
-)
-export default compose(
-  withState('user', 'setUser', {}),
-  withState('show', 'setShow', false),
-  lifecycle({
-    async componentDidMount () {
-      let user = await JSON.parse(window.localStorage.getItem('user'))
-      this.props.setUser(user)
-    }
-  })
-)(Header)
+                </li>
+              </ul>
+            </div>
+          </div>
+        </StyledNav>
+        {
+          this.state.isOpen ? (
+            <NavCollapseContainer className='container-fluid'>
+              <div className='container'>
+                <div className='row'>
+                  <div className='col'>
+                    {
+                      MenuNames.map((menu, i) => <MobileList key={i}>
+                        <Link href={`${menu.link}`}><a>{menu.menuName}</a></Link>
+                      </MobileList>
+                      )
+                    }
+                  </div>
+                </div> 
+              </div>
+            </NavCollapseContainer> 
+          ) : (<div />)
+        }
+        <div className='container-fluid d-none d-lg-block d-xl-block'>
+          <div className='row nav-bg'>
+            <div className='container'>
+              <div className='row'>
+                <div className='col'>
+                  <Menu className='' />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </RelativeBlock>
+    )
+  }
+}
+
+export default Header
