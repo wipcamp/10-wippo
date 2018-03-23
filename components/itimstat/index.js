@@ -1,111 +1,134 @@
-import React from 'react'
-import {Radar} from 'react-chartjs-2'
-import styled from 'styled-components'
+import React from "react"
+import { Radar } from "react-chartjs-2"
+import styled from "styled-components"
 
 const Page = styled.div`
-  height:100vh;
-  width:100vw;
-  overflow-x:hidden;
-
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 `
 const Card = styled.div`
-  width :65%;
-  height:30%;
+  width: 100%;
+  // height:30%;
   background: linear-gradient(135deg, #00c5dc 30%, #716aca 100%);
-  color:#fff;
-  padding:2%;
-  display:block;
-  margin-left:1%;
-  margin-right:1%;
-  margin-top:2%;
+  color: #fff;
+  padding: 2%;
+  display: block;
+  margin-top: 2%;
   border: 0px solid transparent;
-  border-radius: .5em;
-  overflow:hidden;
+  border-radius: 0.5em;
+  overflow: hidden;
 `
 
 const DivInCard = styled.div`
-  width: 45%;
-  margin-top: -20%;
-  margin-left:20%;
-  `
-const Output =styled.ul`
-  margin-left:22.2%;
-  margin-top:10px;
-  text-align:center;
-  color:#000;
-  list-style-type:none;
+  width: 100%;
 `
-  const Li = styled.li`
+
+const Output = styled.ul`
+  margin-left: 22.2%;
+  // margin-top:10px;
+  // text-align:center;
+  color: #000;
+  list-style-type: none;
+`
+
+const Li = styled.li`
   margin: 10px;
-  float:left;
+  float: left;
 `
+
 const Avatar = styled.img`
-  width:15%;
-  height:auto;
-  margin:1%;
-  border:2px solid #000;
-  border-radius:.5em;
-  overflow:hidden;
-`
-const Profile = styled.div`
-  margin-top:-15%;
-  margin-left:70%;
+  height: 200px;
   border: 2px solid #000;
-  border-radius:.4em;
-  display:block;
-  width:20%;
-  height:auto;
-  padding:.3em;
+  border-radius: 0.5em;
+  overflow: hidden;
+`
+
+const Profile = styled.div`
+  // margin-top:-15%;
+  // margin-left:70%;
+  border: 2px solid #000;
+  border-radius: 0.4em;
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0.3em;
 `
 
 const Button = styled.button`
   background: #e35;
-  color:#fff;
-  padding: .2em;
-  margin-left:90%;
-  margin-top:7%;
+  color: #fff;
+  padding: 0.2em;
+  width: 100px;
   border: 1px solid #000;
-  border-radius:.2em;
+  border-radius: 0.2em;
+  margin-top:4%;
+`
+const Badge = styled.span`
+  padding:.2em;
+  margin:1%;
+  font-size:20px;
 `
 
+const CardCustom = ({ data }) => (
+  <Card className="col-12">
+    <div className="row d-flex justify-content-center align-items-center">
+      <div className="col-3 d-flex justify-content-center">
+        <Avatar src="/static/img/avata-mockup.jpg" />
+      </div>
+      <DivInCard className="col-4">
+        <Radar data={data} />
+        <div className="text-center">
+          <Badge className="badge badge-primary">A : 5</Badge>
+          <Badge className="badge badge-success">B : 9</Badge>
+          <Badge className="badge badge-danger">C : 10</Badge>
+        </div>
+      </DivInCard>
+      <div className="col-5">
+        <Profile className="px-3">
+          <p>WIP ID : 100001 &nbsp; เบอร์โทร : 088-888-8888</p> 
+          <p>ชื่อ: อับบราฮัม&nbsp;&nbsp;&nbsp;นามสกุล: มีบุตรเจ็ดคน&nbsp;&nbsp;&nbsp;ชื่อเล่น : น้องเอ๋ย</p>
+          <p>โรค : -&nbsp;&nbsp;&nbsp;อาหารที่แพ้ : -&nbsp;&nbsp;&nbsp;กรุ้ปเลือด : B</p>
+          <p>จังหวัด : กรุงเทพ&nbsp;&nbsp;&nbsp;เขต : ทุ่งครุ</p>
+          <p>เบอร์ผู้ปกครอง : 0999999999&nbsp;&nbsp;&nbsp;ความสัมพันธ์ : มารดา</p>
+          <p>โรงเรียน: อนุบาลหมีน้อย&nbsp;&nbsp;&nbsp;ลำดับชั้น : ม.5 ขึ้น ม.6&nbsp;&nbsp;&nbsp;สายการเรียน : วิทย์-คณิต   </p>
+          <p>เกรดเฉลีย : 3.5 &nbsp;&nbsp;&nbsp;ค่ายที่เคยเข้าร่วม : อิอิ&nbsp;&nbsp;&nbsp;ทักษะคอม : ไม่มี  </p>
+        </Profile>
+        <div className="text-center">
+          <Button type="submit">submit</Button>
+        </div>
+      </div>
+    </div>
+  </Card>
+)
+
 export default class Itimstat extends React.Component {
-  state = { 
+  state = {
     data: {
-      labels: ['ด้าน 1', 'ด้าน 2', 'ด้าน 3'],
+      labels: ["ด้าน 1", "ด้าน 2", "ด้าน 3"],
       datasets: [
         {
-          label: 'คะแนน',
-          backgroundColor: 'rgba(179,181,198,0.2)',
-          borderColor: 'rgba(179,181,198,1)',
-          pointBackgroundColor: 'rgba(179,181,198,1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(179,181,198,1)',
+          label: "คะแนน",
+          backgroundColor: "rgba(179,181,198,0.2)",
+          borderColor: "rgba(179,181,198,1)",
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(179,181,198,1)",
           data: [5, 9, 10]
         }
       ]
     }
-   }
+  }
   render() {
     return (
-      <Page>
-        <Card>
-          <Avatar src="/static/img/avata-mockup.jpg"/>
-
-        <DivInCard >
-          <Radar data={this.state.data} />
-            <Output>
-              <Li>A : 5</Li>
-              <Li>B : 9</Li>
-              <Li>C : 10</Li>
-            </Output>
-        </DivInCard>
-        <Profile>
-          <p>ชื่อ: ไข่   นามสกุล: แมว</p>
-          <p>โรงเรียน: อนุบาลหมีน้อย</p>
-        </Profile>
-        <Button type="submit">submit</Button>
-        </Card>
+      <Page className="contianer-fluid">
+        <div className="container">
+          <div className="row">
+          <h1>Itim Stats</h1>
+            {[1, 1, 1, 1].map(() => <CardCustom data={this.state.data} />)}
+          </div>
+        </div>
       </Page>
     )
   }
