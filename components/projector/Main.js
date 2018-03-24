@@ -2,6 +2,7 @@ import React from 'react'
 import CheckAnswerChart from './CheckAnswerChart'
 import styled from 'styled-components'
 import Clock from 'react-live-clock'
+import Countdown from 'react-countdown-now'
 
 const Card = styled.div`
  box-shadow : 0px 5px 15px 3px rgba(81,77,92,0.09);
@@ -47,7 +48,7 @@ class Main extends React.Component {
             </Card>
             <Card className='mt-3 py-3 text-center'>
               <h2>คาดว่าจะเสร็จในอีก</h2>
-
+              <Countdown date='Sat, 24 Mar 2018 20:10:00' />
             </Card>
           </div>
         </div>
