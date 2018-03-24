@@ -4476,6 +4476,10 @@ react-chartjs@^1.2.0:
   dependencies:
     create-react-class "^15.6.2"
 
+react-countdown-now@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-countdown-now/-/react-countdown-now-1.3.0.tgz#13c262a530614c69e68a0d277bd33b45d925cd56"
+
 react-cursor-position@2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/react-cursor-position/-/react-cursor-position-2.4.1.tgz#458a91d97f01b5fcf093ba0f1fc0719e707148b2"
