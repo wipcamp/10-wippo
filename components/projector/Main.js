@@ -1,6 +1,6 @@
 import React from 'react'
 import CheckAnswerChart from './CheckAnswerChart'
-import styled from 'styled-components'
+import styled, { injectGlobal } from 'styled-components'
 import Clock from 'react-live-clock'
 import Countdown from 'react-countdown-now'
 
@@ -27,6 +27,11 @@ const ProgressBox = styled.div`
 const StyledClock = styled(Clock)`
   font-size:3em;
 `
+injectGlobal`
+  .countdown-timer span{
+    font-size:3em;
+  }
+`
 class Main extends React.Component {
   state = {
     now: ''
@@ -46,9 +51,9 @@ class Main extends React.Component {
               <h2>นี่คือเวลาตอนนี้</h2>
               <StyledClock format={'HH:mm:ss'} ticking timezone={'Asia/Bangkok'} />
             </Card>
-            <Card className='mt-3 py-3 text-center'>
+            <Card className='mt-3 py-3 text-center countdown-timer'>
               <h2>คาดว่าจะเสร็จในอีก</h2>
-              <Countdown date='Sat, 24 Mar 2018 20:10:00' />
+              <Countdown date='Sat, 24 Mar 2018 23:30:00' />
             </Card>
           </div>
         </div>
