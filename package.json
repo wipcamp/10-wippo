@@ -5,7 +5,8 @@
   "contributors": [
     "mixkungz <phachara.mix@mail.kmutt.ac.th>",
     "DiViNiZe <patric_emmel@outlook.com>",
-    "imgrbs <keerati.jear@gmail.com>"
+    "imgrbs <keerati.jear@gmail.com>",
+    "bazsup <bas10600@gmail.com>"
   ],
   "repository": "https://github.com/wipcamp/wip-wippo.git",
   "scripts": {
@@ -33,6 +34,7 @@
     "react-chartjs": "^1.2.0",
     "react-chartjs-2": "^2.7.0",
     "react-dom": "^16.2.0",
+    "react-dropzone": "^4.2.9",
     "react-facebook-login": "^4.0.1",
     "react-image-magnify": "^2.5.2",
     "react-redux": "^5.0.7",
