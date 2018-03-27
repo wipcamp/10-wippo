@@ -3,6 +3,8 @@ import CheckAnswerChart from './CheckAnswerChart'
 import styled, { injectGlobal } from 'styled-components'
 import Clock from 'react-live-clock'
 import Countdown from 'react-countdown-now'
+import axios from '../../components/util/axios'
+import getCookie from '../../components/util/cookie'
 
 const Card = styled.div`
  box-shadow : 0px 5px 15px 3px rgba(81,77,92,0.09);
@@ -32,10 +34,57 @@ injectGlobal`
     font-size:3em;
   }
 `
+
+const x = () => (
+  <Card className='col-3 mx-5 my-4'>
+    <div className='row'>
+      <NumWrapper className='col-4 my-auto'>
+        <TextInNumWrapper className='text-center'>ข้อที่<br /><Num>1</Num></TextInNumWrapper>
+      </NumWrapper>
+      <ProgressBox className='col my-auto'>
+        <h1 className='text-center'>ตรวจแล้ว<br />1/384</h1>
+        <div className='progress'>
+          <div className='progress-bar progress-bar-striped progress-bar-animated bg-danger' role='progressbar' style={{width:'15%'}}>15%</div>
+        </div>
+      </ProgressBox>
+    </div>
+  </Card>
+)
+
 class Main extends React.Component {
   state = {
-    now: ''
+    question: [0, 0, 0, 0, 0, 0],
+    questionPercent: [0, 0, 0, 0, 0, 0],
+    allPercent: 0,
+    registerSuccess: 0
   }
+
+  componentDidMount = async () => {
+    let {token} = await getCookie({req: false})
+    let headers = {
+      Authorization: `Bearer ${token}`
+    }
+    let registerSuccess = await axios.get('/dashboard/register/success', headers)
+    let evals = await axios.get('/evals', headers)
+    let question = [0, 0, 0, 0, 0, 0]
+    let questionPercent = [0, 0, 0, 0, 0, 0]
+    let allCheckQuestion = 0
+    for (let i = 0; i < evals.data.data.length; i++) {
+      question[evals.data.data[i].eval_answer.question_id - 1]++
+    }
+    for (let i = 0; i < 6; i++) {
+      questionPercent[i] = parseInt((question[i] / registerSuccess.data.length) * 100)
+      allCheckQuestion += question[i]
+    }
+    let allPercent = parseInt(allCheckQuestion / (registerSuccess.data.length * 6) * 100)
+    await this.setState({
+      question: question,
+      registerSuccess: registerSuccess.data.length,
+      questionPercent: questionPercent,
+      allPercent: allPercent
+    })
+  }
+
   render () {
     return (
       <div className='container'>
@@ -60,89 +109,28 @@ class Main extends React.Component {
         <div className='row d-flex justify-content-center my-4'>
           <Card className='col-10 py-3'>
             <div className='progress'>
-              <div className='progress-bar progress-bar-striped progress-bar-animated bg-danger' role='progressbar' style={{width:'15%'}}>15%</div>
+              <div className='progress-bar progress-bar-striped progress-bar-animated bg-danger' role='progressbar' style={{width: `${this.state.allPercent}%`}}>{this.state.allPercent}%</div>
             </div>
           </Card>
         </div>
         <div className='row mt-3'>
-          <Card className='col-3 mx-5 my-4'>
-            <div className='row'>
-              <NumWrapper className='col-4 my-auto'>
-                <TextInNumWrapper className='text-center'>ข้อที่<br /><Num>1</Num></TextInNumWrapper>
-              </NumWrapper>
-              <ProgressBox className='col my-auto'>
-                <h1 className='text-center'>ตรวจแล้ว<br />1/384</h1>
-                <div className='progress'>
-                  <div className='progress-bar progress-bar-striped progress-bar-animated bg-danger' role='progressbar' style={{width:'15%'}}>15%</div>
+          {
+            this.state.question.map((q, index) =>
+              <Card className='col-3 mx-5 my-4'>
+                <div className='row'>
+                  <NumWrapper className='col-4 my-auto'>
+                    <TextInNumWrapper className='text-center'>ข้อที่<br /><Num>{index + 1}</Num></TextInNumWrapper>
+                  </NumWrapper>
+                  <ProgressBox className='col my-auto'>
+                    <h1 className='text-center'>ตรวจแล้ว<br />{q}/{this.state.registerSuccess}</h1>
+                    <div className='progress'>
+                      <div className='progress-bar progress-bar-striped progress-bar-animated bg-danger' role='progressbar' style={{width: `${this.state.questionPercent[index]}%`}}>{this.state.questionPercent[index]}%</div>
+                    </div>
+                  </ProgressBox>
                 </div>
-              </ProgressBox>
-            </div>
-          </Card>
-          <Card className='col-3 mx-5 my-4'>
-            <div className='row'>
-              <NumWrapper className='col-4 my-auto'>
-                <TextInNumWrapper className='text-center'>ข้อที่<br /><Num>2</Num></TextInNumWrapper>
-              </NumWrapper>
-              <ProgressBox className='col my-auto'>
-                <h1 className='text-center'>ตรวจแล้ว<br />231/384</h1>
-                <div className='progress'>
-                  <div className='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' style={{width:'70%'}}>70%</div>
-                </div>
-              </ProgressBox>
-            </div>
-          </Card>
-          <Card className='col-3 mx-5 my-4'>
-            <div className='row'>
-              <NumWrapper className='col-4 my-auto'>
-                <TextInNumWrapper className='text-center'>ข้อที่<br /><Num>3</Num></TextInNumWrapper>
-              </NumWrapper>
-              <ProgressBox className='col my-auto'>
-                <h1 className='text-center'>ตรวจแล้ว<br />50/384</h1>
-                <div className='progress'>
-                  <div className='progress-bar progress-bar-striped progress-bar-animated bg-warning' role='progressbar' style={{width:'45%'}}>45%</div>
-                </div>
-              </ProgressBox>
-            </div>
-          </Card>
-          <Card className='col-3 mx-5 my-4'>
-            <div className='row'>
-              <NumWrapper className='col-4 my-auto'>
-                <TextInNumWrapper className='text-center'>ข้อที่<br /><Num>4</Num></TextInNumWrapper>
-              </NumWrapper>
-              <ProgressBox className='col my-auto'>
-                <h1 className='text-center'>ตรวจแล้ว<br />5/384</h1>
-                <div className='progress'>
-                  <div className='progress-bar progress-bar-striped progress-bar-animated bg-danger' role='progressbar' style={{width:'2%'}}>2%</div>
-                </div>
-              </ProgressBox>
-            </div>
-          </Card>
-          <Card className='col-3 mx-5 my-4'>
-            <div className='row'>
-              <NumWrapper className='col-4 my-auto'>
-                <TextInNumWrapper className='text-center'>ข้อที่<br /><Num>5</Num></TextInNumWrapper>
-              </NumWrapper>
-              <ProgressBox className='col my-auto'>
-                <h1 className='text-center'>ตรวจแล้ว<br />384/384</h1>
-                <div className='progress'>
-                  <div className='progress-bar progress-bar-striped progress-bar-animated bg-success' role='progressbar' style={{width:'100%'}}>100%</div>
-                </div>
-              </ProgressBox>
-            </div>
-          </Card>
-          <Card className='col-3 mx-5 my-4'>
-            <div className='row'>
-              <NumWrapper className='col-4 my-auto'>
-                <TextInNumWrapper className='text-center'>ข้อที่<br /><Num>6</Num></TextInNumWrapper>
-              </NumWrapper>
-              <ProgressBox className='col my-auto'>
-                <h1 className='text-center'>ตรวจแล้ว<br />170/384</h1>
-                <div className='progress'>
-                  <div className='progress-bar progress-bar-striped progress-bar-animated bg-info' role='progressbar' style={{width:'50%'}}>50%</div>
-                </div>
-              </ProgressBox>
-            </div>
-          </Card>
+              </Card>
+            )
+          }
         </div>
       </div>
     )
