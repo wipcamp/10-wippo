@@ -17,7 +17,6 @@ export const auth = async (res) => {
     return {role: role.role_team_id}
   }))
   window.localStorage.setItem('team', JSON.stringify(team))
-  console.log(roles)
   if (id) {
     let {data} = await axios.get(`/userroles/user_id/${id}`, {
       Authorization: `Bearer ${accessToken}`
