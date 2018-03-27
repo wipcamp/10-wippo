@@ -34,23 +34,6 @@ injectGlobal`
     font-size:3em;
   }
 `
-
-const x = () => (
-  <Card className='col-3 mx-5 my-4'>
-    <div className='row'>
-      <NumWrapper className='col-4 my-auto'>
-        <TextInNumWrapper className='text-center'>ข้อที่<br /><Num>1</Num></TextInNumWrapper>
-      </NumWrapper>
-      <ProgressBox className='col my-auto'>
-        <h1 className='text-center'>ตรวจแล้ว<br />1/384</h1>
-        <div className='progress'>
-          <div className='progress-bar progress-bar-striped progress-bar-animated bg-danger' role='progressbar' style={{width:'15%'}}>15%</div>
-        </div>
-      </ProgressBox>
-    </div>
-  </Card>
-)
-
 class Main extends React.Component {
   state = {
     question: [0, 0, 0, 0, 0, 0],
