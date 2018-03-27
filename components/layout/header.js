@@ -8,7 +8,6 @@ injectGlobal`
     background:#5eb9e2;
   }
 `
-
 const Logo = styled.img.attrs({
   src: '/static/img/logofinals.png'
 })`
@@ -194,9 +193,9 @@ class Header extends React.Component {
                       )
                     }
                   </div>
-                </div> 
+                </div>
               </div>
-            </NavCollapseContainer> 
+            </NavCollapseContainer>
           ) : (<div />)
         }
         <div className='container-fluid d-none d-lg-block d-xl-block'>
