@@ -22,8 +22,10 @@ class ApproveTable extends React.Component {
   }
 
   componentDidMount = async () => {
+    let data = []
     let wipId = JSON.parse(window.localStorage.getItem('user')).id
     let { token } = getCookie({ req: false })
+    let temps = []
     const teams = JSON.parse(window.localStorage.getItem('team'))
     let answers = teams.map(async team => {
       let {data} = await axios.get(`/answers/${team.role}/${wipId}`, {
@@ -32,15 +34,31 @@ class ApproveTable extends React.Component {
       return data
     })
     await Promise.all(answers).then(arrs => {
-      arrs.map(arr => {
-        arr.map(async answer => {
-          console.log(answer)
-          await this.setState({res: [...this.state.res, answer]})
-          await this.setState({search: [...this.state.search, answer]})
+      arrs.map(async arr => {
+        await arr.map(async answer => {
+          data.push(answer)
         })
       })
     })
-    console.log('res', this.state.res)
+    temps = data.map((answer) => {
+      return {
+        answer_id: answer.id,
+        created_at: answer.created_at,
+        nickname: answer.nickname,
+        updated_at: answer.updated_at,
+        user_id: answer.user_id,
+        criteriea: data.filter(map => {
+          if (map.answer_id === answer.answer_id) {
+            return {
+              id: map.id,
+              name: map.name,
+              percentatge: map.percentatge
+            }
+          }
+        })
+      }
+    })
+    await this.setState({search: temps, res: temps})
   }
 
   searchCamper = async e => {
@@ -76,8 +94,22 @@ class ApproveTable extends React.Component {
             row[filter.id].endsWith(filter.value)
         }
       },
-      { Header: 'Question Id', width: 200, accessor: 'question_id' },
       {
+        Header: 'Score',
+        width: 200,
+        style: { textAlign: 'center' },
+        Cell: props => {
+          let criterieas = []
+          props.original !== undefined ? criterieas = props.original : criterieas = [{criteriea: []}]
+          return (
+            <div>
+              {criterieas.criteriea.map(score => (
+                <span style={{marginRight: '20px'}}>{score.name} : {score.score === null ? '-' : score.score}</span>
+              ))}
+            </div>
+          )
+        }
+      }, {
         Header: '',
         width: 100,
         style: { textAlign: 'center' },
@@ -86,7 +118,7 @@ class ApproveTable extends React.Component {
             <Link
               href={{
                 pathname: '/itimanswer',
-                query: { answer_id: props.original.id }
+                query: { answer_id: props.original.answer_id }
               }}
             >
               <a className='btn btn-primary'> See Answer</a>

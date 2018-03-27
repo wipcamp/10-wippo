@@ -1,5 +1,5 @@
 import React from 'react'
-import ItimCard from '../general/itimcard'
+import ItimCard from './itimcard'
 import { Grid, Icon } from 'semantic-ui-react'
 import styled from 'styled-components'
 import getCookie from '../util/cookie'
@@ -33,6 +33,7 @@ export default class ItimAnswer extends React.Component {
     this.state = {
       answer: {},
       itim: {},
+      evals: [],
       question: { data: null }
     }
   }
@@ -53,7 +54,10 @@ export default class ItimAnswer extends React.Component {
         Authorization: `Bearer ${token}`
       })
       .then(question => this.setState({ question: question.data[0] }))
-    console.log(this.state.itim)
+  }
+
+  evalChangeHandeler (e) {
+    console.log(e)
   }
 
   render () {
@@ -94,7 +98,6 @@ export default class ItimAnswer extends React.Component {
                     </div>
                     <div className='card'>
                       <div className='col-12 text-center'>
-                        {console.log(this.state.answer)}
                         <Answer>
                           <div
                             dangerouslySetInnerHTML={{ __html: this.state.answer.data }}
@@ -112,7 +115,7 @@ export default class ItimAnswer extends React.Component {
                       </div>
                       <div
                         className='row'
-                        style={{ marginTop: '20px', marginLeft: '40px' ,marginBottom: '30px' }}
+                        style={{ marginTop: '20px', marginLeft: '40px', marginBottom: '30px' }}
                       >
                         <div
                           className='col-md-2 col-12 mr-auto'
@@ -120,19 +123,19 @@ export default class ItimAnswer extends React.Component {
                         >
                           <span>ด้านที่ 1 </span>
                           <span>
-                            <input className='form-control' type='number' step='0.10' />
+                            <input onChange={this.evalChangeHandeler} id={1} className='form-control' type='number' step='0.10' />
                           </span>
                         </div>
                         <div className='col-md-2 mr-auto'>
                           <span>ด้านที่ 2 </span>
                           <span>
-                            <input className='form-control' type='number' step='0.10' />
+                            <input onChange={this.evalChangeHandeler} className='form-control' type='number' step='0.10' />
                           </span>
                         </div>
                         <div className='col-md-2 mr-auto'>
                           <span>ด้านที่ 3 </span>
                           <span>
-                            <input className='form-control' type='number' step='0.10' />
+                            <input onChange={this.evalChangeHandeler} className='form-control' type='number' step='0.10' />
                           </span>
                         </div>
                         <div
