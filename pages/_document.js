@@ -17,10 +17,6 @@ export default class MyDocument extends Document {
     return { ...page, styleTags, ...props }
   }
 
-  componentWillMount() {
-    injectGlobal
-  }
-
   render () {
     return (
       <html>
