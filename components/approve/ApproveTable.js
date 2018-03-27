@@ -1,10 +1,9 @@
 import React from 'react'
-import Router from 'next/router'
 import styled from 'styled-components'
 import ReactTable from 'react-table'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
-import Button, { Label, Icon, Input } from 'semantic-ui-react'
+import { Label, Input } from 'semantic-ui-react'
 import Link from 'next/link'
 
 export const Badge = styled(Label)`
@@ -126,7 +125,7 @@ class ApproveTable extends React.Component {
     const Pageignation = () => (
       <div className='input-group' >
         <Button className='btn btn-info form-control' onClick={this.decresePage}>Previous</Button>
-        <input className='form-control' value={this.state.page+1} style={{marginRight: '8px'}} onChange={this.setPage} type='number' />
+        <input className='form-control' value={this.state.page + 1} style={{marginRight: '8px'}} onChange={this.setPage} type='number' />
         <Button className='btn btn-info form-control' onClick={this.incresePage}>Next</Button>
       </div>
     )
