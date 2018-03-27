@@ -31,16 +31,25 @@ export default class ItimAnswer extends React.Component {
   constructor () {
     super()
     this.state = {
+      preEval: [],
       answer: {},
       itim: {},
       evals: [],
+      eval1: [],
+      eval2: [],
+      eval3: [],
+      criteria: [],
       question: { data: null },
       checker: {}
     }
+    this.eval1Handeler = this.eval1Handeler.bind(this)
+    this.eval2Handeler = this.eval2Handeler.bind(this)
+    this.eval3Handeler = this.eval3Handeler.bind(this)
+    this.submitHandeler = this.submitHandeler.bind(this)
   }
   async componentDidMount () {
     let user = window.localStorage.getItem('user')
-    this.setState({checker: user})
+    this.setState({checker: JSON.parse(user)})
     let { token } = await getCookie({ req: false })
     await axios
       .get(`/answers/answer/${this.props.questionId}`, {
@@ -57,29 +66,87 @@ export default class ItimAnswer extends React.Component {
         Authorization: `Bearer ${token}`
       })
       .then(question => this.setState({ question: question.data[0] }))
-    await axios
-      .get(`answer/{answerId}/`, {
-        Authorization: `Bearer ${token}`
-      })
-  }
+    await axios.get(`evals/criteria/${this.state.answer.question_id}`, {
+      Authorization: `Bearer ${token}`
+    }).then(criteria => this.setState({criteria: criteria.data}))
+    await axios.get(`/evals/${this.state.answer.id}`, {
+      Authorization: `Bearer ${token}`
+    }).then(e => this.setState({evals: e.data}))
 
-  evalChangeHandeler (e) {
-    if (this.state.evals !== undefined) {
-      axios.put(`/evals/id`, {
-        id: e.target.id,
-        score: e.target.value
-      })
-    } else {
-      axios.post(`/evals`, {
-        score: e.target.value,
-        answerId: this.state.answer.answer_id,
-        checkerId: this.state.checker.id
-      })
+    let preEval = []
+    preEval['id'] = null
+    preEval['answer_id'] = this.state.answer.question_id
+    preEval['criteria_id'] = this.state.criteria.id
+    preEval['checker_id'] = this.state.checker.id
+    preEval['score'] = 0
+    this.setState({preEval})
+
+    console.log('preEval ', preEval)
+    console.log('state eval ', this.state.preEval)
+    if (this.state.evals.length > 0) {
+      this.setState({eval1: this.state.evals[0]})
+      this.setState({eval2: this.state.evals[1]})
+      this.setState({eval3: this.state.evals[2]})
     }
   }
 
-  commentChangeHandeler (e) {
-    console.log(e.target.value)
+  eval1Handeler (e) {
+    let temp = this.state.eval1
+    temp['score'] = e.target.value
+    this.setState({eval1: temp})
+  }
+  eval2Handeler (e) {
+    let temp = this.state.eval2
+    temp['score'] = e.target.value
+    this.setState({eval2: temp})
+  }
+  eval3Handeler (e) {
+    let temp = this.state.eval3
+    temp['score'] = e.target.value
+    this.setState({eval3: temp})
+  }
+
+  async submitHandeler (e) {
+    let temp = await this.state.preEval
+    let temp1 = await this.state.preEval
+    let temp2 = await this.state.preEval
+    let evals = []
+    temp.score = await this.state.eval1.score
+    temp1.score = await this.state.eval2.score
+    temp2.score = await this.state.eval3.score
+    evals[0] = await temp
+    evals[1] = await temp1
+    evals[2] = await temp2
+    console.log(evals)
+    // console.log('evals ', evals)
+    // temp.score = await this.state.eval2.score
+    // evals[1] = await temp
+    // await evals.push(temp)
+    // temp.score = await this.state.eval3.score
+    // evals[2] = await temp
+    // await evals.push(temp)
+    // console.log('evals', evals)
+    // let { token } = await getCookie({ req: false })
+    // if (this.state.evals.length > 0) {
+    //   await axios.post(`/evals/criteria`, {
+    //     answer_id: this.state.answer.id,
+    //     criteria_id: e.target.id,
+    //     checker_id: this.state.checker.id,
+    //     score: e.target.value
+    //   }, {
+    //     Authorization: `Bearer ${token}`
+    //   })
+    // } else {
+    //   await axios.post(`/evals/`, {
+    //     answer_id: this.state.answer.id,
+    //     criteria_id: e.target.id,
+    //     checker_id: this.state.checker.id,
+    //     score: e.target.value,
+    //     _method: 'put'
+    //   }, {
+    //     Authorization: `Bearer ${token}`
+    //   })
+    // }
   }
 
   render () {
@@ -142,29 +209,25 @@ export default class ItimAnswer extends React.Component {
                           className='col-md-2 col-12 mr-auto'
                           style={{ width: '8px' }}
                         >
-                          <span>ด้านที่ 1 </span>
-                          <span>
-                            <input onChange={this.evalChangeHandeler} id={1} className='form-control' type='number' step='0.10' />
-                          </span>
-                        </div>
-                        <div className='col-md-2 mr-auto'>
-                          <span>ด้านที่ 2 </span>
-                          <span>
-                            <input onChange={this.evalChangeHandeler} className='form-control' type='number' step='0.10' />
-                          </span>
-                        </div>
-                        <div className='col-md-2 mr-auto'>
-                          <span>ด้านที่ 3 </span>
-                          <span>
-                            <input onChange={this.evalChangeHandeler} className='form-control' type='number' step='0.10' />
-                          </span>
-                        </div>
-                        <div
-                          style={{ paddingTop: '12px' }}
-                          className='col-md-1 col-6 mr-auto'
-                        >
-                          <div>
-                            <a href='/checkanswer' className='btn btn-success'>Submit!</a>
+                          <div className='col-md-4'>
+                            <span>ด้านที่1</span>
+                            <input onChange={this.eval1Handeler} value={this.state.eval1['score']} className='form-control' type='number' step='0.10' />
+                          </div>
+                          <div className='col-md-4'>
+                            <span>ด้านที่2</span>
+                            <input onChange={this.eval2Handeler} value={this.state.eval2['score']} className='form-control' type='number' step='0.10' />
+                          </div>
+                          <div className='col-md-4'>
+                            <span>ด้านที่3</span>
+                            <input onChange={this.eval3Handeler} value={this.state.eval3['score']} className='form-control' type='number' step='0.10' />
+                          </div>
+                          <div
+                            style={{ paddingTop: '12px' }}
+                            className='col-md-1 col-6 mr-auto'
+                          >
+                            <div>
+                              <a onClick={this.submitHandeler} className='btn btn-success'>Submit!</a>
+                            </div>
                           </div>
                         </div>
                       </div>
