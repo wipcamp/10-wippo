@@ -34,10 +34,13 @@ export default class ItimAnswer extends React.Component {
       answer: {},
       itim: {},
       evals: [],
-      question: { data: null }
+      question: { data: null },
+      checker: {}
     }
   }
   async componentDidMount () {
+    let user = window.localStorage.getItem('user')
+    this.setState({checker: user})
     let { token } = await getCookie({ req: false })
     await axios
       .get(`/answers/answer/${this.props.questionId}`, {
@@ -54,10 +57,29 @@ export default class ItimAnswer extends React.Component {
         Authorization: `Bearer ${token}`
       })
       .then(question => this.setState({ question: question.data[0] }))
+    await axios
+      .get(`answer/{answerId}/`, {
+        Authorization: `Bearer ${token}`
+      })
   }
 
   evalChangeHandeler (e) {
-    console.log(e)
+    if (this.state.evals !== undefined) {
+      axios.put(`/evals/id`, {
+        id: e.target.id,
+        score: e.target.value
+      })
+    } else {
+      axios.post(`/evals`, {
+        score: e.target.value,
+        answerId: this.state.answer.answer_id,
+        checkerId: this.state.checker.id
+      })
+    }
+  }
+
+  commentChangeHandeler (e) {
+    console.log(e.target.value)
   }
 
   render () {
@@ -87,9 +109,8 @@ export default class ItimAnswer extends React.Component {
                 </div>
               </div>
               <div className='card'>
-                <div calssName='row'>
+                <div>
                   <div className='container'>
-
                     <div style={{ marginTop: '2.5em' }} className='row'>
                       <SecHeader className='mt-3'>
                         <Icon size='big' name={'info'} />
