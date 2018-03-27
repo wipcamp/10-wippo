@@ -1,7 +1,5 @@
 import React from 'react'
-import {compose, withState, lifecycle} from 'recompose'
 import styled, { injectGlobal } from 'styled-components'
-import { Container, Grid } from 'semantic-ui-react'
 import Menu from './menu.js'
 import Link from 'next/link'
 
@@ -10,16 +8,7 @@ injectGlobal`
     background:#5eb9e2;
   }
 `
-const HeaderBox = styled.div`
-  height:90px;
-  display:flex;
-  align-items:center;
-`
-const UserBox = styled.div`
-  margin-left:auto;
-  display:flex;
-  align-items: center;
-`
+
 const Logo = styled.img.attrs({
   src: '/static/img/logofinals.png'
 })`
