@@ -92,7 +92,9 @@ const Arrow = styled.div`
 const Button = [
   { name: 'Logout', path: '/logout' }
 ]
-
+const ListRelative = styled.li`
+  position:relative;
+`
 const StyledNav = styled.nav`
   @media (max-width: 991px){
     background:#5eb9e2;
@@ -167,7 +169,7 @@ class Header extends React.Component {
             </button>
             <div className='collapse navbar-collapse' id='navbarSupportedContent'>
               <ul className='navbar-nav ml-auto'>
-                <li className='nav-item'>
+                <ListRelative className='nav-item'>
                   <div className='row'>
                     <div className='col-9 align-self-center'>
                       <GreetingMember>
@@ -185,7 +187,7 @@ class Header extends React.Component {
                       Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
                     }
                   </Dropdown>
-                </li>
+                </ListRelative>
               </ul>
             </div>
           </div>

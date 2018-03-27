@@ -7,11 +7,11 @@ class Wipper extends React.Component {
   render () {
     return (
       <Layout subheadertext=''>
-        <Grid.Row>
-          <Grid.Column>
+        <div className='row'>
+          <div className='col'>
             <WipperMain {...this.props} />
-          </Grid.Column>
-        </Grid.Row>
+          </div>
+        </div>
       </Layout>
     )
   }
