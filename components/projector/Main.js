@@ -59,7 +59,14 @@ class Main extends React.Component {
     registerSuccess: 0
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    this.fetch()
+    setInterval(() => {
+      this.fetch()
+    }, 10000)
+  }
+
+  fetch = async () => {
     let {token} = await getCookie({req: false})
     let headers = {
       Authorization: `Bearer ${token}`
@@ -83,6 +90,7 @@ class Main extends React.Component {
       questionPercent: questionPercent,
       allPercent: allPercent
     })
+    console.log('finish')
   }
 
   render () {

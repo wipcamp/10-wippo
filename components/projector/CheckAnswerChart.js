@@ -24,7 +24,13 @@ class CheckAnswerChart extends React.Component {
     question: [0, 0, 0, 0, 0, 0],
     questionPercent: [0, 0, 0, 0, 0, 0]
   }
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    this.fetch()
+    setInterval(() => {
+      this.fetch()
+    }, 10000)
+  }
+  fetch = async () => {
     let {token} = await getCookie({req: false})
     let headers = {
       Authorization: `Bearer ${token}`
@@ -32,6 +38,7 @@ class CheckAnswerChart extends React.Component {
     let registerSuccess = await axios.get('/dashboard/register/success', headers)
     let evals = await axios.get('/evals', headers)
     let question = [0, 0, 0, 0, 0, 0]
+    let questionPercent = [0, 0, 0, 0, 0, 0]
     for (let i = 0; i < evals.data.data.length; i++) {
       question[evals.data.data[i].eval_answer.question_id - 1]++
     }
@@ -40,7 +47,6 @@ class CheckAnswerChart extends React.Component {
       registerSuccess: registerSuccess.data.length,
       question: question
     })
-    let questionPercent = [0, 0, 0, 0, 0, 0]
     for (let i = 0; i < 6; i++) {
       questionPercent[i] = (this.state.question[i] / this.state.registerSuccess) * 100
     }
@@ -53,7 +59,6 @@ class CheckAnswerChart extends React.Component {
       }
     })
   }
-
   render () {
     return (
       <div>
