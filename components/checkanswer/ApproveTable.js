@@ -60,6 +60,25 @@ class ApproveTable extends React.Component {
     })
     await this.setState({search: temps, res: temps})
     await console.log(this.state.res)
+    // data.filter((data1, index) => {
+    //   data.map(data2 => {
+    //     if (data1.answer_id === data2.answer_id) {
+    //       return true
+    //     } else {
+    //       return false
+    //     }
+    //   })
+    // })
+    data = await temps.filter((i, index) => {
+      if (index % 2 === 1) {
+        return i
+      }
+    })
+    this.setState({
+      search: data,
+      res: data
+    })
+  //   console.log('temps : ', temps)
   }
 
   searchCamper = async e => {
