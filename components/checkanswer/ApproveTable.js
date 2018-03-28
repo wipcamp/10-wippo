@@ -118,7 +118,11 @@ class ApproveTable extends React.Component {
             <Link
               href={{
                 pathname: '/itimanswer',
-                query: { answer_id: props.original.answer_id }
+                query: {
+                  id: props.original.user_id,
+                  name: props.original.nickname,
+                  answer: props.original.answer_id
+                }
               }}
             >
               <a className='btn btn-primary'> See Answer</a>
