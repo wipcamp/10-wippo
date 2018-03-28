@@ -103,8 +103,8 @@ class ApproveTable extends React.Component {
           props.original !== undefined ? criterieas = props.original : criterieas = [{criteriea: []}]
           return (
             <div>
-              {criterieas.criteriea.map(score => (
-                <span style={{marginRight: '20px'}}>{score.name} : {score.score === null ? '-' : score.score}</span>
+              {criterieas.criteriea.map((score, i) => (
+                <span key={i} style={{marginRight: '20px'}}>{score.name} : {score.score === null ? '-' : score.score}</span>
               ))}
             </div>
           )
