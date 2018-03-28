@@ -7,10 +7,17 @@ const Breadcrumb = () => (
     <li className='breadcrumb-item active'>CheckAnswer</li>
   </ol>
 )
-const CheckAnswer = () => (
-  <Layout subheadertext={<Breadcrumb />}>
-    <Itimlobby />
-  </Layout>
-)
 
-export default CheckAnswer
+export default class CheckAnswer extends React.Component {
+  static async getInitialProps ({query}) {
+    return { ...query }
+  }
+
+  render () {
+    return (
+      <Layout subheadertext={<Breadcrumb />}>
+        <Itimlobby {...this.props} />
+      </Layout>
+    )
+  }
+}
