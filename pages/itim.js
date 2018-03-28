@@ -4,6 +4,7 @@ import DatatableCard from '../components/itim/DatatableCard'
 import ItimProfile from '../components/itim/itimprofile'
 class Itim extends React.Component {
   render () {
+    const answer = this.props.url.query.answer_id
     return (
       <Layout subheadertext='Itim Management'>
         <div className='row'>
