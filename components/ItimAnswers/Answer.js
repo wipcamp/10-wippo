@@ -83,6 +83,7 @@ export default class ItimAnswer extends React.Component {
 
     console.log('preEval ', preEval)
     console.log('state eval ', this.state.preEval)
+    console.log('realEvas',this.state.evals)
     if (this.state.evals.length > 0) {
       this.setState({eval1: this.state.evals[0]})
       this.setState({eval2: this.state.evals[1]})

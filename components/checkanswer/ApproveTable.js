@@ -59,6 +59,7 @@ class ApproveTable extends React.Component {
       }
     })
     await this.setState({search: temps, res: temps})
+    await console.log(this.state.res)
   }
 
   searchCamper = async e => {
@@ -96,7 +97,7 @@ class ApproveTable extends React.Component {
       },
       {
         Header: 'Score',
-        width: 200,
+        width: 600,
         style: { textAlign: 'center' },
         Cell: props => {
           let criterieas = []
