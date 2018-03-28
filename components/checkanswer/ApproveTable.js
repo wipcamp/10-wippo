@@ -123,8 +123,8 @@ class ApproveTable extends React.Component {
           props.original !== undefined ? criterieas = props.original : criterieas = [{criteriea: []}]
           return (
             <div>
-              {criterieas.criteriea.map(score => (
-                <span style={{marginRight: '20px'}}>{score.name} : {score.score === null ? '-' : score.score}</span>
+              {criterieas.criteriea.map((score, i) => (
+                <span key={i} style={{marginRight: '20px'}}>{score.name} : {score.score === null ? '-' : score.score}</span>
               ))}
             </div>
           )
@@ -138,7 +138,11 @@ class ApproveTable extends React.Component {
             <Link
               href={{
                 pathname: '/itimanswer',
-                query: { answer_id: props.original.answer_id }
+                query: {
+                  id: props.original.user_id,
+                  name: props.original.nickname,
+                  answer: props.original.answer_id
+                }
               }}
             >
               <a className='btn btn-primary'> See Answer</a>

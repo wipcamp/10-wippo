@@ -16,7 +16,7 @@ const ItimCard = ({id, fullName, name, facebook}) => (
       <Card.Content>
         <Card.Header>
           <div className='text-center'>
-            <UserHeader>{`wip ID:${id}`}</UserHeader>
+            <UserHeader>{`WIP ID : ${id}`}</UserHeader>
             <UserHeader>{`น้อง ${name}`}</UserHeader>
           </div>
         </Card.Header>
