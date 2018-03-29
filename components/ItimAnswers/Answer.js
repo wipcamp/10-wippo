@@ -36,6 +36,7 @@ export default class ItimAnswer extends React.Component {
       answer: {},
       query: {},
       evals: [],
+      comment: '',
       question: { data: null, eval_criteria: [] },
       eval: [0, 0, 0],
       criteria: []
@@ -190,7 +191,12 @@ export default class ItimAnswer extends React.Component {
                         ประเมิณน้อง
                       </SecHeader>
                       <div className='card'>
-                        <textarea onChange={e => this.handleChange('comment', e.target.value)} className='form-control' placeholder={`ให้ความเห็นตรงนี้เลย!`} />
+                        <textarea
+                          value={this.state.comment}
+                          onChange={e => this.handleChange('comment', e.target.value)}
+                          className='form-control'
+                          placeholder={`ให้ความเห็นตรงนี้เลย!`}
+                        />
                       </div>
                     </Box>
                     <div
