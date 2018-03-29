@@ -45,24 +45,24 @@ const Avatar = styled.img`
 `
 
 const Profile = styled.div`
-  // margin-top:-15%;
-  // margin-left:70%;
   border: 2px solid #000;
   border-radius: 0.4em;
   display: block;
   width: 100%;
   height: auto;
-  padding: 0.3em;
+  padding: .5em;
+  font-size:1.2em;
 `
 
 const Button = styled.button`
   background: #e35;
   color: #fff;
-  padding: 0.2em;
-  width: 100px;
+  padding: 0.4em;
+  width: 15%;
   border: 1px solid #000;
   border-radius: 0.2em;
   margin-top:4%;
+  cursor: pointer;
 `
 const Badge = styled.span`
   padding:.2em;
@@ -95,8 +95,8 @@ const CardCustom = ({ data }) => (
           <p>โรค : -&nbsp;&nbsp;&nbsp;อาหารที่แพ้ : -&nbsp;&nbsp;&nbsp;กรุ้ปเลือด : B</p>
           <p>จังหวัด : กรุงเทพ&nbsp;&nbsp;&nbsp;เขต : ทุ่งครุ</p>
           <p>เบอร์ผู้ปกครอง : 0999999999&nbsp;&nbsp;&nbsp;ความสัมพันธ์ : มารดา</p>
-          <p>โรงเรียน: อนุบาลหมีน้อย&nbsp;&nbsp;&nbsp;ลำดับชั้น : ม.5 ขึ้น ม.6&nbsp;&nbsp;&nbsp;สายการเรียน : วิทย์-คณิต   </p>
-          <p>เกรดเฉลีย : 3.5 &nbsp;&nbsp;&nbsp;</p>
+          <p>โรงเรียน: อนุบาลหมีน้อย&nbsp;&nbsp;&nbsp;ลำดับชั้น : ม.5 ขึ้น ม.6</p>
+          <p>สายการเรียน : วิทย์-คณิต&nbsp;&nbsp;&nbsp;เกรดเฉลีย : 3.5&nbsp;&nbsp;&nbsp;</p>
           <p>ค่ายที่เคยเข้าร่วม : อิอิ</p>
           <p>ทักษะคอม : ไม่มี  </p>
         </Profile>
