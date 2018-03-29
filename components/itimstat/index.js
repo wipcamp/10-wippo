@@ -51,6 +51,7 @@ const Profile = styled.div`
   width: 100%;
   height: auto;
   padding: .5em;
+  font-size:1.2em;
 `
 
 const Button = styled.button`
@@ -94,8 +95,8 @@ const CardCustom = ({ data }) => (
           <p>โรค : -&nbsp;&nbsp;&nbsp;อาหารที่แพ้ : -&nbsp;&nbsp;&nbsp;กรุ้ปเลือด : B</p>
           <p>จังหวัด : กรุงเทพ&nbsp;&nbsp;&nbsp;เขต : ทุ่งครุ</p>
           <p>เบอร์ผู้ปกครอง : 0999999999&nbsp;&nbsp;&nbsp;ความสัมพันธ์ : มารดา</p>
-          <p>โรงเรียน: อนุบาลหมีน้อย&nbsp;&nbsp;&nbsp;ลำดับชั้น : ม.5 ขึ้น ม.6&nbsp;&nbsp;&nbsp;สายการเรียน : วิทย์-คณิต   </p>
-          <p>เกรดเฉลีย : 3.5 &nbsp;&nbsp;&nbsp;</p>
+          <p>โรงเรียน: อนุบาลหมีน้อย&nbsp;&nbsp;&nbsp;ลำดับชั้น : ม.5 ขึ้น ม.6</p>
+          <p>สายการเรียน : วิทย์-คณิต&nbsp;&nbsp;&nbsp;เกรดเฉลีย : 3.5&nbsp;&nbsp;&nbsp;</p>
           <p>ค่ายที่เคยเข้าร่วม : อิอิ</p>
           <p>ทักษะคอม : ไม่มี  </p>
         </Profile>
