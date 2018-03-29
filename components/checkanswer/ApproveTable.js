@@ -40,9 +40,10 @@ class ApproveTable extends React.Component {
         })
       })
     })
+    console.log('data', data)
     temps = data.map((answer) => {
       return {
-        answer_id: answer.id,
+        answer_id: answer.answer_id,
         created_at: answer.created_at,
         nickname: answer.nickname,
         updated_at: answer.updated_at,
@@ -58,19 +59,9 @@ class ApproveTable extends React.Component {
         })
       }
     })
-    await this.setState({search: temps, res: temps})
-    await console.log(this.state.res)
-    // data.filter((data1, index) => {
-    //   data.map(data2 => {
-    //     if (data1.answer_id === data2.answer_id) {
-    //       return true
-    //     } else {
-    //       return false
-    //     }
-    //   })
-    // })
+    console.log('temps', temps)
     data = await temps.filter((i, index) => {
-      if (index % 2 === 1) {
+      if (index % temps[0].criteriea.length === 0) {
         return i
       }
     })
