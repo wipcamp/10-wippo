@@ -34,34 +34,33 @@ export default class ItimAnswer extends React.Component {
       token: '',
       preEval: {},
       answer: {},
-      query: {},
+      query: {id: '', name: ''},
       evals: [],
       comment: '',
-      question: { data: null, eval_criteria: [] },
+      question: { data: '', eval_criteria: [] },
       eval: [0, 0, 0],
       criteria: []
     }
-  }
-  fetchQuestion = async () => {
-    let {data} = await axios
-      .get(`/questions/${this.state.query.answer}`, {
-        Authorization: `Bearer ${this.state.token}`
-      })
-    this.setState({ question: data[0] })
   }
   fetchAnswer = async () => {
     let {data} = await axios
       .get(`/answers/answer/${this.state.query.answer}`, {
         Authorization: `Bearer ${this.state.token}`
       })
-    this.setState({answer: data[0]})
+    await this.setState({answer: data[0]})
+  }
+  fetchQuestion = async () => {
+    let {data} = await axios
+      .get(`/questions/${this.state.query.answer.question_id}`, {
+        Authorization: `Bearer ${this.state.token}`
+      })
+    await this.setState({ question: data[0] })
   }
   fetchEvals = async () => {
     let {data} = await axios.get(`/evals/${this.state.answer.id}`, {
       Authorization: `Bearer ${this.state.token}`
     })
-    console.log(data)
-    this.setState({evals: data})
+    await this.setState({evals: data})
   }
   async componentWillMount () {
     this.setState({
@@ -75,7 +74,6 @@ export default class ItimAnswer extends React.Component {
     preEval.comment = ''
     preEval.score = 0
     preEval.criteria_id = ''
-
     this.setState({preEval})
   }
   async componentDidMount () {
@@ -95,6 +93,7 @@ export default class ItimAnswer extends React.Component {
         this.handleEval(2, this.state.evals[2].score)
       }
     }
+    console.log(this.state.question)
   }
 
   handleChange = (field, value) => {
@@ -142,6 +141,7 @@ export default class ItimAnswer extends React.Component {
         Authorization: `Bearer ${this.state.token}`
       })
     }
+    console.log(finalEval)
   }
 
   render () {
