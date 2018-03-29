@@ -45,24 +45,23 @@ const Avatar = styled.img`
 `
 
 const Profile = styled.div`
-  // margin-top:-15%;
-  // margin-left:70%;
   border: 2px solid #000;
   border-radius: 0.4em;
   display: block;
   width: 100%;
   height: auto;
-  padding: 0.3em;
+  padding: .5em;
 `
 
 const Button = styled.button`
   background: #e35;
   color: #fff;
-  padding: 0.2em;
-  width: 100px;
+  padding: 0.4em;
+  width: 15%;
   border: 1px solid #000;
   border-radius: 0.2em;
   margin-top:4%;
+  cursor: pointer;
 `
 const Badge = styled.span`
   padding:.2em;
