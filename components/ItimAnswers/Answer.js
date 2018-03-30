@@ -4,6 +4,7 @@ import { Grid, Icon } from 'semantic-ui-react'
 import styled from 'styled-components'
 import getCookie from '../util/cookie'
 import axios from '../util/axios'
+import Router from 'next/router'
 
 const HeadAnswer = styled.div`
   font-size: 1.4em;
@@ -156,6 +157,7 @@ export default class ItimAnswer extends React.Component {
         Authorization: `Bearer ${this.state.token}`
       })
     }
+    Router.push('/checkanswer')
   }
 
   render () {
