@@ -40,9 +40,11 @@ class Login extends React.Component {
             cssClass='btn btn-primary btn-lg animated fadeInUp blink'
             tag={`button`}
           />
+          <br />
           <PulseLoader
             color={'#123abc'}
             loading={this.state.loading}
+            margin='1em'
           />
         </Box>
       </Wrapper>
