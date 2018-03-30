@@ -71,7 +71,7 @@ export default class ItimAnswer extends React.Component {
     let {data} = await axios.get(`/evals/${this.state.query.answer}`, {
       Authorization: `Bearer ${this.state.token}`
     })
-    await this.setState({evals: data})
+    await this.setState({evals: data, comment: data[0].comment})
   }
   async componentWillMount () {
     this.setState({
@@ -112,8 +112,8 @@ export default class ItimAnswer extends React.Component {
   }
   handleEval = (key, value) => {
     let v = +value || 0
-    if (v > 100) {
-      v = 100
+    if (v > 10) {
+      v = 10
     }
     if (+value < 0) {
       v = 0
@@ -138,6 +138,7 @@ export default class ItimAnswer extends React.Component {
       answer_id: this.state.query.answer,
       criteria_id: this.state.question.eval_criteria[1].id,
       checker_id: this.state.query.id,
+      comment: '',
       score: this.state.eval[1]
     }
     if (this.state.question.eval_criteria[2]) {
@@ -145,6 +146,7 @@ export default class ItimAnswer extends React.Component {
         answer_id: this.state.query.answer,
         criteria_id: this.state.question.eval_criteria[2].id,
         checker_id: this.state.query.id,
+        comment: '',
         score: this.state.eval[2]
       }
     }
@@ -157,7 +159,7 @@ export default class ItimAnswer extends React.Component {
         Authorization: `Bearer ${this.state.token}`
       })
     }
-    Router.push('/checkanswer')
+    await Router.push('/checkanswer')
   }
 
   render () {
@@ -178,7 +180,7 @@ export default class ItimAnswer extends React.Component {
                 คำถาม
                 </SecHeader>
                 <div className='row'>
-                  <div className='col-12 text-center'>
+                  <div className='col-12 text-left'>
                     <Question>{this.state.question.data}</Question>
                   </div>
                 </div>
@@ -193,7 +195,7 @@ export default class ItimAnswer extends React.Component {
                       </SecHeader>
                     </div>
                     <div className='card'>
-                      <div className='col-12 text-center'>
+                      <div className='col-12 text-left'>
                         <Answer>
                           <div
                             dangerouslySetInnerHTML={{ __html: this.state.answer.data }}
@@ -228,7 +230,7 @@ export default class ItimAnswer extends React.Component {
                                 value={this.state.eval[i]}
                                 className='form-control'
                                 type='number'
-                                max='100'
+                                max='10'
                                 min='0'
                                 step='0.10'
                               />
