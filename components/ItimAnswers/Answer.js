@@ -64,16 +64,14 @@ export default class ItimAnswer extends React.Component {
       .get(`/questions/${this.state.answer.question_id}`, {
         Authorization: `Bearer ${this.state.token}`
       })
-    console.log(data)
     await this.setState({ question: data[0] })
   }
   fetchEvals = async () => {
     let {data} = await axios.get(`/evals/${this.state.query.answer}`, {
       Authorization: `Bearer ${this.state.token}`
     })
-    let comment = data[0].comment
-    if (comment) {
-      await this.setState({evals: data, comment: comment})
+    if (data[0] && data[0].comment !== undefined) {
+      await this.setState({evals: data, comment: data[0].comment})
     } else {
       await this.setState({evals: data, comment: ''})
     }
@@ -107,7 +105,6 @@ export default class ItimAnswer extends React.Component {
         this.handleEval(2, this.state.evals[2].score)
       }
     }
-    await console.log('Question', this.state.question)
   }
 
   handleChange = (field, value) => {
