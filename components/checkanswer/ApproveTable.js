@@ -216,6 +216,7 @@ class ApproveTable extends React.Component {
         />
         <div>
           <ReactTable
+            page={this.state.page}
             PaginationComponent={Pageignation}
             defaultPageSize={10}
             className='table'
