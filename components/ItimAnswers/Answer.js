@@ -71,7 +71,7 @@ export default class ItimAnswer extends React.Component {
     let {data} = await axios.get(`/evals/${this.state.query.answer}`, {
       Authorization: `Bearer ${this.state.token}`
     })
-    await this.setState({evals: data})
+    await this.setState({evals: data, comment: data[0].comment})
   }
   async componentWillMount () {
     this.setState({
@@ -138,6 +138,7 @@ export default class ItimAnswer extends React.Component {
       answer_id: this.state.query.answer,
       criteria_id: this.state.question.eval_criteria[1].id,
       checker_id: this.state.query.id,
+      comment: '',
       score: this.state.eval[1]
     }
     if (this.state.question.eval_criteria[2]) {
@@ -145,6 +146,7 @@ export default class ItimAnswer extends React.Component {
         answer_id: this.state.query.answer,
         criteria_id: this.state.question.eval_criteria[2].id,
         checker_id: this.state.query.id,
+        comment: '',
         score: this.state.eval[2]
       }
     }
@@ -157,7 +159,7 @@ export default class ItimAnswer extends React.Component {
         Authorization: `Bearer ${this.state.token}`
       })
     }
-    Router.push('/checkanswer')
+    await Router.push('/checkanswer')
   }
 
   render () {

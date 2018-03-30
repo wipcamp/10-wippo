@@ -37,6 +37,7 @@ class ApproveTable extends React.Component {
       let {data} = await axios.get(`/answers/${team.role}/${wipId}`, {
         Authorization: `Bearer ${token}`
       })
+      console.log('fetch  ', data)
       return data
     })
     await Promise.all(answers).then(arrs => {
@@ -74,7 +75,8 @@ class ApproveTable extends React.Component {
       search: data,
       res: data
     })
-    console.log('state', this.state.res)
+    await console.log('state', this.state.res)
+    await console.log('data', data)
   }
 
   searchCamper = async e => {
@@ -152,9 +154,32 @@ class ApproveTable extends React.Component {
           props.original !== undefined ? criterieas = props.original : criterieas = [{criteriea: []}]
           return (
             <div>
-              {criterieas.criteriea.map((score, i) => (
-                <span key={i} style={{marginRight: '20px'}}>{score.name} : {score.score === null ? '-' : score.score}</span>
-              ))}
+              {criterieas.criteriea.map((score, i) => {
+                console.log(criterieas.criteriea.length)
+                if (criterieas.criteriea.length === 4) {
+                  if (i < 3) {
+                    if (i !== 0) {
+                      if (criterieas.criteriea[i - 1].name !== score.name &&
+                        criterieas.criteriea[i - 1].id !== score.id) {
+                        return (
+                          <span key={i} style={{marginRight: '20px'}}>{score.name} : {score.score === null ? '-' : score.score}</span>
+                        )
+                      }
+                    } else if (i === 0) {
+                      return (
+                        <span key={i} style={{marginRight: '20px'}}>{score.name} : {score.score === null ? '-' : score.score}</span>
+                      )
+                    }
+                  }
+                } else if (criterieas.criteriea.length === 9) {
+                  if (i === 0 || i === 3 || i === 6) {
+                    return (
+                      <span key={i} style={{marginRight: '20px'}}>{score.name} : {score.score === null ? '-' : score.score}</span>
+                    )
+                  }
+                }
+                return (<span key={i} />)
+              })}
             </div>
           )
         }
