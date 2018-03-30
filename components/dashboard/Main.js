@@ -8,7 +8,11 @@ class Main extends React.Component {
     rule: null
   }
   componentDidMount = () => {
-    this.setState({rule: window.localStorage.getItem('id')})
+    if (window && window.localStorage.getItem('team')) {
+      this.setState({
+        rule: JSON.parse(window.localStorage.getItem('team')) || []
+      })
+    }
   }
   render () {
     return (
