@@ -5,6 +5,7 @@ import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import { Input } from 'semantic-ui-react'
 import Link from 'next/link'
+import { PulseLoader } from 'react-spinners'
 
 const SearchInput = styled(Input)`
   width:100%;
@@ -42,7 +43,8 @@ class ApproveTable extends React.Component {
     })
     temps = data.map((answer) => {
       return {
-        answer_id: answer.id,
+        question_id: answer.question_id,
+        answer_id: answer.answer_id,
         created_at: answer.created_at,
         nickname: answer.nickname,
         updated_at: answer.updated_at,
@@ -58,19 +60,8 @@ class ApproveTable extends React.Component {
         })
       }
     })
-    await this.setState({search: temps, res: temps})
-    await console.log(this.state.res)
-    // data.filter((data1, index) => {
-    //   data.map(data2 => {
-    //     if (data1.answer_id === data2.answer_id) {
-    //       return true
-    //     } else {
-    //       return false
-    //     }
-    //   })
-    // })
     data = await temps.filter((i, index) => {
-      if (index % 2 === 1) {
+      if (index % temps[0].criteriea.length === 0) {
         return i
       }
     })
@@ -78,19 +69,18 @@ class ApproveTable extends React.Component {
       search: data,
       res: data
     })
-  //   console.log('temps : ', temps)
+    console.log('state', this.state.res)
   }
 
   searchCamper = async e => {
-    this.setState({ ...this.state, search: this.state.res })
+    console.log(this.state.search)
     let input = e.target.value
     let msg = input.toUpperCase()
     if (msg.length === 0) this.setState({ search: this.state.res })
     else {
       let res = await this.state.search.filter(
         input =>
-          input.first_name.toUpperCase().indexOf(msg) > -1 ||
-          input.last_name.toUpperCase().indexOf(msg) > -1 ||
+          input.nickname.toUpperCase().indexOf(msg) > -1 ||
           input.user_id.toString().indexOf(msg) > -1
       )
       await this.setState({ ...this.state, search: res })
@@ -164,6 +154,12 @@ class ApproveTable extends React.Component {
           <ReactTable
             defaultPageSize={10}
             className='table'
+            noDataText={
+              <PulseLoader
+                color={'rgb(58, 165, 212)'}
+                loading={this.state.loading}
+              />
+            }
             data={this.state.search}
             columns={TableColumns}
           />

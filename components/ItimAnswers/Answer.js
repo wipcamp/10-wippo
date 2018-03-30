@@ -5,6 +5,15 @@ import styled from 'styled-components'
 import getCookie from '../util/cookie'
 import axios from '../util/axios'
 
+const HeadAnswer = styled.div`
+  font-size: 1.4em;
+  margin-top: 1em;
+  margin-bottom: .8em;
+  input {
+    font-size: 1.4em;
+  }
+`
+
 const SecHeader = styled.div`
   font-family: 'Kanit', sans-serif !important;
   font-size:25px;
@@ -34,34 +43,34 @@ export default class ItimAnswer extends React.Component {
       token: '',
       preEval: {},
       answer: {},
-      query: {},
+      query: {id: '', name: ''},
       evals: [],
       comment: '',
-      question: { data: null, eval_criteria: [] },
+      question: { data: '', eval_criteria: [] },
       eval: [0, 0, 0],
       criteria: []
     }
-  }
-  fetchQuestion = async () => {
-    let {data} = await axios
-      .get(`/questions/${this.state.query.answer}`, {
-        Authorization: `Bearer ${this.state.token}`
-      })
-    this.setState({ question: data[0] })
   }
   fetchAnswer = async () => {
     let {data} = await axios
       .get(`/answers/answer/${this.state.query.answer}`, {
         Authorization: `Bearer ${this.state.token}`
       })
-    this.setState({answer: data[0]})
+    await this.setState({answer: data[0]})
+  }
+  fetchQuestion = async () => {
+    let {data} = await axios
+      .get(`/questions/${this.state.answer.question_id}`, {
+        Authorization: `Bearer ${this.state.token}`
+      })
+    console.log(data)
+    await this.setState({ question: data[0] })
   }
   fetchEvals = async () => {
-    let {data} = await axios.get(`/evals/${this.state.answer.id}`, {
+    let {data} = await axios.get(`/evals/${this.state.query.answer}`, {
       Authorization: `Bearer ${this.state.token}`
     })
-    console.log(data)
-    this.setState({evals: data})
+    await this.setState({evals: data})
   }
   async componentWillMount () {
     this.setState({
@@ -75,17 +84,14 @@ export default class ItimAnswer extends React.Component {
     preEval.comment = ''
     preEval.score = 0
     preEval.criteria_id = ''
-
     this.setState({preEval})
   }
   async componentDidMount () {
     let { token } = await getCookie({ req: false })
     await this.setState({token})
-
-    await this.fetchQuestion()
     await this.fetchAnswer()
+    await this.fetchQuestion()
     await this.fetchEvals()
-
     if (this.state.evals.length > 0) {
       this.handleEval(0, this.state.evals[0].score)
       if (this.state.evals[1]) {
@@ -95,16 +101,24 @@ export default class ItimAnswer extends React.Component {
         this.handleEval(2, this.state.evals[2].score)
       }
     }
+    await console.log('Question', this.state.question)
   }
 
   handleChange = (field, value) => {
     this.setState({
-      [field]: +value
+      [field]: value
     })
   }
   handleEval = (key, value) => {
+    let v = +value || 0
+    if (v > 100) {
+      v = 100
+    }
+    if (+value < 0) {
+      v = 0
+    }
     let newEval = this.state.eval
-    newEval[key] = +value || 0
+    newEval[key] = v
     this.setState({
       eval: newEval
     })
@@ -193,7 +207,7 @@ export default class ItimAnswer extends React.Component {
                       <div className='card'>
                         <textarea
                           value={this.state.comment}
-                          onChange={e => this.handleChange('comment', e.target.value)}
+                          onChange={e => this.setState({ comment: e.target.value })}
                           className='form-control'
                           placeholder={`ให้ความเห็นตรงนี้เลย!`}
                         />
@@ -204,15 +218,20 @@ export default class ItimAnswer extends React.Component {
                     >
                       {
                         this.state.question.eval_criteria.map((data, i) =>
-                          <div key={i} className='col-12 col-md-4 mb-2'>
-                            <span>ด้าน {data.name}</span>
-                            <input
-                              onChange={e => this.handleEval(i, e.target.value)}
-                              value={this.state.eval[i]}
-                              className='form-control'
-                              type='number'
-                              step='0.10'
-                            />
+                          <div key={i} className='col mb-2'>
+                            <HeadAnswer>
+                              ด้าน {data.name.substr(0, 1).toUpperCase()}{data.name.substr(1)}
+                              <input
+                                onChange={e => this.handleEval(i, e.target.value)}
+                                value={this.state.eval[i]}
+                                className='form-control'
+                                type='number'
+                                max='100'
+                                min='0'
+                                step='0.10'
+                              />
+                            </HeadAnswer>
+
                           </div>
                         )
                       }

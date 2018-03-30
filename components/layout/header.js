@@ -111,6 +111,10 @@ const MenuNames = [
     link: '/itim'
   },
   {
+    menuName: 'Check Answer',
+    link: '/checkanswer'
+  },
+  {
     menuName: 'Logout',
     link: '/logout'
   }

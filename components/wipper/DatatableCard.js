@@ -35,7 +35,6 @@ class DatatableCard extends React.Component {
     let {data} = await axios.get('/staffs/nonapprove', {
       Authorization: `Bearer ${token}`
     })
-    console.log(data)
     data = await data.map(staff => {
       return {
         ...staff,
