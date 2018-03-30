@@ -112,8 +112,8 @@ export default class ItimAnswer extends React.Component {
   }
   handleEval = (key, value) => {
     let v = +value || 0
-    if (v > 100) {
-      v = 100
+    if (v > 10) {
+      v = 10
     }
     if (+value < 0) {
       v = 0
@@ -228,7 +228,7 @@ export default class ItimAnswer extends React.Component {
                                 value={this.state.eval[i]}
                                 className='form-control'
                                 type='number'
-                                max='100'
+                                max='10'
                                 min='0'
                                 step='0.10'
                               />
