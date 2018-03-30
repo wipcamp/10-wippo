@@ -121,6 +121,10 @@ const MenuNames = [
     link: '/itim'
   },
   {
+    menuName: 'Check Answer',
+    link: '/checkanswer'
+  },
+  {
     menuName: 'Logout',
     link: '/logout'
   }
@@ -203,9 +207,9 @@ class Header extends React.Component {
                       )
                     }
                   </div>
-                </div> 
+                </div>
               </div>
-            </NavCollapseContainer> 
+            </NavCollapseContainer>
           ) : (<div />)
         }
         <div className='container-fluid d-none d-lg-block d-xl-block'>
