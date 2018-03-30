@@ -93,7 +93,7 @@ class Main extends React.Component {
             </Card>
             <Card className='mt-3 py-3 text-center countdown-timer'>
               <h2>คาดว่าจะเสร็จในอีก</h2>
-              <Countdown date='Sat, 24 Mar 2018 23:30:00' />
+              <Countdown date='Fri, 30 Mar 2018 22:30:00' />
             </Card>
           </div>
         </div>
