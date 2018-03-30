@@ -93,7 +93,6 @@ export default class ItimAnswer extends React.Component {
         this.handleEval(2, this.state.evals[2].score)
       }
     }
-    console.log(this.state.question)
   }
 
   handleChange = (field, value) => {
@@ -141,7 +140,6 @@ export default class ItimAnswer extends React.Component {
         Authorization: `Bearer ${this.state.token}`
       })
     }
-    console.log(finalEval)
   }
 
   render () {

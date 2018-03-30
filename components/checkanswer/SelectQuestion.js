@@ -50,7 +50,6 @@ export default class SelectQuestion extends React.Component {
   }
 
   handleSelect (e) {
-    console.log(e)
   }
 
   render () {
