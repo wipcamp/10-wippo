@@ -178,7 +178,7 @@ export default class ItimAnswer extends React.Component {
                 คำถาม
                 </SecHeader>
                 <div className='row'>
-                  <div className='col-12 text-center'>
+                  <div className='col-12 text-left'>
                     <Question>{this.state.question.data}</Question>
                   </div>
                 </div>
@@ -193,7 +193,7 @@ export default class ItimAnswer extends React.Component {
                       </SecHeader>
                     </div>
                     <div className='card'>
-                      <div className='col-12 text-center'>
+                      <div className='col-12 text-left'>
                         <Answer>
                           <div
                             dangerouslySetInnerHTML={{ __html: this.state.answer.data }}
