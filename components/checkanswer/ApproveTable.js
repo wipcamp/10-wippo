@@ -5,6 +5,7 @@ import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import { Input } from 'semantic-ui-react'
 import Link from 'next/link'
+import { PulseLoader } from 'react-spinners'
 
 const SearchInput = styled(Input)`
   width:100%;
@@ -149,9 +150,16 @@ class ApproveTable extends React.Component {
           placeholder='Search...'
         />
         <div>
+          
           <ReactTable
             defaultPageSize={10}
             className='table'
+            noDataText={
+              <PulseLoader
+                color={'rgb(58, 165, 212)'}
+                loading={this.state.loading}
+              />
+            }
             data={this.state.search}
             columns={TableColumns}
           />
