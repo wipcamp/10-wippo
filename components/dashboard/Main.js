@@ -30,7 +30,6 @@ class Main extends React.Component {
               </div>
             ) : (<div />)
           }
-          
           <div className='col'>
             <Phase1 />
           </div>
