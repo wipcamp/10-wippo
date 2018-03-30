@@ -40,7 +40,6 @@ class ApproveTable extends React.Component {
         })
       })
     })
-    console.log('data', data)
     temps = data.map((answer) => {
       return {
         answer_id: answer.answer_id,
@@ -59,7 +58,6 @@ class ApproveTable extends React.Component {
         })
       }
     })
-    console.log('temps', temps)
     data = await temps.filter((i, index) => {
       if (index % temps[0].criteriea.length === 0) {
         return i
@@ -69,7 +67,6 @@ class ApproveTable extends React.Component {
       search: data,
       res: data
     })
-  //   console.log('temps : ', temps)
   }
 
   searchCamper = async e => {

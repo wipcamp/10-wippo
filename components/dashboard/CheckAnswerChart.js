@@ -38,7 +38,6 @@ class CheckAnswerChart extends React.Component {
   }
 
   render () {
-    console.log(this.state.registerSuccess)
     return (
       <div>
         <HorizontalBar data={this.state.data} />
