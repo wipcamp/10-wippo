@@ -18,8 +18,13 @@ class ApproveTable extends React.Component {
     this.state = {
       res: [],
       search: [],
+      page: 0,
       loading: true
     }
+    this.incresePage = this.incresePage.bind(this)
+    this.decresePage = this.decresePage.bind(this)
+    this.setPage = this.setPage.bind(this)
+    this.savePage = this.savePage.bind(this)
   }
 
   componentDidMount = async () => {
@@ -87,7 +92,41 @@ class ApproveTable extends React.Component {
     }
   }
 
+  setPage (e) {
+    this.setState({page: e.target.value - 1})
+  }
+
+  async incresePage () {
+    await this.setState({ page: this.state.page + 1 })
+    this.savePage()
+  }
+
+  async decresePage () {
+    if (this.state.page - 1 >= 0) {
+      await this.setState({ page: this.state.page - 1 })
+      this.savePage()
+    }
+  }
+
+  savePage () {
+    window.localStorage.setItem('currentPage', this.state.page)
+  }
+
   render () {
+    const Button = styled.button`
+    padding-left:8px;
+    margin-right: 8px;
+    width: 30px;
+  `
+
+    const Pageignation = () => (
+      <div className='input-group' >
+        <Button className='btn btn-info form-control' onClick={this.decresePage}>Previous</Button>
+        <input className='form-control' value={this.state.page + 1} style={{marginRight: '8px'}} onChange={this.setPage} type='number' min='1' />
+        <Button className='btn btn-info form-control' onClick={this.incresePage}>Next</Button>
+      </div>
+    )
+
     const TableColumns = [
       {
         Header: '#',
@@ -152,6 +191,7 @@ class ApproveTable extends React.Component {
         />
         <div>
           <ReactTable
+            PaginationComponent={Pageignation}
             defaultPageSize={10}
             className='table'
             noDataText={
