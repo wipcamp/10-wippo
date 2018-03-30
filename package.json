@@ -38,6 +38,7 @@
     "react-facebook-login": "^4.0.1",
     "react-image-magnify": "^2.5.2",
     "react-redux": "^5.0.7",
+    "react-spinners": "^0.2.6",
     "react-table": "^6.8.0",
     "react-transition-group": "2.2.1",
     "recompose": "^0.26.0",
