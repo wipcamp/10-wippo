@@ -126,24 +126,25 @@ export default class ItimAnswer extends React.Component {
 
   submitHandeler = async (e) => {
     let finalEval = {}
+    let { id } = JSON.parse(window.localStorage.getItem('user'))
     finalEval[0] = {
       answer_id: this.state.query.answer,
       criteria_id: this.state.question.eval_criteria[0].id,
-      checker_id: this.state.query.id,
+      checker_id: id,
       comment: this.state.comment,
       score: this.state.eval[0]
     }
     finalEval[1] = {
       answer_id: this.state.query.answer,
       criteria_id: this.state.question.eval_criteria[1].id,
-      checker_id: this.state.query.id,
+      checker_id: id,
       score: this.state.eval[1]
     }
     if (this.state.question.eval_criteria[2]) {
       finalEval[2] = {
         answer_id: this.state.query.answer,
         criteria_id: this.state.question.eval_criteria[2].id,
-        checker_id: this.state.query.id,
+        checker_id: id,
         score: this.state.eval[2]
       }
     }
