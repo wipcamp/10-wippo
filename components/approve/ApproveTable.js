@@ -1,10 +1,9 @@
 import React from 'react'
-import Router from 'next/router'
 import styled from 'styled-components'
 import ReactTable from 'react-table'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
-import Button, { Label, Icon, Input } from 'semantic-ui-react'
+import { Label, Input } from 'semantic-ui-react'
 import Link from 'next/link'
 
 export const Badge = styled(Label)`
@@ -81,8 +80,10 @@ class ApproveTable extends React.Component {
   }
 
   async decresePage () {
-    await this.setState({ page: this.state.page - 1 })
-    this.savePage()
+    if (this.state.page - 1 >= 0) {
+      await this.setState({ page: this.state.page - 1 })
+      this.savePage()
+    }
   }
 
   setPage (e) {
@@ -102,7 +103,7 @@ class ApproveTable extends React.Component {
       ...profile,
       documents: profile.documents.filter((doc) => doc.type_id !== 1)
     }))
-    let page = window.localStorage.getItem('currentPage')
+    let page = parseInt(window.localStorage.getItem('currentPage'))
     result = result.filter(profile => profile.documents.length)
     this.setState({res: result, search: result})
     page == null ? this.setState({page: 0}) : this.setState({page: page})
@@ -126,7 +127,7 @@ class ApproveTable extends React.Component {
     const Pageignation = () => (
       <div className='input-group' >
         <Button className='btn btn-info form-control' onClick={this.decresePage}>Previous</Button>
-        <input className='form-control' value={this.state.page+1} style={{marginRight: '8px'}} onChange={this.setPage} type='number' />
+        <input className='form-control' value={this.state.page + 1} style={{marginRight: '8px'}} onChange={this.setPage} type='number' min='1' />
         <Button className='btn btn-info form-control' onClick={this.incresePage}>Next</Button>
       </div>
     )

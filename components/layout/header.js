@@ -1,7 +1,5 @@
 import React from 'react'
-import {compose, withState, lifecycle} from 'recompose'
 import styled, { injectGlobal } from 'styled-components'
-import { Container, Grid } from 'semantic-ui-react'
 import Menu from './menu.js'
 import Link from 'next/link'
 
@@ -9,16 +7,6 @@ injectGlobal`
   .nav-bg{
     background:#5eb9e2;
   }
-`
-const HeaderBox = styled.div`
-  height:90px;
-  display:flex;
-  align-items:center;
-`
-const UserBox = styled.div`
-  margin-left:auto;
-  display:flex;
-  align-items: center;
 `
 const Logo = styled.img.attrs({
   src: '/static/img/logofinals.png'
@@ -92,7 +80,9 @@ const Arrow = styled.div`
 const Button = [
   { name: 'Logout', path: '/logout' }
 ]
-
+const ListRelative = styled.li`
+  position:relative;
+`
 const StyledNav = styled.nav`
   @media (max-width: 991px){
     background:#5eb9e2;
@@ -119,6 +109,10 @@ const MenuNames = [
   {
     menuName: 'Itim Management',
     link: '/itim'
+  },
+  {
+    menuName: 'Check Answer',
+    link: '/checkanswer'
   },
   {
     menuName: 'Logout',
@@ -167,7 +161,7 @@ class Header extends React.Component {
             </button>
             <div className='collapse navbar-collapse' id='navbarSupportedContent'>
               <ul className='navbar-nav ml-auto'>
-                <li className='nav-item'>
+                <ListRelative className='nav-item'>
                   <div className='row'>
                     <div className='col-9 align-self-center'>
                       <GreetingMember>
@@ -185,7 +179,7 @@ class Header extends React.Component {
                       Button.map(({name, path}) => <List key={name} href={path}>{name}</List>)
                     }
                   </Dropdown>
-                </li>
+                </ListRelative>
               </ul>
             </div>
           </div>
@@ -203,9 +197,9 @@ class Header extends React.Component {
                       )
                     }
                   </div>
-                </div> 
+                </div>
               </div>
-            </NavCollapseContainer> 
+            </NavCollapseContainer>
           ) : (<div />)
         }
         <div className='container-fluid d-none d-lg-block d-xl-block'>

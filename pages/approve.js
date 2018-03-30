@@ -3,27 +3,24 @@ import Layout from '../components/layout/layout'
 import TranscriptCard from '../components/approve/TranscriptCard'
 import Parentconfirmation from '../components/approve/Parentconfirmation'
 import DatatableCard from '../components/approve/DatatableCard'
-import {Grid} from 'semantic-ui-react'
 
 const Approve = () =>
   (
     <div>
       <Layout subheadertext={'Approve System'}>
-        <Grid >
-          <Grid.Row>
-            <Grid.Column width={8}>
-              <TranscriptCard />
-            </Grid.Column>
-            <Grid.Column width={8}>
-              <Parentconfirmation />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column width={16}>
-              <DatatableCard />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <div className='row'>
+          <div className='col'>
+            <TranscriptCard />
+          </div>
+          <div className='col'>
+            <Parentconfirmation />
+          </div>
+        </div>
+        <div className='row mt-3'>
+          <div className='col'>
+            <DatatableCard />
+          </div>
+        </div>
       </Layout>
     </div>
   )
