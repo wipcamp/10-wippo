@@ -60,8 +60,9 @@ export default class ItimAnswer extends React.Component {
     await this.setState({answer: data[0]})
   }
   fetchQuestion = async () => {
+    const teams = JSON.parse(window.localStorage.getItem('team'))
     let {data} = await axios
-      .get(`/questions/${this.state.answer.question_id}`, {
+      .get(`/questions/${teams[0].role}`, {
         Authorization: `Bearer ${this.state.token}`
       })
     await this.setState({ question: data[0] })
