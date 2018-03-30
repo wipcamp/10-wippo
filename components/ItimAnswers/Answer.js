@@ -71,7 +71,12 @@ export default class ItimAnswer extends React.Component {
     let {data} = await axios.get(`/evals/${this.state.query.answer}`, {
       Authorization: `Bearer ${this.state.token}`
     })
-    await this.setState({evals: data, comment: data[0].comment || ''})
+    let comment = data[0].comment
+    if (comment) {
+      await this.setState({evals: data, comment: comment})
+    } else {
+      await this.setState({evals: data, comment: ''})
+    }
   }
   async componentWillMount () {
     this.setState({
