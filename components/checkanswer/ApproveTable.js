@@ -150,7 +150,6 @@ class ApproveTable extends React.Component {
           placeholder='Search...'
         />
         <div>
-          
           <ReactTable
             defaultPageSize={10}
             className='table'
