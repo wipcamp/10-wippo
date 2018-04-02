@@ -60,18 +60,22 @@ export default class ItimAnswer extends React.Component {
     await this.setState({answer: data[0]})
   }
   fetchQuestion = async () => {
+    const teams = JSON.parse(window.localStorage.getItem('team'))
     let {data} = await axios
-      .get(`/questions/${this.state.answer.question_id}`, {
+      .get(`/questions/${teams[0].role}`, {
         Authorization: `Bearer ${this.state.token}`
       })
-    console.log(data)
     await this.setState({ question: data[0] })
   }
   fetchEvals = async () => {
     let {data} = await axios.get(`/evals/${this.state.query.answer}`, {
       Authorization: `Bearer ${this.state.token}`
     })
-    await this.setState({evals: data, comment: data[0].comment})
+    if (data[0] && data[0].comment !== undefined) {
+      await this.setState({evals: data, comment: data[0].comment})
+    } else {
+      await this.setState({evals: data, comment: ''})
+    }
   }
   async componentWillMount () {
     this.setState({
@@ -102,7 +106,6 @@ export default class ItimAnswer extends React.Component {
         this.handleEval(2, this.state.evals[2].score)
       }
     }
-    await console.log('Question', this.state.question)
   }
 
   handleChange = (field, value) => {
@@ -127,26 +130,27 @@ export default class ItimAnswer extends React.Component {
 
   submitHandeler = async (e) => {
     let finalEval = {}
+    let { id } = JSON.parse(window.localStorage.getItem('user'))
     finalEval[0] = {
       answer_id: this.state.query.answer,
       criteria_id: this.state.question.eval_criteria[0].id,
-      checker_id: this.state.query.id,
+      checker_id: id,
       comment: this.state.comment,
       score: this.state.eval[0]
     }
     finalEval[1] = {
       answer_id: this.state.query.answer,
       criteria_id: this.state.question.eval_criteria[1].id,
-      checker_id: this.state.query.id,
       comment: '',
+      checker_id: id,
       score: this.state.eval[1]
     }
     if (this.state.question.eval_criteria[2]) {
       finalEval[2] = {
         answer_id: this.state.query.answer,
         criteria_id: this.state.question.eval_criteria[2].id,
-        checker_id: this.state.query.id,
         comment: '',
+        checker_id: id,
         score: this.state.eval[2]
       }
     }
