@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../components/layout/layout'
 import Notpaid from '../components/slip/NotpaidCard'
+import ApproveTable from '../components/slip/ApproveTable'
 
 const Breadcrumb = () => (
   <ol className='breadcrumb'>
@@ -14,12 +15,12 @@ const Approve = () =>
       <Layout subheadertext={<Breadcrumb />}>
         <div className='row'>
           <div className='col'>
-            <Notpaid />
+            {/* <Notpaid /> */}
           </div>
         </div>
         <div className='row mt-3'>
-          <div className='col'>
-            test
+          <div style={{width: '100%', padding: '40px'}} className='col card'>
+            <ApproveTable />
           </div>
         </div>
       </Layout>
