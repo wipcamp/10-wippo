@@ -8,7 +8,6 @@ const Breadcrumb = () => (
     <li className='breadcrumb-item active'>CheckAnswer</li>
   </ol>
 )
-
 const Approve = () =>
   (
     <div>

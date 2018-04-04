@@ -6,6 +6,10 @@ import getCookie from '../util/cookie'
 import { Label, Input } from 'semantic-ui-react'
 import Link from 'next/link'
 
+// #####################################
+// FILTER DOCUMENT ID = 4 ONLY !
+// #####################################
+
 export const Badge = styled(Label)`
   overflow: hidden;
   text-overflow: ellipsis; 
