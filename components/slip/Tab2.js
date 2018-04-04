@@ -42,7 +42,7 @@ const Tab2 = ({fullName, profile, button, image, facebook, fileType, path, comme
             }
             <h3>เหตุผล (หากไม่ผ่าน)</h3>
             <textarea
-              onChange={(e) => setComment(e.target.value)}
+              onChange={setComment}
               value={comment}
               placeholder='ใส่เหตุผลที่นี่'
               className='form-control' />

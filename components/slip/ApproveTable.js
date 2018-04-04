@@ -37,19 +37,12 @@ export const documentHeader = {
   Header: 'Document',
   accessor: 'profile.documents',
   style: {textAlign: 'center'},
-  Cell: ({value}) => {
-    let doc = []
-    doc = value.filter(d => d.type_id === 4)
-    console.log('Cell Doc :', doc)
+  Cell: (props) => {
+    let doc = props.original.document[props.original.document.length - 1]
     return (
-      <div>
-        {/* {doc.map((data, i) => data && data.type_id !== 1 ? <Badge key={i} color={checkDocStatus(data.is_approve)}>
-          slip
-        </Badge> : <span />)
-        } */}
-
-      </div>
-    )
+      <Badge color={checkDocStatus(doc.is_approve)}>
+        slip
+      </Badge>)
   }
 }
 
@@ -92,8 +85,16 @@ class ApproveTable extends React.Component {
     let {data} = await axios.get('/slip/all', {
       Authorization: `Bearer ${token}`
     })
-    console.log(data)
-    this.setState({res: data, search: data})
+    let newData = data.map(itim => {
+      return {
+        itim,
+        document: itim.profile.documents.filter(doc => {
+          return doc.type_id === 4
+        })
+      }
+    })
+    console.log(newData)
+    this.setState({res: newData, search: newData})
   }
   searchCamper = async (e) => {
     this.setState({ ...this.state, search: this.state.res })
@@ -119,25 +120,30 @@ class ApproveTable extends React.Component {
       </div>
     )
     const TableColumns = [
-      {Header: '#', accessor: 'profile.user_id', width: 100, style: {textAlign: 'center'}},
+      {Header: '#', accessor: 'itim.profile.user_id', width: 100, style: {textAlign: 'center'}},
       {Header: 'FirstName',
-        accessor: 'profile.first_name',
+        accessor: 'itim.profile.first_name',
         width: 150,
         filterMethod: (filter, row) => {
           row[filter.id].startsWith(filter.value) &&
           row[filter.id].endsWith(filter.value)
         }
       },
-      {Header: 'LastName', width: 150, accessor: 'profile.last_name'},
+      {Header: 'LastName', width: 150, accessor: 'itim.profile.last_name'},
       documentHeader,
       {Header: '',
         width: 150,
         style: {textAlign: 'center'},
-        Cell: props => <div>
-          <Link href={{ pathname: '/verify', query: { user_id: props.original.user_id } }}>
-            <a className='btn btn-primary' > approve</a>
-          </Link>
-        </div>
+        Cell: props => {
+          let doc = props.original.document[props.original.document.length - 1]
+          return (
+            <div>
+              <Link href={{ pathname: '/verifyslip', query: { docId: doc.id } }}>
+                <a className='btn btn-primary' > approve</a>
+              </Link>
+            </div>
+          )
+        }
       }
     ]
     return (

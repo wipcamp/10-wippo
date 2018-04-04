@@ -30,7 +30,7 @@ class Verifyslip extends React.Component {
 
   async componentDidMount () { // TRUE FETCH METHOD! 1 Time Fetch All data is there
     let { token } = await getCookie({ req: false })
-    let { data } = await axios.get(`/slip/90`, {
+    let { data } = await axios.get(`/slip/${this.props.url.query.docId}`, {
       Authorization: `Bearer ${token}`
     })
     await this.setState({doc: data})
@@ -76,6 +76,37 @@ class Verifyslip extends React.Component {
   }
 
   render () {
+    const buttonHandeler = async (e) => {
+      let {token} = getCookie({req: false})
+      const status = Number.parseInt(e.target.value)
+      this.setState({status: status})
+      console.log('status', this.state.status)
+      await axios.post(`/slip/${this.state.doc.id}`,
+        {
+          is_approve: status,
+          approve_reason: this.state.comment,
+          _method: 'put'
+        },
+        {
+          Authorization: `Bearer ${token}`
+        })
+    }
+
+    const setComment = (e) => {
+      this.setState({comment: e.target.value})
+    }
+
+    const ButtonTranscript = () => (
+      <Button.Group>
+        {this.state.status === 0 ? <Button color='red' >Reject </Button>
+          : <Button onClick={buttonHandeler} value={0}>Reject </Button>
+        }
+        <Button.Or />
+        {this.state.status === 1 ? <Button color='green' >Approved </Button>
+          : <Button onClick={buttonHandeler} value={1} >Approved </Button>}
+      </Button.Group>
+    )
+
     const panes = [
       { menuItem: 'infomation',
         render: () => <Tab.Pane attached={false}>
@@ -92,7 +123,7 @@ class Verifyslip extends React.Component {
           <Tab2
             fullName={`${this.state.doc.profile.first_name} ${this.state.doc.profile.last_name}`}
             comment={this.state.comment}
-            setComment={this.setComment}
+            setComment={setComment}
             fileType={this.state.fileType}
             image={this.state.image}
             path={this.state.doc.path}
@@ -101,33 +132,6 @@ class Verifyslip extends React.Component {
             button={<ButtonTranscript />} />
         </Tab.Pane> }
     ]
-
-    const buttonHandeler = async (e) => {
-      let {token} = getCookie({req: false})
-      const status = e.target.value
-      this.setState({status})
-      await axios.post(`/slip/${this.state.doc.id}`, 
-        {
-          is_approve: status,
-          approve_reason: this.state.comment,
-          _method: 'put'
-        },
-        {
-          Authorization: `Bearer ${token}`
-        })
-    }
-
-    const ButtonTranscript = () => (
-      <Button.Group>
-        {this.state.status === '0' ? <Button color='red' >Reject </Button>
-          : <Button onClick={buttonHandeler} value={0}>Reject </Button>
-        }
-        <Button.Or />
-        {this.state.status === '1' ? <Button color='green' >Approved </Button>
-          : <Button onClick={buttonHandeler} value={1} >Approved </Button>}
-      </Button.Group>
-    )
-
     return (
       <Layout subheadertext={<Breadcrumb />}>
         <Grid.Row>
