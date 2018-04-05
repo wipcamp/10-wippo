@@ -82,7 +82,7 @@ class ApproveTable extends React.Component {
 
   componentWillMount = async () => {
     let {token} = await getCookie({req: false})
-    let {data} = await axios.get('/slip/all', {
+    let {data} = await axios.get('/slips', {
       Authorization: `Bearer ${token}`
     })
     let newData = data.map(itim => {
