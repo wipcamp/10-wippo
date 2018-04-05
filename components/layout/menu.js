@@ -34,13 +34,21 @@ const MenuNames = [
     menuName: 'Dashboard',
     link: '/dashboard'
   },
-  {
-    menuName: 'Document',
-    link: '/approve'
-  },
+  // {
+  //   menuName: 'Document',
+  //   link: '/approve'
+  // },
+  // {
+  //   menuName: 'Check Answer',
+  //   link: '/checkanswer'
+  // },
   {
     menuName: 'Itim Management',
     link: '/itim'
+  },
+  {
+    menuName: 'Approve Slip',
+    link: '/slip'
   }
 ]
 
