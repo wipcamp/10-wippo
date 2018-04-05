@@ -5,7 +5,7 @@ import ApproveTable from '../components/slip/ApproveTable'
 
 const Breadcrumb = () => (
   <ol className='breadcrumb'>
-    <li className='breadcrumb-item active'>CheckAnswer</li>
+    <li className='breadcrumb-item active'>Approve Slip</li>
   </ol>
 )
 const Approve = () =>
