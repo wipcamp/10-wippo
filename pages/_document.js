@@ -1,7 +1,6 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 import htmlescape from 'htmlescape'
-import injectGlobal from '../components/layout/injectGlobal'
 
 const { API_URL, URL } = process.env
 const env = { API_URL, URL }

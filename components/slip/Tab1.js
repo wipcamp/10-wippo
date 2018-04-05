@@ -1,10 +1,7 @@
-/* global FormData */
 import React from 'react'
 import ItimCard from '../general/itimcard'
 import { Grid, Icon } from 'semantic-ui-react'
-import styled, { keyframes } from 'styled-components'
-import getCookie from '../util/cookie'
-import api from '../util/axios'
+import styled from 'styled-components'
 
 const SecHeader = styled.div`
   font-family: 'Kanit', sans-serif !important;
@@ -16,27 +13,27 @@ const Topic = styled.div`
   margin-top: 1em;
 `
 
-const documentStatus = {
-  NOT_FOUND: -1,
-  APPROVE: 1,
-  REJECTED: 0,
-  PENDING: null
-}
+// const documentStatus = {
+//   NOT_FOUND: -1,
+//   APPROVE: 1,
+//   REJECTED: 0,
+//   PENDING: null
+// }
 
-const getDocumentStatus = (typeId, userInfo) => {
-  let { documents } = userInfo
-  if (documents !== undefined) {
-    documents = documents.filter(data => data.type_id === typeId)
+// const getDocumentStatus = (typeId, userInfo) => {
+//   let { documents } = userInfo
+//   if (documents !== undefined) {
+//     documents = documents.filter(data => data.type_id === typeId)
 
-    if (documents.length === 0) {
-      return documentStatus.NOT_FOUND
-    } else if (documents.findIndex(data => data.is_approve === documentStatus.APPROVE) > -1) {
-      return documentStatus.APPROVE
-    } else {
-      return documents[documents.length - 1].is_approve
-    }
-  }
-}
+//     if (documents.length === 0) {
+//       return documentStatus.NOT_FOUND
+//     } else if (documents.findIndex(data => data.is_approve === documentStatus.APPROVE) > -1) {
+//       return documentStatus.APPROVE
+//     } else {
+//       return documents[documents.length - 1].is_approve
+//     }
+//   }
+// }
 
 const Tab1 = (props) => {
   const { fullName, profile, image, facebook } = props

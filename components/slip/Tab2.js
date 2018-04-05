@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ItimCard from '../general/itimcard'
 import { Grid, Image } from 'semantic-ui-react'
-import env from '../util/env'
+// import env from '../util/env'
 
 export const ImageCustom = styled(Image)`
   min-width: 100%;
