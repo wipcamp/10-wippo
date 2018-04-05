@@ -1,5 +1,4 @@
 import React from 'react'
-import {injectGlobal} from 'styled-components'
 import Layout from '../components/layout/layout'
 import Tab1 from '../components/slip/Tab1'
 import Tab2 from '../components/slip/Tab2'
