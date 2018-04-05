@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ItimCard from '../general/itimcard'
 import { Grid, Image } from 'semantic-ui-react'
-// import env from '../util/env'
+import env from '../util/env'
 
 export const ImageCustom = styled(Image)`
   min-width: 100%;
@@ -12,8 +12,6 @@ export const PDF = styled.embed`
   min-height: 500px;
   min-width: 100%;
 `
-
-const testlocal = 'https://api.freezer.wip.camp/'
 
 const Tab2 = ({fullName, profile, button, image, facebook, fileType, path, comment, setComment}) => (
   (
@@ -38,8 +36,8 @@ const Tab2 = ({fullName, profile, button, image, facebook, fileType, path, comme
             //   ? <PDF src={`${env.URL}${path}`} href={`${env.URL}${path}`} />
             //   : <ImageCustom src={`${env.URL}${path}`} size='large' href={`${env.URL}${path}`} />
               fileType === 'pdf'
-                ? <PDF src={`${testlocal}${path}`} href={`${testlocal}${path}`} />
-                : <ImageCustom src={`${testlocal}${path}`} size='large' href={`${testlocal}${path}`} />
+                ? <PDF src={`${env.URL}${path}`} href={`${env.URL}${path}`} />
+                : <ImageCustom src={`${env.URL}${path}`} size='large' href={`${env.URL}${path}`} />
             }
             <h3>เหตุผล (หากไม่ผ่าน)</h3>
             <textarea
