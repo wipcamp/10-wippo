@@ -23,25 +23,43 @@ const SearchInput = styled(Input)`
 export const checkDocStatus = (status) => {
   switch (status) {
     case 0:
-      return 'red'
+      return {
+        name: 'ตรวจไม่ผ่าน',
+        color: 'red'
+      }
     case 1:
-      return 'green'
-    case null:
-      return 'yellow'
+      return {
+        name: 'ตรวจผ่านแล้ว',
+        color: 'green'
+      }
+    case undefined || null:
+      return {
+        name: 'ยังไม่ตรวจ',
+        color: 'yellow'
+      }
     default:
-      return ''
+      return {
+        name: 'ยังไม่อัพโหลด',
+        color: 'grey'
+      }
   }
 }
 
 export const documentHeader = {
-  Header: 'Document',
+  Header: 'สถานะสลิป',
   accessor: 'profile.documents',
   style: {textAlign: 'center'},
   Cell: (props) => {
-    let doc = props.original.document[props.original.document.length - 1]
+    const doc = props.original.document
+    let docStatus
+    if (!doc.length > 0) {
+      docStatus = checkDocStatus(false)
+    } else {
+      docStatus = checkDocStatus(doc[doc.length - 1].is_approve)
+    }
     return (
-      <Badge color={checkDocStatus(doc.is_approve)}>
-        slip
+      <Badge color={docStatus.color}>
+        {docStatus.name}
       </Badge>)
   }
 }
@@ -112,6 +130,7 @@ class ApproveTable extends React.Component {
       margin-right: 8px;
       width: 30px;
     `
+    console.log()
     const Pageignation = () => (
       <div className='input-group' >
         <Button className='btn btn-info form-control' onClick={this.decresePage}>Previous</Button>
@@ -121,7 +140,7 @@ class ApproveTable extends React.Component {
     )
     const TableColumns = [
       {Header: '#', accessor: 'itim.profile.user_id', width: 100, style: {textAlign: 'center'}},
-      {Header: 'FirstName',
+      {Header: 'ชื่อจริง',
         accessor: 'itim.profile.first_name',
         width: 150,
         filterMethod: (filter, row) => {
@@ -129,7 +148,8 @@ class ApproveTable extends React.Component {
           row[filter.id].endsWith(filter.value)
         }
       },
-      {Header: 'LastName', width: 150, accessor: 'itim.profile.last_name'},
+      {Header: 'นามสกุล', width: 150, accessor: 'itim.profile.last_name'},
+      {Header: 'เบอร์โทรน้อง', width: 150, accessor: 'itim.profile.profile_registrant.telno_personal'},
       documentHeader,
       {Header: '',
         width: 150,
@@ -138,8 +158,10 @@ class ApproveTable extends React.Component {
           let doc = props.original.document[props.original.document.length - 1]
           return (
             <div>
-              <Link href={{ pathname: '/verifyslip', query: { docId: doc.id } }}>
-                <a className='btn btn-primary' > approve</a>
+              <Link href={{ pathname: '/verifyslip', query: { docId: doc && doc.id } }}>
+                <a className={`btn ${(doc && doc.id && 'btn-primary') || 'disabled'}`} >
+                  { doc && doc.id ? 'ตรวจสลิป' : 'ยังไม่อัพโหลด'}
+                </a>
               </Link>
             </div>
           )
@@ -148,9 +170,6 @@ class ApproveTable extends React.Component {
     ]
     return (
       <div className='text-center'>
-        <Badge color='green'>ตรวจแล้ว</Badge>
-        <Badge color='yellow'>ยังไม่ตรวจ</Badge>
-        <Badge color='red'>เอกสารไม่ผ่าน</Badge>
         <SearchInput onChange={this.searchCamper} type='text' icon='search' placeholder='Search...' />
         <div>
           <ReactTable PaginationComponent={Pageignation} defaultPageSize={10} page={this.state.page} className='table' data={this.state.search} columns={TableColumns} />

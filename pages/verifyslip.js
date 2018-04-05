@@ -30,7 +30,7 @@ class Verifyslip extends React.Component {
 
   async componentDidMount () { // TRUE FETCH METHOD! 1 Time Fetch All data is there
     let { token } = await getCookie({ req: false })
-    let { data } = await axios.get(`/slip/${this.props.url.query.docId}`, {
+    let { data } = await axios.get(`/slips/${this.props.url.query.docId}`, {
       Authorization: `Bearer ${token}`
     })
     await this.setState({doc: data})
