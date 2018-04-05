@@ -48,6 +48,7 @@ const Tab1 = (props) => {
             <ItimCard
               question={6}
               fullName={fullName}
+              telno={profile.profile_registrant.telno_personal}
               id={profile.profile_registrant.user_id}
               src={image}
               name={`น้อง ${profile.nickname}`}

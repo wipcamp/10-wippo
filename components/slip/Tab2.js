@@ -24,6 +24,7 @@ const Tab2 = ({fullName, profile, button, image, facebook, fileType, path, comme
             <ItimCard
               question={6}
               fullName={fullName}
+              telno={profile.profile_registrant.telno_personal}
               id={profile.profile_registrant.user_id}
               src={image}
               name={`น้อง ${profile.nickname}`}
@@ -31,7 +32,7 @@ const Tab2 = ({fullName, profile, button, image, facebook, fileType, path, comme
             />
           </div>
           <div className='col-12 col-md-9 d-flex flex-column justify-content-center align-items-center'>
-            <h1>ใบปพ.1</h1>
+            <h1>หลักฐานยืนยันการโอนเงิน</h1>
             {
             // fileType === 'pdf'
             //   ? <PDF src={`${env.URL}${path}`} href={`${env.URL}${path}`} />

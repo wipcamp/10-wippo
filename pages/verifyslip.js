@@ -1,4 +1,5 @@
 import React from 'react'
+import {injectGlobal} from 'styled-components'
 import Layout from '../components/layout/layout'
 import Tab1 from '../components/slip/Tab1'
 import Tab2 from '../components/slip/Tab2'
@@ -81,7 +82,7 @@ class Verifyslip extends React.Component {
       const status = Number.parseInt(e.target.value)
       this.setState({status: status})
       console.log('status', this.state.status)
-      await axios.post(`/slip/${this.state.doc.id}`,
+      await axios.post(`/slips/${this.state.doc.id}`,
         {
           is_approve: status,
           approve_reason: this.state.comment,
@@ -108,7 +109,7 @@ class Verifyslip extends React.Component {
     )
 
     const panes = [
-      { menuItem: 'infomation',
+      { menuItem: 'ข้อมูลส่วนตัว',
         render: () => <Tab.Pane attached={false}>
           <Tab1
             fullName={`${this.state.doc.profile.first_name} ${this.state.doc.profile.last_name}`}
@@ -118,7 +119,7 @@ class Verifyslip extends React.Component {
             facebook={this.state.fbLink}
           />
         </Tab.Pane> },
-      { menuItem: 'Slip',
+      { menuItem: 'หลักฐานการโอนเงิน',
         render: props => <Tab.Pane attached={false}>
           <Tab2
             fullName={`${this.state.doc.profile.first_name} ${this.state.doc.profile.last_name}`}

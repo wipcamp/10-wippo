@@ -139,17 +139,17 @@ class ApproveTable extends React.Component {
       </div>
     )
     const TableColumns = [
-      {Header: '#', accessor: 'itim.profile.user_id', width: 100, style: {textAlign: 'center'}},
+      {Header: '#', accessor: 'itim.profile.user_id', width: 90, style: {textAlign: 'center'}},
       {Header: 'ชื่อจริง',
         accessor: 'itim.profile.first_name',
-        width: 150,
+        width: 200,
         filterMethod: (filter, row) => {
           row[filter.id].startsWith(filter.value) &&
           row[filter.id].endsWith(filter.value)
         }
       },
-      {Header: 'นามสกุล', width: 150, accessor: 'itim.profile.last_name'},
-      {Header: 'เบอร์โทรน้อง', width: 150, accessor: 'itim.profile.profile_registrant.telno_personal'},
+      {Header: 'นามสกุล', width: 200, accessor: 'itim.profile.last_name'},
+      {Header: 'เบอร์โทรน้อง', width: 110, accessor: 'itim.profile.profile_registrant.telno_personal'},
       documentHeader,
       {Header: '',
         width: 150,
