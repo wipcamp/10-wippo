@@ -44,13 +44,21 @@ export const MenuNames = [
   //   menuName: 'Check Answer',
   //   link: '/checkanswer'
   // },
-  {
-    menuName: 'Itim Management',
-    link: '/itim'
-  },
+  // {
+  //   menuName: 'Itim Management',
+  //   link: '/itim'
+  // },
   {
     menuName: 'Approve Slip',
     link: '/slip'
+  },
+  {
+    menuName: 'Camper Management',
+    link: '/camper'
+  },
+  {
+    menuName: 'Logout',
+    link: '/logout'
   }
 ]
 
