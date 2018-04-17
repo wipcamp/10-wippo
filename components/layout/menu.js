@@ -67,9 +67,9 @@ class MyMenu extends React.Component {
     return (
       <StyledMenu>
         {
-          MenuNames.map((menu, i) => <Menu.Item key={i}>
+          MenuNames.map((menu, i) => menu.menuName !== 'Logout' ? <Menu.Item key={i}>
             <Link href={`${menu.link}`}><StyledLink>{menu.menuName}</StyledLink></Link>
-          </Menu.Item>
+          </Menu.Item> : <span />
           )
         }
       </StyledMenu>
