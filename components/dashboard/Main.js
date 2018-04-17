@@ -1,7 +1,8 @@
 import React from 'react'
 import Layout from '../../components/layout/layout'
-import Phase1 from '../../components/dashboard/Phase1'
+// import Phase1 from '../../components/dashboard/Phase1'
 // import Phase2 from '../../components/dashboard/Phase2'
+import Phase3 from '../../components/dashboard/Phase3'
 class Main extends React.Component {
   state={
     rule: []
@@ -34,7 +35,7 @@ class Main extends React.Component {
           } */}
 
           <div className='col'>
-            <Phase1 />
+            <Phase3 />
           </div>
         </div>
         {/* <div className='row'>
