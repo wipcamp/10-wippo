@@ -2,13 +2,13 @@ import {injectGlobal} from 'styled-components'
 
 export default injectGlobal`
   body, input, h1, h3 {
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Prompt', sans-serif;
   }
   body, input, textarea {
     font-size: 12px;
   }
   .btn-primary {
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Prompt', sans-serif;
     color: #fff;
     background-color: #5867dd;
     border-color: #5867dd;
