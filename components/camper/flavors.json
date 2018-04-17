@@ -1,0 +1,62 @@
+[
+    {
+      "id": 1,
+      "name": "กระเจี๊ยบ",
+      "displayName": "กระเจี๊ยบ",
+      "color": "#C22A3B"
+    },
+    {
+      "id": 2,
+      "name": "ไพลินกรอบ",
+      "displayName": "ไพลินกรอบ",
+      "color": "#417CB5"
+    },
+    {
+      "id": 3,
+      "name": "ขนมไข่",
+      "displayName": "ขนมไข่",
+      "color": "#915B48"
+    },
+    {
+      "id": 4,
+      "name": "ถั่วดำ",
+      "displayName": "ถั่วดำ",
+      "color": "#666666"
+    },
+    {
+      "id": 5,
+      "name": "ช่อม่วง",
+      "displayName": "ช่อม่วง",
+      "color": "#A46ED3"
+    },
+    {
+      "id": 6,
+      "name": "มะขามจี๊ด",
+      "displayName": "มะขามจี๊ด",
+      "color": "#ED7D31"
+    },
+    {
+      "id": 7,
+      "name": "ลอดช่อง",
+      "displayName": "ลอดช่อง",
+      "color": "#8CF058"
+    },
+    {
+      "id": 8,
+      "name": "นมชมพู",
+      "displayName": "นมชมพู",
+      "color": "#F283B5"
+    },
+    {
+      "id": 9,
+      "name": "น้ำผึ้งมะนาว",
+      "displayName": "น้ำผึ้งมะนาว",
+      "color": "#FFFF00"
+    },
+    {
+      "id": 10,
+      "name": "ขนมครก",
+      "displayName": "ขนมครก",
+      "color": "#FDCA85"
+    }
+  ]
