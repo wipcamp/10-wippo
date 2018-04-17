@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import {Card, Image, Button, Icon} from 'semantic-ui-react'
 
 const Text = styled.h1`
-  font-family: 'Kanit', sans-serif;
+  font-family: 'Prompt', sans-serif;
 `
 const Stats = styled.h3`
-  font-family: 'Kanit', sans-serif;
+  font-family: 'Prompt', sans-serif;
 `
 
 const UserHeader = Text.extend`

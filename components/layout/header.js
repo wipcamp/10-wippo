@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { injectGlobal } from 'styled-components'
-import Menu from './menu.js'
+import Menu, { MenuNames } from './menu'
 import Link from 'next/link'
 
 injectGlobal`
@@ -97,28 +97,6 @@ const MobileList = styled.p`
 const NavCollapseContainer = styled.div`
   background-color:#f9f9f9;
 `
-const MenuNames = [
-  {
-    menuName: 'Dashboard',
-    link: '/dashboard'
-  },
-  {
-    menuName: 'Document',
-    link: '/approve'
-  },
-  {
-    menuName: 'Itim Management',
-    link: '/itim'
-  },
-  {
-    menuName: 'Check Answer',
-    link: '/checkanswer'
-  },
-  {
-    menuName: 'Logout',
-    link: '/logout'
-  }
-]
 
 class Header extends React.Component {
   constructor (props) {

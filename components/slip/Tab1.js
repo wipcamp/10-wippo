@@ -4,11 +4,11 @@ import { Grid, Icon } from 'semantic-ui-react'
 import styled from 'styled-components'
 
 const SecHeader = styled.div`
-  font-family: 'Kanit', sans-serif !important;
+  font-family: 'Prompt', sans-serif !important;
   font-size:25px;
 `
 const Topic = styled.div`
-  font-family: 'Kanit', sans-serif !important;
+  font-family: 'Prompt', sans-serif !important;
   font-size:18px;
   margin-top: 1em;
 `

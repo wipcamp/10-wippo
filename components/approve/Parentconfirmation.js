@@ -5,18 +5,18 @@ import axios from '../util/axios'
 import getCookie from '../util/cookie'
 
 export const CardContainer = styled.div`
-  font-family: 'Kanit', sans-serif;
+  font-family: 'Prompt', sans-serif;
   width:100%;
   .card {
     width: 100% !important;
   }
   h1 {
     margin: 0 auto;
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Prompt', sans-serif;
   }
 `
 export const Text = styled.div`
-  font-family: 'Kanit', sans-serif;
+  font-family: 'Prompt', sans-serif;
   font-size:4em;
   padding: .5em 1em;
 `
