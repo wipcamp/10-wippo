@@ -9,6 +9,8 @@ const StyledMenu = styled(Menu)`
   box-shadow:none !important;
 `
 const StyledLink = styled.a`
+  font-family: 'Prompt';
+  cursor: pointer;
   padding:.92857143em 1.64285714em !important;
   font-size:1.1em !important;
   color:#fff !important;
@@ -29,7 +31,7 @@ injectGlobal`
   }
 `
 // const MenuNames = ['Dashboard', 'Document', 'Itim Management']
-const MenuNames = [
+export const MenuNames = [
   {
     menuName: 'Dashboard',
     link: '/dashboard'
