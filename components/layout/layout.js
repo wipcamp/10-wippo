@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { injectGlobal } from 'styled-components'
 import Header from './header'
-import { Container, Grid } from 'semantic-ui-react'
 import Footer from './footer'
 
 const StyledLayout = styled.div`
@@ -91,7 +90,7 @@ export const Wrapper = styled.div`
     }
   }
 `
-export const BackgroundWrapper = styled.div`
+export const BackgroundWrapper = StyledLayout.extend`
   width:100%;
   height:100vh;
   max-height:100vh;
