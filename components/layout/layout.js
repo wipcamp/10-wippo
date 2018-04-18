@@ -91,7 +91,7 @@ export const Wrapper = styled.div`
     }
   }
 `
-export const BackgroundWrapper = styled.div`
+export const BackgroundWrapper = StyledLayout.extend`
   width:100%;
   height:100vh;
   max-height:100vh;
