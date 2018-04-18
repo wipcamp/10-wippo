@@ -4,6 +4,13 @@ import Header from './header'
 import { Container, Grid } from 'semantic-ui-react'
 import Footer from './footer'
 
+const StyledLayout = styled.div`
+  font-family: 'Prompt';
+  html, body, h1, button, h3, h4, h6 {
+    font-family: 'Prompt';
+  }
+`
+
 const SubHeader = styled.div`
   padding: 50px 25px 0 0px;
 `
@@ -34,7 +41,7 @@ class Layout extends React.Component {
 
   render () {
     return (
-      <div>
+      <StyledLayout>
         <Header />
         <div className='container-fluid fullpage'>
           <div className='container'>
@@ -49,7 +56,7 @@ class Layout extends React.Component {
           </div>
         </div>
         <Footer />
-      </div>
+      </StyledLayout>
     )
   }
 }
