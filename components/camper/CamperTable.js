@@ -11,6 +11,30 @@ const StyledReactTable = styled(ReactTable)`
   text-align:center;
 `
 
+const ButtonFlavor = styled.button`
+  font-family: 'Prompt';
+  width: 130px;
+  font-size: 1.3em;
+  padding: .3em 1em;
+`
+
+const camperFilter = (data, search) => {
+  return castString(data.user_id, search) ||
+    castString(data.profile.nickname, search) ||
+    castString(data.profile_registrant.edu_name, search)
+}
+
+const castString = (text, search) => `${text}`.toUpperCase().indexOf(search) > -1
+
+const updateSection = async (sectionId, userId) => {
+  let { token } = await getCookie({ req: false })
+  return axios.put(`/campers/${userId}/flavors`, {
+    sectionId
+  }, {
+    Authorization: `Bearer ${token}`
+  })
+}
+
 const columns = [
   {
     Header: 'WIP ID',
@@ -20,12 +44,12 @@ const columns = [
   {
     Header: 'ชื่อเล่น',
     accessor: 'profile.nickname',
-    width: 100
+    width: 150
   },
   {
     Header: 'โรงเรียน',
     accessor: 'profile_registrant.edu_name',
-    width: 240
+    width: 350
   },
   {
     Header: 'เพศ',
@@ -49,8 +73,12 @@ const columns = [
     Header: 'จัดรส',
     accessor: 'user_id',
     width: 160,
-    Cell: ({ original }) => (
-      <select defaultValue={original.section_id} className='custom-select'>
+    Cell: props => (
+      <select
+        onChange={e => updateSection(e.target.value, props.value)}
+        defaultValue={props.original.section_id}
+        className='custom-select'
+      >
         {
           flavors.map(data =>
             <option key={data.id} value={data.id}>{data.displayName}</option>
@@ -60,14 +88,6 @@ const columns = [
     )
   }
 ]
-
-const camperFilter = (data, search) => {
-  return castString(data.user_id, search) ||
-    castString(data.profile.nickname, search) ||
-    castString(data.profile_registrant.edu_name, search)
-}
-
-const castString = (text, search) => `${text}`.toUpperCase().indexOf(search) > -1
 
 export default class CamperTable extends React.Component {
   state = {
@@ -87,8 +107,7 @@ export default class CamperTable extends React.Component {
 
   searchCamper = async (e) => {
     let { tempCampers } = this.state
-    let input = e.target.value
-    let search = input.toUpperCase()
+    let search = e.target.value.toUpperCase()
     if (search.length === 0) {
       this.setState({ campers: tempCampers })
     } else {
@@ -99,8 +118,11 @@ export default class CamperTable extends React.Component {
 
   filterFlavor = async (e) => {
     let { tempCampers } = this.state
-    let result = await tempCampers.filter(data => data.section_id === e)
-    this.setState({ campers: result })
+    let campers = tempCampers
+    if (!(e === -1)) {
+      campers = await campers.filter(data => data.section_id === e)
+    }
+    this.setState({ campers })
   }
 
   componentWillMount () {
@@ -110,10 +132,37 @@ export default class CamperTable extends React.Component {
       }
     `
   }
+
   render () {
     return (<div>
-      {flavors.map(data => <button onClick={() => this.filterFlavor(data.id)} key={data.id} style={{ background: `${data.color}` }} className='btn'>{data.displayName}</button>)}
-      <SearchInput onChange={this.searchCamper} type='text' icon='search' placeholder='Search...' />
+      <div className='card my-4'>
+        <div className='card-header'>
+          <h4>Filter ตามรส</h4>
+        </div>
+        <div className='card-body'>
+          <div className='row px-3'>
+            <ButtonFlavor
+              onClick={() => this.filterFlavor(-1)}
+              className='col-12 col-md-2 btn btn-primary'
+            >All</ButtonFlavor>
+            <br />
+            {
+              flavors.map(data => <ButtonFlavor
+                onClick={() => this.filterFlavor(data.id)}
+                key={data.id}
+                style={{ background: `${data.color}` }}
+                className={`col-6 col-md-2 btn`}
+              >{data.displayName}</ButtonFlavor>)
+            }
+          </div>
+        </div>
+      </div>
+      <SearchInput
+        onChange={this.searchCamper}
+        type='text'
+        icon='search'
+        placeholder='Search...'
+      />
       <StyledReactTable data={this.state.campers} columns={columns} />
     </div>
     )
