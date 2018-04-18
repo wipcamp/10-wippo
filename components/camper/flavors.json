@@ -3,60 +3,70 @@
       "id": 1,
       "name": "กระเจี๊ยบ",
       "displayName": "กระเจี๊ยบ",
-      "color": "#C22A3B"
+      "color": "#C22A3B",
+      "font": "#fff"
     },
     {
       "id": 2,
       "name": "ไพลินกรอบ",
       "displayName": "ไพลินกรอบ",
-      "color": "#417CB5"
+      "color": "#417CB5",
+      "font": "#fff"
     },
     {
       "id": 3,
       "name": "ขนมไข่",
       "displayName": "ขนมไข่",
-      "color": "#915B48"
+      "color": "#915B48",
+      "font": "#fff"
     },
     {
       "id": 4,
       "name": "ถั่วดำ",
       "displayName": "ถั่วดำ",
-      "color": "#666666"
+      "color": "#666666",
+      "font": "#fff"
     },
     {
       "id": 5,
       "name": "ช่อม่วง",
       "displayName": "ช่อม่วง",
-      "color": "#A46ED3"
+      "color": "#A46ED3",
+      "font": "#fff"
     },
     {
       "id": 6,
       "name": "มะขามจี๊ด",
       "displayName": "มะขามจี๊ด",
-      "color": "#ED7D31"
+      "color": "#ED7D31",
+      "font": "#fff"
     },
     {
       "id": 7,
       "name": "ลอดช่อง",
       "displayName": "ลอดช่อง",
-      "color": "#8CF058"
+      "color": "#8CF058",
+      "font": "#000"
     },
     {
       "id": 8,
       "name": "นมชมพู",
       "displayName": "นมชมพู",
-      "color": "#F283B5"
+      "color": "#F283B5",
+      "font": "#000"
     },
     {
       "id": 9,
       "name": "น้ำผึ้งมะนาว",
       "displayName": "น้ำผึ้งมะนาว",
-      "color": "#FFFF00"
+      "color": "#FFFF00",
+      "font": "#000"
     },
     {
       "id": 10,
       "name": "ขนมครก",
       "displayName": "ขนมครก",
-      "color": "#FDCA85"
+      "color": "#FDCA85",
+      "font": "#000"
     }
   ]

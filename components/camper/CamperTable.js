@@ -1,10 +1,12 @@
 import React from 'react'
 import styled, { injectGlobal } from 'styled-components'
 import ReactTable from 'react-table'
+import { Button } from 'semantic-ui-react'
 
 import getCookie from '../util/cookie'
 import axios from '../util/axios'
 import { SearchInput } from '../itim/DatatableCard'
+
 import flavors from './flavors.json'
 
 const StyledReactTable = styled(ReactTable)`
@@ -14,8 +16,11 @@ const StyledReactTable = styled(ReactTable)`
 const ButtonFlavor = styled.button`
   font-family: 'Prompt';
   width: 130px;
-  font-size: 1.3em;
+  font-size: 1em;
   padding: .3em 1em;
+  @media (max-width: 1024px) {
+    font-size: 1em;
+  }
 `
 
 const camperFilter = (data, search) => {
@@ -94,7 +99,8 @@ export default class CamperTable extends React.Component {
     campers: [],
     tempCampers: []
   }
-  async componentDidMount () {
+
+  fetchCampers = async () => {
     let { token } = await getCookie({ req: false })
     let { data: { data: campers } } = await axios.get('/campers', {
       Authorization: `Bearer ${token}`
@@ -103,6 +109,9 @@ export default class CamperTable extends React.Component {
       campers,
       tempCampers: campers
     })
+  }
+  async componentDidMount () {
+    this.fetchCampers()
   }
 
   searchCamper = async (e) => {
@@ -144,25 +153,39 @@ export default class CamperTable extends React.Component {
             <ButtonFlavor
               onClick={() => this.filterFlavor(-1)}
               className='col-12 col-md-2 btn btn-primary'
-            >All</ButtonFlavor>
-            <br />
+            >ดูทุกรส</ButtonFlavor>
+          </div>
+          <div className='row px-3'>
             {
               flavors.map(data => <ButtonFlavor
                 onClick={() => this.filterFlavor(data.id)}
                 key={data.id}
-                style={{ background: `${data.color}` }}
+                style={{ background: `${data.color}`, color: `${data.font}` }}
                 className={`col-6 col-md-2 btn`}
-              >{data.displayName}</ButtonFlavor>)
+              >{data.displayName} ({this.state.tempCampers.filter(camper => camper.section_id === data.id).length} คน)</ButtonFlavor>)
             }
           </div>
         </div>
       </div>
-      <SearchInput
-        onChange={this.searchCamper}
-        type='text'
-        icon='search'
-        placeholder='Search...'
-      />
+      <div className='row'>
+        <div className='col-12 col-md-10'>
+          <SearchInput
+            onChange={this.searchCamper}
+            type='text'
+            icon='search'
+            placeholder='Search...'
+          />
+        </div>
+        <div className='col-12 col-md-2'>
+          <Button
+            onClick={() => this.fetchCampers()}
+            content='ดึงข้อมูลใหม่'
+            icon='refresh'
+            color='violet'
+            labelPosition='left'
+          />
+        </div>
+      </div>
       <StyledReactTable data={this.state.campers} columns={columns} />
     </div>
     )
