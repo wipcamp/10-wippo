@@ -13,6 +13,10 @@ const StyledReactTable = styled(ReactTable)`
   text-align:center;
 `
 
+const CustomButtom = styled(Button)`
+  font-family: 'Prompt';
+`
+
 const ButtonFlavor = styled.button`
   font-family: 'Prompt';
   width: 130px;
@@ -177,7 +181,7 @@ export default class CamperTable extends React.Component {
           />
         </div>
         <div className='col-12 col-md-2'>
-          <Button
+          <CustomButtom
             onClick={() => this.fetchCampers()}
             content='ดึงข้อมูลใหม่'
             icon='refresh'
