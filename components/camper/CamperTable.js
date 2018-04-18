@@ -14,7 +14,7 @@ const StyledReactTable = styled(ReactTable)`
 `
 
 const CustomButtom = styled(Button)`
-  font-family: 'Prompt';
+  font-family: 'Prompt' !important;
 `
 
 const ButtonFlavor = styled.button`
@@ -172,7 +172,7 @@ export default class CamperTable extends React.Component {
         </div>
       </div>
       <div className='row'>
-        <div className='col-12 col-md-10'>
+        <div className='col-7 col-md-9'>
           <SearchInput
             onChange={this.searchCamper}
             type='text'
@@ -180,7 +180,7 @@ export default class CamperTable extends React.Component {
             placeholder='Search...'
           />
         </div>
-        <div className='col-12 col-md-2'>
+        <div className='col-5 col-md-3'>
           <CustomButtom
             onClick={() => this.fetchCampers()}
             content='ดึงข้อมูลใหม่'
