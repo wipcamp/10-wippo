@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { injectGlobal } from 'styled-components'
 import Header from './header'
-import { Container, Grid } from 'semantic-ui-react'
 import Footer from './footer'
 
 const StyledLayout = styled.div`
