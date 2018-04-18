@@ -6,6 +6,7 @@ import { Button } from 'semantic-ui-react'
 import getCookie from '../util/cookie'
 import axios from '../util/axios'
 import { SearchInput } from '../itim/DatatableCard'
+import Modal from './ConfirmModal'
 
 import flavors from './flavors.json'
 
@@ -82,10 +83,16 @@ const columns = [
     Header: 'จัดรส',
     accessor: 'user_id',
     width: 160,
-    Cell: props => (
+    Cell: ({value, original, tdProps: { rest: { onChange: handleFields } }}) => (
       <select
-        onChange={e => updateSection(e.target.value, props.value)}
-        defaultValue={props.original.section_id}
+        onChange={e => {
+          handleFields('changing', {
+            sectionId: e.target.value,
+            userId: value
+          })
+          handleFields('open', true)
+        }}
+        defaultValue={original.section_id}
         className='custom-select'
       >
         {
@@ -101,7 +108,15 @@ const columns = [
 export default class CamperTable extends React.Component {
   state = {
     campers: [],
-    tempCampers: []
+    tempCampers: [],
+    open: false,
+    changing: {}
+  }
+
+  handleFields = (field, value) => {
+    this.setState({
+      [field]: value
+    })
   }
 
   fetchCampers = async () => {
@@ -180,7 +195,7 @@ export default class CamperTable extends React.Component {
             placeholder='Search...'
           />
         </div>
-        <div className='col-5 col-md-3'>
+        <div className='col-5 col-md-3 text-center'>
           <CustomButtom
             onClick={() => this.fetchCampers()}
             content='ดึงข้อมูลใหม่'
@@ -190,7 +205,22 @@ export default class CamperTable extends React.Component {
           />
         </div>
       </div>
-      <StyledReactTable data={this.state.campers} columns={columns} />
+      <StyledReactTable
+        data={this.state.campers}
+        columns={columns}
+        getTdProps={(state, rowInfo, column, instance) => {
+          return {
+            'onChange': this.handleFields
+          }
+        }}
+      />
+      <Modal
+        handleFields={this.handleFields}
+        confirm={updateSection}
+        data={this.state.changing}
+        open={this.state.open}
+        reload={this.fetchCampers}
+      />
     </div>
     )
   }
