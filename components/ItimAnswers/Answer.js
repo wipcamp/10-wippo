@@ -16,12 +16,12 @@ const HeadAnswer = styled.div`
 `
 
 const SecHeader = styled.div`
-  font-family: 'Kanit', sans-serif !important;
+  font-family: 'Prompt', sans-serif !important;
   font-size:25px;
 `
 
 const Question = styled.div`
-  font-family: 'Kanit', sans-serif !important;
+  font-family: 'Prompt', sans-serif !important;
   font-size:15px;
   margin-top: 1em;
   margin-bottom: 1em;

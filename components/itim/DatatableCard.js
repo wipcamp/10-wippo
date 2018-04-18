@@ -10,10 +10,11 @@ import {documentHeader} from '../approve/ApproveTable'
 const StyledReactTable = styled(ReactTable)`
   text-align:center;
 `
-const SearchInput = styled(Input)`
+export const SearchInput = styled(Input)`
   width:100%;
   margin-bottom:1.2em;
 `
+
 injectGlobal`
   .ReactTable .rt-thead .rt-resizable-header-content{
     font-weight:bold;

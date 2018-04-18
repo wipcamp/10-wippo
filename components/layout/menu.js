@@ -9,6 +9,8 @@ const StyledMenu = styled(Menu)`
   box-shadow:none !important;
 `
 const StyledLink = styled.a`
+  font-family: 'Prompt';
+  cursor: pointer;
   padding:.92857143em 1.64285714em !important;
   font-size:1.1em !important;
   color:#fff !important;
@@ -29,7 +31,7 @@ injectGlobal`
   }
 `
 // const MenuNames = ['Dashboard', 'Document', 'Itim Management']
-const MenuNames = [
+export const MenuNames = [
   {
     menuName: 'Dashboard',
     link: '/dashboard'
@@ -42,13 +44,21 @@ const MenuNames = [
   //   menuName: 'Check Answer',
   //   link: '/checkanswer'
   // },
-  {
-    menuName: 'Itim Management',
-    link: '/itim'
-  },
+  // {
+  //   menuName: 'Itim Management',
+  //   link: '/itim'
+  // },
   {
     menuName: 'Approve Slip',
     link: '/slip'
+  },
+  {
+    menuName: 'Camper Management',
+    link: '/camper'
+  },
+  {
+    menuName: 'Logout',
+    link: '/logout'
   }
 ]
 
@@ -57,9 +67,9 @@ class MyMenu extends React.Component {
     return (
       <StyledMenu>
         {
-          MenuNames.map((menu, i) => <Menu.Item key={i}>
+          MenuNames.map((menu, i) => menu.menuName !== 'Logout' ? <Menu.Item key={i}>
             <Link href={`${menu.link}`}><StyledLink>{menu.menuName}</StyledLink></Link>
-          </Menu.Item>
+          </Menu.Item> : <span key={i} />
           )
         }
       </StyledMenu>

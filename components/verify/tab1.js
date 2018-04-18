@@ -10,11 +10,11 @@ import getCookie from '../util/cookie'
 import api from '../util/axios'
 
 const SecHeader = styled.div`
-  font-family: 'Kanit', sans-serif !important;
+  font-family: 'Prompt', sans-serif !important;
   font-size:25px;
 `
 const Topic = styled.div`
-  font-family: 'Kanit', sans-serif !important;
+  font-family: 'Prompt', sans-serif !important;
   font-size:18px;
   margin-top: 1em;
 `
@@ -32,7 +32,7 @@ const documentStatus = {
 }
 
 const StyledDropzone = styled.div`
-  font-family: 'Kanit', sans-serif !important;
+  font-family: 'Prompt', sans-serif !important;
   font-size:18px;
   text-align: center;
   display: flex;
