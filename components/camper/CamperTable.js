@@ -59,7 +59,7 @@ const columns = [
   {
     Header: 'โรงเรียน',
     accessor: 'profile_registrant.edu_name',
-    width: 350
+    width: 300
   },
   {
     Header: 'เพศ',
@@ -78,6 +78,16 @@ const columns = [
     Header: 'เกรดเฉลี่ย',
     accessor: 'profile_registrant.edu_gpax',
     width: 100
+  },
+  {
+    Header: 'โปรไฟล์',
+    accessor: 'user_id',
+    width: 70,
+    Cell: ({value}) => (
+      <a target='_blank' href={`/itim?user_id=${value}`}>
+        <Button icon='search' color='blue' />
+      </a>
+    )
   },
   {
     Header: 'จัดรส',

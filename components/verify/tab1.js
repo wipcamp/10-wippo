@@ -199,7 +199,7 @@ const Tab1 = (props) => {
                 </div>
               </div>
             </div>
-            <div className='row mb-5'>
+            {/* <div className='row mb-5'>
               <div className='col-12'>
                 <SecHeader className='mt-3'>
                   <Icon className='mr-3' size='big' name={'upload'} />
@@ -279,7 +279,7 @@ const Tab1 = (props) => {
                 <p className='mt-2'>หากไม่ขึ้นสีที่กล่าวมาทั้งหมด 4 สี ลองรีเฟรชหน้าใหม่อีกคร้ัง</p>
                 <p>สีเป็นการบอกสถานะของเอกสารที่ปรากฏอยู่</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
