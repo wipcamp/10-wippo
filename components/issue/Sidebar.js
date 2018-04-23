@@ -21,14 +21,21 @@ const Sidebar = (props) => (
       <hr />
       <h2>Filter</h2>
       <div className='form-group'>
-        <label>priority</label>
+        <label>ความสำคัญ</label>
         <select className='form-control'>
           <option>Default select</option>
         </select>
       </div>
       <hr />
       <div className='form-group'>
-        <label>time</label>
+        <label>เวลา</label>
+        <select className='form-control'>
+          <option>Default select</option>
+        </select>
+      </div>
+      <hr />
+      <div className='form-group'>
+        <label>วัน</label>
         <select className='form-control'>
           <option>Default select</option>
         </select>
