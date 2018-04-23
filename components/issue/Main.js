@@ -14,13 +14,16 @@ const MainIssue = (props) => (
         <StickyContainer>
           <Sticky>
             {
-              (p) => <Sidebar dis={p.distanceFromTop} />
+              (p) => <Sidebar dis={p.distanceFromTop} {...props} />
             }
           </Sticky>
         </StickyContainer>
       </div>
       <div className='col-12 col-md-9'>
         <h2>Issue list | {`Day 1 (${props.issue.date})`}</h2>
+        {
+          props.issue.loading && <div className='text-center'>Loading...</div>
+        }
         <IssueList list={props.issue.issueList} />
       </div>
     </div>
