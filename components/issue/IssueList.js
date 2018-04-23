@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 const IssueList = ({ list }) => (
   <div>
-    issue list
     {
       list.map((d, i) => (
         <IssueItem data={d} key={i} />
