@@ -1,9 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const IssueItem = ({ data }) => (
-  <div>
-    item
+const IssueItem = ({
+  data: {
+    topic
+  }
+}) => (
+  <div className='row'>
+    <div className='col-12 border py-3'>
+      {topic}
+    </div>
   </div>
 )
 
