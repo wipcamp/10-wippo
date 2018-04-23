@@ -59,6 +59,10 @@ export const MenuNames = [
   {
     menuName: 'Logout',
     link: '/logout'
+  },
+  {
+    menuName: 'Issue',
+    link: '/issue'
   }
 ]
 
