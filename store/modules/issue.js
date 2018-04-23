@@ -11,6 +11,7 @@ let initialState = {
   loading: false,
   issueList: [],
   text: '',
+  date: '30 May 2018',
   error: {},
   data: {}
 }
