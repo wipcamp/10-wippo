@@ -17,6 +17,11 @@ const Sidebar = (props) => (
       <h2>Action</h2>
       <div>
         <button className='btn btn-primary btn-block'>สร้าง issue</button>
+        <button
+          className='btn btn-success btn-block'
+          onClick={props.getIssue}
+          disabled={props.issue.loading}
+        >refresh</button>
       </div>
       <hr />
       <h2>Filter</h2>
