@@ -22,21 +22,21 @@ const Sidebar = (props) => (
       <h2>Filter</h2>
       <div className='form-group'>
         <label>ความสำคัญ</label>
-        <select className='form-control'>
+        <select className='custom-select'>
           <option>Default select</option>
         </select>
       </div>
       <hr />
       <div className='form-group'>
         <label>เวลา</label>
-        <select className='form-control'>
+        <select className='custom-select'>
           <option>Default select</option>
         </select>
       </div>
       <hr />
       <div className='form-group'>
         <label>วัน</label>
-        <select className='form-control'>
+        <select className='custom-select'>
           <option>Default select</option>
         </select>
       </div>
@@ -45,28 +45,35 @@ const Sidebar = (props) => (
         <div>
           <label>{`แก้ปัญหายัง`}</label>
         </div>
-        <div className='form-check form-check-inline'>
-          <input
-            className='form-check-input'
-            name={`solve`}
-            type='radio'
-            id='inlineCheckbox1'
-            value='option1'
-          />
-          <label className='form-check-label' htmlFor='inlineCheckbox1'>
-            {`แก้แล้ว`}
-          </label>
-        </div>
-        <div className='form-check form-check-inline'>
-          <input
-            className='form-check-input'
-            name={`solve`} type='radio'
-            id='inlineCheckbox2'
-            value='option2'
-          />
-          <label className='form-check-label' htmlFor='inlineCheckbox2'>
-            {`ยังไม่ได้แก้`}
-          </label>
+        <div className='row'>
+          <div className='col-md-6'>
+            <div className='form-check form-check-inline'>
+              <input
+                className='form-check-input'
+                name={`solve`}
+                type='radio'
+                id='inlineCheckbox1'
+                value='option1'
+              />
+              <label className='form-check-label' htmlFor='inlineCheckbox1'>
+                {`แก้แล้ว`}
+              </label>
+            </div>
+
+          </div>
+          <div className='col-md-6'>
+            <div className='form-check form-check-inline'>
+              <input
+                className='form-check-input'
+                name={`solve`} type='radio'
+                id='inlineCheckbox2'
+                value='option2'
+              />
+              <label className='form-check-label' htmlFor='inlineCheckbox2'>
+                {`ยังไม่ได้แก้`}
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
