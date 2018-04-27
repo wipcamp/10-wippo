@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        issueList: action.data
+        issueList: action.data.reverse()
       }
 
     case GET_PROBLEM.REJECTED:
