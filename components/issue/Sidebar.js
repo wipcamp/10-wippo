@@ -2,13 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 const SideBar = styled.div`
   width: 150px;
+  position: sticky;
+  top: 0;
   @media (min-width: 768px) {
     width: 250px;
   }
-  ${props => props.distance < 0 && `
-    position: fixed;
-    top: 0;
-  `}
 `
 
 const Sidebar = (props) => (
