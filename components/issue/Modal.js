@@ -39,6 +39,7 @@ const Modal = ({ title, show, toggle, children }) => (
     />
     <Dialog className='modal-dialog modal-lg' role='document'
       show={show}
+      onKeyDown={e => { e.key === 'Escape' && toggle()}}
     >
       <div className='modal-content'>
         <div className='modal-header'>
