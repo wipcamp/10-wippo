@@ -1,37 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-
-const Prioritise = styled.div.attrs({
-  className: 'mx-3 p-1 rounded'
-})`
-  display: inline-block;
-  ${props => props.level === 1 ? `
-    background: red;
-    color: white;
-  ` : props.level === 2 ? `
-    background: orange;
-    color: white;    
-  ` : props.level === 3 && `
-    background: green;
-    color: white;
-  `}
-`
+import Tag from './Tag'
+import moment from 'moment'
 
 const IssueItem = ({
   data: {
-    topic
+    topic,
+    priority_id: priority,
+    is_solve: isSolve,
+    not_solve: notSolve,
+    created_at: create
   }
 }) => (
-  <div className='row my-2'>
-    <div className='col-12 border pt-2 pb-1'>
+  <div className='row my-3 border'>
+    <div className='col-12 text-white bg-secondary py-3' style={{fontSize: '120%'}}>
       <b>หัวข้อ:</b> {topic}
     </div>
-    <div className='col-12 bg-secondary py-1'>
-      <div className=' text-white'>
-        วัน 30 May 2018 เวลา 18:00:01
-        <Prioritise level={3}>ปานกลาง</Prioritise>
+    <div className='col-12 py-1' style={{backgroundColor: '#ddd'}}>
+      <div className=''>
+        {moment(create, 'yyyy-mm-dd hh:mm:ss GMT+7').format('วัน DD MMM YYYY เวลา hh:mm:ss')}
+        <Tag priority={priority} />
         <div className='d-inline-block float-right'>
+          <div className='mx-2 d-inline-block'>
+            {(isSolve || notSolve)
+              ? <span className='alert-success alert py-1'>แก้แล้ว</span>
+              : <span className='alert py-1 alert-danger'>ยังไม่ได้แก้</span>}
+          </div>
           <button className='btn btn-warning mr-1'>แก้ไข</button>
           <button className='btn btn-info mr-1'>ดูรายละเอียด</button>
         </div>
@@ -50,6 +44,7 @@ IssueItem.propTypes = {
     not_solve: PropTypes.number, // 0 | 1
     problem_type_id: PropTypes.number,
     priority_id: PropTypes.number,
+    created_at: PropTypes.string,
     updated_at: PropTypes.string
   })
 }
