@@ -1,20 +1,12 @@
 import React from 'react'
-import styled from 'styled-components'
 import Modal from './Modal'
 import PropTypes from 'prop-types'
-
-// const Input = styled.input`
-//   background-repeat: no-repeat;
-//   background-attachment: scroll;
-//   background-size: 16px 18px;
-//   background-position: 98% 50%;
-// `
 
 const GroupBtn = ({ toggle, className }) => (
   <div className={className}>
     <button
       className='btn btn-primary mr-2'
-    >create issue log</button>
+    >Create issue log</button>
     <button
       type='button'
       className='btn btn-secondary'
@@ -57,6 +49,19 @@ const CreateIssue = ({ show, toggle }) => (
         </div>
       </div>
       <div className='row mt-1'>
+        <div className='col-6 col-md-4'>
+          <div className='form-group'>
+            <label htmlFor='problem-type-input'>ประเภท</label>
+            <select
+              className='form-control'
+              id='problem-type-input'
+              required
+            >
+              <option>xx</option>
+              <option>yy</option>
+            </select>
+          </div>
+        </div>
         <div className='col-6 col-md-4'>
           <div className='form-group'>
             <label htmlFor='priority-input'>ความสำคัญ (priotity)</label>
