@@ -6,6 +6,8 @@ import IssueList from './IssueList'
 import Sidebar from './Sidebar'
 import Layout from '../layout/layout'
 import CreateIssue from './CreateIssue'
+import DetailIssue from './DetailIssue'
+import EditIssue from './EditIssue'
 
 const MainIssue = (props) => (
   <Layout subheadertext='Issue Management'>
@@ -21,6 +23,12 @@ const MainIssue = (props) => (
     <CreateIssue
       show={props.issue.showModal}
       toggle={props.toggleModal}
+    />
+    <DetailIssue
+      // show
+    />
+    <EditIssue
+      // show
     />
   </Layout>
 )
