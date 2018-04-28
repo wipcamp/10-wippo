@@ -9,7 +9,6 @@ const DetailIssue = ({ show, toggle }) => (
     title={`Detail Issue ::`}
   >
     <div>
-
       <h2>หัวข้อ: lorem</h2>
       <div className='form-group'>
         <label htmlFor='issue-desc'>Detail:</label>
