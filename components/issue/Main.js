@@ -5,28 +5,33 @@ import { actions as issueActions } from '../../store/modules/issue'
 import IssueList from './IssueList'
 import Sidebar from './Sidebar'
 import Layout from '../layout/layout'
-import { StickyContainer, Sticky } from 'react-sticky'
+import CreateIssue from './CreateIssue'
+import DetailIssue from './DetailIssue'
+import EditIssue from './EditIssue'
 
 const MainIssue = (props) => (
   <Layout subheadertext='Issue Management'>
     <div className='row'>
       <div className='col-12 col-md-3'>
-        <StickyContainer>
-          <Sticky>
-            {
-              (p) => <Sidebar dis={p.distanceFromTop} {...props} />
-            }
-          </Sticky>
-        </StickyContainer>
+        <Sidebar {...props} />
       </div>
       <div className='col-12 col-md-9'>
         <h2>Issue list | {`Day 1 (${props.issue.date})`}</h2>
-        {
-          props.issue.loading && <div className='text-center'>Loading...</div>
-        }
-        <IssueList list={props.issue.issueList} />
+        <IssueList list={props.issue.issueList} loading={props.issue.loading}/>
       </div>
     </div>
+    <CreateIssue
+      show={props.issue.showModal}
+      toggle={props.toggleModal}
+    />
+    <DetailIssue
+      show={false}
+      toggle={props.toggleModal}
+    />
+    <EditIssue
+      show={false}
+      toggle={props.toggleModal}
+    />
   </Layout>
 )
 
