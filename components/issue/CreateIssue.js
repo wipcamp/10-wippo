@@ -106,9 +106,9 @@ const CreateIssue = ({
               onChange={e => setField('priority', e.target.value)}
             >
               <option value=''>โปรดเลือก</option>
-              <option value='1'>น้อย</option>
+              <option value='3'>น้อย</option>
               <option value='2'>ปานกลาง</option>
-              <option value='3'>สูง</option>
+              <option value='1'>สูง</option>
             </select>
           </div>
         </div>
