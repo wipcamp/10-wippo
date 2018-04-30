@@ -28,6 +28,7 @@ const CreateIssue = ({
   setField,
   toggleModal,
   clearAll,
+  createIssue,
   create: {
     topic,
     desc,
@@ -43,7 +44,7 @@ const CreateIssue = ({
     toggle={toggleModal}
     title='Create Issue ::'
   >
-    <form>
+    <form onSubmit={createIssue}>
       <div className='row'>
         <div className='col-12'>
           <div className='form-label-group'>
@@ -105,48 +106,10 @@ const CreateIssue = ({
               onChange={e => setField('priority', e.target.value)}
             >
               <option value=''>โปรดเลือก</option>
-              <option>น้อย</option>
-              <option>ปานกลาง</option>
-              <option>สูง</option>
+              <option value='1'>น้อย</option>
+              <option value='2'>ปานกลาง</option>
+              <option value='3'>สูง</option>
             </select>
-          </div>
-        </div>
-        <div className='col-6 col-md-4'>
-          <div className='form-group'>
-            <label>แก้ปัญหาหรือยัง</label>
-            <div className='mt-2'>
-              <div className='form-check form-check-inline'>
-                <input
-                  className='form-check-input'
-                  type='radio'
-                  name='solve-problem'
-                  id='solve-problem-input1'
-                  value='1'
-                  required
-                  checked={isSolve === '1'}
-                  onChange={e => setField('isSolve', e.target.value)}
-                />
-                <label
-                  className='form-check-label'
-                  htmlFor='solve-problem-input1'
-                >แก้แล้ว</label>
-              </div>
-              <div className='form-check form-check-inline'>
-                <input
-                  className='form-check-input'
-                  type='radio'
-                  name='solve-problem'
-                  id='solve-problem-input2'
-                  value='0'
-                  checked={isSolve === '0'}
-                  onChange={e => setField('isSolve', e.target.value)}
-                />
-                <label
-                  className='form-check-label'
-                  htmlFor='solve-problem-input2'
-                >ยังไม่ได้แก้</label>
-              </div>
-            </div>
           </div>
         </div>
         <div className='col-12'>
@@ -172,7 +135,6 @@ CreateIssue.propTypes = {
     desc: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     priority: PropTypes.string.isRequired,
-    isSolve: PropTypes.string.isRequired,
     assignTo: PropTypes.array.isRequired,
     showModal: PropTypes.bool.isRequired
   })
