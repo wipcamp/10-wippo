@@ -37,6 +37,8 @@ const MainIssue = (props) => (
   </Layout>
 )
 
+let interval
+
 export default compose(
   connect(
     state => ({
@@ -53,9 +55,10 @@ export default compose(
   lifecycle({
     componentDidMount () {
       this.props.getIssue()
+      interval = setInterval(this.props.getIssue, 15000)
     },
     componentWillUnmount () {
-
+      clearInterval(interval)
     }
   })
 )(MainIssue)
