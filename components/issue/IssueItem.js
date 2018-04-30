@@ -11,6 +11,7 @@ const IssueItem = ({
   viewDetail
 }) => {
   const {
+    id,
     topic,
     priority_id: priority,
     is_solve: isSolve,
@@ -24,7 +25,8 @@ const IssueItem = ({
       </div>
       <div className='col-12 py-1' style={{backgroundColor: '#ddd'}}>
         <div className=''>
-          {moment(create, 'yyyy-mm-dd hh:mm:ss GMT+7').format('วัน DD MMM YYYY เวลา hh:mm:ss')}
+          <b style={{fontSize: '110%'}}>problem_id: ( {id} )</b>&nbsp;
+          {moment(create, 'YYYY-MM-DD HH:mm:ss GMT+7').format('วัน DD MMM YYYY เวลา hh:mm:ss')}
           <Tag priority={priority} />
           <div className='d-inline-block float-right'>
             <div className='mx-2 d-inline-block'>
