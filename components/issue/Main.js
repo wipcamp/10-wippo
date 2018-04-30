@@ -19,7 +19,7 @@ const MainIssue = (props) => (
         <Sidebar {...props} />
       </div>
       <div className='col-12 col-md-9'>
-        <h2>Issue list | {`Day 1 (${props.issue.date})`}</h2>
+        <h2>Issue list | {props.issue.date}</h2>
         <IssueList list={props.issue.issueList} loading={props.issue.loading}/>
       </div>
     </div>
@@ -44,6 +44,7 @@ export default compose(
   ),
   lifecycle({
     componentDidMount () {
+      this.props.initDate()
       this.props.getIssue()
     },
     componentWillUnmount () {
