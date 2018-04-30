@@ -23,7 +23,7 @@ const Sidebar = (props) => (
       <div>
         <button
           className='btn btn-primary btn-block'
-          onClick={props.toggleModal}
+          onClick={props.toggleCreate}
         >สร้าง issue</button>
         <button
           className='btn btn-success btn-block'
