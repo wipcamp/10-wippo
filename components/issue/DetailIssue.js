@@ -51,7 +51,7 @@ const DetailIssue = ({
             <b>ความสำคัญ:</b> <Tag priority={priority} />
           </div>
           <div className='col-4'>
-            <b>แก้ปัญหาแล้วรึยัง</b> {isSolve === 0 ? 'ยังไม่ได้แก้' : 'แก้แล้ว'}
+            <b>แก้ปัญหาแล้วรึยัง</b> {isSolve === '0' ? 'ยังไม่ได้แก้' : 'แก้แล้ว'}
           </div>
         </div>
         <div className='row'>
