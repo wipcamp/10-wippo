@@ -1,11 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { compose } from 'recompose'
+import { connect } from 'react-redux'
+import { actions as editActions } from '../../store/modules/issue.edit'
+import { problemTypes } from './dropdown.json'
+
 import Modal from './Modal'
 
-const EditIssue = ({ show, toggle }) => (
+const EditIssue = ({
+  toggleModal,
+  setField,
+  edit: {
+    id,
+    topic,
+    desc,
+    priority,
+    type,
+    isSolve,
+    time,
+    showModal
+  }
+}) => (
   <Modal
-    show={show}
-    toggle={toggle}
+    show={showModal}
+    toggle={toggleModal}
     title={`Edit Isue ::`}
   >
     <form>
@@ -18,8 +36,9 @@ const EditIssue = ({ show, toggle }) => (
               className='form-control'
               placeholder='Topic'
               required
-              autoFocus
               autoComplete='off'
+              value={topic}
+              onChange={e => setField('topic', e.target.value)}
             />
             <label htmlFor='topic-input'>Topic</label>
           </div>
@@ -31,6 +50,8 @@ const EditIssue = ({ show, toggle }) => (
               placeholder='Description here ..'
               required
               rows='4'
+              value={desc}
+              onChange={e => setField('desc', e.target.value)}
             />
           </div>
         </div>
@@ -43,9 +64,14 @@ const EditIssue = ({ show, toggle }) => (
               className='form-control'
               id='problem-type-input'
               required
+              value={type}
+              onChange={e => setField('type', e.target.value)}
             >
-              <option>xx</option>
-              <option>yy</option>
+              {
+                problemTypes.map(d => (
+                  <option key={d.id} value={d.id}>{d.name}</option>
+                ))
+              }
             </select>
           </div>
         </div>
@@ -56,10 +82,12 @@ const EditIssue = ({ show, toggle }) => (
               className='form-control'
               id='priority-input'
               required
+              value={priority}
+              onChange={e => setField('priority', e.target.value)}
             >
-              <option>น้อย</option>
-              <option>ปานกลาง</option>
-              <option>สูง</option>
+              <option value='3' >น้อย</option>
+              <option value='2'>ปานกลาง</option>
+              <option value='1'>สูง</option>
             </select>
           </div>
         </div>
@@ -75,6 +103,8 @@ const EditIssue = ({ show, toggle }) => (
                   id='solve-problem-input1'
                   value='1'
                   required
+                  checked={isSolve === '1'}
+                  onChange={e => setField('isSolve', e.target.value)}
                 />
                 <label
                   className='form-check-label'
@@ -88,6 +118,8 @@ const EditIssue = ({ show, toggle }) => (
                   name='solve-problem'
                   id='solve-problem-input2'
                   value='0'
+                  checked={isSolve === '0'}
+                  onChange={e => setField('isSolve', e.target.value)}
                 />
                 <label
                   className='form-check-label'
@@ -108,7 +140,7 @@ const EditIssue = ({ show, toggle }) => (
           </div>
         </div>
         <div className='col-12'>
-          <span className='text-danger'>เวลาอ้างอิงตามเวลาที่โพสต์</span>
+          <b>เวลา:</b> {time}
         </div>
         <div className='col-12 px-0'>
           <hr />
@@ -119,7 +151,7 @@ const EditIssue = ({ show, toggle }) => (
             <button
               type='button'
               className='btn btn-secondary'
-              // onClick={toggle}
+              onClick={toggleModal}
             >Close</button>
           </div>
         </div>
@@ -129,18 +161,17 @@ const EditIssue = ({ show, toggle }) => (
 )
 
 EditIssue.propTypes = {
-  data: PropTypes.shape({
-    id: PropTypes.number,
-    topic: PropTypes.string,
-    description: PropTypes.string,
-    report_id: PropTypes.number, // wipid
-    is_solve: PropTypes.number, // 0 | 1
-    not_solve: PropTypes.number, // 0 | 1
-    problem_type_id: PropTypes.number,
-    priority_id: PropTypes.number,
-    created_at: PropTypes.string,
-    updated_at: PropTypes.string
+  toggleModal: PropTypes.func.isRequired,
+  edit: PropTypes.shape({
+    showModal: PropTypes.bool.isRequired
   })
 }
 
-export default EditIssue
+export default compose(
+  connect(
+    state => ({
+      edit: state.editIssue
+    }),
+    { ...editActions }
+  )
+)(EditIssue)
