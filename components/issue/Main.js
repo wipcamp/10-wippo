@@ -1,6 +1,7 @@
 import React from 'react'
 import { compose, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 import { actions as issueActions } from '../../store/modules/issue'
 import { actions as createActions } from '../../store/modules/issue.create'
@@ -19,8 +20,15 @@ const MainIssue = (props) => (
         <Sidebar {...props} />
       </div>
       <div className='col-12 col-md-9'>
-        <h2>Issue list | {props.issue.date}</h2>
-        <IssueList list={props.issue.issueList} loading={props.issue.loading}/>
+        <h2>Issue list</h2>
+        <IssueList
+          list={props.issue.issueList}
+          priority={props.issue.filter_priority}
+          time={props.issue.filter_time}
+          date={props.issue.filter_date}
+          solve={props.issue.filter_solve}
+          loading={props.issue.loading}
+        />
       </div>
     </div>
     {props.modal1 && <CreateIssue />}
@@ -44,7 +52,6 @@ export default compose(
   ),
   lifecycle({
     componentDidMount () {
-      this.props.initDate()
       this.props.getIssue()
     },
     componentWillUnmount () {
