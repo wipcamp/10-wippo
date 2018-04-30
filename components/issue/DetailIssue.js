@@ -56,9 +56,6 @@ const DetailIssue = ({
         </div>
         <div className='row'>
           <div className='col-12'>
-            assign to:
-          </div>
-          <div className='col-12'>
             สร้างเมื่อ {time}
           </div>
           <div className='col-12 px-0'>

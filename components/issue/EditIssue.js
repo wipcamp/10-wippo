@@ -130,16 +130,6 @@ const EditIssue = ({
           </div>
         </div>
         <div className='col-12'>
-          <div className='form-group'>
-            <label htmlFor='assign-input'>Assign to</label>
-            <input
-              className='form-control'
-              id='assign-input'
-              required
-            />
-          </div>
-        </div>
-        <div className='col-12'>
           <b>เวลา:</b> {time}
         </div>
         <div className='col-12 px-0'>
