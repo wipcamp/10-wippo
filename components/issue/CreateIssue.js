@@ -1,9 +1,18 @@
 import React from 'react'
 import Modal from './Modal'
 import PropTypes from 'prop-types'
+import { compose } from 'recompose'
+import { connect } from 'react-redux'
+import { actions as createActions } from '../../store/modules/issue.create'
+import { problemTypes } from './dropdown.json'
 
-const GroupBtn = ({ toggle, className }) => (
+const GroupBtn = ({ toggle, className, clear }) => (
   <div className={className}>
+    <button
+      type='button'
+      className='btn btn-warning mr-2'
+      onClick={clear}
+    >Clear field</button>
     <button
       className='btn btn-primary mr-2'
     >Create issue log</button>
@@ -15,10 +24,23 @@ const GroupBtn = ({ toggle, className }) => (
   </div>
 )
 
-const CreateIssue = ({ show, toggle }) => (
+const CreateIssue = ({
+  setField,
+  toggleModal,
+  clearAll,
+  create: {
+    topic,
+    desc,
+    type,
+    priority,
+    isSolve,
+    assignTo,
+    showModal
+  }
+}) => (
   <Modal
-    show={show}
-    toggle={toggle}
+    show={showModal}
+    toggle={toggleModal}
     title='Create Issue ::'
   >
     <form>
@@ -33,6 +55,8 @@ const CreateIssue = ({ show, toggle }) => (
               required
               autoFocus
               autoComplete='off'
+              value={topic}
+              onChange={e => setField('topic', e.target.value)}
             />
             <label htmlFor='topic-input'>Topic</label>
           </div>
@@ -44,6 +68,8 @@ const CreateIssue = ({ show, toggle }) => (
               placeholder='Description here ..'
               required
               rows='4'
+              value={desc}
+              onChange={e => setField('desc', e.target.value)}
             />
           </div>
         </div>
@@ -56,9 +82,15 @@ const CreateIssue = ({ show, toggle }) => (
               className='form-control'
               id='problem-type-input'
               required
+              value={type}
+              onChange={e => setField('type', e.target.value)}
             >
-              <option>xx</option>
-              <option>yy</option>
+              <option value=''>โปรดเลือก</option>
+              {
+                problemTypes.map(d => (
+                  <option key={d.id} value={d.id} >{d.name}</option>
+                ))
+              }
             </select>
           </div>
         </div>
@@ -69,7 +101,10 @@ const CreateIssue = ({ show, toggle }) => (
               className='form-control'
               id='priority-input'
               required
+              value={priority}
+              onChange={e => setField('priority', e.target.value)}
             >
+              <option value=''>โปรดเลือก</option>
               <option>น้อย</option>
               <option>ปานกลาง</option>
               <option>สูง</option>
@@ -88,6 +123,8 @@ const CreateIssue = ({ show, toggle }) => (
                   id='solve-problem-input1'
                   value='1'
                   required
+                  checked={isSolve === '1'}
+                  onChange={e => setField('isSolve', e.target.value)}
                 />
                 <label
                   className='form-check-label'
@@ -101,6 +138,8 @@ const CreateIssue = ({ show, toggle }) => (
                   name='solve-problem'
                   id='solve-problem-input2'
                   value='0'
+                  checked={isSolve === '0'}
+                  onChange={e => setField('isSolve', e.target.value)}
                 />
                 <label
                   className='form-check-label'
@@ -127,7 +166,8 @@ const CreateIssue = ({ show, toggle }) => (
           <hr />
           <GroupBtn
             className='px-3 text-right'
-            toggle={toggle}
+            toggle={toggleModal}
+            clear={clearAll}
           />
         </div>
       </div>
@@ -136,8 +176,23 @@ const CreateIssue = ({ show, toggle }) => (
 )
 
 CreateIssue.propTypes = {
-  toggle: PropTypes.func.isRequired,
-  show: PropTypes.bool.isRequired
+  toggleModal: PropTypes.func.isRequired,
+  create: PropTypes.shape({
+    topic: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    priority: PropTypes.string.isRequired,
+    isSolve: PropTypes.string.isRequired,
+    assignTo: PropTypes.array.isRequired,
+    showModal: PropTypes.bool.isRequired
+  })
 }
 
-export default CreateIssue
+export default compose(
+  connect(
+    state => ({
+      create: state.createIssue
+    }),
+    { ...createActions }
+  )
+)(CreateIssue)
