@@ -1,21 +1,22 @@
+import moment from 'moment'
+
 import actionCreator from '../../libs/actionCreator'
 import api from '../../components/util/axios.js'
 import cookie from '../../components/util/cookie'
 
-const issueAction = actionCreator('hello')
+const issueAction = actionCreator('issue')
 
 const SET_FIELD = issueAction('SET_FIELD')
 const GET_PROBLEM = issueAction('GET_PROBLEM', true)
-const TOGGLE_MODAL = issueAction('TOGGLE_MODAL')
 
 let initialState = {
   loading: false,
   issueList: [],
-  text: '',
-  date: '30 May 2018',
-  error: {},
-  data: {},
-  showModal: true
+  err: '',
+  filter_priority: '0',
+  filter_time: 'all',
+  filter_date: 'all',
+  filter_solve: '2'
 }
 
 export default (state = initialState, action) => {
@@ -46,11 +47,6 @@ export default (state = initialState, action) => {
         [action.field]: action.value
       }
 
-    case TOGGLE_MODAL:
-      return {
-        ...state,
-        showModal: !state.showModal
-      }
     default: return state
   }
 }
@@ -69,8 +65,5 @@ export const actions = {
     type: SET_FIELD,
     field,
     value
-  }),
-  toggleModal: () => ({
-    type: TOGGLE_MODAL
   })
 }

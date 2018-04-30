@@ -14,13 +14,8 @@ export default () => next => (action) => {
         )
       })
       .catch(error => {
-        if (error.status === 404 || (error.data && error.data.error === 'LDAP Error. Invalid Credentials')) {
-          return reject(
-            next({ ...action, type: action.type.REJECTED, error: error.data })
-          )
-        }
-        return resolve(
-          next({ ...action, type: action.type.REJECTED, error: error.data })
+        return reject(
+          next({ ...action, type: action.type.REJECTED, error })
         )
       })
   )
