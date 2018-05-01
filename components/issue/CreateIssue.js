@@ -62,7 +62,7 @@ const CreateIssue = ({
             <label htmlFor='topic-input'>Topic</label>
           </div>
           <div className='form-group'>
-            <label htmlFor='desc-input'>Description</label>
+            <label htmlFor='desc-input'>รายละเอียด (Description)<sup className='text-danger'>*</sup></label>
             <textarea
               id='desc-input'
               className='form-control'
@@ -78,7 +78,7 @@ const CreateIssue = ({
       <div className='row mt-1'>
         <div className='col-6 col-md-4'>
           <div className='form-group'>
-            <label htmlFor='problem-type-input'>ประเภท</label>
+            <label htmlFor='problem-type-input'>ประเภท (Type)<sup className='text-danger'>*</sup></label>
             <select
               className='form-control'
               id='problem-type-input'
@@ -97,7 +97,7 @@ const CreateIssue = ({
         </div>
         <div className='col-6 col-md-4'>
           <div className='form-group'>
-            <label htmlFor='priority-input'>ความสำคัญ (priotity)</label>
+            <label htmlFor='priority-input'>ความสำคัญ (Priotity)<sup className='text-danger'>*</sup></label>
             <select
               className='form-control'
               id='priority-input'
@@ -113,7 +113,7 @@ const CreateIssue = ({
           </div>
         </div>
         <div className='col-12'>
-          <span className='text-danger'>เวลาอ้างอิงตามเวลาที่โพสต์</span>
+          <span className='text-danger'>หมายเหตุ: เวลาอ้างอิงตามเวลาที่สร้างโพสต์</span>
         </div>
         <div className='col-12 px-0'>
           <hr />
