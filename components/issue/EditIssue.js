@@ -10,6 +10,7 @@ import Modal from './Modal'
 const EditIssue = ({
   toggleModal,
   setField,
+  changeSolveStatus,
   edit: {
     id,
     topic,
@@ -17,6 +18,7 @@ const EditIssue = ({
     priority,
     type,
     isSolve,
+    notSolve,
     time,
     showModal
   }
@@ -40,10 +42,10 @@ const EditIssue = ({
               value={topic}
               onChange={e => setField('topic', e.target.value)}
             />
-            <label htmlFor='topic-input'>Topic</label>
+            <label htmlFor='topic-input' className='font-weight-bold'>Topic</label>
           </div>
           <div className='form-group'>
-            <label htmlFor='desc-input'>Description</label>
+            <label htmlFor='desc-input' className='font-weight-bold'>Description<sup className='text-danger'>*</sup></label>
             <textarea
               id='desc-input'
               className='form-control'
@@ -59,7 +61,7 @@ const EditIssue = ({
       <div className='row mt-1'>
         <div className='col-6 col-md-4'>
           <div className='form-group'>
-            <label htmlFor='problem-type-input'>ประเภท</label>
+            <label htmlFor='problem-type-input' className='font-weight-bold'>ประเภท (Type)<sup className='text-danger'>*</sup></label>
             <select
               className='form-control'
               id='problem-type-input'
@@ -77,7 +79,7 @@ const EditIssue = ({
         </div>
         <div className='col-6 col-md-4'>
           <div className='form-group'>
-            <label htmlFor='priority-input'>ความสำคัญ (priotity)</label>
+            <label htmlFor='priority-input' className='font-weight-bold'>ความสำคัญ (Priotity)<sup className='text-danger'>*</sup></label>
             <select
               className='form-control'
               id='priority-input'
@@ -91,9 +93,11 @@ const EditIssue = ({
             </select>
           </div>
         </div>
-        <div className='col-6 col-md-4'>
+      </div>
+      <div className='row'>
+        <div className='col-6'>
           <div className='form-group'>
-            <label>แก้ปัญหาหรือยัง</label>
+            <label className='font-weight-bold'>สถานะของปัญหา<sup className='text-danger'>*</sup></label>
             <div className='mt-2'>
               <div className='form-check form-check-inline'>
                 <input
@@ -103,13 +107,13 @@ const EditIssue = ({
                   id='solve-problem-input1'
                   value='1'
                   required
-                  checked={isSolve === '1'}
-                  onChange={e => setField('isSolve', e.target.value)}
+                  checked={isSolve}
+                  onChange={e => changeSolveStatus(e.target.value)}
                 />
                 <label
                   className='form-check-label'
                   htmlFor='solve-problem-input1'
-                >แก้แล้ว</label>
+                >แก้ปัญหาแล้ว</label>
               </div>
               <div className='form-check form-check-inline'>
                 <input
@@ -117,14 +121,29 @@ const EditIssue = ({
                   type='radio'
                   name='solve-problem'
                   id='solve-problem-input2'
-                  value='0'
-                  checked={isSolve === '0'}
-                  onChange={e => setField('isSolve', e.target.value)}
+                  value='2'
+                  checked={notSolve}
+                  onChange={e => changeSolveStatus(e.target.value)}
                 />
                 <label
                   className='form-check-label'
                   htmlFor='solve-problem-input2'
-                >ยังไม่ได้แก้</label>
+                >เพิกเฉยปัญหา</label>
+              </div>
+              <div className='form-check form-check-inline'>
+                <input
+                  className='form-check-input'
+                  type='radio'
+                  name='solve-problem'
+                  id='solve-problem-input3'
+                  value='0'
+                  checked={!(isSolve || notSolve)}
+                  onChange={e => changeSolveStatus(e.target.value)}
+                />
+                <label
+                  className='form-check-label'
+                  htmlFor='solve-problem-input3'
+                >ยังไม่แก้ปัญหา</label>
               </div>
             </div>
           </div>
