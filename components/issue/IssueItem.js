@@ -30,9 +30,11 @@ const IssueItem = ({
           <Tag priority={priority} />
           <div className='d-inline-block float-right'>
             <div className='mx-2 d-inline-block'>
-              {(isSolve || notSolve)
+              {isSolve
                 ? <span className='alert-success alert py-1'>แก้แล้ว</span>
-                : <span className='alert py-1 alert-danger'>ยังไม่ได้แก้</span>}
+                : notSolve
+                  ? <span className='alert py-1 alert-primary'>เพิกเฉย</span>
+                  : <span className='alert py-1 alert-danger'>ยังไม่ได้แก้</span>}
             </div>
             <button
               className='btn btn-info mr-1'
