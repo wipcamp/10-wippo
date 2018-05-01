@@ -21,6 +21,7 @@ const DetailIssue = ({
     type,
     priority,
     isSolve,
+    notSolve,
     assignTo,
     time,
     showModal
@@ -51,7 +52,11 @@ const DetailIssue = ({
             <b>ความสำคัญ:</b> <Tag priority={priority} />
           </div>
           <div className='col-4'>
-            <b>แก้ปัญหาแล้วรึยัง</b> {isSolve === '0' ? 'ยังไม่ได้แก้' : 'แก้แล้ว'}
+            <b>สถานะของปัญหา: </b>
+            <span>{isSolve ? 'แก้ปัญหาแล้ว'
+              : notSolve
+                ? 'เพิกเฉยปัญหา'
+                : 'ยังไม่ได้แก้ปัญหา'}</span>
           </div>
         </div>
         <div className='row'>
