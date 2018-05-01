@@ -8,12 +8,13 @@ const CLOSE_MODAL = issueAction('CLOSE_MODAL')
 const VIEW_DETAIL = issueAction('VIEW_DETAIL')
 
 let initialState = {
-  id: '',
+  id: 0,
   topic: '',
   desc: '',
-  type: '',
-  priority: '',
-  isSolve: '',
+  type: 0,
+  priority: 0,
+  isSolve: 0,
+  notSolve: 0,
   time: '',
   assignTo: [],
   showModal: false
@@ -34,18 +35,10 @@ export default (state = initialState, action) => {
       }
 
     case VIEW_DETAIL:
-      const { isSolve } = action.data
-      let solve = isSolve ? '1' : '0'
       return {
         ...state,
-        showModal: true,
-        id: action.data.id,
-        topic: action.data.topic,
-        desc: action.data.desc,
-        type: action.data.type,
-        priority: action.data.priority,
-        isSolve: solve,
-        time: action.data.time
+        ...action.data,
+        showModal: true
       }
 
     case CLOSE_MODAL:
@@ -70,7 +63,8 @@ export const actions = {
       desc: values.description,
       type: values.problem_type_id,
       priority: values.priority_id,
-      isSolve: values.is_solve || values.not_solve,
+      isSolve: values.is_solve,
+      notSolve: values.not_solve,
       time: values.created_at
     }
   }),
