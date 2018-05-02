@@ -75,7 +75,6 @@ const DetailIssue = ({
             <div className='px-3 text-right'>
               <button
                 className='btn btn-warning mr-2'
-                disabled
                 onClick={() => {
                   closeModal()
                   setEdit(detail)
