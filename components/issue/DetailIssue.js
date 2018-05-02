@@ -16,14 +16,15 @@ const DetailIssue = ({
   setEdit
 }) => {
   const {
+    id,
     topic,
     desc,
     type,
     priority,
     isSolve,
     notSolve,
-    assignTo,
     time,
+    reportId,
     showModal
   } = detail
   return (
@@ -33,7 +34,8 @@ const DetailIssue = ({
       title={`Detail Issue ::`}
     >
       <div>
-        <h3>หัวข้อ: {topic}</h3>
+        <span>ID: {id}</span>
+        <h3 className='mt-1'>หัวข้อ: {topic}</h3>
         <div className='form-group'>
           <label htmlFor='issue-desc'><b>Detail:</b></label>
           <textarea
@@ -61,7 +63,12 @@ const DetailIssue = ({
         </div>
         <div className='row'>
           <div className='col-12'>
-            สร้างเมื่อ {time}
+            <b>สร้างเมื่อ (Created at): </b> 
+            <span>{time}</span>
+          </div>
+          <div className='col-12'>
+            <b>แจ้งโดย (Reported by): </b>
+            <span>WIPID {reportId}</span>
           </div>
           <div className='col-12 px-0'>
             <hr />
