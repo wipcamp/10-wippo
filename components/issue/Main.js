@@ -27,6 +27,7 @@ const MainIssue = (props) => (
           time={props.issue.filter_time}
           date={props.issue.filter_date}
           solve={props.issue.filter_solve}
+          problemType={props.issue.filter_type}
           loading={props.issue.loading}
         />
       </div>
