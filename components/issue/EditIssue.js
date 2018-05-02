@@ -161,7 +161,7 @@ const EditIssue = ({
         </div>
         <div className='col-12'>
           <b>ผู้สร้าง (Report By): </b>
-          WIPPID {time}
+          WIPPID {reportId}
         </div>
         <div className='col-12 px-0'>
           <hr />
