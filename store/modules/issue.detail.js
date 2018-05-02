@@ -16,6 +16,7 @@ let initialState = {
   isSolve: 0,
   notSolve: 0,
   time: '',
+  reportId: 0,
   assignTo: [],
   showModal: false
 }
@@ -65,7 +66,8 @@ export const actions = {
       priority: values.priority_id,
       isSolve: values.is_solve,
       notSolve: values.not_solve,
-      time: values.created_at
+      time: values.created_at,
+      reportId: values.report_id
     }
   }),
   closeModal: () => ({
