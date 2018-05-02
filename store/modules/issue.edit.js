@@ -18,7 +18,8 @@ let initialState = {
   isSolve: 0,
   notSolve: 0,
   assignTo: [],
-  showModal: false
+  showModal: false,
+  loading: false
 }
 
 export default (state = initialState, action) => {
@@ -48,6 +49,28 @@ export default (state = initialState, action) => {
         [action.field1]: action.value1,
         [action.field2]: action.value2
       }
+
+    case EDIT_ISSUE.PENDING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case EDIT_ISSUE.RESOLVED:
+      alert('edit success')
+      return {
+        ...state,
+        loading: false,
+        showModal: false
+      }
+
+    case EDIT_ISSUE.REJECTED:
+      alert(`error: ${action.error}`)
+      return {
+        ...state,
+        loading: false
+      }
+
     default: return state
   }
 }
@@ -57,10 +80,29 @@ export const actions = {
     type: INIT_EDIT,
     data: values
   }),
-  editIssue: (values) => (dispatch, getStore) => {
-    dispatch({
-      type: EDIT_ISSUE
-    })
+  editIssue: (e) => (dispatch, getStore) => {
+    e.preventDefault()
+    const { id, topic, desc, type, priority, isSolve, notSolve } = getStore().editIssue
+    if (topic && desc && type && priority) {
+      const headers = { Authorization: `Bearer ${cookie({req: false}).token}` }
+      const data = {
+        topic,
+        description: desc,
+        problem_type_id: type,
+        priority_id: priority,
+        is_solve: isSolve,
+        not_solve: notSolve
+      }
+      dispatch({
+        type: EDIT_ISSUE,
+        promise: api.put(`/problems/${id}/wippo`, data, headers)
+      })
+    } else {
+      dispatch({
+        type: EDIT_ISSUE.REJECTED,
+        error: 'ข้อมูลใส่ไม่ครบ'
+      })
+    }
   },
   setField: (field, value) => ({
     type: SET_FIELD,
