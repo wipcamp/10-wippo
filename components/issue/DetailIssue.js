@@ -80,7 +80,7 @@ const DetailIssue = ({
                   closeModal()
                   setEdit(detail)
                 }}
-              >Edit Issue Log (not support yet)</button>
+              >Edit Issue Log</button>
               <button
                 type='button'
                 className='btn btn-secondary'
