@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { problemTypes } from './dropdown.json'
+
 const SideBar = styled.div`
   width: 150px;
   position: sticky;
@@ -85,7 +87,7 @@ const Sidebar = ({
       </div>
       <hr />
       <div className='form-group'>
-        <label>แก้ปัญหาหรือยัง</label>
+        <label>สถานะของปัญหา</label>
         <select
           className='custom-select'
           value={issue.filter_solve}
@@ -94,6 +96,22 @@ const Sidebar = ({
           <option value='2'>โชว์ทั้งหมด</option>
           <option value='1'>ที่แก้แล้ว</option>
           <option value='0'>ที่ยังไม่ได้แก้</option>
+        </select>
+      </div>
+      <hr />
+      <div className='form-group'>
+        <label>ประเภทของปัญหา</label>
+        <select
+          className='custom-select'
+          value={issue.filter_type}
+          onChange={e => setField('filter_type', e.target.value)}
+        >
+          <option value='all'>โชว์ทั้งหมด</option>
+          {
+            problemTypes.map(d => (
+              <option key={d.id} value={d.id}>{d.name}</option>
+            ))
+          }
         </select>
       </div>
     </div>
