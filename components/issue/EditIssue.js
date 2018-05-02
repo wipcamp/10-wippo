@@ -11,6 +11,7 @@ const EditIssue = ({
   toggleModal,
   setField,
   changeSolveStatus,
+  editIssue,
   edit: {
     id,
     topic,
@@ -20,6 +21,7 @@ const EditIssue = ({
     isSolve,
     notSolve,
     time,
+    reportId,
     showModal
   }
 }) => (
@@ -28,8 +30,14 @@ const EditIssue = ({
     toggle={toggleModal}
     title={`Edit Isue ::`}
   >
-    <form>
+    <form
+      method={`POST`}
+      onSubmit={editIssue}
+    >
       <div className='row'>
+        <div className='col-12 mb-2'>
+          <b>ID: </b>{id}
+        </div>
         <div className='col-12'>
           <div className='form-label-group'>
             <input
@@ -149,7 +157,11 @@ const EditIssue = ({
           </div>
         </div>
         <div className='col-12'>
-          <b>เวลา:</b> {time}
+          <b>เวลาที่สร้าง (Created at):</b> {time}
+        </div>
+        <div className='col-12'>
+          <b>ผู้สร้าง (Report By): </b>
+          WIPPID {time}
         </div>
         <div className='col-12 px-0'>
           <hr />
