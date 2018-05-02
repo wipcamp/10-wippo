@@ -17,7 +17,7 @@ let initialState = {
   filter_time: 'all',
   filter_date: 'all',
   filter_solve: '2',
-  filter_type: ''
+  filter_type: 'all'
 }
 
 export default (state = initialState, action) => {
