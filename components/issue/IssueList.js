@@ -8,7 +8,8 @@ const issueFilter = ({
   priority,
   time,
   date,
-  solve
+  solve,
+  problemType
 }) => {
   return list.filter(item => {
     let shouldReturn = true
@@ -52,6 +53,13 @@ const issueFilter = ({
         break
     }
 
+    // filter by problemType
+    if (problemType !== 'all') {
+      if (item.problem_type_id != problemType) {
+        shouldReturn = false
+      }
+    }
+
     return shouldReturn
   })
 }
@@ -62,7 +70,8 @@ const IssueList = ({
   priority,
   time,
   date,
-  solve
+  solve,
+  problemType
 }) => (
   <div>
     {loading && <div className='text-center'>Loading...</div>}
@@ -72,7 +81,8 @@ const IssueList = ({
         priority,
         time,
         date,
-        solve
+        solve,
+        problemType
       }).map((d, i) => (
         <IssueItem data={d} key={i} />
       ))
