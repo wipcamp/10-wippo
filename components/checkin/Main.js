@@ -49,6 +49,12 @@ class Main extends React.Component {
   }
 
   handleFields = (field, value) => {
+    if (field === 'personId' && !(/\d/.test(value))) {
+      return
+    }
+    if (field === 'personId' && value.length > 13) {
+      value = value.substring(0, 13)
+    }
     this.setState({
       [field]: value
     })
@@ -62,25 +68,32 @@ class Main extends React.Component {
     this.handleFields('confirm', false)
     const { camper } = this.state
     const { token } = await getCookie({ req: false })
-    const { data: { data } } = await api.put(`/campers/${camper.user_id}/checkin`,
-      {
-        checkedAt: moment().format()
-      }
-      , {
-        Authorization: `Bearer ${token}`
-      }).catch(error => {
-      if (error.includes('401')) {
-        window.location.replace('/')
-      }
-    })
-    if (data) {
-      console.log('success')
-      this.setState({
-        show: true,
-        message: 'เช็คอินสำเร็จ !'
+    if (camper && camper.user_id) {
+      const { data: { data } } = await api.put(`/campers/${camper.user_id}/checkin`,
+        {
+          checkedAt: moment().format()
+        }
+        , {
+          Authorization: `Bearer ${token}`
+        }).catch(error => {
+        if (error.includes('401')) {
+          window.location.replace('/')
+        }
       })
+      if (data) {
+        console.log('success')
+        this.setState({
+          show: true,
+          message: 'เช็คอินสำเร็จ !'
+        })
+      } else {
+        console.log('failed')
+        this.setState({
+          show: true,
+          message: 'เช็คอินไม่สำเร็จ.'
+        })
+      }
     } else {
-      console.log('failed')
       this.setState({
         show: true,
         message: 'เช็คอินไม่สำเร็จ.'
@@ -98,16 +111,30 @@ class Main extends React.Component {
 
   getCamperByPersonId = async (personId) => {
     const { token } = await getCookie({ req: false })
-    const {data: { data }} = await api.get(`/campers/${personId}/person`, {
+    const resultCheckIn = await api.get(`/campers/${personId}/person`, {
       Authorization: `Bearer ${token}`
     }).catch(error => {
       if (error.includes('401')) {
         window.location.replace('/')
       }
+      if (error.includes('404')) {
+        this.setState({
+          error: 'ไม่พบข้อมูล.'
+        })
+        setTimeout(() => {
+          this.setState({
+            error: null
+          })
+        }, 2000)
+      }
     })
-    const [ camper ] = data
-    if (camper) {
-      this.setState({ camper, error: null })
+    if (resultCheckIn.data && resultCheckIn.data.data) {
+      const [ camper ] = resultCheckIn.data.data
+      if (camper) {
+        this.setState({ camper, error: null })
+      } else {
+        this.setState({ camper: null, error: 'ไม่พบข้อมูล' })
+      }
     } else {
       this.setState({ camper: null, error: 'ไม่พบข้อมูล' })
     }
@@ -146,7 +173,7 @@ class Main extends React.Component {
               placeholder='ตัวอย่าง 1100888555999'
               className='form-control text-center'
               name='person'
-              type='text'
+              type='number'
               pattern='\d*'
               maxLength='13'
               id='person'
@@ -167,22 +194,28 @@ class Main extends React.Component {
             </button>
           </div>
           <div className='col-12'>
-            {
-              error && <div>{ error }</div>
-            }
-            { camper && <div className='mt-3 card'>
-              <div className='card-body text-center'>
-                <h1>WIP ID : { camper.user_id }</h1>
-                <h2>ชื่อจริง - นามสกุล : { camper.first_name } { camper.last_name }</h2>
-                <h2>
-                  กรุ๊บเลือด : { camper.blood_group } |
-                  อาหารที่แพ้ : { camper.congenital_diseases } |
-                  ยาประจำตัว : { camper.congenital_drugs }
-                </h2>
-                <h2>
-                  โรงเรียน : { camper.profile_registrant.edu_name }
-                </h2>
-              </div>
+            { (camper || error) && <div className='mt-3 card'>
+              {
+                camper &&
+                <div className='card-body text-center'>
+                  <h1>WIP ID : { camper.user_id }</h1>
+                  <h2>ชื่อจริง - นามสกุล : { camper.first_name } { camper.last_name }</h2>
+                  <h2>
+                    กรุ๊บเลือด : { camper.blood_group } |
+                    อาหารที่แพ้ : { camper.congenital_diseases } |
+                    ยาประจำตัว : { camper.congenital_drugs }
+                  </h2>
+                  <h2>
+                    โรงเรียน : { camper.profile_registrant.edu_name }
+                  </h2>
+                </div>
+              }
+              {
+                error &&
+                <div className='card-body text-center'>
+                  <h1>{ error }</h1>
+                </div>
+              }
             </div>
             }
           </div>
