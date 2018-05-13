@@ -7,6 +7,7 @@ module.exports = {
     config.plugins.push(
       new webpack.DefinePlugin({
         'process.env.API_URL': JSON.stringify(process.env.API_URL),
+        'process.env.URL': JSON.stringify(process.env.URL),
         'process.env.SOCKET_URL': JSON.stringify(process.env.SOCKET_URL)
       })
     )
