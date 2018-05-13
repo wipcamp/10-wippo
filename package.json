@@ -50,6 +50,7 @@
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.3.0",
     "semantic-ui-react": "^0.78.3",
+    "socket.io-client": "^2.1.0",
     "styled-components": "^3.2.1",
     "sweetalert-react": "^0.4.11",
     "thaismartcardreader.js": "https://github.com/sgnsys3/thaismartcardreader.js",
