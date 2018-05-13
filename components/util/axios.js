@@ -3,7 +3,7 @@ import env from './env'
 
 const createInstance = (headers) => {
   return axios.create({
-    baseURL: env.API_URL,
+    baseURL: process.env.API_URL,
     headers
   })
 }

@@ -22,8 +22,8 @@ const Tab3 = ({question, fullName, info, image, path, button, fileType, setComme
             <h1>ใบอนุญาติผู้ปกครอง</h1>
             {
               fileType === 'pdf'
-                ? <PDF src={`${env.URL}${path}`} href={`${env.URL}${path}`} />
-                : <ImageCustom src={`${env.URL}${path}`} size='large' href={`${env.URL}${path}`} />
+                ? <PDF src={`${process.env.URL}${path}`} href={`${process.env.URL}${path}`} />
+                : <ImageCustom src={`${process.env.URL}${path}`} size='large' href={`${process.env.URL}${path}`} />
             }
             <h3>เหตุผล (หากไม่ผ่าน)</h3>
             <textarea
