@@ -5,7 +5,7 @@ import { Button } from 'semantic-ui-react'
 
 import getCookie from '../util/cookie'
 import axios from '../util/axios'
-import { SearchInput } from '../itim/DatatableCard'
+import { SearchInput } from '../layout/input'
 import Modal from './ConfirmModal'
 
 import flavors from './flavors.json'
