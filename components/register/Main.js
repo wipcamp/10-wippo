@@ -71,7 +71,7 @@ export default compose(
   }),
   lifecycle({
     componentWillReceiveProps (nextProps) {
-      if (nextProps.registerData.step > 1) {
+      if (nextProps.regis.step > 1) {
         Router.push('/dashboard')
       }
     }
