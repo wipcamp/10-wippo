@@ -31,9 +31,10 @@ export default class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet" />
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous" />
           <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
-          <link rel="stylesheet" href="/static/css/style.css"/>
+          <link rel="stylesheet" href="/static/css/animate.css"/>
           <link rel="stylesheet" href="/static/css/react-table.css" />
           <link rel="stylesheet" href="/static/css/sweetalert.css" />
+          <link rel="stylesheet" href="/static/css/style.css"/>
           <script src="/static/js/fontawesome-all.min.js"></script>
           <script src="/static/js/fa-solid.js"></script>
           
