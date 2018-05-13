@@ -21,10 +21,16 @@ const Background = styled(MinHeight)`
     margin: 0;
     font-size: 4em;
   }
+  .text-danger {
+    font-size: 5.5em;
+  }
   .card-body {
     h1 {
       color: #000;
     }
+  }
+  form {
+    min-width: 100%;
   }
 `
 
@@ -129,10 +135,15 @@ class Main extends React.Component {
         <form onSubmit={this.updateCheckin} className='row'>
           <div className='col-12'>
             <div className='text-center my-3'>
-              <h1>Check-In System WIP Camp #10</h1>
-              <h1>กรุณาเตรียมบัตรประชาชน</h1>
+              <div className='card'>
+                <div className='card-body'>
+                  <h1>Check-In System WIP Camp #10</h1>
+                  <h1 className='text-danger animated infinite pulse'>"กรุณาเตรียมบัตรประชาชน"</h1>
+                </div>
+              </div>
             </div>
             <CheckinInput
+              placeholder='ตัวอย่าง 1100888555999'
               className='form-control text-center'
               name='person'
               type='text'
