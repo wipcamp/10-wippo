@@ -30,6 +30,7 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="/static/css/react-table.css" />
           <link rel="stylesheet" href="/static/css/sweetalert.css" />
           <link rel="stylesheet" href="/static/css/floating-label.css" />
+          <link rel="stylesheet" href="/static/css/react-datetime.css" />
           <script src="/static/js/fontawesome-all.min.js"></script>
           <script src="/static/js/fa-solid.js"></script>
           
