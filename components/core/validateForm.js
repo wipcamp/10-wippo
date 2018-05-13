@@ -96,7 +96,7 @@ export const validate = values => {
   } else if (!moment.isMoment(values.birth_at)) {
     errors.birth_at = 'กรุณารูปแบบวันที่ให้ถูกต้อง (DD/MM/YYYY)'
   } else if (!validDate(values.birth_at)) {
-    errors.birth_at = 'กรุณากรอกช่วงวันให้ถูกต้อง (ค.ศ. 1998 - 2004)'
+    errors.birth_at = 'กรุณากรอกช่วงวันให้ถูกต้อง (ค.ศ. 1995 - 2000)'
   }
 
   if (!values.citizen_id) {

@@ -401,7 +401,7 @@ const range = {
   end: moment('2001 GMT+7', 'YYYY')
 }
 
-const defaultValue = moment('01 Jan 2001 GMT+7', 'DD MMM YYYY')
+const defaultValue = moment('01 Jan 1998 GMT+7', 'DD MMM YYYY')
 
 const DateInput = ({
   input,
