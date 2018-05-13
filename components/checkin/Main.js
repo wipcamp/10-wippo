@@ -145,9 +145,9 @@ class Main extends React.Component {
   }
 
   async componentDidMount () {
-    const SOCKET_URL = process.env.SOCKET_URL
     if (process.browser) {
-      const socket = io.connect(SOCKET_URL)
+      console.log(process.env.SOCKET_URL)
+      const socket = io.connect(process.env.SOCKET_URL)
       socket.on(`personIdClient`, (personId) => {
         this.setState({ personId })
         this.getCamperByPersonId(personId)

@@ -25,6 +25,9 @@ class Login extends React.Component {
   render () {
     return (
       <Wrapper>
+        { console.log(process.env.API_URL) }
+        { console.log(process.env.URL) }
+        { console.log(process.env.SOCKET_URL) }
         <h1>WIP Camp #10</h1>
         <h3>Management System</h3>
         <h6>Made with ♥ by 10 I'm Developer.</h6>
