@@ -1,4 +1,4 @@
-
+import styled from 'styled-components'
 import { Input } from 'semantic-ui-react'
 
 export const SearchInput = styled(Input)`
