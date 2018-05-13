@@ -26,8 +26,7 @@ const StepOne = (props) => {
 export default compose(
   withProps(
     props => ({
-      onSubmit: (d) => {console.log(d)}
-      // onSubmit: props.saveRegisterStep1
+      onSubmit: props.registerSubmit
     })
   )
 )(StepOne)
