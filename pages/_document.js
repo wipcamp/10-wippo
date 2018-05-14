@@ -2,8 +2,8 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 import htmlescape from 'htmlescape'
 
-const { API_URL, URL } = process.env
-const env = { API_URL, URL }
+const { API_URL, URL, SOCKET_URL } = process.env
+const env = { API_URL, URL, SOCKET_URL }
 
 export default class MyDocument extends Document {
   static async getInitialProps (ctx) {
