@@ -5,6 +5,7 @@ import moment from 'moment'
 
 import getCookie from '../util/cookie'
 import api from '../util/axios'
+import env from '../util/env'
 
 import Modal from '../layout/modal'
 import injectGlobal from '../layout/injectGlobal'
@@ -146,8 +147,8 @@ class Main extends React.Component {
 
   async componentDidMount () {
     if (process.browser) {
-      console.log(process.env.SOCKET_URL)
-      const socket = io.connect(process.env.SOCKET_URL)
+      console.log(env.SOCKET_URL)
+      const socket = io.connect(env.SOCKET_URL)
       socket.on(`personIdClient`, (personId) => {
         this.setState({ personId })
         this.getCamperByPersonId(personId)
