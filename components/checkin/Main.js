@@ -118,7 +118,7 @@ class Main extends React.Component {
       if (error.includes('401')) {
         window.location.replace('/')
       }
-      if (error.includes('404')) {
+      if (error.includes('404') || error.includes('500')) {
         this.setState({
           error: 'ไม่พบข้อมูล.'
         })
