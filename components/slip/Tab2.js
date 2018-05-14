@@ -33,11 +33,11 @@ const Tab2 = ({fullName, profile, button, image, facebook, fileType, path, comme
             <h1>หลักฐานยืนยันการโอนเงิน</h1>
             {
             // fileType === 'pdf'
-            //   ? <PDF src={`${process.env.URL}${path}`} href={`${process.env.URL}${path}`} />
-            //   : <ImageCustom src={`${process.env.URL}${path}`} size='large' href={`${process.env.URL}${path}`} />
+            //   ? <PDF src={`${env.URL}${path}`} href={`${env.URL}${path}`} />
+            //   : <ImageCustom src={`${env.URL}${path}`} size='large' href={`${env.URL}${path}`} />
               fileType === 'pdf'
-                ? <PDF src={`${process.env.URL}${path}`} href={`${process.env.URL}${path}`} />
-                : <ImageCustom src={`${process.env.URL}${path}`} size='large' href={`${process.env.URL}${path}`} />
+                ? <PDF src={`${env.URL}${path}`} href={`${env.URL}${path}`} />
+                : <ImageCustom src={`${env.URL}${path}`} size='large' href={`${env.URL}${path}`} />
             }
             <h3>เหตุผล (หากไม่ผ่าน)</h3>
             <textarea
