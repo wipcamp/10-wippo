@@ -134,10 +134,10 @@ class Main extends React.Component {
       if (camper) {
         this.setState({ camper, error: null })
       } else {
-        this.setState({ camper: null, error: 'ไม่พบข้อมูล' })
+        this.setState({ camper: null, error: 'ไม่พบข้อมูล หรือ อาจจะเช็คอินไปแล้ว' })
       }
     } else {
-      this.setState({ camper: null, error: 'ไม่พบข้อมูล' })
+      this.setState({ camper: null, error: 'ไม่พบข้อมูล หรือ อาจจะเช็คอินไปแล้ว' })
     }
   }
 
