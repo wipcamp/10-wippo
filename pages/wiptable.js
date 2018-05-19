@@ -1,5 +1,6 @@
 import React from 'react'
 import Layout from '../components/layout/layout'
+import Wipcalendar from '../components/timetable/Main'
 
 const Breadcrumb = () => (
   <ol className='breadcrumb'>
@@ -9,6 +10,6 @@ const Breadcrumb = () => (
 
 export default () => (
   <Layout subheadertext={<Breadcrumb />}>
-    calendar comming soooooooooooon!
+    <Wipcalendar />
   </Layout>
 )

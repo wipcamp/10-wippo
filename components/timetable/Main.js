@@ -16,9 +16,10 @@ export default class Timetable extends React.Component {
         <BigCalendar
           events={events}
           views={allViews}
+          view={'week'}
           step={60}
           showMultiDayTimes
-          defaultDate={new Date(2015, 3, 1)}
+          date={new Date(2018, 5, 3)}
         />
       </div>
     )
