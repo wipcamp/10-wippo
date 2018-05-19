@@ -8,8 +8,8 @@ const Breadcrumb = () => (
   </ol>
 )
 
-export default () => (
+export default (props) => (
   <Layout subheadertext={<Breadcrumb />}>
-    <Wipcalendar />
+    <Wipcalendar props={props} />
   </Layout>
 )
