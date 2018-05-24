@@ -12,22 +12,32 @@ export default class Timetable extends React.Component {
         id: 0,
         desc: '',
         startDate: {},
-        endDate: {}
+        endDate: {},
+        location: '',
+        createBy: ''
       },
-      isModalOpen: true
+      isOpen: true
     }
   }
   componentWillMount () {
     BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
   }
 
+  toggle () {
+    this.setState({isOpen: !this.state.isOpen})
+  }
+
   render () {
+    const toggleFunction = () => {
+      this.setState({isOpen: !this.state.isOpen})
+    }
     let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
     return (
       <div>
         <Modal
-          show
+          isOpen={this.state.isOpen}
           title={'test'}
+          toggle={toggleFunction}
         />
         <BigCalendar
           events={events}

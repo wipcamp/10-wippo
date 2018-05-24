@@ -10,9 +10,9 @@ const ButtonContainer = styled.div`
   width: 50%;
 `
 
-export default (isOpen, eventName, description, location, startOn, finishOn, createBy, handleDate) => {
+export default ({isOpen, eventName, description, location, startOn, finishOn, createBy, handleDate, toggle}) => {
   return (
-    <Modal show title={'Edit Event::'} >
+    <Modal show={isOpen} title={'Edit Event::'} toggle={toggle} >
       <div className='container' >
         <form>
           <div className='row'>
@@ -64,9 +64,6 @@ export default (isOpen, eventName, description, location, startOn, finishOn, cre
           <div className='row'>
             <ButtonContainer style={{textAlign: 'right'}}>
               <button className='btn btn-success'>save</button>
-            </ButtonContainer>
-            <ButtonContainer>
-              <button className='btn btn-danger'>cancel</button>
             </ButtonContainer>
           </div>
         </form>
