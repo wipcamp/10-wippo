@@ -65,6 +65,10 @@ export const MenuNames = [
     link: '/issue'
   },
   {
+    menuName: 'Examination',
+    link: '/examination'
+  },
+  {
     menuName: 'Logout',
     link: '/logout'
   }
