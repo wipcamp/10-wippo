@@ -178,88 +178,6 @@
       "label": "ข้อมูลทางการศึกษา"
     },
     {
-      "label": "ชื่อโรงเรียน",
-      "name": "edu_name",
-      "component": "input",
-      "outerClass": "col-12 col-sm-6 col-md-4 text-left form-group",
-      "innerClass": "form-control d-inline-block ml-1",
-      "list": "school",
-      "placeholder": "ตัวอย่าง โรงเรียนวิปแคมป์",
-      "dropdown": [
-        "โรงเรียนของเราน่าอยู่"
-      ]
-    },
-    {
-      "name": "edu_lv",
-      "label": "ระดับชั้น",
-      "component": "select",
-      "outerClass": "col-8 col-sm-3 text-left form-group",
-      "innerClass": "form-control d-inline-block",
-      "placeholder": "",
-      "dropdown": [
-        "ม.3 ขึ้น ม.4",
-        "ม.4 ขึ้น ม.5",
-        "ม.5 ขึ้น ม.6",
-        "ม.6"
-      ],
-      "values": [
-        "ม.3 ขึ้น ม.4",
-        "ม.4 ขึ้น ม.5",
-        "ม.5 ขึ้น ม.6",
-        "ม.6"
-      ]
-    },
-    {
-      "name": "edu_gpax",
-      "label": "เกรด",
-      "component": "input",
-      "outerClass": "col-4 col-sm-3 col-md-2 col-md-2 text-left form-group",
-      "innerClass": "form-control",
-      "type": "number",
-      "placeholder": "",
-      "min": "0",
-      "max": "4",
-      "step": "0.01"
-    },
-    {
-      "name": "edu_major",
-      "label": "สายการเรียน",
-      "component": "select",
-      "outerClass": "col-12 col-sm-4 col-md-3 text-left form-group",
-      "innerClass": "form-control d-inline-block",
-      "placeholder": "",
-      "dropdown": [
-        "วิทย์-คณิต",
-        "วิทย์-คอม",
-        "ศิลป์-คอม",
-        "ศิลป์-คำนวณ"
-      ],
-      "values": [
-        "วิทย์-คณิต",
-        "วิทย์-คอม",
-        "ศิลป์-คอม",
-        "ศิลป์-คำนวณ"
-      ]
-    },
-    {
-      "name": "telno_parent",
-      "label": "เบอร์โทรศัพท์ของผู้ปกครอง",
-      "component": "input",
-      "outerClass": "col-12 offset-sm-2 col-sm-6 offset-md-0 text-left form-group",
-      "innerClass": "form-control",
-      "type": "tel",
-      "placeholder": "ตัวอย่าง (081-234-5678)"
-    },
-    {
-      "name": "parent_relation",
-      "label": "เกี่ยวข้องเป็น",
-      "component": "input",
-      "outerClass": "col-12 col-sm-6 text-left form-group",
-      "innerClass": "form-control",
-      "type": "text",
-      "placeholder": "ตัวอย่าง มารดา"
-    },
-    {
       "name": "allergic_foods",
       "label": "อาหารที่แพ้",
       "component": "input",
@@ -282,6 +200,40 @@
       "outerClass": "col-12 col-sm-5 col-md-4 text-left form-group",
       "innerClass": "form-control",
       "placeholder": "ถ้าไม่มีให้ใส่ -"
+    },
+    {
+      "component": "header",
+      "label": "ข้อมูลเกี่ยวกับค่าย"
+    },
+    {
+      "name": "flavorId",
+      "label": "รสชาติ",
+      "component": "select",
+      "outerClass": "col-12 col-md-6 text-left form-group",
+      "innerClass": "form-control d-block",
+      "placeholder": "",
+      "values": [1,2,3,4,5,6,7,8,9,10],
+      "dropdown": [
+        "กระเจี๊ยบ",
+        "ไพลินกรอบ",
+        "ขนมไข่",
+        "ถั่วดำ",
+        "ช่อม่วง",
+        "มะขามจี๊ด",
+        "ลอดช่อง",
+        "นมชมพู",
+        "น้ำผึ้งมะนาว",
+        "ขนมครก"
+      ]
+    },
+    {
+      "name": "stdId",
+      "label": "รหัสนักศึกษา",
+      "component": "input",
+      "outerClass": "col-12 col-md-6 text-left form-group",
+      "innerClass": "form-control",
+      "placeholder": "กรอกรหัสนักศึกษา",
+      "maxlength": "11"
     }
   ]
 }
