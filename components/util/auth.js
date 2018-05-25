@@ -25,7 +25,7 @@ export const auth = async (res) => {
     if (roles[0] && roles[0].role_id >= 6) {
       Router.pushRoute('/dashboard')
     } else {
-      Router.pushRoute('/wait')
+      Router.pushRoute('/register')
     }
   }
 }
