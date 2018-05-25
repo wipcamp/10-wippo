@@ -16,7 +16,15 @@ export default class Timetable extends React.Component {
         location: '',
         createBy: ''
       },
-      isOpen: true
+      isOpen: false,
+      event: {
+        eventName: '',
+        description: '',
+        location: '',
+        startOn: '',
+        finishOn: '',
+        createBy: ''
+      }
     }
   }
   componentWillMount () {
@@ -27,6 +35,10 @@ export default class Timetable extends React.Component {
     this.setState({isOpen: !this.state.isOpen})
   }
 
+  hadelStart(date){
+    this.setState({})
+  }
+
   render () {
     const toggleFunction = () => {
       this.setState({isOpen: !this.state.isOpen})
@@ -34,10 +46,14 @@ export default class Timetable extends React.Component {
     let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
     return (
       <div>
+        {/* Modal Props {isOpen, event, toggle, handelStart, handelFin} */}
         <Modal
           isOpen={this.state.isOpen}
           title={'test'}
           toggle={toggleFunction}
+          event={this.state.event}
+          handelStart={}
+          handelFin
         />
         <BigCalendar
           events={events}
