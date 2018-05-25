@@ -56,14 +56,6 @@ export default compose(
     }),
     { ...registerActions }
   ),
-  withProps(
-    props => ({
-      initialValues: {
-        known_via: '-',
-        past_camp: '-'
-      }
-    })
-  ),
   reduxForm({
     form: 'register',
     validate,
@@ -71,7 +63,9 @@ export default compose(
   }),
   lifecycle({
     componentWillReceiveProps (nextProps) {
-      if (nextProps.regis.step > 1) {
+      if (this.props.regis.step === 1 && nextProps.regis.step === 2) {
+        this.props.insertStaff()
+      } else if (nextProps.regis.step > 2) {
         Router.push('/dashboard')
       }
     }
