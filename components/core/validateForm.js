@@ -21,19 +21,13 @@ export const validate = values => {
     'addr_prov',
     'addr_dist',
     'religion_id',
-    'edu_name',
-    'edu_lv',
-    'edu_major',
-    'telno_parent',
-    'parent_relation',
+
     'allergic_foods',
     'congenital_diseases',
     'congenital_drugs',
 
-    'skill_computer',
-    'past_camp',
-    'activities',
-    'known_via'
+    'flavorId',
+    'stdId'
   ]
 
   const maximumLength = [
@@ -88,6 +82,8 @@ export const validate = values => {
       errors[e] = `ป้อนได้ไม่เกิน ${maximumLength[5].length} ตัวอักษร`
     } else if (e.includes('telno') && values[e].replace(/[^\d]/g, '').length !== 10) {
       errors[e] = 'โปรดกรอกเบอร์โทรศัพท์ให้ครบ 10 ตัว'
+    } else if (e === 'stdId' && values[e].length !== 11) {
+      errors[e] = 'กรอกรหัสนักศึกษา 11 ตัว'
     }
   })
 
@@ -115,16 +111,6 @@ export const validate = values => {
     } else if (values.other_blood_group > 16) {
       errors.other_blood_group = `ป้อนได้ไม่เกิน 16 ตัวอักษร`
     }
-  }
-
-  if (!values.edu_gpax) {
-    errors.edu_gpax = required
-  } else if (!/^[0-9.]+$/.test(values.edu_gpax)) {
-    errors.edu_gpax = 'อนุญาต ให้ใส่เฉพาะตัวเลข'
-  } else if (Number(values.edu_gpax) > 4 || Number(values.edu_gpax) < 0) {
-    errors.edu_gpax = 'ให้อยู่ช่วง 0 ถึง 4'
-  } else if (values.edu_gpax.split('.')[1] && values.edu_gpax.split('.')[1].length > 2) {
-    errors.edu_gpax = 'ทศนิยม 2 ตำแหน่ง'
   }
 
   return errors
