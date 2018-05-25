@@ -131,3 +131,7 @@ export class IndexTemplate extends React.Component {
     )
   }
 }
+
+export const MinHeight = styled.div`
+  height: 100vh;
+`
