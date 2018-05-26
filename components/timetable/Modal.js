@@ -19,54 +19,64 @@ finishOn: '',
 createBy: '',
 
 */
-export default class Modal extends React.component {
+export default class extends React.Component {
   constructor (props) {
-    // {isOpen, event, toggle}
-    state = {
+    super(props)
+    this.state = {
       isOpen: props.isOpen,
-      toggle: null,
+      toggle: props.toggle,
       event: {
         eventName: props.event.eventName,
         description: props.event.description,
-        location: props.location,
-        startOn: props.startOn,
-        finishOn: props.finishOn,
-        createBy: props.createBy
+        location: props.event.location,
+        startOn: props.event.startOn,
+        finishOn: props.event.finishOn,
+        createBy: props.event.createBy
       }
     }
+    this.handelFinish = this.handelFinish.bind(this)
+    this.handelStart = this.handelStart.bind(this)
+  }
+
+  handelStart (date) {
+    this.setState({startOn: date})
+  }
+
+  handelFinish (date) {
+    this.setState({finishOn: date})
   }
 
   render () {
     return (
-      <Modal show={isOpen} title={'Edit Event::'} toggle={toggle} >
+      <Modal show={this.state.isOpen} title={'Edit Event::'} toggle={this.state.toggle} >
         <div className='container' >
           <form>
             <div className='row'>
               <div className='col-6'>
                 Name
-                <input type={'text'} className={'form-control'} value={state.event.eventName} />
+                <input type={'text'} className={'form-control'} value={this.state.event.eventName} />
               </div>
               <div className='col-6'>
               description
-                <input type={'textarea'} className={'form-control'} value={state.event.description} />
+                <input type={'textarea'} className={'form-control'} value={this.state.event.description} />
               </div>
             </div>
             <div className='row'>
               <div className='col-6'>
               location
-                <input type={'text'} className={'form-control'} value={state.event.location} />
+                <input type={'text'} className={'form-control'} value={this.state.event.location} />
               </div>
               <div className='col-6'>
                 createBy
-                <input type={'text'} className={'form-control'} value={state.event.startOn} />
+                <input type={'text'} className={'form-control'} value={this.state.event.startOn} />
               </div>
             </div>
             <div className='row'>
               <div className='col-6'>
               StartOn
                 <DatePicker
-                  selected={state.event.startOn}
-                  onChange={handelStart}
+                  selected={this.state.event.startOn}
+                  onChange={this.handelStart}
                   showTimeSelect
                   timeFormat='HH:mm'
                   timeIntervals={15}
@@ -77,8 +87,8 @@ export default class Modal extends React.component {
               <div className='col-6'>
               FinishOn
                 <DatePicker
-                  selected={state.event.startOn}
-                  onChange={handelFinish}
+                  selected={this.state.event.startOn}
+                  onChange={this.handelFinish}
                   showTimeSelect
                   timeFormat='HH:mm'
                   timeIntervals={15}
