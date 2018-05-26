@@ -135,7 +135,6 @@ export const actions = {
     const data = prepareData(values, fields)
     data.gender_id = convertToInt(data.gender_id)
     data.religion_id = convertToInt(data.religion_id)
-    // data.edu_gpax = convertToFloat(data.edu_gpax)
     if (data.birth_at) {
       data.birth_at = data.birth_at.format('YYYY-MM-DD')
     }
