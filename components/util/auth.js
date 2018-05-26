@@ -21,9 +21,11 @@ export const auth = async (res) => {
     let {data} = await axios.get(`/userroles/user_id/${id}`, {
       Authorization: `Bearer ${accessToken}`
     })
-    let roles = await data.filter(data => data.role_id >= 6)
+    let roles = await data.filter(data => data.role_id >= 5)
     if (roles[0] && roles[0].role_id >= 6) {
       Router.pushRoute('/dashboard')
+    } else if (roles[0] && roles[0].role_id >= 5) {
+      Router.pushRoute('/complete')
     } else {
       Router.pushRoute('/register')
     }
