@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../components/layout/layout'
-import Wipcalendar from '../components/timetable/Main'
+import Wipcalendar from '../components/timetable/'
 
 const Breadcrumb = () => (
   <ol className='breadcrumb'>

@@ -4,8 +4,8 @@ import Modal from './Modal'
 import moment from 'moment'
 import events from './events'
 
-export default class Timetable extends React.Component {
-  constructor (...props) {
+export default class extends React.Component {
+  constructor (props) {
     super(props)
     this.state = {
       selectedEvent: {
@@ -35,14 +35,11 @@ export default class Timetable extends React.Component {
     this.setState({isOpen: !this.state.isOpen})
   }
 
-  hadelStart(date){
-    this.setState({})
-  }
-
   render () {
     const toggleFunction = () => {
       this.setState({isOpen: !this.state.isOpen})
     }
+
     let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
     return (
       <div>
@@ -52,8 +49,6 @@ export default class Timetable extends React.Component {
           title={'test'}
           toggle={toggleFunction}
           event={this.state.event}
-          handelStart={}
-          handelFin
         />
         <BigCalendar
           events={events}
