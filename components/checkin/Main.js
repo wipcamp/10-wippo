@@ -303,7 +303,7 @@ class Main extends React.Component {
                         <div className='d-flex flex-row'>
                           <CardSmallText width={25} header={`กรุ๊บเลือด`} data={camper.blood_group} />
                           <CardSmallText width={25} header={`อาหารที่แพ้`} data={camper.congenital_diseases} />
-                          <CardSmallText width={25} header={`กรุ๊บเลือด`} data={camper.congenital_drugs} />
+                          <CardSmallText width={25} header={`ยาที่แพ้`} data={camper.congenital_drugs} />
                         </div>
                         <div className='d-flex flex-flow'>
                           <CardSmallText width={35} header={`เบอร์โทรฯ ส่วนตัว`} data={camper.profile_registrant.telno_personal} />
