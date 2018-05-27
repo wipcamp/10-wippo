@@ -120,7 +120,8 @@ class Main extends React.Component {
     personId: '',
     message: null,
     error: null,
-    camper: null
+    camper: null,
+    deg: 0
   }
 
   handleFields = (field, value) => {
@@ -151,9 +152,7 @@ class Main extends React.Component {
         , {
           Authorization: `Bearer ${token}`
         }).catch(error => {
-        if (error.includes('401')) {
-          window.location.replace('/')
-        }
+        error.includes('401') && window.location.replace('/')
       })
       if (data) {
         console.log('success')
@@ -189,9 +188,7 @@ class Main extends React.Component {
     const resultCheckIn = await api.get(`/campers/${personId}/person`, {
       Authorization: `Bearer ${token}`
     }).catch(error => {
-      if (error.includes('401')) {
-        window.location.replace('/')
-      }
+      error.includes('401') && window.location.replace('/')
       if (error.includes('404') || error.includes('500')) {
         this.setState({
           error: 'ไม่พบข้อมูล.'
@@ -203,13 +200,10 @@ class Main extends React.Component {
         }, 2000)
       }
     })
-    if (resultCheckIn.data && resultCheckIn.data.data) {
-      const [ camper ] = resultCheckIn.data.data
-      if (camper) {
-        this.setState({ camper, error: null })
-      } else {
-        this.setState({ camper: null, error: 'ไม่พบข้อมูล หรือ อาจจะเช็คอินไปแล้ว' })
-      }
+    const [ camper ] = resultCheckIn && resultCheckIn.data.data
+    console.log(camper)
+    if (camper) {
+      this.setState({ camper, error: null })
     } else {
       this.setState({ camper: null, error: 'ไม่พบข้อมูล หรือ อาจจะเช็คอินไปแล้ว' })
     }
@@ -245,7 +239,7 @@ class Main extends React.Component {
               maxLength='13'
               id='person'
               onChange={e => this.handleFields('personId', e.target.value)}
-              value={this.state.personId}
+              value={personId}
               required
             />
           </div>
