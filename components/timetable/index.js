@@ -39,7 +39,6 @@ export default class extends React.Component {
       Authorization: `Bearer ${token}`
     })
     this.setState({eventList: this.castEventList(data)})
-    console.log('eventList', this.state.eventList)
   }
 
   castEventList (nonEventList) {
