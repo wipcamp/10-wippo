@@ -76,6 +76,7 @@ export const RadioContainer = styled.div`
     left: -12px;
     padding: 2px 0px 2px 35px;
     margin: 0px auto;
+    margin-left: 10px;
     height: 30px;
     z-index: 9;
     cursor: pointer;

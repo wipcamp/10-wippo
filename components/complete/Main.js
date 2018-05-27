@@ -6,7 +6,7 @@ export default class Main extends React.Component {
   componentDidMount () {
     setTimeout(() => {
       Router.push('/')
-    }, 1000)
+    }, 3000)
   }
   render () {
     return (

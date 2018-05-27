@@ -66,7 +66,7 @@ export default compose(
       if (this.props.regis.step === 1 && nextProps.regis.step === 2) {
         this.props.insertStaff()
       } else if (nextProps.regis.step > 2) {
-        Router.push('/dashboard')
+        Router.push('/complete')
       }
     }
   })
