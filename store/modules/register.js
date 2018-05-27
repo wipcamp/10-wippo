@@ -152,7 +152,8 @@ export const actions = {
     if (dataIsNotNull(data)) {
       await localStorage.setItem('wip-staff', JSON.stringify({
         flavorId: values.flavorId,
-        stdId: values.stdId
+        stdId: values.stdId,
+        team: values.team
       }))
 
       dispatch({
