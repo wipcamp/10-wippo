@@ -17,13 +17,13 @@ const Background = styled(MinHeight)`
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
-  h1 {
+  h4 {
     color: #fff;
     margin: 0;
     font-size: 4em;
   }
   .text-danger {
-    font-size: 5.5em;
+    font-size: 2.5em;
   }
   .card-body {
     h1 {
@@ -36,8 +36,82 @@ const Background = styled(MinHeight)`
 `
 
 const CheckinInput = styled.input`
-  font-size: 4em;
+  font-size: 2em;
 `
+
+const Card = styled.div`
+  margin: 0 auto;
+  padding: 1em;
+  min-height: 45vh;
+  margin-top: 3em;
+  img {
+    max-width: 230px;
+  }
+  .row {
+    min-height: 45vh;
+  }
+  .col-1 {
+    background-color: #002d40;
+  }
+  h2, h5 {
+    margin: 0;
+  }
+  h2 {
+    font-size: 2.6em;
+  }
+`
+
+const CardNameWarpper = styled.div`
+  position: relative;
+  height: 100%;
+
+`
+const CardHero = styled.h1`
+  position: absolute;
+  width: 45vh;
+  transform: rotate(-90deg);
+  top: 0;
+  left: 1.5em;
+  bottom: 0;
+  color: #fff !important;
+
+  @media only screen and (min-width: 1440px) {
+    left: 1.6em;
+  }
+  @media only screen and (min-width: 1600px) {
+    left: 1.8em;
+  }
+  @media only screen and (min-width: 1680px) {
+    left: .5em;
+  }
+`
+const CardId = styled.h1`
+  position: absolute;
+  font-size: 3em;
+  right: 2px;
+  top: -15px;
+
+  .describe-text {
+    font-size: 18px
+  }
+`
+const CardFirstname = styled.div`
+  margin: 0;
+  font-size: 2.7em;
+  font-weight: bold;
+  line-height: 1.2;
+`
+const SmallTextWarpper = styled.div`
+  width: ${props => props.w}%;
+  margin-right: 2.4em;
+`
+
+const CardSmallText = ({header, data, width = 10}) => (
+  <SmallTextWarpper w={width}>
+    <h5>{header}</h5>
+    <h2>{data}</h2>
+  </SmallTextWarpper>
+)
 
 class Main extends React.Component {
   state={
@@ -161,17 +235,9 @@ class Main extends React.Component {
     return (
       <Background className='container-fluid d-flex flex-column justify-content-center align-items-center'>
         <form onSubmit={this.updateCheckin} className='row'>
-          <div className='col-12'>
-            <div className='text-center my-3'>
-              <div className='card'>
-                <div className='card-body'>
-                  <h1>Check-In System WIP Camp #10</h1>
-                  <h1 className='text-danger animated infinite pulse'>"กรุณาเตรียมบัตรประชาชน"</h1>
-                </div>
-              </div>
-            </div>
+          <div className='col-12 col-lg-6 offset-lg-3'>
             <CheckinInput
-              placeholder='ตัวอย่าง 1100888555999'
+              placeholder='รหัสบัตรประชาชน'
               className='form-control text-center'
               name='person'
               type='number'
@@ -183,42 +249,75 @@ class Main extends React.Component {
               required
             />
           </div>
-
-          <div className='col-12 col-md-6'>
-            <button type='button' onClick={() => this.getCamperByPersonId(personId)} className='btn btn-lg btn-info mt-3 col-12'>
-              ดึงข้อมูล
-            </button>
-          </div>
-          <div className='col-12 col-md-6'>
+          <div className='col-12 col-lg-6 offset-lg-3'>
             <button type='button' onClick={() => this.handleFields('confirm', true)} className='btn btn-lg btn-primary mt-3 col-12'>
               ยืนยัน
             </button>
           </div>
-          <div className='col-12'>
-            { (camper || error) && <div className='mt-3 card'>
-              {
-                camper &&
-                <div className='card-body text-center'>
-                  <h1>WIP ID : { camper.user_id }</h1>
-                  <h2>ชื่อจริง - นามสกุล : { camper.first_name } { camper.last_name }</h2>
-                  <h2>
-                    กรุ๊บเลือด : { camper.blood_group } |
-                    อาหารที่แพ้ : { camper.congenital_diseases } |
-                    ยาประจำตัว : { camper.congenital_drugs }
-                  </h2>
-                  <h2>
-                    โรงเรียน : { camper.profile_registrant.edu_name }
-                  </h2>
-                </div>
-              }
-              {
-                error &&
-                <div className='card-body text-center'>
-                  <h1>{ error }</h1>
-                </div>
-              }
+          <div className='col-12 col-lg-8 offset-lg-2'>
+            <div className='text-center my-3'>
+              <Card className={`card animated ${!(camper || error) ? 'd-flex align-items-center justify-content-center slideInUp' : 'flipInY'}`}>
+                {
+                  !camper && !error &&
+                    <div className='card-body'>
+                      <h4 className='mt-4 mb-5 text-danger animated infinite pulse'>"กรุณาเตรียมบัตรประชาชน"</h4>
+                      <img src='/static/img/card.png' />
+                    </div>
+                }
+                { (
+                  camper && <div className='card-body text-center'>
+                    <div className='row'>
+                      <div className='col-1 rounded'>
+                        <CardNameWarpper>
+                          <CardHero>
+                            WIP Camp #10 Itim Card
+                          </CardHero>
+                        </CardNameWarpper>
+                      </div>
+                      <div className='col-11 text-left'>
+                        <CardId><span className='describe-text'>WIP-ID #</span>{ camper.user_id }</CardId>
+                        <h5>ชื่อและนามสกุล</h5>
+                        <CardFirstname>
+                          { camper.first_name } { camper.last_name } <br />
+                        </CardFirstname>
+                        <h5>first name & last name</h5>
+                        <CardFirstname>
+                          { camper.first_name_en } { camper.last_name_en }
+                        </CardFirstname>
+                        <hr />
+                        <div className='d-flex flex-row'>
+                          <CardSmallText header={`ชื่อเล่น`} data={camper.nickname} />
+                          <CardSmallText header={`เพศ`} data={camper.profile_gender.display_name} />
+                          <CardSmallText header={`ศาสนา`} data={camper.profile_religion.display_name} />
+                          <CardSmallText width={25} header={`วันเกิด`} data={camper.birth_at} />
+                        </div>
+                        <hr />
+                        <div className='d-flex flex-flow'>
+                          <CardSmallText width={60} header={`โรงเรียน`} data={camper.profile_registrant.edu_name} />
+                          <CardSmallText width={30} header={`สายการเรียน`} data={camper.profile_registrant.edu_major} />
+                        </div>
+                        <hr />
+                        <div className='d-flex flex-row'>
+                          <CardSmallText width={25} header={`กรุ๊บเลือด`} data={camper.blood_group} />
+                          <CardSmallText width={25} header={`อาหารที่แพ้`} data={camper.congenital_diseases} />
+                          <CardSmallText width={25} header={`กรุ๊บเลือด`} data={camper.congenital_drugs} />
+                        </div>
+                        <div className='d-flex flex-flow'>
+                          <CardSmallText width={35} header={`เบอร์โทรฯ ส่วนตัว`} data={camper.profile_registrant.telno_personal} />
+                          <CardSmallText width={35} header={`เบอร์โทรฯ ผู้ปกครอง`} data={camper.profile_registrant.telno_parent} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) ||
+                    (
+                      error && <div className='card-body d-flex justify-content-center align-items-center'>
+                        <h1>{ error }</h1>
+                      </div>
+                    )
+                }
+              </Card>
             </div>
-            }
           </div>
         </form>
 
