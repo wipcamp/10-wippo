@@ -8,6 +8,8 @@ export default class extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      typeView: 'week',
+      showDate: new Date(2018, 5, 2),
       selectedEvent: {
         id: 0,
         desc: '',
@@ -26,37 +28,60 @@ export default class extends React.Component {
         createBy: ''
       }
     }
+    this.toggle = this.toggle.bind(this)
+    this.viewChangeHandeler = this.viewChangeHandeler.bind(this)
+    this.dateChangeHadeler = this.dateChangeHadeler.bind(this)
   }
+
   componentWillMount () {
     BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
   }
 
-  toggle () {
-    this.setState({isOpen: !this.state.isOpen})
+  renderComponent () { // Test function can render Inside JSX
+    return (
+      <div>
+        <h1>Rendered Component</h1>
+      </div>
+    )
+  }
+
+  toggle (e, sync) {
+    this.setState({isOpen: !this.state.isOpen, event: e})
+  }
+
+  viewChangeHandeler (e) {
+    console.log('E : ', e)
+    this.setState({typeView: e})
+    console.log('state :', this.state.typeView)
+    // Callback fired when the view value changes.
+  }
+
+  dateChangeHadeler (e) {
+    // Callback fired when the date value changes.
+    console.log('dateChangeHadeler', e)
+    this.setState({showDate: e})
   }
 
   render () {
-    const toggleFunction = () => {
-      this.setState({isOpen: !this.state.isOpen})
-    }
-
     let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
     return (
       <div>
-        {/* Modal Props {isOpen, event, toggle, handelStart, handelFin} */}
-        <Modal
-          isOpen={this.state.isOpen}
+        {this.state.isOpen ? <Modal
+          isOpen
           title={'test'}
-          toggle={toggleFunction}
+          toggle={this.toggle}
           event={this.state.event}
-        />
+        /> : null }
         <BigCalendar
           events={events}
           views={allViews}
-          view={'week'}
+          view={this.state.typeView}
           step={60}
+          onView={this.viewChangeHandeler}
+          onNavigate={this.dateChangeHadeler}
           showMultiDayTimes
-          date={new Date(2018, 5, 3)}
+          onSelectEvent={this.toggle}
+          date={this.state.showDate}
         />
       </div>
     )
