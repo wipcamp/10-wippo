@@ -6,28 +6,24 @@ import getCookie from './cookie'
 export const auth = async (res) => {
   let {data: {accessToken}} = await axios.post('/auth/login', { ...res }, null)
   document.cookie = cookie.serialize('token', accessToken, { maxAge: 60 * 60 })
-  let {data, data: {id}} = await axios.post(`/auth/me`, null, {
+  let {data: user, data: { id }} = await axios.post(`/auth/me`, null, {
     Authorization: `Bearer ${accessToken}`
   })
-  let roles = await axios.get(`/userroleteams/user_id/${id}`, {
+  let { data } = await axios.get(`/profiles/${id}`, {
     Authorization: `Bearer ${accessToken}`
   })
-  window.localStorage.setItem('user', JSON.stringify(data))
-  let team = ('role', roles.data.map(role => {
-    return {role: role.role_team_id}
-  }))
-  window.localStorage.setItem('team', team == null ? '' : JSON.stringify(team))
-  if (id) {
-    let {data} = await axios.get(`/userroles/user_id/${id}`, {
+  window.localStorage.setItem('user', JSON.stringify(user))
+  if (data === '') {
+    Router.pushRoute('/register')
+  } else {
+    let { data } = await axios.get(`/userroles/user_id/${id}`, {
       Authorization: `Bearer ${accessToken}`
     })
     let roles = await data.filter(data => data.role_id >= 5)
     if (roles[0] && roles[0].role_id >= 6) {
       Router.pushRoute('/dashboard')
-    } else if (roles[0] && roles[0].role_id >= 5) {
-      Router.pushRoute('/complete')
     } else {
-      Router.pushRoute('/register')
+      Router.pushRoute('/complete')
     }
   }
 }
