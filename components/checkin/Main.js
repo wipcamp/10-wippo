@@ -40,6 +40,11 @@ const CheckinInput = styled.input`
 `
 
 const Card = styled.div`
+  background-image: url('/static/img/monkeyxgiant.png');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: 70% 60%;
+  background-color: #fff;
   margin: 0 auto;
   padding: 1em;
   min-height: 45vh;
@@ -250,12 +255,16 @@ class Main extends React.Component {
           </div>
           <div className='col-12 col-lg-8 offset-lg-2'>
             <div className='text-center my-3'>
-              <Card className={`card animated ${!(camper || error) ? 'd-flex align-items-center justify-content-center slideInUp' : 'flipInY'}`}>
+              <Card className={`card animated ${!(camper || error) ? 'slideInUp' : 'flipInY'}`}>
                 {
                   !camper && !error &&
                     <div className='card-body'>
-                      <h4 className='mt-4 mb-5 text-danger animated infinite pulse'>"กรุณาเตรียมบัตรประชาชน"</h4>
-                      <img src='/static/img/card.png' />
+                      <div className='row'>
+                        <div className='col-6 text-center'>
+                          <h4 className='mt-5 mb-5 text-danger animated infinite pulse'>"กรุณาเตรียมบัตรประชาชน"</h4>
+                          <img src='/static/img/card.png' />
+                        </div>
+                      </div>
                     </div>
                 }
                 { (
@@ -287,8 +296,8 @@ class Main extends React.Component {
                         </div>
                         <hr />
                         <div className='d-flex flex-flow'>
-                          <CardSmallText width={60} header={`โรงเรียน`} data={camper.profile_registrant.edu_name} />
-                          <CardSmallText width={30} header={`สายการเรียน`} data={camper.profile_registrant.edu_major} />
+                          <CardSmallText width={50} header={`โรงเรียน`} data={camper.profile_registrant.edu_name} />
+                          <CardSmallText width={50} header={`สายการเรียน`} data={camper.profile_registrant.edu_major} />
                         </div>
                         <hr />
                         <div className='d-flex flex-row'>
