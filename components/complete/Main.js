@@ -1,13 +1,7 @@
 import React from 'react'
-import Router from 'next/router'
 import {Wrapper, IndexTemplate} from '../layout/layout'
 
 export default class Main extends React.Component {
-  componentDidMount () {
-    setTimeout(() => {
-      Router.push('/')
-    }, 3000)
-  }
   render () {
     return (
       <IndexTemplate>
