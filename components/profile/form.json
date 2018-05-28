@@ -1,0 +1,205 @@
+{
+  "header": "test",
+  "fields": [
+    {
+      "component": "header",
+      "label": "ข้อมูลส่วนตัว"
+    },
+    {
+      "name": "first_name",
+      "label": "ชื่อ (ภาษาไทย)",
+      "component": "input",
+      "type": "text",
+      "outerClass": "col-12 col-sm-6 text-left form-group",
+      "innerClass": "form-control",
+      "placeholder": ""
+    },
+    {
+      "name": "last_name",
+      "label": "นามสกุล (ภาษาไทย)",
+      "component": "input",
+      "type": "text",
+      "outerClass": "col-12 col-sm-6 text-left form-group",
+      "innerClass": "form-control",
+      "placeholder": ""
+    },
+    {
+      "name": "first_name_en",
+      "label": "ชื่อ (ภาษาอังกฤษ)",
+      "component": "input",
+      "type": "text",
+      "outerClass": "col-12 col-sm-6 text-left form-group",
+      "innerClass": "form-control",
+      "placeholder": ""
+    },
+    {
+      "name": "last_name_en",
+      "label": "นามสกุล (ภาษาอังกฤษ)",
+      "component": "input",
+      "type": "text",
+      "outerClass": "col-12 col-sm-6 text-left form-group",
+      "innerClass": "form-control",
+      "placeholder": ""
+    },
+    {
+      "name": "nickname",
+      "label": "ชื่อเล่น",
+      "component": "input",
+      "type": "text",
+      "outerClass": "col-12 col-sm-4 text-left form-group",
+      "innerClass": "form-control",
+      "placeholder": "ตัวอย่าง วิปโป้"
+    },
+    {
+      "component": "date",
+      "name": "birth_at",
+      "label": "วัน/เดือน/ปี เกิด",
+      "outerClass": "col-12 col-sm-8 col-md-6 offset-md-2 text-left form-group",
+      "placeholder": "วว/ดด/ปปปป"
+    },
+    {
+      "name": "citizen_id",
+      "label": "เลขบัตรประชาชน",
+      "component": "input",
+      "outerClass": "col-12 col-sm-6 col-md-6 text-left form-group",
+      "innerClass": "form-control",
+      "placeholder": ""
+    },
+    {
+      "name": "gender_id",
+      "htmlFor": "gender",
+      "label": "เพศ",
+      "component": "radio",
+      "outerClass": "form-check col-12 col-sm-6 col-md-6 text-left form-group",
+      "data": [
+        {
+          "innerClass": "form-check form-check-inline col-5 mr-0 ml-sm-1 col-sm-5 col-sm-4 text-left form-group",
+          "value": "1",
+          "label": "ชาย",
+          "htmlFor": "gender-male"
+        },
+        {
+          "innerClass": "form-check col-5 form-check-inline mr-0",
+          "value": "2",
+          "label": "หญิง",
+          "htmlFor": "gender-female"
+        }
+      ]
+    },
+    {
+      "name": "telno_personal",
+      "label": "เบอร์โทรศัพท์",
+      "component": "input",
+      "outerClass": "col-12 col-sm-4 col-md-4 text-left form-group",
+      "innerClass": "form-control",
+      "type": "tel",
+      "placeholder": "ตัวอย่าง (081-234-5678)"
+    },
+    {
+      "name": "addr_prov",
+      "label": "จังหวัด",
+      "component": "select",
+      "outerClass": "col-12 col-sm-4 offset-md-2 col-md-3 text-left form-group",
+      "middleClass": "",
+      "innerClass": "form-control",
+      "placeholder": "",
+      "dropdown": [
+        "กรุงเทพ"
+      ],
+      "values": [
+        "กรุงเทพ"
+      ]
+    },
+    {
+      "name": "addr_dist",
+      "label": "เขต/อำเภอ",
+      "component": "input",
+      "type": "text",
+      "outerClass": "col-12 col-sm-4 col-md-3 text-left form-group",
+      "innerClass": "form-control",
+      "placeholder": ""
+    },
+    {
+      "name": "blood_group",
+      "htmlFor": "blood_group",
+      "label": "กรุ๊ปเลือด",
+      "component": "radio",
+      "outerClass": "form-check col-12 col-md-9 text-left form-group",
+      "data": [
+        {
+          "innerClass": "form-check form-check-inline col-4 mr-0 col-md-2 text-left form-group",
+          "value": "A",
+          "label": "A",
+          "htmlFor": "blood-a"
+        },
+        {
+          "innerClass": "form-check col-4 col-md-2 form-check-inline mr-0",
+          "value": "B",
+          "label": "B",
+          "htmlFor": "blood-b"
+        },
+        {
+          "innerClass": "form-check form-check-inline col-4 mr-0 col-md-2 text-left form-group",
+          "value": "AB",
+          "label": "AB",
+          "htmlFor": "blood-ab"
+        },
+        {
+          "innerClass": "form-check col-4 col-md-2 form-check-inline mr-0",
+          "value": "O",
+          "label": "O",
+          "htmlFor": "blood-o"
+        },
+        {
+          "innerClass": "form-check form-check-inline col-8 mr-0 col-md-3 text-left form-group pr-0",
+          "value": "ไม่ทราบ",
+          "label": "ไม่ทราบ",
+          "htmlFor": "blood-other"
+        }
+      ]
+    },
+    {
+      "name": "religion_id",
+      "label": "ศาสนา",
+      "component": "select",
+      "outerClass": "col-12 col-md-3 text-left form-group",
+      "innerClass": "form-control d-block",
+      "placeholder": "",
+      "values": [1,2,3,4],
+      "dropdown": [
+        "พุทธ",
+        "คริสต์",
+        "อิสลาม",
+        "อื่นๆ"
+      ]
+    },
+    {
+      "component": "header",
+      "label": "ข้อมูลทางการศึกษา"
+    },
+    {
+      "name": "allergic_foods",
+      "label": "อาหารที่แพ้",
+      "component": "input",
+      "outerClass": "col-12 col-sm-5 col-md-4 text-left form-group",
+      "innerClass": "form-control",
+      "placeholder": "ถ้าไม่มีให้ใส่ -"
+    },
+    {
+      "name": "congenital_diseases",
+      "label": "โรคประจำตัว",
+      "component": "input",
+      "outerClass": "col-12 col-sm-5 col-md-4 text-left form-group",
+      "innerClass": "form-control",
+      "placeholder": "ถ้าไม่มีให้ใส่ -"
+    },
+    {
+      "name": "congenital_drugs",
+      "label": "ยาที่แพ้",
+      "component": "input",
+      "outerClass": "col-12 col-sm-5 col-md-4 text-left form-group",
+      "innerClass": "form-control",
+      "placeholder": "ถ้าไม่มีให้ใส่ -"
+    }
+  ]
+}
