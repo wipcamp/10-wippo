@@ -1,10 +1,11 @@
 import React from 'react'
 import Modal from './Modal'
 import PropTypes from 'prop-types'
-import { compose } from 'recompose'
+import { compose, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
 import { actions as createActions } from '../../store/modules/issue.create'
 import { problemTypes } from './dropdown.json'
+import Select from 'react-select'
 
 const GroupBtn = ({ toggle, className, clear }) => (
   <div className={className}>
@@ -36,7 +37,9 @@ const CreateIssue = ({
     priority,
     isSolve,
     assignTo,
-    showModal
+    showModal,
+    staffs,
+    roleteams
   }
 }) => (
   <Modal
@@ -113,6 +116,21 @@ const CreateIssue = ({
           </div>
         </div>
         <div className='col-12'>
+          <div className='form-group'>
+            <label htmlFor='priority-input'>กำหนด (Assign to)<sup className='text-danger'>*</sup></label>
+            <Select
+              value={assignTo}
+              removeSelected
+              multi
+              onChange={e => setField('assignTo', e)}
+              options={[
+                ...roleteams.map((d, i) => ({value: { ...d, id: i + 1, type: 'roleteam' }, label: `ทีม ${d.description}`})),
+                ...staffs.map((d) => ({value: { ...d, type: 'staff' }, label: `${d.user_id}: ${d.profile.first_name} ${d.profile.last_name} (${d.profile.nickname})`}))
+              ]}
+            />
+          </div>
+        </div>
+        <div className='col-12'>
           <span className='text-danger'>หมายเหตุ: เวลาอ้างอิงตามเวลาที่สร้างโพสต์</span>
         </div>
         <div className='col-12 px-0'>
@@ -146,5 +164,12 @@ export default compose(
       create: state.createIssue
     }),
     { ...createActions }
-  )
+  ),
+  lifecycle({
+    componentWillReceiveProps (nextProps) {
+      if (!this.props.create.finish && nextProps.create.finish) {
+        this.props.insertAssign()
+      }
+    }
+  })
 )(CreateIssue)
