@@ -78,6 +78,7 @@ const Arrow = styled.div`
   border-bottom: 15px solid #fff;
 `
 const Button = [
+  { name: 'Edit Profile', path: '/profile' },
   { name: 'Logout', path: '/logout' }
 ]
 const ListRelative = styled.li`
