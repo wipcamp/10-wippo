@@ -71,22 +71,18 @@ export default class extends React.Component {
   }
 
   viewChangeHandeler (e) {
-    console.log('E : ', e)
     this.setState({typeView: e})
-    console.log('state :', this.state.typeView)
     // Callback fired when the view value changes.
   }
 
   dateChangeHadeler (e) {
     // Callback fired when the date value changes.
-    console.log('dateChangeHadeler', e)
     this.setState({showDate: e})
   }
 
   render () {
     return (
       <div>
-        {console.log('DateEvent', DateEvent)}
         {this.state.isOpen ? <Modal
           isOpen
           title={'test'}

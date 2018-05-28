@@ -2,8 +2,9 @@ import React from 'react'
 import Modal from '../issue/Modal'
 import DatePicker from 'react-datepicker'
 import styled from 'styled-components'
+import getCookie from '../util/cookie'
 import moment from 'moment'
-import axios from '.'
+import axios from '../util/axios'
 
 const ButtonContainer = styled.div`
   padding:8px;
@@ -27,6 +28,7 @@ export default class extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      userToken: '',
       isOpen: this.props.isOpen,
       toggle: props.toggle,
       eventId: props.event.eventId,
@@ -35,30 +37,75 @@ export default class extends React.Component {
       location: props.event.location,
       start: moment(props.event.startOn),
       end: moment(props.event.finishOn),
-      createBy: props.event.createBy
+      createBy: props.event.createBy,
+      roleId: props.event.role_team_id,
+      createAt: props.event.create_at,
+      updateAt: props.event.update_at
     }
-    this.handelFinish = this.handelFinish.bind(this)
-    this.handelStart = this.handelStart.bind(this)
+    this.handleFinish = this.handleFinish.bind(this)
+    this.handleStart = this.handleStart.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSave = this.handleSave.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
     this.setState({
-      eventName: nextProps.event.eventName,
-      description: nextProps.event.description,
-      location: nextProps.event.location,
-      start: moment(nextProps.event.startOn),
-      end: moment(nextProps.event.finishOn),
-      createBy: nextProps.event.createBy
+      eventId: nextProps.eventId,
+      eventName: nextProps.eventName,
+      description: nextProps.description,
+      location: nextProps.location,
+      start: moment(nextProps.startOn),
+      end: moment(nextProps.finishOn),
+      createBy: nextProps.createBy,
+      roleId: nextProps.role_team_id,
+      createAt: nextProps.create_at,
+      updateAt: nextProps.update_at
     })
   }
 
-  handelStart (date) {
+  handleStart (date) {
     this.setState({start: moment(date)})
   }
 
-  handelFinish (date) {
+  handleFinish (date) {
     this.setState({end: moment(date)})
+  }
+
+  async handleSave (e) {
+    await e.preventDefault()
+    await e.stopPropagation()
+    let {token} = await getCookie({req: false})
+    console.log(token)
+    let event = await {
+      eventId: this.state.eventId,
+      eventName: this.state.eventName,
+      description: this.state.description,
+      location: this.state.location,
+      start: await moment(this.state.startOn).format('YYYY-MM-DD HH:mm:ss'),
+      end: await moment(this.state.finishOn),
+      createBy: this.state.createBy,
+      roleId: this.state.role_team_id,
+      createAt: this.state.create_at,
+      updateAt: this.state.update_at
+    }
+    console.log(event)
+    let header = await {
+      Authorization: `Bearer ${token}`,
+      _method: 'put'
+    }
+    await axios.post(`/timetables/${event.eventId}`, event, header).then((response) => {
+      console.log(response)
+    })
+  }
+
+  async handleDelete () {
+    let {token} = await getCookie({req: false})
+    let header = await {
+      Authorization: `Bearer ${token}`,
+      _method: 'put'
+    }
+    await axios.post(`/timetables/${this.state.eventId}`, header)
   }
 
   handleChange (e) {
@@ -110,8 +157,9 @@ export default class extends React.Component {
               <div className='col-6'>
               StartOn
                 <DatePicker
+                  className={'form-control'}
                   selected={this.state.start}
-                  onChange={this.handelStart}
+                  onChange={this.handleStart}
                   showTimeSelect
                   timeFormat='HH:mm'
                   timeIntervals={15}
@@ -122,8 +170,9 @@ export default class extends React.Component {
               <div className='col-6'>
               FinishOn
                 <DatePicker
+                  className={'form-control'}
                   selected={this.state.end}
-                  onChange={this.handelFinish}
+                  onChange={this.handleFinish}
                   showTimeSelect
                   timeFormat='HH:mm'
                   timeIntervals={15}
@@ -134,7 +183,7 @@ export default class extends React.Component {
             </div>
             <div className='row'>
               <ButtonContainer style={{textAlign: 'right'}}>
-                <button className='btn btn-success'>save</button>
+                <button className='btn btn-success' onClick={this.handleSave}>save</button>
               </ButtonContainer>
             </div>
           </form>
