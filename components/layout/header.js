@@ -43,12 +43,12 @@ const RelativeBlock = styled.div`
 `
 const Dropdown = styled.div`
   text-align: center;
-  padding: .7em 1em .3em;
+  padding: .7em 1em;
   display: ${props => props.show ? 'block' : 'none'};
   min-height: 35px;
   width: 300px;
-  right: -16px;
-  bottom: -2.5em;
+  right: -26px;
+  bottom: -5em;
   background-color: #fff;
   position: absolute;
   border-radius: 5px;
@@ -56,6 +56,7 @@ const Dropdown = styled.div`
   z-index: 9999;
 `
 const List = styled.a`
+  display: block;
   cursor: pointer;
   width: 100%;
   min-height: 20px;
@@ -63,6 +64,7 @@ const List = styled.a`
   text-align: center;
   transition: .3s;
   color: #b1b5c1;
+  margin: .3em 0;
   &:hover {
     color: #000;
   }
