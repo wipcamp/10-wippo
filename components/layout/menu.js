@@ -57,6 +57,14 @@ export const MenuNames = [
     link: '/camper'
   },
   {
+    menuName: 'Check-in',
+    link: '/checkin'
+  },
+  {
+    menuName: 'Issue',
+    link: '/issue'
+  },
+  {
     menuName: 'Logout',
     link: '/logout'
   }

@@ -1,8 +1,8 @@
 import {injectGlobal} from 'styled-components'
 
 export default injectGlobal`
-  body, input, h1, h3 {
-    font-family: 'Prompt', sans-serif;
+  *, body, input, h1, h2, h3, h4, h5 .btn {
+    font-family: 'Prompt', sans-serif !important;
   }
   body, input, textarea {
     font-size: 12px;
