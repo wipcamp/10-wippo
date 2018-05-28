@@ -48,11 +48,13 @@ const SubmitButton = styled.button`
 `
 
 const FormContainer = (props) => {
-  const { handleSubmit, pristine, submitting, buttonText, onSubmit, fields } = props
+  const { name, handleSubmit, pristine, submitting, buttonText, onSubmit, fields } = props
   return (
     <div>
       <RegisterSection onSubmit={handleSubmit(onSubmit)}>
-        <SubHeader>ลงทะเบียน</SubHeader>
+        <SubHeader>
+          {name}
+        </SubHeader>
         <div className='row px-3 pb-4 pt-3'>
           {
             fields.map((field, index) => (

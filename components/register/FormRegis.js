@@ -8,7 +8,8 @@ const StepOne = (props) => {
     <FormContainer
       {...props}
       fields={fields}
-      buttonText={`ลงทะเบียน`}
+      name={`ลงทะเบียนพี่ค่าย`}
+      buttonText={`ยืนยันการลงทะเบียน`}
     />
   )
 }

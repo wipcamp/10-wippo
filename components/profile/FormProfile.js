@@ -8,7 +8,8 @@ const StepOne = (props) => {
     <FormContainer
       {...props}
       fields={fields}
-      buttonText={`บันทึก`}
+      name={`แก้ไขโปรไฟล์`}
+      buttonText={`บันทึกโปรไฟล์`}
     />
   )
 }
