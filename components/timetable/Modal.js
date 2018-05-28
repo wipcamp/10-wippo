@@ -76,36 +76,34 @@ export default class extends React.Component {
     await e.preventDefault()
     await e.stopPropagation()
     let {token} = await getCookie({req: false})
-    console.log(token)
     let event = await {
       eventId: this.state.eventId,
-      eventName: this.state.eventName,
+      event: this.state.eventName,
       description: this.state.description,
       location: this.state.location,
-      start: await moment(this.state.startOn).format('YYYY-MM-DD HH:mm:ss'),
-      end: await moment(this.state.finishOn),
-      createBy: this.state.createBy,
-      roleId: this.state.role_team_id,
-      createAt: this.state.create_at,
-      updateAt: this.state.update_at
+      start_on: await moment(this.state.startOn).format('YYYY-MM-DD HH:mm:ss'),
+      finish_on: await moment(this.state.finishOn),
+      created_id: this.state.createBy,
+      role_team_id: this.state.role_team_id
     }
     console.log(event)
     let header = await {
-      Authorization: `Bearer ${token}`,
-      _method: 'put'
+      Authorization: `Bearer ${token}`
     }
-    await axios.post(`/timetables/${event.eventId}`, event, header).then((response) => {
+    await axios.put(`/timetables/${event.eventId}`, event, header).then((response) => {
       console.log(response)
     })
   }
 
-  async handleDelete () {
+  async handleDelete (e) {
+    await e.preventDefault()
+    await e.stopPropagation()
+    console.log('delete', e)
     let {token} = await getCookie({req: false})
     let header = await {
-      Authorization: `Bearer ${token}`,
-      _method: 'put'
+      Authorization: `Bearer ${token}`
     }
-    await axios.post(`/timetables/${this.state.eventId}`, header)
+    await axios.delete(`/timetables/${this.state.eventId}`, {Authorization: `Bearer ${token}`}).then(res => console.log('res', res))
   }
 
   handleChange (e) {
@@ -182,8 +180,11 @@ export default class extends React.Component {
               </div>
             </div>
             <div className='row'>
-              <ButtonContainer style={{textAlign: 'right'}}>
+              <ButtonContainer style={{textAlign: 'center'}}>
                 <button className='btn btn-success' onClick={this.handleSave}>save</button>
+              </ButtonContainer>
+              <ButtonContainer style={{textAlign: 'center'}}>
+                <button className='btn btn-danger' onClick={this.handleDelete}>delete</button>
               </ButtonContainer>
             </div>
           </form>
