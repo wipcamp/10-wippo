@@ -71,6 +71,10 @@ export const MenuNames = [
   {
     menuName: 'Logout',
     link: '/logout'
+  },
+  {
+    menuName: 'Agenda',
+    link: '/wiptable'
   }
 ]
 
