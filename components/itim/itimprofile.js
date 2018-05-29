@@ -1,5 +1,5 @@
 import React from 'react'
-import Tab1 from '../verify/tab1'
+import Tab1 from './tab1'
 // import Tab2 from '../verify/tab2'
 // import Tab3 from '../verify/tab3'
 import axios from '../util/axios'

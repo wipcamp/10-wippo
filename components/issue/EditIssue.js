@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { compose } from 'recompose'
+import { compose, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
 import { actions as editActions } from '../../store/modules/issue.edit'
 import { problemTypes } from './dropdown.json'
+import Select from 'react-select'
 
 import Modal from './Modal'
 
@@ -18,11 +19,14 @@ const EditIssue = ({
     desc,
     priority,
     type,
+    assignTo,
     isSolve,
     notSolve,
     time,
     reportId,
-    showModal
+    showModal,
+    roleteams,
+    staffs
   }
 }) => (
   <Modal
@@ -157,6 +161,21 @@ const EditIssue = ({
           </div>
         </div>
         <div className='col-12'>
+          <div className='form-group'>
+            <label htmlFor='priority-input'>กำหนด (Assign to)<sup className='text-danger'>*</sup></label>
+            <Select
+              value={assignTo}
+              removeSelected
+              multi
+              onChange={e => setField('assignTo', e)}
+              options={[
+                ...roleteams.map((d, i) => ({value: { ...d, id: i + 1, type: 'roleteam' }, label: `ทีม ${d.description}`})),
+                ...staffs.map((d) => ({value: { ...d, type: 'staff' }, label: `${d.user_id}: ${d.profile.first_name} ${d.profile.last_name} (${d.profile.nickname})`}))
+              ]}
+            />
+          </div>
+        </div>
+        <div className='col-12'>
           <b>เวลาที่สร้าง (Created at):</b> {time}
         </div>
         <div className='col-12'>
@@ -194,5 +213,44 @@ export default compose(
       edit: state.editIssue
     }),
     { ...editActions }
-  )
+  ),
+  lifecycle({
+    componentWillReceiveProps (nextProps) {
+      if (!this.props.edit.finish && nextProps.edit.finish) {
+        this.props.editAssign()
+      }
+
+      if (!this.props.edit.changeform && this.props.edit.assignTo.length > 0 &&
+        this.props.edit.roleteams.length > 0 && this.props.edit.staffs.length > 0) {
+        let temp = this.props.edit.assignTo.map(data => {
+          if (data.role_team_id === null) {
+            return {
+              ...nextProps.edit.staffs.find(staff => staff.user_id === data.assigned_id),
+              type: 'staff'
+            }
+          } else {
+            return {
+              ...nextProps.edit.roleteams.find(role => role.id === data.role_team_id),
+              type: 'roleteam'
+            }
+          }
+        })
+        temp = temp.map(data => {
+          if (data.type === 'roleteam') {
+            return {
+              value: data,
+              label: `ทีม ${data.description}`
+            }
+          } else {
+            return {
+              value: data,
+              label: `${data.user_id}: ${data.profile.first_name} ${data.profile.last_name} (${data.profile.nickname})`
+            }
+          }
+        })
+        this.props.changeform(temp)
+        // this.props.changeform()
+      }
+    }
+  })
 )(EditIssue)

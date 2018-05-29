@@ -9,8 +9,14 @@ const EDIT_ISSUE = issueAction('EDIT_ISSUE', true)
 const TOGGLE_MODAL = issueAction('TOGGLE_MODAL')
 const INIT_EDIT = issueAction('INIT_EDIT')
 const SET_SOLVE_STATUS = issueAction('SET_SOLVE_STATUS')
+const GET_ASSIGNS = issueAction('GET_ASSIGNS', true)
+const GET_ROLETEAMS = issueAction('GET_ROLETEAMS', true)
+const GET_STAFFS = issueAction('GET_STAFFS', true)
+const CHANGE_ASSIGN_FORM = issueAction('CHANGE_ASSIGN_FORM')
+const EDIT_ASSIGN = issueAction('EDIT_ASSIGN', true)
 
 let initialState = {
+  id: 0,
   topic: '',
   desc: '',
   type: 0,
@@ -19,7 +25,11 @@ let initialState = {
   notSolve: 0,
   assignTo: [],
   showModal: false,
-  loading: false
+  loading: false,
+  staffs: [],
+  roleteams: [],
+  finish: false,
+  changeform: false
 }
 
 export default (state = initialState, action) => {
@@ -33,7 +43,9 @@ export default (state = initialState, action) => {
     case TOGGLE_MODAL:
       return {
         ...state,
-        showModal: !state.showModal
+        showModal: !state.showModal,
+        finish: false,
+        changeform: false
       }
 
     case INIT_EDIT:
@@ -57,11 +69,11 @@ export default (state = initialState, action) => {
       }
 
     case EDIT_ISSUE.RESOLVED:
-      alert('edit success')
       return {
         ...state,
         loading: false,
-        showModal: false
+        // showModal: false,
+        finish: true
       }
 
     case EDIT_ISSUE.REJECTED:
@@ -71,8 +83,96 @@ export default (state = initialState, action) => {
         loading: false
       }
 
+    case GET_ASSIGNS.PENDING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case GET_ASSIGNS.RESOLVED:
+      return {
+        ...state,
+        loading: false,
+        assignTo: action.data.filter(d => d.role_team_id !== null || d.assigned_id !== null)
+      }
+
+    case GET_ASSIGNS.REJECTED:
+      return {
+        ...state,
+        loading: false
+      }
+
+    case GET_STAFFS.PENDING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case GET_STAFFS.RESOLVED:
+      return {
+        ...state,
+        loading: false,
+        staffs: action.data.data,
+        finish: false
+      }
+
+    case GET_STAFFS.REJECTED:
+      return {
+        ...state,
+        loading: false
+      }
+
+    case GET_ROLETEAMS.PENDING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case GET_ROLETEAMS.RESOLVED:
+      return {
+        ...state,
+        loading: false,
+        roleteams: action.data.data.map((d, i) => ({...d, id: i + 1}))
+      }
+
+    case GET_ROLETEAMS.REJECTED:
+      return {
+        ...state,
+        loading: false
+      }
+
+    case CHANGE_ASSIGN_FORM:
+      return {
+        ...state,
+        changeform: true,
+        assignTo: action.data
+      }
+
+    case EDIT_ASSIGN.PENDING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case EDIT_ASSIGN.RESOLVED:
+      alert('success')
+      return {
+        ...state,
+        loading: false,
+        showModal: false
+      }
+
+    case EDIT_ASSIGN.REJECTED:
+      return {
+        ...state,
+        loading: false
+      }
     default: return state
   }
+}
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index
 }
 
 export const actions = {
@@ -138,5 +238,52 @@ export const actions = {
         value2: 0
       })
     }
+  },
+  getAssigns: (problemid) => async (dispatch) => {
+    const headers = { Authorization: `Bearer ${cookie({req: false}).token}` }
+    dispatch({
+      type: GET_ASSIGNS,
+      promise: api.get(`assigns/problem_id/${problemid}`, headers)
+    })
+  },
+  getRoleTeams: () => (dispatch) => {
+    const headers = { Authorization: `Bearer ${cookie({req: false}).token}` }
+    dispatch({
+      type: GET_ROLETEAMS,
+      promise: api.get('/roleteams', headers)
+    })
+  },
+  getStaffs: () => (dispatch) => {
+    const headers = { Authorization: `Bearer ${cookie({req: false}).token}` }
+    dispatch({
+      type: GET_STAFFS,
+      promise: api.get('/staffs', headers)
+    })
+  },
+  changeform: (data) => ({
+    type: CHANGE_ASSIGN_FORM,
+    data
+  }),
+  editAssign: () => (dispatch, getStore) => {
+    const { id, assignTo } = getStore().editIssue
+    const unique = assignTo.filter(onlyUnique)
+    const data = unique.map(d => {
+      return d.value.type === 'roleteam' ? (
+        {
+          problem_id: id,
+          role_team_id: d.value.id
+        }
+      ) : (
+        {
+          problem_id: id,
+          assigned_id: d.value.user_id
+        }
+      )
+    })
+    const headers = { Authorization: `Bearer ${cookie({req: false}).token}` }
+    dispatch({
+      type: EDIT_ASSIGN,
+      promise: api.put(`assigns/problem_id/${id}`, { data }, headers)
+    })
   }
 }

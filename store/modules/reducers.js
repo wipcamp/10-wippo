@@ -3,6 +3,7 @@ import createIssue from './issue.create'
 import editIssue from './issue.edit'
 import detailIssue from './issue.detail'
 import register from './register'
+import profile from './profile'
 import { reducer as form } from 'redux-form'
 
 export default {
@@ -11,5 +12,6 @@ export default {
   createIssue,
   editIssue,
   detailIssue,
-  form
+  form,
+  profile
 }

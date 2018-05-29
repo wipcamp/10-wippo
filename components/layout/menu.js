@@ -36,6 +36,10 @@ export const MenuNames = [
     menuName: 'Dashboard',
     link: '/dashboard'
   },
+  {
+    menuName: 'Edit Profile',
+    link: '/profile'
+  },
   // {
   //   menuName: 'Document',
   //   link: '/approve'
@@ -48,9 +52,13 @@ export const MenuNames = [
   //   menuName: 'Itim Management',
   //   link: '/itim'
   // },
+  // {
+  //   menuName: 'Approve Slip',
+  //   link: '/slip'
+  // },
   {
-    menuName: 'Approve Slip',
-    link: '/slip'
+    menuName: 'Issue',
+    link: '/issue'
   },
   {
     menuName: 'Camper Management',
@@ -61,12 +69,12 @@ export const MenuNames = [
     link: '/checkin'
   },
   {
-    menuName: 'Issue',
-    link: '/issue'
-  },
-  {
     menuName: 'Logout',
     link: '/logout'
+  },
+  {
+    menuName: 'Agenda',
+    link: '/wiptable'
   }
 ]
 
