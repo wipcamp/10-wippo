@@ -40,13 +40,19 @@ export default class extends React.Component {
       createBy: props.event.createBy,
       roleId: props.event.role_team_id,
       createAt: props.event.create_at,
-      updateAt: props.event.update_at
+      updateAt: props.event.update_at,
+      type: props.event.type,
+      user: ''
     }
     this.handleFinish = this.handleFinish.bind(this)
     this.handleStart = this.handleStart.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  componentDidMount () {
+    this.setState({user: window.localStorage.getItem('user')})
   }
 
   componentWillReceiveProps (nextProps) {
@@ -60,7 +66,8 @@ export default class extends React.Component {
       createBy: nextProps.createBy,
       roleId: nextProps.role_team_id,
       createAt: nextProps.create_at,
-      updateAt: nextProps.update_at
+      updateAt: nextProps.update_at,
+      type: nextProps.event.type
     })
   }
 
@@ -73,8 +80,7 @@ export default class extends React.Component {
   }
 
   async handleSave (e) {
-    await e.preventDefault()
-    await e.stopPropagation()
+    e.preventDefault()
     let {token} = await getCookie({req: false})
     let event = await {
       eventId: this.state.eventId,
@@ -82,28 +88,28 @@ export default class extends React.Component {
       description: this.state.description,
       location: this.state.location,
       start_on: await moment(this.state.startOn).format('YYYY-MM-DD HH:mm:ss'),
-      finish_on: await moment(this.state.finishOn),
+      finish_on: await moment(this.state.finishOn).format('YYYY-MM-DD HH:mm:ss'),
       created_id: this.state.createBy,
-      role_team_id: this.state.role_team_id
+      role_team_id: this.state.roleId
     }
-    console.log(event)
     let header = await {
       Authorization: `Bearer ${token}`
     }
-    await axios.put(`/timetables/${event.eventId}`, event, header).then((response) => {
-      console.log(response)
-    })
+    if (this.state.eventId === 0) {
+      await axios.post(`/timetables/${this.state.eventId}`, event, header)
+    } else {
+      await axios.put(`/timetables/${this.state.eventId}`, event, header)
+    }
   }
 
   async handleDelete (e) {
     await e.preventDefault()
-    await e.stopPropagation()
     console.log('delete', e)
     let {token} = await getCookie({req: false})
     let header = await {
       Authorization: `Bearer ${token}`
     }
-    await axios.delete(`/timetables/${this.state.eventId}`, {Authorization: `Bearer ${token}`}).then(res => console.log('res', res))
+    await axios.delete(`/timetables/${this.state.eventId}`, header)
   }
 
   handleChange (e) {
@@ -128,7 +134,7 @@ export default class extends React.Component {
 
   render () {
     return (
-      <Modal show={this.props.isOpen} title={'Edit Event::'} toggle={this.state.toggle} >
+      <Modal show={this.props.isOpen} title={`${this.state.type} Event`} toggle={this.state.toggle} >
         <div className='container' >
           <form>
             <div className='row'>
@@ -183,8 +189,8 @@ export default class extends React.Component {
               <ButtonContainer style={{textAlign: 'center'}}>
                 <button className='btn btn-success' onClick={this.handleSave}>save</button>
               </ButtonContainer>
-              <ButtonContainer style={{textAlign: 'center'}}>
-                <button className='btn btn-danger' onClick={this.handleDelete}>delete</button>
+              <ButtonContainer style={{textAlign: 'center'}} >
+                <button className='btn btn-danger' onClick={this.handleDelete} disabled={this.state.type === 'create'}>delete</button>
               </ButtonContainer>
             </div>
           </form>

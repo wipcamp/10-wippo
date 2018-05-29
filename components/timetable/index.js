@@ -5,6 +5,7 @@ import moment from 'moment'
 import {DateEvent} from './view'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
+import styled from 'styled-components'
 
 export default class extends React.Component {
   constructor (props) {
@@ -15,18 +16,23 @@ export default class extends React.Component {
       eventList: [],
       isOpen: false,
       token: '',
+      userId: '',
       event: {
+        eventId: '',
         eventName: '',
         description: '',
         location: '',
         start: '',
         end: '',
-        createBy: ''
+        role_team_id: '',
+        createBy: '',
+        type: 'edit'
       }
     }
     this.toggle = this.toggle.bind(this)
     this.viewChangeHandeler = this.viewChangeHandeler.bind(this)
     this.dateChangeHadeler = this.dateChangeHadeler.bind(this)
+    this.newEvent = this.newEvent.bind(this)
   }
 
   async componentWillMount () {
@@ -38,7 +44,9 @@ export default class extends React.Component {
     let {data} = await axios.get('/timetables', {
       Authorization: `Bearer ${token}`
     })
-    this.setState({eventList: this.castEventList(data)})
+    let getUser = JSON.parse(window.localStorage.getItem('user'))
+    this.setState({eventList: this.castEventList(data), user: getUser.id})
+    console.log('UserState', this.state.user)
   }
 
   castEventList (nonEventList) {
@@ -51,6 +59,7 @@ export default class extends React.Component {
         location: e.location,
         start: new Date(e.start_on),
         end: new Date(e.finish_on),
+        role_team_id: e.role_team_id,
         createBy: e.created_id
       }
       eventList.push(event)
@@ -80,9 +89,41 @@ export default class extends React.Component {
     this.setState({showDate: e})
   }
 
+  newEvent () {
+    let event = {
+      eventId: 0,
+      eventName: '',
+      description: '',
+      location: '',
+      start: '',
+      end: '',
+      role_team_id: '',
+      createBy: this.state.user,
+      type: 'create'
+    }
+    this.toggle(event, null)
+  }
+
   render () {
+    const FloatingContainer = styled.div`
+position:fixed;
+width:50px;
+height:50px;
+bottom:40px;
+right:40px;
+background-color:#0C9;
+color:#FFF;
+border-radius:50px;
+text-align:center;
+box-shadow: 2px 2px 3px #999;
+padding-top: 13px;
+font-size:25px;
+`
     return (
       <div>
+        <FloatingContainer>
+          <a onClick={this.newEvent} type={'create'}><i className='fa fa-plus my-float' /></a>
+        </FloatingContainer>
         {this.state.isOpen ? <Modal
           isOpen
           title={'test'}
