@@ -5,7 +5,7 @@ import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import Link from 'next/link'
 import { Input, Button } from 'semantic-ui-react'
-import {documentHeader} from '../approve/ApproveTable'
+// import {documentHeader} from '../approve/ApproveTable'
 
 const StyledReactTable = styled(ReactTable)`
   text-align:center;
