@@ -100,7 +100,7 @@ export default class extends React.Component {
     }
     console.log('EVENT**', event)
     if (this.state.eventId === 0) {
-      await axios.post(`/timetables/${this.state.eventId}`, event, header).then(res => console.log(res))
+      await axios.post(`/timetables/`, event, header).then(res => console.log(res))
     } else {
       await axios.put(`/timetables/${this.state.eventId}`, event, header).then(res => console.log(res))
     }
@@ -119,7 +119,7 @@ export default class extends React.Component {
   }
 
   handleRoleChange (e) {
-    console.log(e.target)
+    console.log(e.target  )
     this.setState({roleId: e.target.value})
   }
 
