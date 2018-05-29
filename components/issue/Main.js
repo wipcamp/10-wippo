@@ -50,7 +50,9 @@ export default compose(
     }),
     {
       ...issueActions,
-      toggleCreate: createActions.toggleModal
+      toggleCreate: createActions.toggleModal,
+      getRoleTeams: createActions.getRoleTeams,
+      getStaffs: createActions.getStaffs
     }
   ),
   lifecycle({

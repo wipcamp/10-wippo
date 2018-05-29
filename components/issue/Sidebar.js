@@ -22,7 +22,9 @@ const Sidebar = ({
   toggleCreate,
   getIssue,
   setField,
-  issue
+  issue,
+  getRoleTeams,
+  getStaffs
 }) => (
   <SideBar className='pt-3 px-0'>
     <div className='border p-3'>
@@ -30,7 +32,11 @@ const Sidebar = ({
       <div>
         <button
           className='btn btn-primary btn-block'
-          onClick={toggleCreate}
+          onClick={() => {
+            toggleCreate()
+            getRoleTeams()
+            getStaffs()
+          }}
         >สร้าง issue</button>
         <button
           className='btn btn-success btn-block'

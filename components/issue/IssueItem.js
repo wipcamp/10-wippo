@@ -8,7 +8,10 @@ import { actions as detailActions } from '../../store/modules/issue.detail'
 
 const IssueItem = ({
   data,
-  viewDetail
+  viewDetail,
+  getAssigns,
+  getStaffs,
+  getRoleTeams
 }) => {
   const {
     id,
@@ -38,7 +41,12 @@ const IssueItem = ({
             </div>
             <button
               className='btn btn-info mr-1'
-              onClick={() => viewDetail(data)}
+              onClick={() => {
+                viewDetail(data)
+                getAssigns(data.id)
+                getRoleTeams()
+                getStaffs()
+              }}
             >ดูรายละเอียด</button>
           </div>
         </div>
@@ -69,7 +77,10 @@ export default compose(
   connect(
     state => ({}),
     {
-      viewDetail: detailActions.viewDetail
+      viewDetail: detailActions.viewDetail,
+      getAssigns: detailActions.getAssigns,
+      getRoleTeams: detailActions.getRoleTeams,
+      getStaffs: detailActions.getStaffs
     }
   )
 )(IssueItem)
