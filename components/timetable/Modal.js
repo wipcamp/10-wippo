@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import getCookie from '../util/cookie'
 import moment from 'moment'
 import axios from '../util/axios'
+import { CampRole } from './view'
 
 const ButtonContainer = styled.div`
   padding:8px;
@@ -35,8 +36,8 @@ export default class extends React.Component {
       eventName: props.event.eventName,
       description: props.event.description,
       location: props.event.location,
-      start: moment(props.event.startOn),
-      end: moment(props.event.finishOn),
+      start: moment(props.event.start),
+      end: moment(props.event.end),
       createBy: props.event.createBy,
       roleId: props.event.role_team_id,
       createAt: props.event.create_at,
@@ -49,10 +50,12 @@ export default class extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleRoleChange = this.handleRoleChange.bind(this)
   }
 
   componentDidMount () {
     this.setState({user: window.localStorage.getItem('user')})
+    console.log(this.state)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -61,8 +64,8 @@ export default class extends React.Component {
       eventName: nextProps.eventName,
       description: nextProps.description,
       location: nextProps.location,
-      start: moment(nextProps.startOn),
-      end: moment(nextProps.finishOn),
+      start: moment(nextProps.start),
+      end: moment(nextProps.end),
       createBy: nextProps.createBy,
       roleId: nextProps.role_team_id,
       createAt: nextProps.create_at,
@@ -87,19 +90,21 @@ export default class extends React.Component {
       event: this.state.eventName,
       description: this.state.description,
       location: this.state.location,
-      start_on: await moment(this.state.startOn).format('YYYY-MM-DD HH:mm:ss'),
-      finish_on: await moment(this.state.finishOn).format('YYYY-MM-DD HH:mm:ss'),
+      start_on: await moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
+      finish_on: await moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
       created_id: this.state.createBy,
       role_team_id: this.state.roleId
     }
     let header = await {
       Authorization: `Bearer ${token}`
     }
+    console.log('EVENT**', event)
     if (this.state.eventId === 0) {
-      await axios.post(`/timetables/${this.state.eventId}`, event, header)
+      await axios.post(`/timetables/${this.state.eventId}`, event, header).then(res => console.log(res))
     } else {
-      await axios.put(`/timetables/${this.state.eventId}`, event, header)
+      await axios.put(`/timetables/${this.state.eventId}`, event, header).then(res => console.log(res))
     }
+    this.state.toggle()
   }
 
   async handleDelete (e) {
@@ -110,6 +115,12 @@ export default class extends React.Component {
       Authorization: `Bearer ${token}`
     }
     await axios.delete(`/timetables/${this.state.eventId}`, header)
+    this.state.toggle()
+  }
+
+  handleRoleChange (e) {
+    console.log(e.target)
+    this.setState({roleId: e.target.value})
   }
 
   handleChange (e) {
@@ -186,6 +197,12 @@ export default class extends React.Component {
               </div>
             </div>
             <div className='row'>
+              <div className='col-6'>
+                role
+                <CampRole select={this.state.roleId} onChange={this.handleRoleChange} />
+              </div>
+            </div>
+            <div className='row'>
               <ButtonContainer style={{textAlign: 'center'}}>
                 <button className='btn btn-success' onClick={this.handleSave}>save</button>
               </ButtonContainer>
@@ -197,6 +214,5 @@ export default class extends React.Component {
         </div>
       </Modal>
     )
-    // return (<div>Hi{console.log(this.state)}</div>)
   }
 }

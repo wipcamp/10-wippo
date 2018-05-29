@@ -2,7 +2,7 @@ import React from 'react'
 import BigCalendar from 'react-big-calendar'
 import Modal from './Modal'
 import moment from 'moment'
-import {DateEvent} from './view'
+import {DateEvent, getRoleTeamStyle} from './view'
 import axios from '../util/axios'
 import getCookie from '../util/cookie'
 import styled from 'styled-components'
@@ -95,8 +95,8 @@ export default class extends React.Component {
       eventName: '',
       description: '',
       location: '',
-      start: '',
-      end: '',
+      start: moment(),
+      end: moment(),
       role_team_id: '',
       createBy: this.state.user,
       type: 'create'
@@ -135,6 +135,7 @@ font-size:25px;
           components={{
             event: DateEvent
           }}
+          formats={{ eventTimeRangeFormat: () => null }}
           views={['month', 'day', 'week']}
           view={this.state.typeView}
           step={60}
@@ -142,6 +143,7 @@ font-size:25px;
           onNavigate={this.dateChangeHadeler}
           onSelectEvent={this.toggle}
           date={this.state.showDate}
+          eventPropGetter={getRoleTeamStyle}
         />
       </div>
     )
