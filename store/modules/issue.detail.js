@@ -1,4 +1,6 @@
 import actionCreator from '../../libs/actionCreator'
+import api from '../../components/util/axios.js'
+import cookie from '../../components/util/cookie'
 
 const issueAction = actionCreator('issue.detail')
 
@@ -6,8 +8,12 @@ const SET_FIELD = issueAction('SET_FIELD')
 const TOGGLE_MODAL = issueAction('TOGGLE_MODAL')
 const CLOSE_MODAL = issueAction('CLOSE_MODAL')
 const VIEW_DETAIL = issueAction('VIEW_DETAIL')
+const GET_ASSIGNS = issueAction('GET_ASSIGNS', true)
+const GET_ROLETEAMS = issueAction('GET_ROLETEAMS', true)
+const GET_STAFFS = issueAction('GET_STAFFS', true)
 
 let initialState = {
+  loading: false,
   id: 0,
   topic: '',
   desc: '',
@@ -18,7 +24,9 @@ let initialState = {
   time: '',
   reportId: 0,
   assignTo: [],
-  showModal: false
+  showModal: false,
+  staffs: [],
+  roleteams: []
 }
 
 export default (state = initialState, action) => {
@@ -48,6 +56,64 @@ export default (state = initialState, action) => {
         showModal: false
       }
 
+    case GET_ASSIGNS.PENDING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case GET_ASSIGNS.RESOLVED:
+      return {
+        ...state,
+        loading: false,
+        assignTo: action.data.filter(d => d.role_team_id !== null || d.assigned_id !== null)
+      }
+
+    case GET_ASSIGNS.REJECTED:
+      return {
+        ...state,
+        loading: false
+      }
+
+    case GET_STAFFS.PENDING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case GET_STAFFS.RESOLVED:
+      return {
+        ...state,
+        loading: false,
+        staffs: action.data.data,
+        finish: false
+      }
+
+    case GET_STAFFS.REJECTED:
+      return {
+        ...state,
+        loading: false
+      }
+
+    case GET_ROLETEAMS.PENDING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case GET_ROLETEAMS.RESOLVED:
+      return {
+        ...state,
+        loading: false,
+        roleteams: action.data.data.map((d, i) => ({...d, id: i + 1}))
+      }
+
+    case GET_ROLETEAMS.REJECTED:
+      return {
+        ...state,
+        loading: false
+      }
+
     default: return state
   }
 }
@@ -72,5 +138,26 @@ export const actions = {
   }),
   closeModal: () => ({
     type: CLOSE_MODAL
-  })
+  }),
+  getAssigns: (problemid) => async (dispatch) => {
+    const headers = { Authorization: `Bearer ${cookie({req: false}).token}` }
+    dispatch({
+      type: GET_ASSIGNS,
+      promise: api.get(`assigns/problem_id/${problemid}`, headers)
+    })
+  },
+  getRoleTeams: () => (dispatch) => {
+    const headers = { Authorization: `Bearer ${cookie({req: false}).token}` }
+    dispatch({
+      type: GET_ROLETEAMS,
+      promise: api.get('/roleteams', headers)
+    })
+  },
+  getStaffs: () => (dispatch) => {
+    const headers = { Authorization: `Bearer ${cookie({req: false}).token}` }
+    dispatch({
+      type: GET_STAFFS,
+      promise: api.get('/staffs', headers)
+    })
+  }
 }

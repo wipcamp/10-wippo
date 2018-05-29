@@ -2,15 +2,14 @@
 import actionCreator from '../../libs/actionCreator'
 import api from '../../components/util/axios.js'
 import cookie from '../../components/util/cookie'
-import { convertToInt, convertToFloat, dataIsNotNull } from '../../utils/helper'
+import { convertToInt, dataIsNotNull } from '../../utils/helper'
 
-const regisAction = actionCreator('register')
+const regisAction = actionCreator('profile')
 
 const SET_FIELD = regisAction('SET_FIELD')
-const SAVE_REGISTER = regisAction('SAVE_REGISTER', true)
+const SAVE_PROFILE = regisAction('SAVE_PROFILE', true)
 const SHOW_DIALOG = regisAction('SHOW_DIALOG')
 const HIDE_DIALOG = regisAction('HIDE_DIALOG')
-const INSERT_STAFF = regisAction('INSERT_STAFF', true)
 
 let initialState = {
   loading: false,
@@ -42,45 +41,20 @@ export default (state = initialState, action) => {
         [action.field]: action.value
       }
 
-    case SAVE_REGISTER.PENDING:
+    case SAVE_PROFILE.PENDING:
       return {
         ...state,
         loading: true
       }
 
-    case SAVE_REGISTER.RESOLVED:
+    case SAVE_PROFILE.RESOLVED:
       return {
         ...state,
         loading: false,
         step: state.step + 1
       }
 
-    case SAVE_REGISTER.REJECTED:
-      return {
-        ...state,
-        loading: false,
-        dialogMessage: action.error,
-        showDialog: true,
-        error: true
-      }
-
-    case INSERT_STAFF.PENDING:
-      return {
-        ...state,
-        loading: true
-      }
-
-    case INSERT_STAFF.RESOLVED:
-      return {
-        ...state,
-        loading: false,
-        step: state.step + 1,
-        error: false,
-        dialogMessage: 'success',
-        showDialog: true
-      }
-
-    case INSERT_STAFF.REJECTED:
+    case SAVE_PROFILE.REJECTED:
       return {
         ...state,
         loading: false,
@@ -121,6 +95,14 @@ const fields = [
   'addr_dist',
   'telno_personal',
 
+  'edu_name',
+  'edu_lv',
+  'edu_major',
+  'edu_gpax',
+  'parent_relation',
+  'parent_relation',
+  'telno_parent',
+
   'birth_at'
 ]
 
@@ -130,8 +112,7 @@ export const actions = {
     field,
     value
   }),
-  registerSubmit: (values) => async (dispatch) => {
-    console.log('this is registerSubmit', values)
+  profileSubmit: (values) => async (dispatch) => {
     const data = prepareData(values, fields)
     data.gender_id = convertToInt(data.gender_id)
     data.religion_id = convertToInt(data.religion_id)
@@ -141,42 +122,19 @@ export const actions = {
     data.telno_personal = getOnlyNum(data.telno_personal)
     data.citizen_id = getOnlyNum(data.citizen_id)
     data.user_id = await JSON.parse(localStorage.getItem('user')).id
+    console.log(data)
 
-    data.edu_name = 'วิปแคมป์'
-    data.edu_lv = 'มหาวิทยาลัย'
-    data.edu_major = '-'
-    data.edu_gpax = 0.00
-    data.parent_relation = '-'
-    data.telno_parent = '-'
     let { token } = cookie({req: false})
     if (dataIsNotNull(data)) {
-      await localStorage.setItem('wip-staff', JSON.stringify({
-        flavorId: values.flavorId,
-        stdId: values.stdId,
-        team: values.team
-      }))
-
       dispatch({
-        type: SAVE_REGISTER,
-        promise: api.post('/profiles', data, {Authorization: `Bearer ${token}`})
+        type: SAVE_PROFILE,
+        promise: api.put(`/profiles/${data.user_id}`, data, {Authorization: `Bearer ${token}`})
       })
     } else {
       dispatch({
-        type: SAVE_REGISTER.REJECTED
+        type: SAVE_PROFILE.REJECTED
       })
     }
-  },
-  insertStaff: () => async (dispatch) => {
-    const staff = await JSON.parse(localStorage.getItem('wip-staff'))
-    let data = {
-      ...staff
-    }
-    data.userId = await JSON.parse(localStorage.getItem('user')).id
-    let { token } = cookie({req: false})
-    dispatch({
-      type: INSERT_STAFF,
-      promise: api.post('/staffs', data, {Authorization: `Bearer ${token}`})
-    })
   },
   onSubmitError: (err) => ({
     type: SHOW_DIALOG,

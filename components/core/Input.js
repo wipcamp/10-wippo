@@ -76,6 +76,7 @@ export const RadioContainer = styled.div`
     left: -12px;
     padding: 2px 0px 2px 35px;
     margin: 0px auto;
+    margin-left: 10px;
     height: 30px;
     z-index: 9;
     cursor: pointer;
@@ -112,7 +113,7 @@ export const RadioContainer = styled.div`
 `
 
 export const StyledTextArea = styled.textarea`
-  background-color: ${inputStyle.backgroundColor}; */
+  background-color: ${inputStyle.backgroundColor};
   color: ${inputStyle.color};
   transition: ${inputStyle.transition};
 `
@@ -161,11 +162,13 @@ const Input = ({
   min,
   max,
   title,
-  pattern
+  pattern,
+  maxlength
 }) => (
   <div className={outerClass}>
+  
     <Label htmlFor={`${input.name}-input`}>{label}<Required /></Label>
-    <StyledInput {...input} min={min} max={max} step={step} type={type} className={innerClass} placeholder={placeholder} pattern={pattern} title={title} required />
+    <StyledInput {...input} min={min} max={max} step={step} type={type} className={innerClass} placeholder={placeholder} pattern={pattern} title={title} required maxlength={maxlength} />
     <Error>{touched && error}</Error>
   </div>
 )

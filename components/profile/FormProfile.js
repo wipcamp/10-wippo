@@ -1,6 +1,6 @@
 import React from 'react'
 import { compose, withProps } from 'recompose'
-import FormContainer from './FormContainer'
+import FormContainer from '../register/FormContainer'
 import { fields } from './form.json'
 
 const StepOne = (props) => {
@@ -8,8 +8,8 @@ const StepOne = (props) => {
     <FormContainer
       {...props}
       fields={fields}
-      name={`ลงทะเบียนพี่ค่าย`}
-      buttonText={`ยืนยันการลงทะเบียน`}
+      name={`แก้ไขโปรไฟล์`}
+      buttonText={`บันทึกโปรไฟล์`}
     />
   )
 }
@@ -17,7 +17,7 @@ const StepOne = (props) => {
 export default compose(
   withProps(
     props => ({
-      onSubmit: props.registerSubmit
+      onSubmit: props.profileSubmit
     })
   )
 )(StepOne)

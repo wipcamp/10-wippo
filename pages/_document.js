@@ -44,6 +44,7 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="/static/css/animate.css"/>
           <link rel="stylesheet" href="/static/css/style.css"/>
           <link rel="stylesheet" href="/static/css/react-datepicker.css"/>         
+          <link rel="stylesheet" href="https://unpkg.com/react-select@1.2.1/dist/react-select.css" />
           <script src="/static/js/fontawesome-all.min.js"></script>
           <script src="/static/js/fa-solid.js"></script>
           {this.props.styleTags}

@@ -8,15 +8,22 @@ const SET_FIELD = issueAction('SET_FIELD')
 const CREATE_ISSUE = issueAction('CREATE_ISSUE', true)
 const TOGGLE_MODAL = issueAction('TOGGLE_MODAL')
 const CLEAR_ALL_FIELD = issueAction('CLEAR_ALL_FIELD')
+const GET_ROLETEAMS = issueAction('GET_ROLETEAMS', true)
+const GET_STAFFS = issueAction('GET_STAFFS', true)
+const INSERT_ASSIGN = issueAction('INSERT_ASSIGN', true)
 
 let initialState = {
   loading: false,
+  id: 0,
   topic: '',
   desc: '',
   type: '',
   priority: '',
   assignTo: [],
-  showModal: false
+  showModal: false,
+  roleteams: [],
+  staffs: [],
+  finish: false
 }
 
 export default (state = initialState, action) => {
@@ -30,7 +37,8 @@ export default (state = initialState, action) => {
     case TOGGLE_MODAL:
       return {
         ...state,
-        showModal: !state.showModal
+        showModal: !state.showModal,
+        finish: false
       }
 
     case CLEAR_ALL_FIELD:
@@ -39,7 +47,8 @@ export default (state = initialState, action) => {
         topic: '',
         desc: '',
         type: '',
-        priority: ''
+        priority: '',
+        assignTo: []
       }
 
     case CREATE_ISSUE.PENDING:
@@ -49,7 +58,67 @@ export default (state = initialState, action) => {
       }
 
     case CREATE_ISSUE.RESOLVED:
-      alert('success')
+      return {
+        ...state,
+        loading: false,
+        finish: true,
+        id: action.data
+        // action.data
+      }
+
+    case CREATE_ISSUE.REJECTED:
+      // alert('error: ' + action.error)
+      return {
+        ...state,
+        loading: false
+      }
+
+    case GET_STAFFS.PENDING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case GET_STAFFS.RESOLVED:
+      return {
+        ...state,
+        loading: false,
+        staffs: action.data.data,
+        finish: false
+      }
+
+    case GET_STAFFS.REJECTED:
+      return {
+        ...state,
+        loading: false
+      }
+
+    case GET_ROLETEAMS.PENDING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case GET_ROLETEAMS.RESOLVED:
+      return {
+        ...state,
+        loading: false,
+        roleteams: action.data.data
+      }
+
+    case GET_ROLETEAMS.REJECTED:
+      return {
+        ...state,
+        loading: false
+      }
+
+    case INSERT_ASSIGN.PENDING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case INSERT_ASSIGN.RESOLVED:
       return {
         ...state,
         loading: false,
@@ -57,12 +126,11 @@ export default (state = initialState, action) => {
         topic: '',
         desc: '',
         type: '',
-        priority: ''
-        // action.data
+        priority: '',
+        assignTo: []
       }
 
-    case CREATE_ISSUE.REJECTED:
-      alert('error: ' + action.error)
+    case INSERT_ASSIGN.REJECTED:
       return {
         ...state,
         loading: false
@@ -78,6 +146,10 @@ const mapFields = (fields, values) => {
     data[field] = values[field]
   })
   return data
+}
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index
 }
 
 export const actions = {
@@ -123,5 +195,47 @@ export const actions = {
   }),
   clearAll: () => ({
     type: CLEAR_ALL_FIELD
-  })
+  }),
+  getRoleTeams: () => (dispatch) => {
+    const headers = { Authorization: `Bearer ${cookie({req: false}).token}` }
+    dispatch({
+      type: GET_ROLETEAMS,
+      promise: api.get('/roleteams', headers)
+    })
+  },
+  getStaffs: () => (dispatch) => {
+    const headers = { Authorization: `Bearer ${cookie({req: false}).token}` }
+    dispatch({
+      type: GET_STAFFS,
+      promise: api.get('/staffs', headers)
+    })
+  },
+  insertAssign: () => (dispatch, getStore) => {
+    const createIssue = getStore().createIssue
+    if (createIssue.assignTo.length === 0) {
+      dispatch({
+        type: INSERT_ASSIGN.RESOLVED
+      })
+    } else {
+      const unique = createIssue.assignTo.filter(onlyUnique)
+      const data = unique.map(d => {
+        return d.value.type === 'roleteam' ? (
+          {
+            problem_id: createIssue.id,
+            role_team_id: d.value.id
+          }
+        ) : (
+          {
+            problem_id: createIssue.id,
+            assigned_id: d.value.user_id
+          }
+        )
+      })
+      const headers = { Authorization: `Bearer ${cookie({req: false}).token}` }
+      dispatch({
+        type: INSERT_ASSIGN,
+        promise: api.post('/assigns', { data }, headers)
+      })
+    }
+  }
 }

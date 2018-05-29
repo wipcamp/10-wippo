@@ -6,6 +6,7 @@ import { actions as detailActions } from '../../store/modules/issue.detail'
 import { actions as editActions } from '../../store/modules/issue.edit'
 import Tag from './Tag'
 import { problemTypes } from './dropdown.json'
+import DetailAssign from './DetailAssign'
 
 import Modal from './Modal'
 
@@ -13,7 +14,10 @@ const DetailIssue = ({
   toggleModal,
   detail,
   closeModal,
-  setEdit
+  setEdit,
+  getEditAssigns,
+  getEditStaffs,
+  getEditRoleTeams
 }) => {
   const {
     id,
@@ -25,7 +29,10 @@ const DetailIssue = ({
     notSolve,
     time,
     reportId,
-    showModal
+    showModal,
+    assignTo,
+    staffs,
+    roleteams
   } = detail
   return (
     <Modal
@@ -63,7 +70,16 @@ const DetailIssue = ({
         </div>
         <div className='row'>
           <div className='col-12'>
-            <b>สร้างเมื่อ (Created at): </b> 
+            <DetailAssign
+              staffs={staffs}
+              roleteams={roleteams}
+              assignTo={assignTo}
+            />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-12'>
+            <b>สร้างเมื่อ (Created at): </b>
             <span>{time}</span>
           </div>
           <div className='col-12'>
@@ -77,6 +93,9 @@ const DetailIssue = ({
                 className='btn btn-warning mr-2'
                 onClick={() => {
                   closeModal()
+                  getEditAssigns(id)
+                  getEditRoleTeams()
+                  getEditStaffs()
                   setEdit(detail)
                 }}
               >Edit Issue Log</button>
@@ -107,7 +126,10 @@ export default compose(
     }),
     {
       ...detailActions,
-      setEdit: editActions.initEdit
+      setEdit: editActions.initEdit,
+      getEditAssigns: editActions.getAssigns,
+      getEditRoleTeams: editActions.getRoleTeams,
+      getEditStaffs: editActions.getStaffs
     }
   )
 )(DetailIssue)

@@ -1,12 +1,14 @@
 import React from 'react'
-import { compose, lifecycle, withProps } from 'recompose'
+import getCookie from '../util/cookie'
+import api from '../util/axios'
+import { compose, lifecycle } from 'recompose'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import Router from 'next/router'
 
-import {actions as registerActions} from '../../store/modules/register'
-import FormRegis from './FormRegis'
+import { actions as profileActions } from '../../store/modules/profile'
+import FormRegis from './FormProfile'
 import Alert from '../core/Alert'
 import { validate } from '../core/validateForm'
 
@@ -24,15 +26,15 @@ const BackgroundContainer = styled.div`
 `
 
 export const MainRegister = props => {
-  const { regis } = props
+  const { profile } = props
   return (
     <div>
       <BackgroundContainer>
         <div className='container'>
           <Alert
-            showDialog={regis.showDialog}
-            error={regis.error}
-            message={regis.dialogMessage}
+            showDialog={profile.showDialog}
+            error={profile.error}
+            message={profile.dialogMessage}
             hideDialog={props.hideDialog}
           />
           <div className='row '>
@@ -52,20 +54,30 @@ export const MainRegister = props => {
 export default compose(
   connect(
     state => ({
-      regis: state.register
+      profile: state.profile
     }),
-    { ...registerActions }
+    { ...profileActions }
   ),
   reduxForm({
-    form: 'register',
+    form: 'profile',
     validate,
     onSubmitFail: (err, __, ___, props) => props.onSubmitError(err)
   }),
   lifecycle({
+    async componentDidMount () {
+      const user = window && await JSON.parse(window.localStorage.getItem('user'))
+      const { token } = await getCookie({ req: false })
+      const profile = await api.get(`/profiles/${user.id}`, {
+        Authorization: `Bearer ${token}`
+      })
+      const userProfile = {
+        ...profile.data,
+        ...profile.data.profile_registrant
+      }
+      this.props.initialize(userProfile)
+    },
     componentWillReceiveProps (nextProps) {
-      if (this.props.regis.step === 1 && nextProps.regis.step === 2) {
-        this.props.insertStaff()
-      } else if (nextProps.regis.step > 2) {
+      if (nextProps.profile.step > 1) {
         Router.push('/complete')
       }
     }
