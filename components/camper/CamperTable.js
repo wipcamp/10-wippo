@@ -221,7 +221,7 @@ export default class CamperTable extends React.Component {
             placeholder='Search...'
           />
         </div>
-        <div className='col-5 col-md-3 text-center'>
+        <div className='col-12 col-md-3 text-center'>
           <CustomButtom
             onClick={() => this.fetchCampers()}
             content='ดึงข้อมูลใหม่'
