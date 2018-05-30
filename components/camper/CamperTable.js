@@ -54,12 +54,12 @@ const columns = [
   {
     Header: 'ชื่อเล่น',
     accessor: 'profile.nickname',
-    width: 150
+    width: 120
   },
   {
     Header: 'โรงเรียน',
     accessor: 'profile_registrant.edu_name',
-    width: 300
+    width: 180
   },
   {
     Header: 'เพศ',
@@ -75,9 +75,49 @@ const columns = [
     width: 120
   },
   {
-    Header: 'เกรดเฉลี่ย',
-    accessor: 'profile_registrant.edu_gpax',
+    Header: 'โรคประจำตัว',
+    accessor: 'profile.congenital_diseases',
+    width: 120
+  },
+  {
+    Header: 'ยาที่แพ้',
+    accessor: 'profile.congenital_drugs',
     width: 100
+  },
+  {
+    Header: 'ห้องนอน',
+    accessor: 'bedroom',
+    width: 100
+  },
+  {
+    Header: 'ห้องเรียน',
+    accessor: 'classroom',
+    width: 100
+  },
+  {
+    Header: 'เบอร์โทรน้อง',
+    accessor: 'profile_registrant.telno_personal',
+    width: 140
+  },
+  {
+    Header: 'เบอร์โทรผู้ปกครอง',
+    accessor: 'profile_registrant.telno_parent',
+    width: 140
+  },
+  {
+    Header: 'จังหวัด',
+    accessor: 'profile_registrant.addr_prov',
+    width: 130
+  },
+  {
+    Header: 'รส',
+    accessor: 'section_id',
+    width: 100,
+    Cell: ({ original: {section_id: sectionId} }) => (
+      <div>
+        { flavors.filter((data) => data.id === sectionId)[0].displayName }
+      </div>
+    )
   },
   {
     Header: 'โปรไฟล์',
@@ -87,30 +127,6 @@ const columns = [
       <a target='_blank' href={`/itim?user_id=${value}`}>
         <Button icon='search' color='blue' />
       </a>
-    )
-  },
-  {
-    Header: 'จัดรส',
-    accessor: 'user_id',
-    width: 160,
-    Cell: ({value, original, tdProps: { rest: { onChange: handleFields } }}) => (
-      <select
-        onChange={e => {
-          handleFields('changing', {
-            sectionId: e.target.value,
-            userId: value
-          })
-          handleFields('open', true)
-        }}
-        defaultValue={original.section_id}
-        className='custom-select'
-      >
-        {
-          flavors.map(data =>
-            <option key={data.id} value={data.id}>{data.displayName}</option>
-          )
-        }
-      </select>
     )
   }
 ]
@@ -205,7 +221,7 @@ export default class CamperTable extends React.Component {
             placeholder='Search...'
           />
         </div>
-        <div className='col-5 col-md-3 text-center'>
+        <div className='col-12 col-md-3 text-center'>
           <CustomButtom
             onClick={() => this.fetchCampers()}
             content='ดึงข้อมูลใหม่'
