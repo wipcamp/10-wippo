@@ -38,5 +38,14 @@ export default {
       })
       .then(handleResponse)
       .catch(catchError)
+  ),
+  delete: (path, headers = {}) => (
+    createInstance(headers)
+      .request({
+        url: path,
+        method: 'DELETE'
+      })
+      .then(handleResponse)
+      .catch(catchError)
   )
 }

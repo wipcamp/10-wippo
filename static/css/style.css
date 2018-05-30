@@ -1,3 +1,6 @@
 .ui.menu .item {
   padding: 1em !important;
 }
+.react-datepicker__time-list {
+  padding-left: 0;
+}
