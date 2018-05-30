@@ -125,7 +125,19 @@ const CreateIssue = ({
               onChange={e => setField('assignTo', e)}
               options={[
                 ...roleteams.map((d, i) => ({value: { ...d, id: i + 1, type: 'roleteam' }, label: `ทีม ${d.description}`})),
-                ...staffs.map((d) => ({value: { ...d, type: 'staff' }, label: `${d.user_id}: ${d.profile.first_name} ${d.profile.last_name} (${d.profile.nickname})`}))
+                ...staffs.map((s) => {
+                  const profile = s.profile
+                  console.log(s)
+                  console.log(profile)
+                  let label = `${s.user_id}`
+                  if (profile) {
+                    label += `${profile.first_name} ${profile.last_name} (${profile.nickname})`
+                  }
+                  return {
+                    value: { ...s, type: 'staff' },
+                    label
+                  }
+                })
               ]}
             />
           </div>
