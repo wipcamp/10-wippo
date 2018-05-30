@@ -3,7 +3,7 @@ import styled, { injectGlobal } from 'styled-components'
 import Header from './header'
 import Footer from './footer'
 
-const StyledLayout = styled.div`
+export const StyledLayout = styled.div`
   font-family: 'Prompt';
   html, body, h1, button, h3, h4, h6 {
     font-family: 'Prompt';

@@ -6,7 +6,7 @@ class Itim extends React.Component {
   render () {
     const answer = this.props.url.query.answer_id
     return (
-      <Layout subheadertext='Itim Management'>
+      <Layout subheadertext='Camper Management'>
         <div className='row'>
           {
             this.props.url.query.user_id ? (
