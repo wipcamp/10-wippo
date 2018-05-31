@@ -47,23 +47,24 @@ pipeline {
         sh 'sudo docker image rm 10-wippo'
       }
     }
-    stage('deploy-development') {
-      when {
-        expression {
-          return GIT_BRANCH == 'develop'
-        }
-      }
+    stage('deploy') {
       steps {
-        sh 'sudo kubectl rolling-update wip-wippo -n development --image registry.wip.camp/10-wippo:$GIT_BRANCH --image-pull-policy Always'
+        script {
+          if (GIT_BRANCH == 'master') {
+            sh 'sudo kubectl rolling-update wip-wippo -n production --image registry.wip.camp/10-wippo:master-$BUILD_NUMBER --image-pull-policy Always'
+          } else {
+            sh 'sudo kubectl rolling-update wip-wippo -n development --image rregistry.wip.camp/10-wippo:develop --image-pull-policy Always'
+          }
+        }
       }
     }
   }
   post {
     success {
-      sh 'echo success'
+      slackSend(color: good, message: "${env.JOB_NAME} on ${env.GIT_BRANCH} at build number ${env.BUILD_NUMBER} was built successfully & deploy. More infomation ${env.BUILD_URL}")
     }
     failure {
-      sh 'echo failure'
+      slackSend(color: danger, message: "${env.JOB_NAME} on ${env.GIT_BRANCH} was fail ${env.BUILD_URL}")
     }
   }
 }
