@@ -53,7 +53,7 @@ pipeline {
           if (GIT_BRANCH == 'master') {
             sh 'sudo kubectl rolling-update wip-wippo -n production --image registry.wip.camp/10-wippo:master-$BUILD_NUMBER --image-pull-policy Always'
           } else {
-            sh 'sudo kubectl rolling-update wip-wippo -n development --image rregistry.wip.camp/10-wippo:develop --image-pull-policy Always'
+            sh 'sudo kubectl rolling-update wip-wippo -n development --image registry.wip.camp/10-wippo:develop --image-pull-policy Always'
           }
         }
       }
