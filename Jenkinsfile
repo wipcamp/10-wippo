@@ -53,7 +53,7 @@ pipeline {
           if (GIT_BRANCH == 'master') {
             sh 'sudo kubectl rolling-update wip-wippo -n production --image registry.wip.camp/10-wippo:master-$BUILD_NUMBER --image-pull-policy Always'
           } else {
-            sh 'sudo kubectl rolling-update wip-wippo -n development --image rregistry.wip.camp/10-wippo:develop --image-pull-policy Always'
+            sh 'sudo kubectl rolling-update wip-wippo -n development --image registry.wip.camp/10-wippo:develop --image-pull-policy Always'
           }
         }
       }
@@ -61,10 +61,10 @@ pipeline {
   }
   post {
     success {
-      slackSend(color: good, message: "$JOB_NAME on $GIT_BRANCH at build number $BUILD_NUMBER was built successfully & deploy. More infomation ${env.BUILD_URL}")
+      slackSend(color: "#228b22", message: "10-Wippo on ${env.GIT_BRANCH} at build number ${env.BUILD_NUMBER} was built successfully & deploy. More infomation ${env.JENKINS_URL}")
     }
     failure {
-      slackSend(color: danger, message: "$env.JOB_NAME on $GIT_BRANCH was fail $BUILD_URL")
+      slackSend(color: "#ff0033", message: "10-Wippo on ${env.GIT_BRANCH} was fail ${env.JENKINS_URL}")
     }
   }
 }
